@@ -47,8 +47,8 @@
 </template>
 
 <script>
-import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
-import AccountLayout from "@/Pages/Admin/Account/Partials/AccountLayout.vue";
+import AuthenticatedLayout from '../../Layouts/Dashboard/AuthenticatedLayout.vue';
+import AccountLayout from "../Partials/AccountLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";

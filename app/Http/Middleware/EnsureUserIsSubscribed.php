@@ -17,7 +17,7 @@ class EnsureUserIsSubscribed
     {
         if ($request->user() && ! $request->user()->subscribed('default')) {
             // This user is not a paying customer...
-            return redirect('plans.show');
+            return redirect('/plans ')->with('alert', 'Need to subscribe to a plan');
         }
 
         return $next($request);

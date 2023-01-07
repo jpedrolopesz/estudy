@@ -27,6 +27,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'owner',
+        'account_id',
         'plan_id',
         'stripe_id',
         'pm_type',

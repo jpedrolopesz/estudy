@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'jplopeszamonelo@hotmail.com',
             'password' => bcrypt('joao1998'),
             'owner' => true,
+            'trial_ends_at' => 14
         ]);
 
         User::factory(10)->create(['account_id' => $account->id]);

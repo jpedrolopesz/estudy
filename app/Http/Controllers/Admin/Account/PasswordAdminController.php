@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\PasswordUser;
 use Inertia\Inertia;
 
-class PasswordController extends Controller
+class PasswordAdminController extends Controller
 {
-    public function show()
+    public function edit()
     {
-        return Inertia::render('Admin/Account/Password/Show',
+        return Inertia::render('Admin/Account/Password/Edit',
             ['user' => auth()->user()]);
     }
 

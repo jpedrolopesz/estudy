@@ -6,14 +6,14 @@
           <div class="min-w-0 flex-1">
 
             <div class="mb-2">
-              <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Dashboard Admin sa</h1>
+              <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Dashboard Admin</h1>
             </div>
             <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
               <nav class="flex mb-2" aria-label="Breadcrumb">
                 <ul class="inline-flex flex-wrap text-sm font-medium">
                   <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                    <BreadcrumbLink  :active="route().current('dashboard')">
+                    <BreadcrumbLink  :active="route().current('admin.dashboard')">
                       Dashboard
                     </BreadcrumbLink>
                   </li>

@@ -29,8 +29,8 @@
                   <input type="file" class="hidden" ref="photo"
                          @change="updatePhotoPreview"/>
 
-                  <div class="mt-2" v-show="!photoPreview && user.image">
-                    <img :src="currentImage()" class="rounded-full h-14 w-14 object-cover"/>
+                  <div class="mt-2" v-show="!photoPreview && $page.props.auth.user.photo">
+                    <img v-bind:src="'/storage/user/' + $page.props.auth.user.photo" class="rounded-full h-14 w-14 object-cover"/>
                   </div>
 
                   <div class="mt-2" v-show="photoPreview">
@@ -39,7 +39,7 @@
                   photoPreview +'\');'">
                   </span>
                   </div>
-                  <InputError :message="form.errors.image"></InputError>
+                  <InputError :message="form.errors.photo"></InputError>
                   <button class="ml-2 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           type="button" @click.prevent="selectNewPhoto">
                     Select a New Photo
@@ -50,8 +50,8 @@
 
                 <div class="col-span-6 sm:col-span-3">
                   <label for="name" class="block text-sm font-medium text-gray-700">First name*</label>
-                  <input  v-model="form.name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm" />
-                  <InputError class="mt-2" :message="form.errors.name" />
+                  <input  v-model="form.first_name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm" />
+                  <InputError class="mt-2" :message="form.errors.first_name" />
 
                 </div>
 
@@ -126,16 +126,19 @@ export default {
     const user = usePage().props.value.auth.user;
 
     const form = useForm({
-      image: props.user.image,
-      name: props.user.name,
+      photo: props.user.photo,
+      first_name: props.user.first_name,
       email: props.user.email,
       mustVerifyEmail: props.user.email_verified_at,
+      status: props.status
 
     });
     return {form};
   },
   props:{
-    user:Object
+    user:Object,
+    mustVerifyEmail:Boolean,
+    status:Object
   },
   data() {
     return {
@@ -145,7 +148,7 @@ export default {
   methods: {
     submit() {
       if (this.$refs.photo) {
-        this.form.image = this.$refs.photo.files[0];
+        this.form.photo = this.$refs.photo.files[0];
       }
       this.form.post(route("profile.update"));
     },
@@ -153,9 +156,7 @@ export default {
       this.form.clearErrors();
       this.form.reset();
     },
-    currentImage() {
-      return "/storage/user/" + this.user.image;
-    },
+
     selectNewPhoto() {
       this.$refs.photo.click();
     },

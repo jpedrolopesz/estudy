@@ -14,6 +14,6 @@
 
 
 <script setup>
-import Navigation from "@/Pages/Admin/Account/Partials/Navigation.vue";
-import HeaderForm from "@/Pages/Admin/Account/Partials/HeaderForm.vue";
+import Navigation from "../Partials/Navigation.vue";
+import HeaderForm from "../Partials/HeaderForm.vue";
 </script>

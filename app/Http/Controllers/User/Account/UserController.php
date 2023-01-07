@@ -23,6 +23,8 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
+
+
         return Inertia::render('User/Account/Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
@@ -38,11 +40,11 @@ class UserController extends Controller
         $request->user()->fill($request->validated());
 
 
-        if( $request->hasFile('image')) {
-            $image = $request->file('image');
+        if( $request->hasFile('photo')) {
+            $image = $request->file('photo');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             Image::make($image)->resize(120, 120)->save(public_path('storage/user/' . $filename));
-            auth()->user()->image = $filename;
+            auth()->user()->photo = $filename;
 
         }
 
@@ -50,9 +52,10 @@ class UserController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-
-
         $request->user()->save();
+
+
+
 
         return Redirect::route('profile.edit');
     }

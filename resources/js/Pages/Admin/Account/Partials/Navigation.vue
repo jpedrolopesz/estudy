@@ -6,7 +6,7 @@
 
 
         <!-- Profile -->
-        <NavigationLink :href="route('profile.edit')" :active="route().current('profile.edit')">
+        <NavigationLink :href="route('admin.profile.edit')" :active="route().current('admin.profile.edit')">
           <i class="bx bx-user nav__icon flex-shrink-0 w-5 h-5 mr-3 -ml-1 text-gray-500 transition duration-150 ease-in-out group-hover:text-indigo-500 group-focus:text-gray-500"></i>
           <span class="hidden truncate md:inline-block transition duration-150 ease-in-out group-hover:text-indigo-500 group-focus:text-gray-500">
             Profile
@@ -14,7 +14,7 @@
         </NavigationLink>
 
         <!-- Password -->
-        <NavigationLink :href="route('password.edit')" :active="route().current('password.edit')">
+        <NavigationLink :href="route('admin.password.edit')" :active="route().current('admin.password.edit')">
           <i class="bx bx-lock-open-alt nav__icon flex-shrink-0 w-5 h-5 mr-3 -ml-1 text-gray-500 transition duration-150 ease-in-out group-hover:text-indigo-500 group-focus:text-gray-500"></i>
           <span class="hidden truncate md:inline-block transition duration-150 ease-in-out group-hover:text-indigo-500 group-focus:text-gray-500">
             Password

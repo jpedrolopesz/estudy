@@ -4,23 +4,25 @@ namespace App\Http\Controllers\User\Account;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Middleware\EnsureUserIsSubscribed;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Laravel\Cashier\Exceptions\IncompletePayment;
+use Laravel\Cashier\Subscription;
 
 class PlanController extends Controller
 {
     public $plan = '';
 
-    public function show()
+    public function show(Subscription $subscription, Request $request,Plan $plan)
     {
 
         return Inertia::render('User/Account/Plans/Show', [
-            'EnsureUserIsSubscribed' => EnsureUserIsSubscribed::class,
             'plansMonthly' => Plan::where('slug', 'monthly')->get(),
-            'plansYearly' =>  Plan::where('slug', 'yearly')->get()
+            'plansYearly' =>  Plan::where('slug', 'yearly')->get(),
+            'currentPlan' => auth()->user()->subscription('default') ?? NULL
+             // dd($request->user()->subscribed('default')),
+
         ]);
 
     }
@@ -39,27 +41,10 @@ class PlanController extends Controller
 
         return view('tenant.pages.account.plans.index', compact('plans'));
     }
-
-    public function  store(Request $request)
-    {
-        $plan = tenancy()->central(function () use($request) {
-
-            return Plan::where('slug', $request->plan_id)->first();
-
-        });
-        try {
-            tenant()->subscription('default')->swapAndInvoice($request->plan);
-        } catch (IncompletePayment $e) {
-            return redirect()->route('cashier.payment',
-                [$e->payment->id,
-                    'redirect' => route('tenant.pages.account.plans.index')
-                ]);
-
-        }
-        return back();
-    }
      *
      **/
+
+
 
 
 }

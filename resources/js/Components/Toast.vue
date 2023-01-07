@@ -18,6 +18,11 @@ let removeFinshEventListener = Inertia.on("finish", () => {
       message: page.props.value.flash.error,
     })
   }
+  if (page.props.value.flash.alert) {
+    toast.add({
+      message: page.props.value.flash.alert,
+    })
+  }
 });
 
 onUnmounted(() => removeFinshEventListener());

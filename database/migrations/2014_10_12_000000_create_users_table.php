@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->boolean('owner')->default(false);
-            $table->string('photo_path', 100)->default('default.png');;
+            $table->string('photo' )->default('default.png');;
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

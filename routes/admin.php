@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Account\PasswordController;
+use App\Http\Controllers\Admin\Account\PasswordAdminController;
 use App\Http\Controllers\Admin\Account\ProfileController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CompanyController;
@@ -53,8 +53,8 @@ Route::prefix('admin')->middleware(['auth'])
             Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
 
             /** Password Profile */
-            Route::get('password', [PasswordController::class, 'show'])->name('password');
-            Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+            Route::get('password', [PasswordAdminController::class, 'show'])->name('password');
+            Route::put('password', [PasswordAdminController::class, 'update'])->name('password.update');
 
             /**  Company */
             Route::get('company', [CompanyController::class, 'show'])->name('company');

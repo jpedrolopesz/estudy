@@ -13,7 +13,8 @@ class SubscriptionInvoiceController extends Controller
     {
 
         return Inertia::render('User/Account/Invoices/Show', [
-            //'invoices' => User::get()->invoices()
+            'invoices' => auth()->user()->invoices(),
+            'subscription' => auth()->user(),
         ]);
 
     }

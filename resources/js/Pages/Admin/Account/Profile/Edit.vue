@@ -15,9 +15,9 @@
                 <input type="file" class="hidden" ref="photo"
                        @change="updatePhotoPreview"/>
 
-                <div class="mt-2" v-show="!photoPreview && user.image">
-                  <img :src="currentImage()" class="rounded-full h-14 w-14 object-cover"/>
-                </div>
+                  <div class="mt-2" v-show="!photoPreview && $page.props.auth.user.photo">
+                    <img v-bind:src="'/storage/user/' + $page.props.auth.user.photo" class="rounded-full h-14 w-14 object-cover"/>
+                  </div>
 
                 <div class="mt-2" v-show="photoPreview">
                   <span class="block rounded-full w-14 h-14" :style="
@@ -96,8 +96,8 @@
 </template>
 
 <script>
-import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
-import AccountLayout from "@/Pages/Admin/Account/Partials/AccountLayout.vue";
+import AuthenticatedLayout from '../../Layouts/Dashboard/AuthenticatedLayout.vue';
+import AccountLayout from "../Partials/AccountLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
@@ -146,9 +146,7 @@ export default {
       this.form.clearErrors();
       this.form.reset();
     },
-    currentImage() {
-      return "/storage/user/" + this.user.image;
-    },
+
     selectNewPhoto() {
       this.$refs.photo.click();
     },

@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import Sidebar from "./Sidebar.vue";
 import Header from "./Header.vue";
+import Toast from "../../../../Components/Toast.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -18,6 +19,8 @@ const showingNavigationDropdown = ref(false);
       <!-- Site header -->
 
       <Header class="ml-6"/>
+      <Toast/>
+
 
       <!-- Page Heading -->
       <header  v-if="$slots.header">

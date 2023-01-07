@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Rule;
@@ -18,8 +19,6 @@ class UsersController extends Controller
 
     public function index()
     {
-
-
         return Inertia::render('Admin/User/Index', [
             'filters' => Request::all('search', 'role', 'trashed'),
             'users' => Auth::user()->account->users()
@@ -31,8 +30,7 @@ class UsersController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'owner' => $user->owner,
-                    'photo' => $user->photo_path ? URL::route('image', ['path' =>
-                        $user->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
+                    'photo' => $user->photo,
                     'deleted_at' => $user->deleted_at,
                 ]),
         ]);

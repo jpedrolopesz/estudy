@@ -32,7 +32,7 @@
                 <div class="text-sm text-gray-800">Payment Method</div>
                 <!-- Right -->
                 <div class="text-sm text-gray-800 ml-4">
-                  <span class="mr-3">Mastercard ending 9282</span>
+                  <span class="mr-3">{{ subscription.pm_type }} ending {{ subscription.pm_last_four }}</span>
                   <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Edit</a>
                 </div>
               </li>
@@ -47,10 +47,10 @@
               </li>
               <li class="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
                 <!-- Left -->
-                <div class="text-sm text-gray-800">VAT/GST Number</div>
+                <div class="text-sm text-gray-800">Number</div>
                 <!-- Right -->
                 <div class="text-sm text-gray-800ml-4">
-                  <span class="mr-3">UK849700927</span>
+                  <span class="mr-3">{{ subscription.stripe_id }}</span>
                   <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Edit</a>
                 </div>
               </li>
@@ -68,12 +68,14 @@
                 <div class="text-sm text-gray-800 ">Billing Address</div>
                 <!-- Right -->
                 <div class="text-sm text-gray-800 ml-4">
-                  <span class="mr-3">hello@cruip.com</span>
+                  <span class="mr-3">{{ subscription.email }}</span>
                   <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Edit</a>
                 </div>
               </li>
             </ul>
           </section>
+
+
 
           <!-- Invoices -->
           <section>
@@ -84,13 +86,10 @@
               <thead class="text-xs uppercase text-gray-400">
               <tr class="flex flex-wrap md:table-row md:flex-no-wrap">
                 <th class="w-full block md:w-auto md:table-cell py-2">
-                  <div class="font-medium text-left">Year</div>
+                  <div class="font-medium text-left">Id</div>
                 </th>
                 <th class="w-full hidden md:w-auto md:table-cell py-2">
-                  <div class="font-medium text-left">Plan</div>
-                </th>
-                <th class="w-full hidden md:w-auto md:table-cell py-2">
-                  <div class="font-medium text-left">Amount</div>
+                  <div class="font-medium text-left">Price</div>
                 </th>
                 <th class="w-full hidden md:w-auto md:table-cell py-2">
                   <div class="font-semibold text-right"></div>
@@ -98,42 +97,23 @@
               </tr>
               </thead>
               <!-- Table body -->
-              <tbody class="text-sm">
+              <tbody v-for="invoice in invoices" class="text-sm">
               <!-- Row -->
               <tr class="flex flex-wrap md:table-row md:flex-no-wrap border-b border-gray-200 py-2 md:py-0">
+
                 <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div class="text-left  text-gry-800">2021</div>
+                  <div class="text-left">{{ invoice.number }}</div>
                 </td>
                 <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div class="text-left">Basic Plan - Annualy</div>
-                </td>
-                <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div class="text-left ">$349.00</div>
+                  <div class="text-left ">${{ invoice.subtotal_excluding_tax }}</div>
                 </td>
                 <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
                   <div class="text-right flex items-center md:justify-end">
-                    <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">HTML</a>
+                    <a class="font-medium text-indigo-500 hover:text-indigo-600"
+                       target="_blank" :href=invoice.hosted_invoice_url>Link</a>
                     <span class="block w-px h-4 bg-gray-200 mx-2" aria-hidden="true"></span>
-                    <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">PDF</a>
-                  </div>
-                </td>
-              </tr>
-              <!-- Row -->
-              <tr class="flex flex-wrap md:table-row md:flex-no-wrap border-b border-gray-200 py-2 md:py-0">
-                <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div class="text-left  text-gray-800">2020</div>
-                </td>
-                <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div class="text-left">Basic Plan - Annualy</div>
-                </td>
-                <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div class="text-left ">$349.00</div>
-                </td>
-                <td class="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div class="text-right flex items-center md:justify-end">
-                    <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">HTML</a>
-                    <span class="block w-px h-4 bg-gray-200 mx-2" aria-hidden="true"></span>
-                    <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">PDF</a>
+                    <a class="font-medium text-indigo-500 hover:text-indigo-600"
+                       :href=invoice.invoice_pdf>Download</a>
                   </div>
                 </td>
               </tr>
@@ -151,9 +131,22 @@
 
 </template>
 
-<script setup>
+<script>
 import AuthenticatedUserLayout from "../../Layouts/Dashboard/AuthenticatedUserLayout.vue";
 import AccountUserLayout from "../../Layouts/Account/AccountUserLayout.vue";
 import {Link, Head,} from "@inertiajs/inertia-vue3";
+
+export default {
+
+  components: {AuthenticatedUserLayout,AccountUserLayout, Link, Head,},
+
+  props: {
+    invoices:Object,
+    subscription:String,
+
+
+  },
+
+}
 
 </script>

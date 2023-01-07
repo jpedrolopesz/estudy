@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Account\AdminController;
+use App\Http\Controllers\Admin\Account\PasswordAdminController;
 use App\Http\Controllers\Admin\Courses\CoursesController;
 use App\Http\Controllers\Admin\CreatePlanController;
 use App\Http\Controllers\Admin\UsersController;
@@ -25,7 +27,7 @@ Route::get('/', function () {
 });
 
 
-Route::prefix('admin')->middleware(['auth', 'verified'])
+Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
     ->group(function () {
 
         Route::get('/dashboard', function () {
@@ -41,6 +43,15 @@ Route::prefix('admin')->middleware(['auth', 'verified'])
         Route::post('users/{user}', [UsersController::class, 'update'])->name('users.update');
         Route::delete('users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
         Route::put('users/{user}/restore', [UsersController::class, 'restore'])->name('users.restore');
+
+
+        //** Account Admin */
+
+        Route::get('/profile', [AdminController::class, 'edit'])->name('admin.profile.edit');
+        Route::post('/profile', [AdminController::class, 'update'])->name('admin.profile.update');
+
+        Route::get('/password', [PasswordAdminController::class, 'edit'])->name('admin.password.edit');
+        Route::post('/password', [PasswordAdminController::class, 'update'])->name('admin.password.update');
 
 
         //** Courses */
@@ -94,6 +105,9 @@ Route::get('/dashboard', function () {
 Route::group(['prefix' => 'subscription', 'middleware' => ['auth','verified'],'as' => 'subscription.'], function (){
     Route::get('/{plan_id}', [SubscriptionController::class, 'subscription'])->name('subscription');
     Route::post('/', [SubscriptionController::class, 'processSubscription'])->name('process');
+    Route::post('/plans', [SubscriptionController::class, 'update'])->name('subscription.update');
+
+
     //Route::post('/cancel', [SubscriptionCancelController::class, 'cancel'])->name('cancel');
 
 });
@@ -113,7 +127,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/plans', [PlanController::class, 'show'])->name('plans.show');
 
     /** Invoice */
-    Route::get('/invoice', [SubscriptionInvoiceController::class, 'show'])->name('invoice.show');
+    Route::get('/invoice', [SubscriptionInvoiceController::class, 'show'])
+        ->name('invoice.show')->middleware('EnsureUserIsSubscribed');
    // Route::get('/invoice/{id}', [SubscriptionInvoiceController::class, 'show'])->name('invoice');
 });
 

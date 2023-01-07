@@ -82,15 +82,17 @@
 
             </tr>
             </thead>
+
             <!-- Table body -->
             <tbody class="text-sm divide-y divide-slate-200 "
                    v-for="user in users"
                    :key="user.id">
             <tr>
+
               <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap ">
                 <div class="flex items-center">
                   <div class="w-10 h-10 shrink-0 mr-2 sm:mr-3">
-                    <img  class="rounded-full" :src="user.photo" />
+                    <img  class="rounded-full" v-bind:src="'/storage/user/' + user.photo" />
                   </div>
                   <div class="font-medium text-slate-800">{{user.name}}</div>
                 </div>

@@ -2,11 +2,11 @@
     <nav class="bg-white border-b border-gray-100">
 
     <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between items-center h-14">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 ml-12 lg:ml-10 flex sm:flex  items-center">
-                    <Link :href="route('dashboard')">
+                    <Link :href="route('admin.dashboard')">
                         <ApplicationLogo class="block h-9 w-auto" />
                     </Link>
                 </div>
@@ -21,8 +21,8 @@
 
                           <span class="inline-flex rounded-md">
                             <img class="w-8 h-8 rounded-full" width="32" height="32"
-                                 v-bind:src="'/storage/user/' + $page.props.auth.user.image"
-                                 :alt="$page.props.auth.user.name" />
+                                 v-bind:src="'/storage/user/' + $page.props.auth.user.photo"
+                                 :alt="$page.props.auth.user.first_name" />
                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                               {{ $page.props.auth.user.first_name }}
 
@@ -42,7 +42,7 @@
                                 <div class="text-xs text-slate-500 italic"> {{ $page.props.auth.user.email }}</div>
                             </div>
 
-                            <DropdownLink :href="route('profile.edit')" >
+                            <DropdownLink :href="route('admin.profile.edit')" >
                                 Account
                             </DropdownLink>
                             <DropdownLink :href="route('logout')" method="post" as="button">

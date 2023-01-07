@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\User\Account\Subscription;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 
@@ -15,15 +17,12 @@ class SubscriptionController extends Controller
     //Checkout
     public function subscription(User $user,Request $request, $plan_id)
     {
+        $plan = Plan::findOrFail($plan_id);
 
-        return Inertia('Subscription/Show',
-            [
-                'stripeKey' => config('cashier.key'),
-                'intent'=> $user->createSetupIntent(),
-                'plan' => Plan::findOrFail($plan_id)
-
-            ],
-          );
+        return view('pages.checkout', [
+            'intent' => auth()->user()->createSetupIntent(),
+            'currentPlan' => auth()->user()->subscription('default') ?? NULL
+        ], compact('plan' ));
     }
 
     /**
@@ -32,29 +31,42 @@ class SubscriptionController extends Controller
     public function processSubscription(Request $request)
     {
 
-        dd($request->all());
-
         $this->validate($request, [
             'token' => 'required',
         ]);
 
-        $plan = tenancy()->central(function () use($request){
-            return Plan::findOrFail($request->input('billing_plan_id'));
-        });
-
+        $plan = Plan::findOrFail($request->input('billing_plan_id'));
         try {
-            tenant()
+           auth()->user()
                 ->newSubscription('default', $plan->stripe_id)
                 ->create($request->token);
         } catch (IncompletePayment $e) {
             return redirect()->route('cashier.payment',
                 [$e->payment->id,
-                    'redirect' => route('tenant.pages.account.profile.index')
+                    'redirect' => route('plans.show')
                 ]);
 
         }
 
-        return redirect()->route('tenant.account.plans.index')
+        return redirect('plans')
+            ->with('success', 'Your data has been successfully updated.');
+    }
+
+    public function update(Request $request)
+    {
+        $plan = Plan::where('slug', $request->plan_id)->first();
+
+        try {
+            auth()->user()->subscription('default')->swapAndInvoice($request->plan);
+        } catch (IncompletePayment $e) {
+            return redirect()->route('cashier.payment',
+                [$e->payment->id,
+                    'redirect' => route('plans.show')
+                ]);
+
+        }
+
+        return redirect('plans')
             ->with('success', 'Your data has been successfully updated.');
     }
 

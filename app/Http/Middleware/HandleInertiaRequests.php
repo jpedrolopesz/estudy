@@ -2,8 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Plan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
+use Laravel\Cashier\Subscription;
 use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
@@ -34,9 +38,18 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+
         return array_merge(parent::share($request), [
 
-            'permissions' => false,
+            'permission' => function () use ($request,) {
+            return [
+                'isAdmin' => ''
+
+                ];
+
+            },
+
+
 
             'auth' => function () use ($request) {
                 return [
@@ -46,6 +59,7 @@ class HandleInertiaRequests extends Middleware
                         'last_name' => $request->user()->last_name,
                         'email' => $request->user()->email,
                         'owner' => $request->user()->owner,
+                        'photo' => $request->user()->photo,
                         'account' => [
                             'id' => $request->user()->account->id,
                             'name' => $request->user()->account->name,
@@ -61,6 +75,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => function () use ($request) {
                 return [
                     'success' => $request->session()->get('success'),
+                    'alert' => $request->session()->get('alert'),
                     'error' => $request->session()->get('error'),
                 ];
             },
