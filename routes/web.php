@@ -58,15 +58,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         Route::group(['prefix' => 'plan'], function () {
 
 
-
-           // Route::delete('/{id}/details/{idDetail}', [DetailPlanController::class, 'destroy'])->name('details.destroy');
-          //  Route::put('/{id}/details/{idDetail}', [DetailPlanController::class, 'update'])->name('details.update');
-           // Route::post('/{id}/details', [DetailPlanController::class, 'store'])->name('details.store');
-            Route::post('/details/create', [DetailPlanController::class, 'create'])->name('detail.create');
-          //  Route::get('/{id}/details', [DetailPlanController::class, 'index'])->name('pages.plans.details.index');
-           // Route::get('/{id}/details/{idDetail}/edit', [DetailPlanController::class, 'edit'])->name('pages.plans.details.edit');
-
-
             Route::get('/create', [CreatePlanController::class, 'create'])->name('pages.plans.create');
             Route::post('/', [CreatePlanController::class, 'store'])->name('plans.store');
             Route::put('/{id}', [CreatePlanController::class, 'update'])->name('plans.update');
@@ -81,13 +72,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
 
     });
-
-// Images
-
-Route::get('/img/{path}', [ImagesController::class, 'show'])
-    ->where('path', '.*')
-    ->name('image');
-
 
 
 
