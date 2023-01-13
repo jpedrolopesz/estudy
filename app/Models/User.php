@@ -68,10 +68,17 @@ class User extends Authenticatable
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
+
     public function account()
     {
         return $this->belongsTo(Account::class);
     }
+
 
     public function getNameAttribute()
     {

@@ -3,9 +3,8 @@
 use App\Http\Controllers\Admin\Account\AdminController;
 use App\Http\Controllers\Admin\Account\PasswordAdminController;
 use App\Http\Controllers\Admin\CreatePlanController;
-use App\Http\Controllers\Admin\DetailPlanController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\User\Account\DeleteController;
 use App\Http\Controllers\User\Account\PlanController;
 use App\Http\Controllers\User\Account\PasswordController;
@@ -57,7 +56,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         //** Create Plans */
         Route::group(['prefix' => 'plan'], function () {
 
-
             Route::get('/create', [CreatePlanController::class, 'create'])->name('pages.plans.create');
             Route::post('/', [CreatePlanController::class, 'store'])->name('plans.store');
             Route::put('/{id}', [CreatePlanController::class, 'update'])->name('plans.update');
@@ -66,9 +64,12 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
             Route::get('/{plan}/edit', [CreatePlanController::class, 'edit'])->name('pages.plans.edit');
             Route::put('/{plan}/restore', [CreatePlanController::class, 'restore'])->name('plans.restore');
 
-
-
         });
+
+        // Order
+        Route::get('/orders', [OrderController::class, 'show'])->name('orders.show');
+       Route::get('/orders/{order}', [OrderController::class, 'orderDetails'])->name('orders.details');
+       // Route::get('/orders/pdf/download/{order}', [OrderController::class, 'orderPdfDownload'])->name('orders.pdf.download')->withoutMiddleware('check.admin.role');
 
 
     });

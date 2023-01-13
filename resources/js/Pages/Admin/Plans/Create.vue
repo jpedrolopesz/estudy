@@ -58,14 +58,11 @@
 
                   <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-3">
-                      <label for="name" class="block text-sm font-medium text-gray-700">Plan name</label>
+                      <label for="name" class="block text-sm font-medium text-gray-700">Plan Name</label>
                       <input  v-model="form.name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
 
                       <InputError class="mt-2" :message="form.errors.name" />
                     </div>
-
-
-
 
                     <div class="col-span-6 sm:col-span-2">
                       <label for="street-address" class="block text-sm font-medium text-gray-700">Price</label>
@@ -82,12 +79,10 @@
 
                     </div>
 
-
                     <div class="col-span-6 sm:col-span-3">
                       <label for="stripe_id"  class="block text-sm font-medium text-gray-700">Code Stripe</label>
                       <input v-model="form.stripe_id" type="text" name="stripe_id" id="stripe_id"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
-
 
                   </div>
 
@@ -100,8 +95,6 @@
                       </div>
                     </div>
                   </div>
-
-
 
                   <div class="col-span-10 sm:col-span-8">
                     <label for="description" class="block text-sm font-medium text-gray-700"> Description </label>
@@ -130,14 +123,10 @@
                       Create
                     </button>
                   </div>
-
                 </div>
               </div>
             </form>
-
-
         </div>
-
       </div>
     </div>
 

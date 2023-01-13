@@ -51,12 +51,12 @@
 
         <div class="mt-1 md:col-span-2 md:mt-0">
           <form @submit.prevent="update">
-            <div class=" shadow-lg sm:overflow-hidden sm:rounded-b-md">
+            <div class=" shadow-lg sm:overflow-hidden rounded-t-md sm:rounded-b-md">
               <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
                 <div class="grid grid-cols-6 gap-6">
                   <div class="col-span-6 sm:col-span-3">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Plan name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Plan Name</label>
                     <input  v-model="form.name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
 
                     <InputError class="mt-2" :message="form.errors.name" />

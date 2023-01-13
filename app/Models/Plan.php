@@ -33,15 +33,14 @@ class Plan extends Model
         return $this->hasOne(User::class, 'user_id');
     }
 
+
+
     public function planFeatures(): HasOne
     {
         return $this->hasOne(PlanFeature::class, 'plan_id');
     }
 
-    public function details()
-    {
-        return $this->hasMany(DetailPlan::class);
-    }
+
 
     public function resolveRouteBinding($value, $field = null)
     {

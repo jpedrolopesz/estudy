@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Account;
+use App\Models\Order;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -62,6 +63,9 @@ class DatabaseSeeder extends Seeder
                 'max_users' => 2,
             ]);
         }
+        Order::factory(10)->create();
+
     }
+
 
 }
