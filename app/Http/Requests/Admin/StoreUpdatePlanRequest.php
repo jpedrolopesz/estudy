@@ -29,6 +29,7 @@ class StoreUpdatePlanRequest extends FormRequest
             'name' => "required|min:3|max:255|",
             'description' => 'nullable|min:3|max:255',
             'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
+            'max_users' => 'required|numeric',
         ];
     }
 }

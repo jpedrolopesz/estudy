@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\Account\ProfileController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

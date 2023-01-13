@@ -3,23 +3,47 @@
 namespace App\Http\Controllers\Admin\Account;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\PasswordUser;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class PasswordAdminController extends Controller
 {
-    public function edit()
+    /**
+     * Display the user's profile form.
+     *
+     * @return Response
+     */
+    public function edit(): Response
     {
         return Inertia::render('Admin/Account/Password/Edit',
-            ['user' => auth()->user()]);
+            ['status' => session('status')]);
     }
 
-    public function update(PasswordUser $request)
+    /**
+     * Update the user's password.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(Request $request): RedirectResponse
     {
-        auth()->user()->update([
-            'password'=>bcrypt($request->password)
+
+
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
-        return redirect()->back();
+        $request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+
+        return Redirect::back()->with('success', 'Successfully updated');
     }
 }

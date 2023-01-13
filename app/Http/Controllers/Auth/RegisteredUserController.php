@@ -42,10 +42,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $account = Account::create(['name' => 'Laravel']);
+        $account = Account::create(['name' => $request->first_name,]);
 
         $user = User::create([
-            'account_id' => $account->id,
+            'account_id' => 1,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,

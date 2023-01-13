@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUpdatePlanRequest;
 use App\Models\Plan;
+use App\Models\PlanFeature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
@@ -16,15 +17,19 @@ class CreatePlanController extends Controller
 
     public function __construct(Plan $plan)
     {
+
         $this->repository = $plan;
+
     }
 
-    public function index()
+    public function show()
     {
 
-        return Inertia('Admin/Plans/Index',[
+        return Inertia('Admin/Plans/Show',[
+
             'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
-            'plans' => $this->repository
+
+            'plans' => $this->repository->with('planFeatures')
                 ->orderBy('price')
                 ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
                 ->get()
@@ -34,6 +39,9 @@ class CreatePlanController extends Controller
                     'slug' => $plan->slug,
                     'price' => $plan->price,
                     'deleted_at' => $plan->deleted_at,
+
+                    'plan_features' => $plan->planFeatures
+
                 ]),
         ]);
     }
@@ -45,24 +53,20 @@ class CreatePlanController extends Controller
 
     public function store(StoreUpdatePlanRequest $request)
     {
+
         $data = $request->all();
         $data['url'] = Str::kebab($request->name);
-        $this->repository->create($data);
+        $plan = $this->repository->create($data);
 
-        return redirect()->route('central.pages.plans.index')
+        $plan->planFeatures()->create([
+             'max_users' => $request->max_users,
+            ]);
+
+
+        return Redirect::route('pages.plans.show')
             ->with('success', 'Your plan has been created successfully');
     }
 
-    public function show($id)
-    {
-        $plan = $this->repository->where('id', $id)->first();
-
-        if (!$plan)
-            return redirect()->back();
-
-        return view('central.pages.plans.view', compact('plan')
-        );
-    }
 
     public function edit(Plan $plan)
     {
@@ -76,6 +80,7 @@ class CreatePlanController extends Controller
                 'stripe_id' => $plan->stripe_id,
                 'description' => $plan->description,
                 'deleted_at' => $plan->deleted_at,
+                'plan_features' => $plan->planFeatures
                 ] ]);
 
     }
@@ -84,8 +89,13 @@ class CreatePlanController extends Controller
     {
         $plan = $this->repository->where('id', $id)->first();
 
+
         if (!$plan)
             return redirect()->back();
+
+        $plan->planFeatures()->update([
+            'max_users' => $request->max_users,
+        ]);
 
         $plan->update($request->all());
 
@@ -101,7 +111,7 @@ class CreatePlanController extends Controller
             return redirect()->back();
 
 
-        $plan -> delete();
+        $plan-> delete();
 
         return Redirect()->back()
             ->with('success', 'Plan successfully deleted');

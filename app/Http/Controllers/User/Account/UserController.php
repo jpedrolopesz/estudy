@@ -23,13 +23,10 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
-
-
         return Inertia::render('User/Account/Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'user' => User::all()
-
+            'user' => auth()->user()
         ]);
 
     }
@@ -56,8 +53,7 @@ class UserController extends Controller
 
 
 
-
-        return Redirect::route('profile.edit');
+        return Redirect::back()->with('success', 'Successfully updated');
     }
 
     /**

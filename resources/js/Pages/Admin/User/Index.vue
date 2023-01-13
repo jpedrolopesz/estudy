@@ -151,6 +151,7 @@
           </table>
 
 
+
         </div>
       </div>
     </div>
@@ -168,19 +169,17 @@ import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import ModalDelete from "@/Components/ModalDelete.vue";
 import Modal from "@/Components/Modal.vue";
-import Pagination from "@/Components/Pagination.vue";
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import pickBy from 'lodash/pickBy'
 import { Link, Head } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue';
 
 
 export default {
 
   components: {
     AuthenticatedLayout, BreadcrumbLink, Modal,
-    FormSearch, ModalDelete, Link, Pagination, Head,
+    FormSearch, ModalDelete, Link,  Head,
   },
   props: {
     filters: Object,

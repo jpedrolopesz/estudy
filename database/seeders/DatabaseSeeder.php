@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'account_id' => $account->id,
-            'first_name'=>'Joao Pedro',
-            'last_name'=>'Lopes Zamonelo',
+            'first_name' => 'Joao Pedro',
+            'last_name' => 'Lopes Zamonelo',
             'email' => 'jplopeszamonelo@hotmail.com',
             'password' => bcrypt('joao1998'),
             'owner' => true,
@@ -32,14 +32,36 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create(['account_id' => $account->id]);
 
 
-        Plan::factory()->create(['name' => 'Gold', 'url'=> 'gold', 'slug' => 'monthly', 'price'=> 990, 'stripe_id' => 'price_1LSRHkGQW0U1PfqxJO7EGsHx']);
-        Plan::factory()->create(['name' => 'Gold', 'url'=> 'gold', 'slug' => 'yearly', 'price'=> 9990, 'stripe_id' => 'price_1LTBIAGQW0U1Pfqxdr82APbW']);
+        $plans = [
+            [
+                'name' => 'Gold', 'url' => 'gold', 'slug' => 'monthly', 'price' => 990, 'stripe_id' => 'price_1LSRHkGQW0U1PfqxJO7EGsHx'
+            ],
+            [
+                'name' => 'Gold', 'url' => 'gold', 'slug' => 'yearly', 'price' => 9990, 'stripe_id' => 'price_1LTBIAGQW0U1Pfqxdr82APbW'
+            ],
+            [
+                'name' => 'Diamond', 'url' => 'diamond', 'slug' => 'monthly', 'price' => 3990, 'stripe_id' => 'price_1LSmsIGQW0U1PfqxxsV7db73'
+            ],
+            [
+                'name' => 'Diamond', 'url' => 'diamond', 'slug' => 'yearly', 'price' => 33990, 'stripe_id' => 'price_1Lb6p6GQW0U1PfqxjKs6uVX2'
+            ],
+            [
+                'name' => 'Premium', 'url' => 'premium', 'slug' => 'monthly', 'price' => 6990, 'stripe_id' => 'price_1LSRIVGQW0U1PfqxnFnKpQmh'
+            ],
+            [
+                'name' => 'Premium', 'url' => 'premium', 'slug' => 'yearly', 'price' => 66990, 'stripe_id' => 'price_1Lb6kvGQW0U1PfqxQFJJcEBN'
+            ]
 
-        Plan::factory()->create(['name' => 'Diamond', 'url'=> 'diamond', 'slug' => 'monthly', 'price'=> 3990, 'stripe_id' => 'price_1LSmsIGQW0U1PfqxxsV7db73']);
-        Plan::factory()->create(['name' => 'Diamond', 'url'=> 'diamond', 'slug' => 'yearly', 'price'=> 33990, 'stripe_id' => 'price_1Lb6p6GQW0U1PfqxjKs6uVX2']);
 
-        Plan::factory()->create(['name' => 'Premium', 'url'=> 'premium', 'slug' => 'monthly', 'price'=> 6990, 'stripe_id' => 'price_1LSRIVGQW0U1PfqxnFnKpQmh']);
-        Plan::factory()->create(['name' => 'Premium', 'url'=> 'premium', 'slug' => 'yearly', 'price'=> 66990, 'stripe_id' => 'price_1Lb6kvGQW0U1PfqxQFJJcEBN']);
+        ];
 
+        foreach ($plans as $item) {
+            $plan = Plan::create($item);
+
+            $plan->planFeatures()->create([
+                'max_users' => 2,
+            ]);
+        }
     }
+
 }

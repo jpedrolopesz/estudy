@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\Account\AdminController;
 use App\Http\Controllers\Admin\Account\PasswordAdminController;
-use App\Http\Controllers\Admin\Courses\CoursesController;
 use App\Http\Controllers\Admin\CreatePlanController;
+use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\User\Account\DeleteController;
@@ -54,11 +54,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         Route::post('/password', [PasswordAdminController::class, 'update'])->name('admin.password.update');
 
 
-        //** Courses */
-
-        Route::get('/courses', [CoursesController::class, 'show'])->name('courses.show');
-
-
         //** Create Plans */
         Route::group(['prefix' => 'plan'], function () {
 
@@ -67,7 +62,7 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
            // Route::delete('/{id}/details/{idDetail}', [DetailPlanController::class, 'destroy'])->name('details.destroy');
           //  Route::put('/{id}/details/{idDetail}', [DetailPlanController::class, 'update'])->name('details.update');
            // Route::post('/{id}/details', [DetailPlanController::class, 'store'])->name('details.store');
-          //  Route::get('/{id}/details/create', [DetailPlanController::class, 'create'])->name('pages.plans.details.create');
+            Route::post('/details/create', [DetailPlanController::class, 'create'])->name('detail.create');
           //  Route::get('/{id}/details', [DetailPlanController::class, 'index'])->name('pages.plans.details.index');
            // Route::get('/{id}/details/{idDetail}/edit', [DetailPlanController::class, 'edit'])->name('pages.plans.details.edit');
 
@@ -76,10 +71,10 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
             Route::post('/', [CreatePlanController::class, 'store'])->name('plans.store');
             Route::put('/{id}', [CreatePlanController::class, 'update'])->name('plans.update');
             Route::delete('/{id}', [CreatePlanController::class, 'destroy'])->name('plans.destroy');
-            Route::get('/', [CreatePlanController::class, 'index'])->name('pages.plans.index');
-            Route::get('/view/{id}', [CreatePlanController::class, 'show'])->name('pages.plans.view');
+            Route::get('/', [CreatePlanController::class, 'show'])->name('pages.plans.show');
             Route::get('/{plan}/edit', [CreatePlanController::class, 'edit'])->name('pages.plans.edit');
             Route::put('/{plan}/restore', [CreatePlanController::class, 'restore'])->name('plans.restore');
+
 
 
         });

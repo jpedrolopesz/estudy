@@ -67,7 +67,7 @@ export default {
           </li>
 
           <li>
-            <NavLink :href="route('pages.plans.index')" :active="route().current('pages.plans.index')">
+            <NavLink :href="route('pages.plans.show')" :active="route().current('pages.plans.show')">
               <div class="flex items-center p-2 ">
                 <svg class="w-6 h-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
@@ -78,14 +78,7 @@ export default {
             <span class="tooltip">Plans</span>
           </li>
 
-          <li>
-            <NavLink :href="route('courses.show')" :active="route().current('courses.show')">
-              <i class="nav__icon bx bx-grid-alt transition duration-150 ease-in-out group-hover:text-gray-500 group-focus:text-gray-900"></i>
-              <span class="links_name pt-2.5 font-semibold  transition duration-150 ease-in-out group-hover:text-gray-900 group-focus:text-gray-900">
-                    Courses</span>
-            </NavLink>
-            <span class="tooltip">Courses</span>
-          </li>
+
 
           <!-- Users
             <li>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Billable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Billable, MustVerifyEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -21,17 +22,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'first_name',
         'last_name',
         'owner',
         'account_id',
-        'plan_id',
-        'stripe_id',
-        'pm_type',
-        'pm_last_four',
         'trial_ends_at',
 
     ];
@@ -89,7 +85,7 @@ class User extends Authenticatable
 
     public function isDemoUser()
     {
-        return $this->email === 'johndoe@example.com';
+        return $this->email === 'demo@demo.com';
     }
 
     public function scopeOrderByName($query)

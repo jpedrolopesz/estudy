@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Plan extends Model
@@ -18,6 +19,7 @@ class Plan extends Model
         'slug',
         'name',
         'price',
+        'plan_features',
         'stripe_id',
         'active',
         'recommended',
@@ -29,6 +31,11 @@ class Plan extends Model
     public function users()
     {
         return $this->hasOne(User::class, 'user_id');
+    }
+
+    public function planFeatures(): HasOne
+    {
+        return $this->hasOne(PlanFeature::class, 'plan_id');
     }
 
     public function details()

@@ -24,7 +24,7 @@
                         </BreadcrumbLink>
                       </li>
                       <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                        <BreadcrumbLink  :active="route().current('pages.plans.index')">
+                        <BreadcrumbLink  :active="route().current('pages.plans.show')">
                           Plans
                         </BreadcrumbLink>
                       </li>
@@ -50,125 +50,91 @@
 
 
         <div class="mt-1 md:col-span-2 md:mt-0">
-          <TabGroup>
-            <TabList class="mt-1 p-2 bg-white border-b rounded-t-md items-center">
+          <form @submit.prevent="update">
+            <div class=" shadow-lg sm:overflow-hidden sm:rounded-b-md">
+              <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
-              <!-- Start -->
-              <div class="text-sm font-medium flex flex-nowrap mt-3 sm:-mx-6 lg:-mx-8 overflow-x-auto ">
-                <Tab  v-slot="{ selected }" class="pb-3 sm:ml-4 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
-                  <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
+                <div class="grid grid-cols-6 gap-6">
+                  <div class="col-span-6 sm:col-span-3">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Plan name</label>
+                    <input  v-model="form.name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
-                    </svg>
+                    <InputError class="mt-2" :message="form.errors.name" />
+                  </div>
 
-                    <span>Plan</span>
+
+
+
+                  <div class="col-span-6 sm:col-span-2">
+                    <label for="street-address" class="block text-sm font-medium text-gray-700">Price</label>
+                    <input v-model="form.price" type="number" name="price" id="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                   </div>
-                </Tab>
-                <Tab v-slot="{ selected }" class="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
-                  <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                    </svg>
-                    <span>Details</span>
+
+                  <div class="col-span-6 sm:col-span-2">
+                    <label for="recurrence" class="block text-sm font-medium text-gray-700">Recurrence</label>
+                    <select v-model="form.slug" name="recurrence" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                      <option>{{form.slug}}</option>
+                      <option>Monthly</option>
+                      <option>Yearly</option>
+                    </select>
+                    <InputError class="mt-2" :message="form.errors.slug" />
+
                   </div>
-                </Tab>
-                <Tab  v-slot="{ selected }" class="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
-                  <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
-                    <svg class="w-4 h-4 shrink-0 fill-current text-slate-400 mr-2" viewBox=" 0 0 16 16">
-                      <path d="M3.414 2L9 7.586V16H7V8.414l-5-5V6H0V1a1 1 0 011-1h5v2H3.414zM15 0a1 1 0 011 1v5h-2V3.414l-3.172 3.172-1.414-1.414L12.586 2H10V0h5z" />
-                    </svg>
-                    <span>Billing</span>
+
+
+                  <div class="col-span-6 sm:col-span-3">
+                    <label for="stripe_id"  class="block text-sm font-medium text-gray-700">Code Stripe</label>
+                    <input v-model="form.stripe_id" type="text" name="stripe_id" id="stripe_id"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
-                </Tab>
+
+
+                </div>
+
+                <div class="grid grid-cols-6 gap-6">
+                  <div class="col-span-6 sm:col-span-2">
+                    <label for="max_users" class="block text-sm font-medium text-gray-700">Features Permissions</label>
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                      <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">Max Users</span>
+                      <input  v-model="form.plan_features" type="number" name="max_users" id="max_users"  class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-span-10 sm:col-span-8">
+                  <label for="description" class="block text-sm font-medium text-gray-700"> Description </label>
+                  <div class="mt-1">
+                    <textarea v-model="form.description" name="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" ></textarea>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-500">Brief description for your profile. URLs are hyperlinked.</p>
+                </div>
+
               </div>
-              <!-- End -->
-            </TabList>
-            <TabPanels>
-              <!-- Tab 1 - Account -->
-              <TabPanel>
-                <form @submit.prevent="update">
-                  <div class=" shadow-lg sm:overflow-hidden sm:rounded-b-md">
-                    <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
+              <div class="flex justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
 
-                      <div class="grid grid-cols-6 gap-6">
-                        <div class="col-span-6 sm:col-span-3">
-                          <label for="name" class="block text-sm font-medium text-gray-700">Plan name</label>
-                          <input  v-model="form.name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                <div>
+                  <Link :href="route('pages.plans.show')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                    </svg>
 
-                          <InputError class="mt-2" :message="form.errors.name" />
-                        </div>
+                    Previous
+                  </Link>
+                </div>
 
+                <div>
+                  <TrashedMessage v-if="plan.deleted_at"  @restore="restore"> This plan has been deleted.  </TrashedMessage>
 
+                  <button v-if="!plan.deleted_at" type="submit" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                    Update
+                  </button>
+                </div>
 
+              </div>
+            </div>
+          </form>
 
-                        <div class="col-span-6 sm:col-span-2">
-                          <label for="street-address" class="block text-sm font-medium text-gray-700">Price</label>
-                          <input v-model="form.price" type="number" name="price" id="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-2">
-                          <label for="recurrence" class="block text-sm font-medium text-gray-700">Recurrence</label>
-                          <select v-model="form.slug" name="recurrence" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                            <option>{{form.slug}}</option>
-                            <option>Monthly</option>
-                            <option>Yearly</option>
-                          </select>
-                          <InputError class="mt-2" :message="form.errors.slug" />
-
-                        </div>
-
-
-                        <div class="col-span-6 sm:col-span-3">
-                          <label for="stripe_id"  class="block text-sm font-medium text-gray-700">Code Stripe</label>
-                          <input v-model="form.stripe_id" type="text" name="stripe_id" id="stripe_id"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-
-
-                      </div>
-
-                      <div class="col-span-10 sm:col-span-8">
-                        <label for="description" class="block text-sm font-medium text-gray-700"> Description </label>
-                        <div class="mt-1">
-                          <textarea v-model="form.description" name="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" ></textarea>
-                        </div>
-                        <p class="mt-2 text-sm text-gray-500">Brief description for your profile. URLs are hyperlinked.</p>
-                      </div>
-
-                    </div>
-                    <div class="flex justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
-
-                      <div>
-                        <Link :href="route('pages.plans.index')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
-                          </svg>
-
-                          Previous
-                        </Link>
-                      </div>
-
-                      <div>
-                        <TrashedMessage v-if="plan.deleted_at"  @restore="restore"> This plan has been deleted.  </TrashedMessage>
-
-                        <button v-if="!plan.deleted_at" type="submit" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                          Update
-                        </button>
-                      </div>
-
-                    </div>
-                  </div>
-                </form>
-
-              </TabPanel>
-              <!-- Tab 2 - Password -->
-              <TabPanel>
-                Details Plan
-              </TabPanel>
-              <TabPanel>Billing Information</TabPanel>
-            </TabPanels>
-          </TabGroup>
         </div>
 
       </div>
@@ -197,8 +163,6 @@ export default {
     FileInput,
     InputError,
     Head, Link,
-    TabGroup, TabList,
-    Tab, TabPanels, TabPanel,
   },
   props: {
     plan: Object,
@@ -212,7 +176,9 @@ export default {
         slug: this.plan.slug,
         price: this.plan.price,
         stripe_id: this.plan.stripe_id,
-        description: this.plan.description
+        description: this.plan.description,
+        plan_features: this.plan.plan_features.max_users
+
 
       }),
     }

@@ -3,32 +3,36 @@
 namespace App\Http\Controllers\User\Account;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class PasswordController extends Controller
 {
     /**
      * Display the user's profile form.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
+     * @param Request $request
+     * @return Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request): Response
     {
         return Inertia::render('User/Account/Password/Edit', [
             'status' => session('status'),
         ]);
     }
+
     /**
      * Update the user's password.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
 
 
@@ -42,6 +46,6 @@ class PasswordController extends Controller
         ]);
 
 
-        return back();
+        return Redirect::back()->with('success', 'Successfully updated');
     }
 }

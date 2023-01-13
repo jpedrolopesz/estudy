@@ -48,12 +48,22 @@
               </div>
 
 
+              <div class="grid grid-cols-6 gap-6">
+
                 <div class="col-span-6 sm:col-span-3">
                   <label for="name" class="block text-sm font-medium text-gray-700">First name*</label>
                   <input  v-model="form.first_name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm" />
                   <InputError class="mt-2" :message="form.errors.first_name" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <label for="name" class="block text-sm font-medium text-gray-700">Last name*</label>
+                  <input  v-model="form.last_name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm" />
+                  <InputError class="mt-2" :message="form.errors.last_name" />
 
                 </div>
+
+              </div>
 
                 <div class="col-span-6 sm:col-span-3">
                   <label for="email" class="block text-sm font-medium text-gray-700">Email address*</label>
@@ -128,6 +138,7 @@ export default {
     const form = useForm({
       photo: props.user.photo,
       first_name: props.user.first_name,
+      last_name: props.user.last_name,
       email: props.user.email,
       mustVerifyEmail: props.user.email_verified_at,
       status: props.status

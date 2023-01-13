@@ -89,8 +89,6 @@
                 <div class="sr-only"></div>
               </td>
 
-
-
               <td class="px-2 inline-flex first:pl-5 last:pr-5 py-6 whitespace-nowrap">
                 <div v-if="!plan.deleted_at" class="bg-emerald-100 text-emerald-600 text-left rounded-full text-center px-2.5 ">Active</div>
                 <div v-if="plan.deleted_at" class=" bg-amber-100 text-amber-600 text-left rounded-full text-center px-2.5">Disabled</div>
@@ -138,6 +136,8 @@
     </div>
 
 
+
+
   </AuthenticatedLayout>
 
 </template>
@@ -166,11 +166,15 @@ export default {
   },
   props: {
     filters: Object,
-    plans: Object,
-  },
+    plans: {
+      type: Object,
+      required: true
+    },
 
+  },
   data() {
     return {
+
       form: {
         search: this.filters.search,
         trashed: this.filters.trashed,
