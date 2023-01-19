@@ -10,7 +10,7 @@
 
     <AccountUserLayout>
 
-        <div class="mt-5  md:col-span-2 md:mt-0">
+        <div class="mt-5 md:col-span-2 md:mt-0">
 
             <header>
               <h2 class="text-lg ml-5 mt-2.5 font-medium text-gray-900">Update Password</h2>

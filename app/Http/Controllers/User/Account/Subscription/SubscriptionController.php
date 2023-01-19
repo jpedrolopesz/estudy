@@ -15,14 +15,15 @@ class SubscriptionController extends Controller
 {
 
     //Checkout
-    public function subscription(User $user,Request $request, $plan_id)
+    public function subscription($plan_id)
     {
-        $plan = Plan::findOrFail($plan_id);
 
         return view('pages.checkout', [
+            'plan' => Plan::findOrFail($plan_id),
             'intent' => auth()->user()->createSetupIntent(),
-            'currentPlan' => auth()->user()->subscription('default') ?? NULL
-        ], compact('plan' ));
+            'currentPlan' => auth()->user()->subscription('default') ?? NULL,
+
+        ]);
     }
 
     /**
@@ -31,14 +32,17 @@ class SubscriptionController extends Controller
     public function processSubscription(Request $request)
     {
 
+
+
         $this->validate($request, [
             'token' => 'required',
         ]);
 
+
         $plan = Plan::findOrFail($request->input('billing_plan_id'));
         try {
            auth()->user()
-                ->newSubscription('default', $plan->stripe_id)
+                ->newSubscription('default',  $plan->stripe_id)
                 ->create($request->token);
         } catch (IncompletePayment $e) {
             return redirect()->route('cashier.payment',
@@ -51,6 +55,9 @@ class SubscriptionController extends Controller
         return redirect('plans')
             ->with('success', 'Your data has been successfully updated.');
     }
+
+
+
 
     public function update(Request $request)
     {
@@ -69,6 +76,25 @@ class SubscriptionController extends Controller
         return redirect('plans')
             ->with('success', 'Your data has been successfully updated.');
     }
+
+    public function cancel(Request $request)
+    {
+        $subscription = auth()->user()->subscription('default');
+
+        $subscription->cancel();
+
+        return Redirect::back()->with('success', 'Your subscription has been canceled successfully');
+    }
+
+    public function resume(Request $request)
+    {
+        $subscription = auth()->user()->subscription('default');
+
+        $subscription->resume();
+
+        return Redirect::back()->with('success', 'Your subscription has been successfully reactivated');
+    }
+
 
 
 }

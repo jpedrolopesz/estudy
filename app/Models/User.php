@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use Laravel\Sanctum\HasApiTokens;
+use function Illuminate\Events\queueable;
 
 class User extends Authenticatable
 {
@@ -53,20 +55,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function plan()
+    protected static function booted()
     {
-        return $this->hasOneThrough(
-            Plan::class, Subscription::class,
-            'user_id', 'stripe_id', 'id',
-            'stripe_price'
-
-        );
+        static::updated(queueable(function ($user) {
+            if ($user->hasStripeId()) {
+                $user->syncStripeCustomerDetails();
+            }
+        }));
     }
+
 
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
+
 
     public function orders()
     {

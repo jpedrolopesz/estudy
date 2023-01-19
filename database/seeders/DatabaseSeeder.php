@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Laravel\Cashier\Subscription;
+use Laravel\Cashier\SubscriptionItem;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'jplopeszamonelo@hotmail.com',
             'password' => bcrypt('joao1998'),
             'owner' => true,
-            'trial_ends_at' => 14
+            'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
         ]);
 
         User::factory(10)->create(['account_id' => $account->id]);
@@ -64,6 +66,14 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         Order::factory(10)->create();
+
+
+
+
+
+
+
+
 
     }
 

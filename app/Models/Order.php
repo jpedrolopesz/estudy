@@ -6,6 +6,7 @@ use App\Models\Plan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stripe\Subscription;
 
 class Order extends Model
 {
@@ -16,6 +17,11 @@ class Order extends Model
     public function plan()
     {
         return $this->belongsTo(Plan::class, 'plan_id');
+    }
+
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class, 'user_id');
     }
 
     public function user()

@@ -40,7 +40,6 @@
                 <div class="px-5 pt-5 pb-6 ">
                   <header class="flex items-center mb-2">
 
-                   <!-- @if (tenant()->subscribedToPrice($plan->stripe_id, 'default')) -->
 
                     <h3 class="text-lg text-slate-800 font-semibold">{{plan.name}}</h3>
                   </header>
@@ -77,43 +76,6 @@
                   </div>
 
 
-                  <!-- CTA
-                  <div class="">
-                    @if (tenant()->subscribedToPrice($plan->stripe_id, 'default'))
-                    @if (!tenant()->subscription( 'default')->cancelled())
-                    <form action="{{route('tenant.subscription.cancel')}}"  method="post">
-                      @csrf
-
-                      <button class="btn border-slate-200 bg-red-500 text-white w-full flex items-center" >
-                        Cancel Plan</button>
-                    </form>
-                    @endif
-                    @if (tenant()->subscription('default')->cancelled())
-                    <a  href="{{route('tenant.subscription.subscription',$plan->id)}}" type="button" class="btn bg-gray-300 hover:bg-indigo-600 text-white w-full ">
-                      Reactivate
-                    </a>
-                    @endif
-                    @else
-                    @if (!tenant()->subscription('default'))
-                    <a  href="{{route('tenant.subscription.subscription',$plan->id)}}" type="button" class="btn bg-indigo-500 hover:bg-indigo-600 text-white w-full">
-                      Subscription
-                    </a>
-                    @endif
-                    @if(tenant()->subscription('default'))
-
-                    <form  method="post">
-
-                      <button name="plan" id="plan" value="{{plan.stripe_id}}"
-                              class="btn bg-indigo-500 hover:bg-indigo-600 text-white w-full">
-                        Update Plan
-                      </button>
-
-
-                    </form>
-                    @endif
-                    @endif
-                  </div>
-                  -->
                 </div>
                 <div class="flex items-center px-5 ">
                   <h4 class="flex-shrink-0 pr-4 bg-white text-xs leading-5 tracking-wider font-semibold uppercase text-gray-700">
@@ -162,7 +124,6 @@
             <div class="px-5 pt-5 pb-6 ">
               <header class="flex items-center mb-2">
 
-                <!-- @if (tenant()->subscribedToPrice($plan->stripe_id, 'default')) -->
 
                 <h3 class="text-lg text-slate-800 font-semibold">{{plan.name}}</h3>
               </header>
@@ -198,44 +159,6 @@
                 </a>
               </div>
 
-
-              <!-- CTA
-              <div class="">
-                @if (tenant()->subscribedToPrice($plan->stripe_id, 'default'))
-                @if (!tenant()->subscription( 'default')->cancelled())
-                <form action="{{route('tenant.subscription.cancel')}}"  method="post">
-                  @csrf
-
-                  <button class="btn border-slate-200 bg-red-500 text-white w-full flex items-center" >
-                    Cancel Plan</button>
-                </form>
-                @endif
-                @if (tenant()->subscription('default')->cancelled())
-                <a  href="{{route('tenant.subscription.subscription',$plan->id)}}" type="button" class="btn bg-gray-300 hover:bg-indigo-600 text-white w-full ">
-                  Reactivate
-                </a>
-                @endif
-                @else
-                @if (!tenant()->subscription('default'))
-                <a  href="{{route('tenant.subscription.subscription',$plan->id)}}" type="button" class="btn bg-indigo-500 hover:bg-indigo-600 text-white w-full">
-                  Subscription
-                </a>
-                @endif
-                @if(tenant()->subscription('default'))
-
-                <form  method="post">
-
-                  <button name="plan" id="plan" value="{{plan.stripe_id}}"
-                          class="btn bg-indigo-500 hover:bg-indigo-600 text-white w-full">
-                    Update Plan
-                  </button>
-
-
-                </form>
-                @endif
-                @endif
-              </div>
-              -->
             </div>
             <div class="flex items-center px-5 ">
               <h4 class="flex-shrink-0 pr-4 bg-white text-xs leading-5 tracking-wider font-semibold uppercase text-gray-700">
@@ -300,20 +223,9 @@ export default {
       planSelect: true,
     }
   },
-  setup(props){
-
-    const enabled = ref(false)
-
-    const form = useForm({
-      name: props.plansMonthly.name,
-
-    });
-    return {form};
-  },
   props:{
     plansMonthly:Object,
     plansYearly:Object,
-    permissions:Object,
     currentPlan:Object,
   },
   }

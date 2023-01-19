@@ -13,8 +13,6 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
-        "league/glide-laravel": "^1.0",
-        "spatie/laravel-google-cloud-storage": "^2.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {

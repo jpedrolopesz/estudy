@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Account\AdminController;
 use App\Http\Controllers\Admin\Account\PasswordAdminController;
 use App\Http\Controllers\Admin\CreatePlanController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\Stripe\StripeController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\User\Account\DeleteController;
 use App\Http\Controllers\User\Account\PlanController;
@@ -26,12 +27,30 @@ Route::get('/', function () {
 });
 
 
+
+
 Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
     ->group(function () {
 
         Route::get('/dashboard', function () {
             return Inertia::render('Admin/Dashboard');
         })->name('admin.dashboard');
+
+        Route::get('/checkout', function () {
+            return Inertia::render('Subscription/Show', [
+                'intent' => auth()->user()->createSetupIntent(),
+
+            ]);
+        })->name('checkout.index');
+
+
+
+
+        //Stripe Test
+
+
+        Route::get('/stripe', [StripeController::class, 'show'])->name('stripe.show');
+
 
         //** Users */
 
@@ -86,6 +105,8 @@ Route::group(['prefix' => 'subscription', 'middleware' => ['auth','verified'],'a
     Route::get('/{plan_id}', [SubscriptionController::class, 'subscription'])->name('subscription');
     Route::post('/', [SubscriptionController::class, 'processSubscription'])->name('process');
     Route::post('/plans', [SubscriptionController::class, 'update'])->name('subscription.update');
+    Route::post('/cancel', [SubscriptionController::class, 'cancel'])->name('cancel');
+    Route::post('/resume', [SubscriptionController::class, 'resume'])->name('resume');
 
 
     //Route::post('/cancel', [SubscriptionCancelController::class, 'cancel'])->name('cancel');

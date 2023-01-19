@@ -1,235 +1,176 @@
 <template>
+  <Head title="Checkout" />
+
+    <div class="p-4 mt-2 max-w-[1250px] mx-auto text-3xl font-extrabold">Checkout</div>
+
+    <div class="flex max-w-[1250px] mx-auto pt-4">
+
+      <div class="w-8/12">
+        <div class="flex items-stretch border-b border-b-gray-300 w-[calc(100%-100px)] pb-4 pl-4 mb-6">
+          <div class="text-gray-900 font-extrabold text-xl mr-12">
+            Shipping Address
+          </div>
+          <div class="px-4 font-semibold">
+            <div>{{ $page.props.auth.user.first_name }} {{ $page.props.auth.user.last_name }}</div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="w-4/12 border border-gray-400 rounded-md py-4 px-2">
 
 
-  <div>
+        <form id="payment-form">
 
-    <h1>{{plan.name}} / {{ plan.price }} / {{plan.id}}</h1>
+          <div id="card-element"></div>
 
+          <div class="flex justify-between text-xl text-red-700 font-extrabold border-y border-y-gray-300 my-3 p-2">
+            <div>Order total:</div>
+            <div >USD: </div>
+          </div>
 
-  </div>
+          <button id="submit"  data-secret="{{value.client_secret}}"
+                  class="w-full bg-yellow-400 hover:bg-yellow-500 rounded-md text-sm font-extrabold p-2">
+            <div v-if="isProcessing" id="button-text">Processing...</div>
+            <div v-else id="button-text">Place your order in USD</div>
+          </button>
 
+          <p id="card-error" role="alert" class="text-red-700 text-center font-semibold"></p>
 
-
-
-  <div class="px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 -mb-px">
-
-      <Link :href="route('plans.show')" class="block rounded-full bg-slate-100 text-slate-500 hover:text-slate-600"
-      >
-        <span class="sr-only">Back</span>
-        <svg width="32" height="32" viewBox="0 0 32 32">
-          <path class="fill-current" d="M15.95 14.536l4.242-4.243a1 1 0 111.415 1.414l-4.243 4.243 4.243 4.242a1 1 0 11-1.415 1.415l-4.242-4.243-4.243 4.243a1 1 0 01-1.414-1.415l4.243-4.242-4.243-4.243a1 1 0 011.414-1.414l4.243 4.243z" />
-        </svg>
-      </Link>
+        </form>
+      </div>
     </div>
-  </div>
-
-  <div class="checkout max-h-full bg-white rounded-2xl md:items-center md:mx-20 mt-14 mb-14">
-    <div class="panel max-h-full flex flex-col rounded-2xl  rounded-md md:flex-row mb-8 shadow-2xl ">
-      <div class="panel-left w-full md:w-2/3 bg-white rounded-l">
-
-        <div class="max-w-sm mx-auto px-4 py-8">
-          <!-- Form -->
-
-          <div >
-            <h2 class="mb-12 text-center text-3xl font-bold text-gray-900">Checkout</h2>
-          </div>
-
-          <main>
-            <form @submit.prevent="submit"  id="card-form">
-
-
-              <!-- Card form -->
-              <div class="space-y-4">
-
-                <input type="hidden"  name="billing_plan_id" v-bind:value="plan.id" />
-                <input type="hidden" name="payment-method" id="payment-method"  :value="plan.id" />
-                <!-- Name on Card -->
-                <div>
-                  <label class="block text-sm text-slate-500 font-medium mb-3" for="card-name">Name on Card<span class="text-rose-500">*</span></label>
-                  <input type="text"  id="card-holder-name" name="card-holder-name" class="appearance-none block w-full px-3 py-2 border border-gray-100 shadow-md rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="John Doe" />
-                </div>
-
-                <!-- Card Number -->
-                <label class="block text-sm text-slate-500 font-medium" for="card-name">Card Number<span class="text-rose-500">*</span></label>
-                <div class="border border-gray-100 shadow-md"  id="card-element"></div>
-
-                <input type="hidden" name="plan" :value="plan"/>
-
-              </div>
-              <!-- Form footer data-secret="{{intent.client_secret}}" -->
-              <div class="mt-6">
-                <div class="mb-4">
-
-                  <button   id="card-button" :data-secret="intent.client_secret"  type="submit"
-                            class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white  bg-gradient-to-tr from-indigo-500 to-indigo-400  rounded-md hover:bg-indigo-500  focus:ring-indigo active:bg-indigo-900 transition duration-150 ease-in-out">Pay ${{plan.price}}</button>
-                </div>
-                <div class="text-xs text-slate-500 italic text-center">This is a secure checkout, your payment details don't touch our servers.</div>
-              </div>
-
-
-            </form>
-          </main>
-        </div>
-
-      </div>
-
-      <!-- end panel-left -->
-
-      <div class="panel-right rounded-2xl mt-2 mb-2 mr-2 w-full md:w-1/3 shrink-0  bg-gradient-to-tr from-indigo-500 to-indigo-400 text-white rounded-md">
-        <div class="p-10">
-          <h2 class="font-bold text-xl mb-4">{{plan.name}}</h2>
-          <div class="mb-4">
-            <span class="text-2xl align-top">$</span>
-            <span class="text-4xl align-top">{{plan.price}}</span>
-            <span class="text-lg">/ {{plan.slug}}</span>
-          </div>
-          <div class="italic w-3/4 leading-normal mb-8">
-            Automatically renews after 1 {{plan.slug}}
-          </div>
-          <ul>
-
-            <li class="flex items-center py-1">
-              <svg class=" w-4 h-4 shrink-0 fill-current text-white mr-2" viewBox="0 0 12 12">
-                <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
-              </svg>
-              <div class="text-sm">detalhes</div>
-            </li>
-
-          </ul>
-
-        </div>
-      </div>
-    </div> <!-- end panel -->
-
-  </div> <!-- end checkout -->
-
-
+    <div class="w-[1200px] mx-auto text-xl font-bold pb-2 underline">Items</div>
 
 
 </template>
 
 
-<script>
-
-import {Link, useForm} from "@inertiajs/inertia-vue3";
-
-export default {
-  components: {
-    Link
-  },
-  props: {
-    _token:Object,
-    plan:Object,
-    intent:Object,
-    stripeKey: {
-      type: String,
-    },
+<script setup>
+import { Head, Inertia, useForm } from '@inertiajs/inertia-vue3';
+import { toRefs, ref, computed, onMounted, onBeforeMount } from 'vue'
 
 
-  },
-  setup (props) {
-    const form = useForm({
-      _method: 'post',
-      billing_plan_id: props.plan.id,
-      name: props.plan.name,
-      slug: props.plan.slug,
-      url: props.plan.url,
-      stripe_id: props.plan.stripe_id,
-      intent: props.intent.client_secret,
-      _token: props._token,
+const props = defineProps({
+  intent: Object,
+})
+const { intent } = toRefs(props)
 
+let stripe = null
+let elements = null
+let card = null
+let form = null
+let isProcessing = ref(false)
+const data = useForm({ payment_intent: null, })
 
+onMounted(() => {
+  stripe = Stripe("pk_test_51LRjEpGQW0U1Pfqxy4rwka8HWdsBTnY2S2Jsiz9vUB8XstTHI47i3NuYkyJH1ZZ6sbhoOqlepPENnrJjy2kA9sCm00kus3pIY8");
 
-    })
-    function submit() {
-      form.post(route("subscription.process"))
-    }
-
-    return { form, submit }},
-
-  mounted(){
-    this.includeStripe('js.stripe.com/v3/', function(){
-      this.configureStripe();
-    }.bind(this));
-  },
-  methods: {
-
-    includeStripe(URL, callback) {
-      var documentTag = document, tag = 'script',
-        object = documentTag.createElement(tag),
-        scriptTag = documentTag.getElementsByTagName(tag)[0];
-      object.src = '//' + URL;
-      if (callback) {
-        object.addEventListener('load', (e) => {
-          callback(null, e);
-        }, false);
+  elements = stripe.elements();
+  var style = {
+    base: {
+      color: "#32325d",
+      fontFamily: 'Arial, sans-serif',
+      fontSmoothing: "antialiased",
+      fontSize: "16px",
+      "::placeholder": {
+        color: "#32325d"
       }
-      scriptTag.parentNode.insertBefore(object, scriptTag);
     },
+    invalid: {
+      fontFamily: 'Arial, sans-serif',
+      color: "#fa755a",
+      iconColor: "#fa755a"
+    }
+  };
 
-    configureStripe() {
-      this.stripe = Stripe(this.stripeKey);
+  card = elements.create("card", { style: style });
+  // Stripe injects an iframe into the DOM
+  card.mount("#card-element");
 
-      this.elements = this.stripe.elements();
-      this.card = this.elements.create('card');
-      this.card.mount('#card-element');
-      this.cardHolderName = document.getElementById('card-holder-name')
-      this.cardButton = document.getElementById('card-button')
+  card.on("change", function (event) {
+    // Disable the Pay button if there are no card details in the Element
+    document.querySelector("button").disabled = event.empty;
+    document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
+  });
 
-      this.form = document.getElementById('card-form')
+  form = document.getElementById("payment-form");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    // Complete payment when the submit button is clicked
+    payWithCard(stripe, card, intent.value.client_secret);
+  });
 
-      this.form.addEventListener('submit', async (e) => {
-        e.preventDefault()
+  setTimeout(() => {
+    Inertia.post('/checkout')
+  }, 10)
+})
 
-        this.cardButton.disabled = true
+// Calls stripe.confirmCardPayment
+// If the card requires authentication Stripe shows a pop-up modal to
+// prompt the user to enter authentication details without leaving your page.
+const payWithCard = (stripe, card, clientSecret) => {
+  loading(true);
+  stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card
+      },
+    })
+    .then(function (result) {
+      if (result.error) {
+        // Show error to your customer
+        showError(result.error.message);
+      } else {
+        // The payment succeeded!
+        console.log(result.paymentIntent.id)
+        orderComplete(result.paymentIntent.id);
+      }
+    });
+};
 
-        const {setupIntent, error} = await this.stripe.confirmCardSetup(
-          this.cardButton.dataset.secret, {
-            payment_method: {
-              card: this.card,
-              billing_details: {
-                name: this.cardHolderName.value
-              }
-            }
-          }
-        )
-        if (error) {
-          this.cardButton.disabled = false
-        }else{
-          this.token = document.createElement('input')
-          this.token.setAttribute('type', 'hidden')
-          this.token.setAttribute('name', 'token')
-          this.token.setAttribute('value', setupIntent.payment_method)
+/* ------- UI helpers ------- */
 
-          this.form.appendChild(this.token)
-          this.form.submit()
-        }
-      })
-
-    },
-
-
-
-
-
-  }
-
+// Shows a success message when the payment is complete
+const orderComplete = (paymentIntentId) => {
+  data.payment_intent = paymentIntentId
+  data.put('/checkout')
 }
+
+// Show the customer the error from Stripe if their card fails to charge
+const showError = (errorMsgText) => {
+  loading(false);
+  var errorMsg = document.querySelector("#card-error");
+  errorMsg.textContent = errorMsgText;
+  setTimeout(function () {
+    errorMsg.textContent = "";
+  }, 4000);
+};
+
+// Show a spinner on payment submission
+const loading = (isLoading) => {
+  if (isLoading) {
+    document.querySelector("button").disabled = true;
+    isProcessing.value = true
+  } else {
+    document.querySelector("button").disabled = false;
+    isProcessing.value = false
+  }
+};
+
 </script>
 
 <style>
-.StripeElement {
-  background-color: white;
-  padding: 10px 12px;
-  border-radius: 4px;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+#card-element {
+  border-radius: 4px 4px 0 0 ;
+  padding: 12px;
+  border: 1px solid rgba(50, 50, 93, 0.1);
+  height: 44px;
+  width: 100%;
+  background: white;
 }
-.StripeElement--invalid {
-  border-color: #fa755a;
-}
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+
+#payment-request-button {
+  margin-bottom: 32px;
 }
 </style>
+
