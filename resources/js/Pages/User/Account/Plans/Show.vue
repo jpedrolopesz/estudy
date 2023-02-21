@@ -228,5 +228,9 @@ export default {
     plansYearly:Object,
     currentPlan:Object,
   },
+
+  setup(props) {
+    console.log(props.currentPlan)
+  }
   }
 </script>

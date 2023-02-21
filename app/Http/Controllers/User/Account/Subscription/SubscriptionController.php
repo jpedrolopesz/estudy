@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\User\Account\Subscription;
 
 use App\Http\Controllers\Controller;
-use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\Plan;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\Rule;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class SubscriptionController extends Controller
@@ -18,10 +15,12 @@ class SubscriptionController extends Controller
     public function subscription($plan_id)
     {
 
+        $plan = Plan::findOrFail($plan_id);
+
         return view('pages.checkout', [
-            'plan' => Plan::findOrFail($plan_id),
+            'plan' => $plan,
             'intent' => auth()->user()->createSetupIntent(),
-            'currentPlan' => auth()->user()->subscription('default') ?? NULL,
+            'currentPlan' => auth()->user()->subscription($plan->name) ?? NULL,
 
         ]);
     }
@@ -32,8 +31,6 @@ class SubscriptionController extends Controller
     public function processSubscription(Request $request)
     {
 
-
-
         $this->validate($request, [
             'token' => 'required',
         ]);
@@ -42,8 +39,9 @@ class SubscriptionController extends Controller
         $plan = Plan::findOrFail($request->input('billing_plan_id'));
         try {
            auth()->user()
-                ->newSubscription('default',  $plan->stripe_id)
+                ->newSubscription('default' ,$plan->stripe_id)
                 ->create($request->token);
+
         } catch (IncompletePayment $e) {
             return redirect()->route('cashier.payment',
                 [$e->payment->id,
@@ -61,6 +59,7 @@ class SubscriptionController extends Controller
 
     public function update(Request $request)
     {
+
         $plan = Plan::where('slug', $request->plan_id)->first();
 
         try {

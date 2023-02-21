@@ -18,6 +18,7 @@ class SubscriptionInvoiceController extends Controller
 
         return Inertia::render('User/Account/Invoices/Show', [
             'invoices' => auth()->user()->invoices(),
+            'upcomingInvoices' => auth()->user()->upcomingInvoice(),
             'subscription' => auth()->user(),
             'onGracePeriod' => $onGracePeriod, //cancelou sua assinatura, mas ainda está em seu "período de carência"
 

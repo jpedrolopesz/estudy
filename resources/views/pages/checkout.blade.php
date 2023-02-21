@@ -34,7 +34,7 @@
                 <!-- Card form -->
                 <div class="space-y-4">
 
-                  <input type="hidden" name="billing_plan_id" value="{{ $plan->id }}" />
+                  <input type="hidden" name="billing_plan_id" value="{{ $plan->id}}" />
                   <input type="hidden" name="payment-method" id="payment-method"  value="" />
                   <!-- Name on Card -->
                   <div>
@@ -81,7 +81,7 @@
                   <!-- Form footer -->
                   <div class="mt-6">
                     <div class="mb-4">
-                      <button name="plan" id="plan" value="{{$plan->price}}" type="submit"
+                      <button name="plan" id="plan" value="{{$plan->stripe_id}}" type="submit"
                               class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
                         Update ${{number_format($plan->price / 100,2)}}
                       </button>

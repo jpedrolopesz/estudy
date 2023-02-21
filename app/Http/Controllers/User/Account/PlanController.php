@@ -15,6 +15,8 @@ class PlanController extends Controller
 
     public function show()
     {
+
+
         return Inertia::render('User/Account/Plans/Show', [
             'plansMonthly' => Plan::where('slug', 'monthly')->get(),
             'plansYearly' =>  Plan::where('slug', 'yearly')->get(),

@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Account;
+use App\Models\Course;
+use App\Models\Lesson;
+use App\Models\Module;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\User;
@@ -72,6 +75,94 @@ class DatabaseSeeder extends Seeder
 
 
 
+        // Cria um curso com 2 módulos e 4 aulas em cada módulo
+        $course1 = Course::create([
+            'user_id' => 1,
+            'thumbnail' => 'https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            'price' => 199,
+            'title' => 'Curso de Laravel',
+            'description' => 'Aprenda a criar aplicações web com Laravel'
+        ]);
+
+        for ($i = 1; $i <= 2; $i++) {
+            $module = Module::create([
+                'course_id' => $course1->id,
+                'title' => 'Módulo ' . $i,
+                'order' => 1,
+                'description' => 'Descrição do Módulo ' . $i
+            ]);
+
+            for ($j = 1; $j <= 4; $j++) {
+                $lesson = Lesson::create([
+                    'module_id' => $module->id,
+                    'title' => 'Aula ' . $j,
+                    'description' => 'Descrição da Aula ' . $j,
+                    'order' => 1,
+                    'video_url' => 'https://www.youtube.com/embed/MlgbDr-9SJE'
+                ]);
+                $lesson = Lesson::create([
+                    'module_id' => $module->id,
+                    'title' => 'Aula Motiva ' . $j,
+                    'description' => 'Descrição da Aula ' . $j,
+                    'order' => 1,
+                    'video_url' => 'https://www.youtube.com/embed/SIsCy663mz4'
+                ]);
+            }
+        }
+
+        // Cria outro curso com 1 módulo e 3 aulas
+        $course2 = Course::create([
+            'user_id' => 1,
+            'thumbnail' => 'https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            'price' => 199,
+            'title' => 'Curso de Vue.js',
+            'description' => 'Aprenda a criar aplicações front-end com Vue.js'
+        ]);
+
+        $module = Module::create([
+            'course_id' => $course2->id,
+            'title' => 'Módulo 1',
+            'order' => 1,
+            'description' => 'Descrição do Módulo 1'
+        ]);
+
+        for ($j = 1; $j <= 3; $j++) {
+            $lesson = Lesson::create([
+                'module_id' => $module->id,
+                'title' => 'Aula ' . $j,
+                'description' => 'Descrição da Aula ' . $j,
+                'order' => 1,
+                'video_url' => 'https://www.youtube.com/embed/MlgbDr-9SJE'
+            ]);
+        }
+
+
+        $course3 = Course::create([
+            'user_id' => 2,
+            'thumbnail' => 'https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            'price' => 199,
+            'title' => 'Curso de Laravel',
+            'description' => 'Aprenda a criar aplicações web com Laravel'
+        ]);
+
+        for ($i = 1; $i <= 2; $i++) {
+            $module = Module::create([
+                'course_id' => $course1->id,
+                'title' => 'Módulo ' . $i,
+                'order' => 1,
+                'description' => 'Descrição do Módulo ' . $i
+            ]);
+
+            for ($j = 1; $j <= 4; $j++) {
+                $lesson = Lesson::create([
+                    'module_id' => $module->id,
+                    'title' => 'Aula ' . $j,
+                    'description' => 'Descrição da Aula ' . $j,
+                    'order' => 1,
+                    'video_url' => 'https://www.youtube.com/embed/MlgbDr-9SJE'
+                ]);
+            }
+        }
 
 
 

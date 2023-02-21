@@ -12,6 +12,7 @@ use App\Http\Controllers\User\Account\PasswordController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionInvoiceController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionController;
 use App\Http\Controllers\User\Account\UserController;
+use App\Http\Controllers\User\CoursesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -132,6 +133,9 @@ Route::middleware('auth')->group(function () {
         ->name('invoice.show')->middleware('EnsureUserIsSubscribed');
    // Route::get('/invoice/{id}', [SubscriptionInvoiceController::class, 'show'])->name('invoice');
 });
+
+
+Route::resource('/courses', CoursesController::class);
 
 
 

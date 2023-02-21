@@ -80,20 +80,22 @@ export default {
     subscription: {
       type: Object || Array,
       require: true
-
     },
     onGenericTrial: Boolean,
     onGracePeriod: Boolean,
     subscribed: Boolean,
     user: Object,
-
-    setup(props) {
-      console.log(props.subscription)
+    plan: Object,
+  },
+  setup(props) {
       //console.log(props.invoices)
-      console.log(props.onGenericTrial)
-      console.log(props.onGracePeriod)
-      console.log(props.user)
+     console.log(props.onGenericTrial)
+    console.log(props.onGracePeriod)
+    console.log(props.subscribed)
+    // console.log(props.subscription)
+      //console.log(props.user)
+      //console.log(props.plan)
     }
-  }
+
 }
 </script>

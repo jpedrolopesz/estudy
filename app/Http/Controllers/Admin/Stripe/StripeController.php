@@ -15,7 +15,7 @@ class StripeController extends Controller
 {
 
 
-    public function show(User $user)
+    public function show(Request $request)
     {
 
         $onGracePeriod = false;
@@ -23,15 +23,20 @@ class StripeController extends Controller
             $onGracePeriod = auth()->user()->subscription('default')->onGracePeriod();
         }
 
+
+
+
         return Inertia('Admin/Stripe/Show',[
 
-            //'subscription' => auth()->user()->subscription('default'),
             'invoices' => auth()->user(),
             'user' => auth()->user(),
+                //'plan' => $plan,
+                'upcomingInvoice' => auth()->user()->upcomingInvoice(),
                 'subscribed' => auth()->user()->subscribed('default'), // usuário tiver uma assinatura ativa, mesmo que a assinatura esteja atualmente dentro de seu período de avaliação
+                'subscription' => auth()->user()->subscription('default'),// usuário tiver uma assinatura ativa, mesmo que a assinatura esteja atualmente dentro de seu período de avaliação
                 'onGenericTrial' => auth()->user()->onGenericTrial(), //usuário está dentro de seu período de teste "genérico" e ainda não criou uma assinatura real
                 'onGracePeriod' => $onGracePeriod, //cancelou sua assinatura, mas ainda está em seu "período de carência"
-            //'invoices' => auth()->user()->invoices()
+
 
             ]
         );

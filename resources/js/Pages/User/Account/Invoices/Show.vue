@@ -96,6 +96,8 @@
 
 
           <!-- Invoices -->
+
+
             <section  >
               <h3 class="text-xl mt-5  text-gray-800 font-semibold mb-1">Invoices</h3>
               <!-- Table -->
@@ -164,14 +166,10 @@ export default {
       type: Object || Array,
       require: true
     },
-    subscription:String,
+    subscription:Object,
     onGracePeriod: Boolean,
-
-
   },
-  setup(props){
-    console.log(props.subscription)
-
+  setup(){
     const form = useForm({
       _method: 'post',
     });
