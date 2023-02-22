@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'file_name', 'file_path', 'lesson_id', 'user_id'
+    ];
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
@@ -17,5 +21,7 @@ class File extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
 }
 

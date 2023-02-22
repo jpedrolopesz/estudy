@@ -9,6 +9,12 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'comment', 'user_id', 'lesson_id'
+    ];
+    protected $casts = [
+        'comment' => 'array'
+    ];
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
@@ -19,3 +25,7 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 }
+
+
+
+

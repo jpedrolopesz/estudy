@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CreatePlanController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\Stripe\StripeController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\User\Account\DeleteController;
 use App\Http\Controllers\User\Account\PlanController;
 use App\Http\Controllers\User\Account\PasswordController;
@@ -136,6 +137,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::resource('/courses', CoursesController::class);
+Route::resource('/comments', CommentController::class);
 
 
 

@@ -57,16 +57,20 @@ class CoursesController extends Controller
      */
     public function show( $id)
     {
+
+
         $course = Course::findOrFail($id);
-        $moduleCount = $course->modules->count();
         $lessonCount = 0;
         foreach ($course->modules as $module) {
-            $lessonCount += $module->lessons->count();
-        }
+            foreach ($module->lessons as $lesson) {
+                $lessonCount++;
+                $file = $lesson->files;
+                $comments = $lesson->comments;
 
+            }
+        }
         return Inertia::render('User/Course/Show', [
             'course' => $course,
-            'module' => $moduleCount,
             'lesson' => $lessonCount,
 
         ]);

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Account;
+use App\Models\Comment;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Module;
@@ -71,6 +72,23 @@ class DatabaseSeeder extends Seeder
         Order::factory(10)->create();
 
 
+        Course::factory()->count(5)->create()->each(function ($curso) {
+            // Criar 5 módulos para cada curso
+            $modulos = Module::factory()->count(5)->create(['course_id' => $curso->id]);
+
+            // Para cada módulo, criar 5 aulas
+            $modulos->each(function ($modulo) {
+                $aulas = Lesson::factory()->count(5)->create(['module_id' => $modulo->id]);
+
+                // Para cada aula, criar 3 comentários
+                $aulas->each(function ($aula) {
+                    Comment::factory()->count(3)->create([
+                        'lesson_id' => $aula->id,
+                        'user_id' => User::inRandomOrder()->first()->id
+                    ]);
+                });
+            });
+        });
 
 
 
@@ -133,6 +151,16 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Descrição da Aula ' . $j,
                 'order' => 1,
                 'video_url' => 'https://www.youtube.com/embed/MlgbDr-9SJE'
+            ]);
+            $lesson->comments()->create([
+                'comment' => 'Comentário ' . $j,
+                'user_id' => 1, // ID do usuário que criou o comentário
+            ]);
+            $file = $lesson->files()->create([
+                'file_name' => 'arquivo.pdf',
+                'file_path' => '/caminho/para/o/arquivo.pdf',
+                'user_id' => 1, // ID do usuário que criou o comentário
+
             ]);
         }
 

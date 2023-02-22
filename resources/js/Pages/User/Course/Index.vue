@@ -64,8 +64,6 @@ import AuthenticatedUserLayout from "@/Pages/User/Layouts/Dashboard/Authenticate
 import moment from "moment";
 import {Link} from "@inertiajs/inertia-vue3";
 
-
-
 export default {
 
   components: {AuthenticatedUserLayout, Link},

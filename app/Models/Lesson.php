@@ -14,8 +14,11 @@ class Lesson extends Model
         'title',
         'description',
         'video_url',
-        'order'
+        'order',
+        'comments'
     ];
+
+
 
     public function module()
     {
