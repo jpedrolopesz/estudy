@@ -7,16 +7,13 @@
     @close-msgsidebar="msgSidebarOpen = false"
   />
 
-
-  <div class="w-full ml-2 bg-white rounded-md shadow-lg border-gray-400 flex flex-col">
+  <div class="w-full ml-2.5 bg-white rounded-md shadow-lg border-gray-400 flex flex-col">
     <div class="grow flex flex-col md:translate-x-0 transform transition-transform duration-300 ease-in-out" :class="msgSidebarOpen ? 'translate-x-1/3' : 'translate-x-0'">
       <ChatHeader :msgSidebarOpen="msgSidebarOpen" @toggle-msgsidebar="msgSidebarOpen = !msgSidebarOpen">
         <div class="flex flex-col space-y-1">
-
-          <strong v-if="selectedComment">{{ selectedComment.user.first_name }} {{selectedComment.user.last_name  }}</strong>
-          <p v-if="selectedComment" class="text-md">{{selectedComment.title}}</p>
-
-          </div>
+          <strong class="truncate" v-if="selectedComment">{{ selectedComment.user.first_name }} {{selectedComment.user.last_name  }}</strong>
+          <p v-if="selectedComment" class=" text-xs md:text-md">{{selectedComment.title}}</p>
+        </div>
       </ChatHeader>
     </div>
     <div class="flex-auto overflow-y-auto p-5 space-y-4"

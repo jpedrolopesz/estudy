@@ -1,6 +1,6 @@
 <template>
   <div class="sticky top-16">
-    <div class="flex items-center justify-between bg-white border-b border-slate-200 px-4 sm:px-6 md:px-5 h-16">
+    <div class="flex items-center justify-between bg-white rounded-t-lg border-b  px-4 sm:px-6 md:px-5 h-16">
 
       <div class="flex">
        <slot/>
