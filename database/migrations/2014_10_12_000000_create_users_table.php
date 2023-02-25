@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->boolean('owner')->default(false);
+            $table->enum('role', ['owner', 'teacher', 'student'])->default('student');
             $table->string('photo' )->default('default.png');;
             $table->rememberToken();
             $table->timestamps();

@@ -26,3 +26,24 @@
 .btn-xs {
   @apply px-2 py-0.5;
 }
+
+/* estilo da barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+/* estilo da trilha */
+::-webkit-scrollbar-track {
+  background: #FFF;
+}
+
+/* estilo da thumb */
+::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 5px;
+}
+
+
+

@@ -10,7 +10,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'comment', 'user_id', 'lesson_id'
+        'comment', 'user_id', 'lesson_id', 'title'
     ];
     protected $casts = [
         'comment' => 'array'
@@ -23,6 +23,11 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }
 

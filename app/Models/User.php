@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->belongsTo(Account::class);
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
 
     public function getNameAttribute()
     {

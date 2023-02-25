@@ -10,6 +10,7 @@ use App\Models\Lesson;
 use App\Models\Module;
 use App\Models\Order;
 use App\Models\Plan;
+use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Laravel\Cashier\Subscription;
@@ -84,8 +85,11 @@ class DatabaseSeeder extends Seeder
                 $aulas->each(function ($aula) {
                     Comment::factory()->count(3)->create([
                         'lesson_id' => $aula->id,
-                        'user_id' => User::inRandomOrder()->first()->id
+                        'user_id' => User::inRandomOrder()->first()->id,
+
                     ]);
+                    Reply::factory()->count(3)->create();
+
                 });
             });
         });
