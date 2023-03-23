@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('video_url');
             $table->integer('order');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->text('description');
             $table->decimal('price', 10, 2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -15,11 +15,12 @@ class CommentController extends Controller
      */
     public function index()
     {
-
-
-        $comments = Comment::with('user', 'replies', 'replies.user')->get();
+        $comments = Comment::with('user', 'replies', 'replies.user')
+            ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
+            ->get();
 
         return Inertia::render('User/Comment/Index',[
+            'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
             'comments' => $comments
         ] );
     }

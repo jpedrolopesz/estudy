@@ -8,13 +8,11 @@ use App\Models\Comment;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Module;
-use App\Models\Order;
 use App\Models\Plan;
 use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Laravel\Cashier\Subscription;
-use Laravel\Cashier\SubscriptionItem;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -70,7 +68,6 @@ class DatabaseSeeder extends Seeder
                 'max_users' => 2,
             ]);
         }
-        Order::factory(10)->create();
 
 
         Course::factory()->count(5)->create()->each(function ($curso) {

@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Cashier\Billable;
-use Laravel\Cashier\Subscription;
 use Laravel\Sanctum\HasApiTokens;
 use function Illuminate\Events\queueable;
 
@@ -70,11 +68,6 @@ class User extends Authenticatable
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'user_id');
-    }
 
 
     public function account()

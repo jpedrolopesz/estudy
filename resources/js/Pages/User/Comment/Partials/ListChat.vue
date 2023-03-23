@@ -1,11 +1,14 @@
 <template>
 
+
   <div id="messages-sidebar"
        class="flex shadow-lg flex-col absolute z-20 top-20 bottom-0 right-1.5 w-4/5 md:w-auto md:static md:top-auto md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
        :class="msgSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
   >
-    <div class="flex-none rounded-t-lg border-b h-16 bg-white">
-      <div class="text-xs font-semibold text-slate-400 uppercase mb-3">Direct messages</div>
+    <div class="flex rounded-t-lg border-b h-16 bg-white justify-between">
+      <h1 class="font-medium m-2 text-lg lg:text-2xl opacity-75">Comments</h1>
+      <FormSearchSideBar/>
+
     </div>
     <div class="flex-auto bg-white rounded-b-lg border-1 border-gray-100 overflow-y-auto">
       <ul>
@@ -51,16 +54,23 @@
 <script>
 
 import moment from "moment/moment";
+import FormSearch from "@/Components/FormSearch.vue";
+import FormSearchSideBar from "@/Components/FormSearchSideBar.vue";
+import throttle from "lodash/throttle";
+import pickBy from "lodash/pickBy";
+import mapValues from "lodash/mapValues";
 
 export default {
   name: 'ListChat',
+  components: {FormSearchSideBar, FormSearch},
   props: {
     comments: Object,
     msgSidebarOpen:Boolean
   },
   data() {
     return {
-      moment: moment
+      moment: moment,
+
     }
   },
   emits: ["comment-selected", 'close-msgsidebar'],
@@ -68,6 +78,7 @@ export default {
     selectComment(comment) {
       this.$emit('comment-selected', comment);
     },
+
   },
 
 }

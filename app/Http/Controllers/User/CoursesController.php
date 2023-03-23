@@ -19,12 +19,11 @@ class CoursesController extends Controller
      */
     public function index(User $user)
     {
-
         $courses = Course::get();
 
-
         return Inertia::render('User/Course/Index', [
-           'course' => $courses
+            'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
+            'courses' => Course::get()
        ]);
     }
 
@@ -80,11 +79,25 @@ class CoursesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Courses  $courses
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Inertia\Response
      */
-    public function edit(Courses $courses)
+    public function edit($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        $lessonCount = 0;
+        foreach ($course->modules as $module) {
+            foreach ($module->lessons as $lesson) {
+                $lessonCount++;
+                $file = $lesson->files;
+                $comments = $lesson->comments;
+
+            }
+        }
+        return Inertia::render('User/Course/Edit', [
+            'course' => $course,
+            'lesson' => $lessonCount,
+
+        ]);
     }
 
     /**
@@ -92,11 +105,16 @@ class CoursesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Courses  $courses
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Courses $courses)
+    public function update(Request $request,$id)
     {
-        //
+        $course = Course::find($id);
+        $course->title = $request->title;
+        $course->save();
+
+        return redirect()->back();
+
     }
 
     /**
@@ -107,7 +125,6 @@ class CoursesController extends Controller
      */
     public function destroy(Courses $courses)
     {
-        //
     }
 
     public function markAsWatched(Request $request, $lessonId)
