@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import AuthenticatedLayout from '../../Layouts/Dashboard/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '../../Layouts/AdminLayout.vue';
 import AccountLayout from "../../Layouts/Account/AccountLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";

@@ -26,6 +26,7 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
         // Stripe Test
         Route::get('/stripe', [StripeController::class, 'show'])->name('stripe.show');
+        Route::get('/stripe/create', [StripeController::class, 'create'])->name('stripe.create');
 
 
         //** Users */

@@ -23,6 +23,7 @@
         "@headlessui/vue": "^0.0.0-insiders.219901c",
         "@heroicons/vue": "^2.0.12",
         "@popperjs/core": "^2.11.6",
-        "moment": "^2.29.4"
+        "moment": "^2.29.4",
+        "momentum-modal": "^0.2.1"
     }
 }

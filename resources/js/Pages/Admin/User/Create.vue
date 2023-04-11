@@ -150,7 +150,7 @@
 
 <script>
 
-import AuthenticatedLayout from "../Layouts/Dashboard/AuthenticatedLayout.vue";
+import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import { useForm, Link, Head } from '@inertiajs/inertia-vue3'

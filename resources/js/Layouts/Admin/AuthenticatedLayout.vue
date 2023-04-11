@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import Sidebar from "@/Layouts/Admin/Dashboard/Sidebar.vue";
-import Header from "@/Layouts/Admin/Dashboard/Header.vue";
 import Toast from "@/Components/Toast.vue";
 
 const showingNavigationDropdown = ref(false);

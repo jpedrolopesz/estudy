@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Lesson;
+use App\Models\Module;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +85,7 @@ class CoursesController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail($id);
+
         $lessonCount = 0;
         foreach ($course->modules as $module) {
             foreach ($module->lessons as $lesson) {
@@ -93,6 +95,8 @@ class CoursesController extends Controller
 
             }
         }
+
+
         return Inertia::render('User/Course/Edit', [
             'course' => $course,
             'lesson' => $lessonCount,
@@ -107,11 +111,20 @@ class CoursesController extends Controller
      * @param  \App\Models\Courses  $courses
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, Module $module_id,$id)
     {
+
         $course = Course::find($id);
-        $course->title = $request->title;
-        $course->save();
+
+        $course->update([
+            'title' => $request->input('title')
+        ]);
+
+        $module = $course->modules()->where('id', $module_id)->first();
+
+        $module->update([
+            'title' => $request->input('module_title')
+        ]);
 
         return redirect()->back();
 

@@ -1,12 +1,13 @@
 <template>
-  <AuthenticatedLayout>
+  <AdminLayout>
+
 
       <div class="w-full ">
         <div class="sm:flex sm:items-center mx-8 sm:justify-between">
           <div class="min-w-0 flex-1">
 
             <div class="mb-2">
-              <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Dashboard Admin</h1>
+              <h1 class="text-2xl md:text-2xl text-slate-800 font-bold">Dashboard Admin</h1>
             </div>
             <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
@@ -27,12 +28,14 @@
         </div>
       </div>
 
-  </AuthenticatedLayout>
+
+
+  </AdminLayout>
 </template>
 
 
 <script setup>
-import AuthenticatedLayout from "./Layouts/Dashboard/AuthenticatedLayout.vue";
+import AdminLayout from "./Layouts/AdminLayout.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 
 </script>

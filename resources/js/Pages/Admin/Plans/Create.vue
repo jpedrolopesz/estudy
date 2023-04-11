@@ -137,7 +137,7 @@
 
 <script>
 
-import AuthenticatedLayout from "../Layouts/Dashboard/AuthenticatedLayout.vue";
+import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import InputError from "@/Components/InputError.vue";
 import { Link, Head ,useForm } from '@inertiajs/inertia-vue3';

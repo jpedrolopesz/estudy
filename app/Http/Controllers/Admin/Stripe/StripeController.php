@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Invoice;
 use Stripe\Customer;
@@ -40,5 +41,12 @@ class StripeController extends Controller
 
             ]
         );
+    }
+
+
+
+    public function create ()
+    {
+        return Inertia::modal('Admin/Stripe/Create')->baseRoute('stripe.create');
     }
 }

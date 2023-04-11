@@ -76,7 +76,7 @@
 
 
 <script setup>
-import AuthenticatedLayout from '../../Layouts/Dashboard/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '../../Layouts/AdminLayout.vue';
 import AccountLayout from "../../Layouts/Account/AccountLayout.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
