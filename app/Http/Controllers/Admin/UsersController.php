@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\User\GetAllUsersAction;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
@@ -19,20 +21,10 @@ class UsersController extends Controller
 
     public function index()
     {
+        $users = GetAllUsersAction::run(['perPage' => 10000]);
+
         return Inertia::render('Admin/User/Index', [
-            'filters' => Request::all('search', 'role', 'trashed'),
-            'users' => Auth::user()->account->users()
-                ->orderByName()
-                ->filter(Request::only('search', 'role', 'trashed'))
-                ->get()
-                ->transform(fn ($user) => [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'owner' => $user->owner,
-                    'photo' => $user->photo,
-                    'deleted_at' => $user->deleted_at,
-                ]),
+            'users' => UserResource::collection($users)
         ]);
 
 

@@ -1,14 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
+use App\Actions\Course\CreateCourseAction;
+use App\Actions\Course\GetAllCoursesAction;
+
+use App\Actions\Project\CreateProjectAction;
+use App\Actions\User\GetAllUsersAction;
+use App\Data\Course\CreateCourseData;
+use App\Enums\CodeTypes;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CourseResource;
+use App\Http\Resources\UserResource;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Module;
-use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CoursesController extends Controller
@@ -18,14 +27,15 @@ class CoursesController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index(User $user)
+    public function index()
     {
-        $courses = Course::get();
+        $course = GetAllCoursesAction::run(['perPage' => 10000]);
 
-        return Inertia::render('User/Course/Index', [
-            'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
-            'courses' => Course::get()
-       ]);
+
+        return Inertia::render('Admin/Course/Index', [
+            'users' => UserResource::collection(GetAllUsersAction::run(['perPage' => 10000])),
+            'courses' => CourseResource::collection($course),
+        ]);
     }
 
     /**
@@ -42,11 +52,14 @@ class CoursesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateCourseData $data)
     {
-        //
+
+        $project = CreateCourseAction::run($data);
+
+        return Redirect::route('courses.index', $project);
     }
 
     /**
@@ -69,7 +82,7 @@ class CoursesController extends Controller
 
             }
         }
-        return Inertia::render('User/Course/Show', [
+        return Inertia::render('Admin/Course/Show', [
             'course' => $course,
             'lesson' => $lessonCount,
 
@@ -97,7 +110,7 @@ class CoursesController extends Controller
         }
 
 
-        return Inertia::render('User/Course/Edit', [
+        return Inertia::render('Admin/Course/Edit', [
             'course' => $course,
             'lesson' => $lessonCount,
 
@@ -159,6 +172,17 @@ class CoursesController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+
+    /**
+     * @return Response
+     *
+     * @throws AuthorizationException
+     */
+    public function overview(Request $request, Course $course)
+    {
+
     }
 
 }

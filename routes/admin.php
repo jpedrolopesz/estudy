@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\Account\PasswordAdminController;
 use App\Http\Controllers\Admin\CreatePlanController;
 use App\Http\Controllers\Admin\Stripe\StripeController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\CoursesController;
+use App\Models\Course;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -61,7 +64,76 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
         });
 
+
+        Route::resource('/courses', CoursesController::class);
+
+
+
+       // Route::resource('/comments', CommentController::class);
+
     });
+
+Route::group(['prefix' => 'p/{course}'], function () {
+    // Courses boards
+    Route::controller(CoursesController::class)->group(function () {
+        Route::get('', function (Course $course) {
+            return Redirect::route('courses.overview', [
+                'course' => $course,
+            ]);
+        })->name('courses.show');
+        Route::get('edit', 'edit')->name('courses.edit');
+        Route::put('', 'update')->name('courses.update');
+        Route::get('overview', 'overview')->name('courses.overview');
+        Route::get('list', 'list')->name('courses.list');
+        Route::get('board', 'board')->name('courses.board');
+        Route::put('draggable', 'updateDraggable')->name('courses.draggable');
+        Route::put('archive', 'toggleArchive')->name('courses.archive');
+        Route::put('favorite', 'toggleFavorite')->name('courses.favorite');
+    });
+
+    /*
+  // Course settings
+  Route::controller(CourseSettingsController::class)->group(function () {
+      Route::get('settings', 'index')->name('courses.settings');
+      Route::put('members/{member}/toggle', 'toggleMembership')->name('courses.members');
+      Route::put('members/{member}/role', 'toggleRole')->name('courses.role');
+      Route::post('codes', 'store')->name('codes.store');
+      Route::put('codes/{code}', 'update')->name('codes.update');
+      Route::delete('codes/{code}', 'destroy')->name('codes.destroy');
+  });
+
+
+  Route::controller(TaskController::class)->group(function () {
+      Route::post('tasks', 'store')->name('tasks.store');
+      Route::put('tasks/{task}', 'update')->name('tasks.update');
+      Route::put('tasks/{task}/resolve', 'toggleResolvedStatus')->name('tasks.resolve');
+      Route::get('tasks/{task:display_key}', 'show')->name('tasks.show');
+  });
+
+  // Related tasks
+  Route::controller(TaskRelationController::class)->group(function () {
+      Route::get('tasks/{task}/unrelated', 'getUnrelatedTasks')->name('tasks.unrelated');
+      Route::post('tasks/{task}/relate', 'relate')->name('tasks.relate');
+      Route::delete('tasks/{task}/unrelate', 'unrelate')->name('tasks.unrelate');
+  });
+
+  // Comments
+  Route::controller(CommentController::class)->group(function () {
+      Route::post('tasks/{task}/comments', 'store')->name('comments.store');
+      Route::put('tasks/{task}/comments/{comment}', 'update')->name('comments.update');
+      Route::delete('tasks/{task}/comments/{comment}', 'destroy')->name('comments.destroy');
+  });
+
+  // File Attachments
+  Route::controller(UploadAttachmentController::class)->group(function () {
+      Route::post('tasks/{task}/upload', 'upload')->name('tasks.upload');
+      Route::delete('tasks/{task}/media/{media}', 'destroy')->name('media.destroy');
+      Route::get('tasks/{task}/media/{media}', 'download')->name('media.download');
+  });
+
+  */
+});
+
 
 
 

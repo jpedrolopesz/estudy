@@ -1,99 +1,76 @@
-<script setup>
-import { computed, onMounted, onUnmounted, watch } from 'vue';
-
-const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false,
-  },
-  maxWidth: {
-    type: String,
-    default: '2xl',
-  },
-  closeable: {
-    type: Boolean,
-    default: true,
-  },
-});
-
-const emit = defineEmits(['close']);
-
-watch(
-  () => props.show,
-  () => {
-    if (props.show) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = null;
-    }
-  }
-);
-
-const close = () => {
-  if (props.closeable) {
-    emit('close');
-  }
-};
-
-const closeOnEscape = (e) => {
-  if (e.key === 'Escape' && props.show) {
-    close();
-  }
-};
-
-onMounted(() => document.addEventListener('keydown', closeOnEscape));
-
-onUnmounted(() => {
-  document.removeEventListener('keydown', closeOnEscape);
-  document.body.style.overflow = null;
-});
-
-const maxWidthClass = computed(() => {
-  return {
-    sm: 'sm:max-w-sm',
-    md: 'sm:max-w-md',
-    lg: 'sm:max-w-lg',
-    xl: 'sm:max-w-xl',
-    '2xl': 'sm:max-w-2xl',
-  }[props.maxWidth];
-});
-</script>
-
 <template>
-  <teleport to="body">
-    asda
-    <transition leave-active-class="duration-200">
-      <div v-show="show" class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50">
-        <transition
-          enter-active-class="ease-out duration-300"
-          enter-from-class="opacity-0"
-          enter-to-class="opacity-100"
-          leave-active-class="ease-in duration-200"
-          leave-from-class="opacity-100"
-          leave-to-class="opacity-0"
-        >
-          <div v-show="show" class="fixed inset-0 transform transition-all" @click="close">
-            <div class="absolute inset-0 bg-gray-500 opacity-75" />
-            AS
-          </div>
-        </transition>
+  <div>
+    <button type="button" @click="openModal">
+     <slot/>
+    </button>
+  </div>
+  <TransitionRoot :show="isOpen" as="template">
+    <Dialog as="div" @close="closeModal" class="relative z-50">
+      <TransitionChild
+        as="template"
+        enter="ease-in-out duration-300"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="ease-in-out duration-300"
+        leave-from="opacity-100"
+        leave-to="opacity-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-60 transition-opacity" />
+      </TransitionChild>
 
-        <transition
-          enter-active-class="ease-out duration-300"
-          enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          enter-to-class="opacity-100 translate-y-0 sm:scale-100"
-          leave-active-class="ease-in duration-200"
-          leave-from-class="opacity-100 translate-y-0 sm:scale-100"
-          leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        >
-          <div
-            v-show="show"
-            class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
-          >
-            <slot v-if="show" />
+      <div class="fixed inset-0 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+            <TransitionChild
+              as="template"
+              enter="transform transition ease-in-out duration-300 sm:duration-500"
+              enter-from="translate-x-full"
+              enter-to="translate-x-0"
+              leave="transform transition ease-in-out duration-300 sm:duration-500"
+              leave-from="translate-x-0"
+              leave-to="translate-x-full">
+              <DialogPanel class="pointer-events-auto relative w-screen max-w-5xl md:max-w-md">
+                <section class="absolute right-0 bottom-0 bg-white w-full h-full shadow flex flex-col">
+                  <header class="h-14 border-b border-gray-200 px-4 flex items-center justify-between">
+                    <DialogTitle class="text-lg font-medium text-gray-900">
+                      <slot name="title" />
+                    </DialogTitle>
+
+                    <button @click="closeModal" class="rounded-full bg-gray-100 transition p-2 hover:bg-gray-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+
+                  </header>
+
+                  <slot name="createForm" />
+                </section>
+              </DialogPanel>
+            </TransitionChild>
           </div>
-        </transition>
+        </div>
       </div>
-    </transition>
-  </teleport>
+    </Dialog>
+
+  </TransitionRoot>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from '@headlessui/vue'
+
+const isOpen = ref(false)
+
+function closeModal() {
+  isOpen.value = false
+}
+function openModal() {
+  isOpen.value = true
+}
+</script>

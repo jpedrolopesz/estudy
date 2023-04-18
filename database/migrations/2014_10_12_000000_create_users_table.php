@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Roles;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,15 +15,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('account_id')->index();
+            $table->primaryKey();
             $table->string('first_name', 25);
             $table->string('last_name', 25);
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->boolean('owner')->default(false);
-            $table->enum('role', ['owner', 'teacher', 'student'])->default('student');
+            $table->integer('role')->default((Roles::MEMBER)->value);
             $table->string('photo' )->default('default.png');;
             $table->rememberToken();
             $table->timestamps();

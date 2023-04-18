@@ -1,23 +1,27 @@
 <template>
-  <div v-if="links.length > 3">
-    <div class="flex flex-wrap -mb-1">
-      <template v-for="(link, key) in links">
-        <div v-if="link.url === null" :key="key" class="mb-1 mr-1 px-4 py-3 text-gray-400 text-sm leading-4 border rounded" v-html="link.label" />
-        <Link v-else :key="`link-${key}`" class="mb-1 mr-1 px-4 py-3 focus:text-indigo-500 text-sm leading-4 hover:bg-white border focus:border-indigo-500 rounded" :class="{ 'bg-white': link.active }" :href="link.url" v-html="link.label" />
-      </template>
-    </div>
-  </div>
+  <nav v-show="links.length > 3">
+    <ul class="inline-flex items-center">
+      <li v-for="(link, key) in links" :key="key">
+        <div v-if="link.url === null" :key="`${key}-disabled`"
+             class="mr-1 mb-1 px-3 py-1 text-xs leading-4 text-gray-400 border rounded" v-html="link.label" />
+        <Link v-else :key="key"
+              class="mr-1 mb-1 px-3 py-1 text-xs leading-4 border rounded hover:bg-white focus:border-primary-500 focus:text-primary-500"
+              :class="{ 'bg-white': link.active }" :href="link.url">
+          <span v-html="link.label"></span>
+        </Link>
+      </li>
+    </ul>
+  </nav>
 </template>
 
-<script>
-import { Link } from '@inertiajs/inertia-vue3'
+<script setup>
 
-export default {
-  components: {
-    Link,
-  },
-  props: {
-    links: Array,
-  },
-}
+import { Link } from '@inertiajs/inertia-vue3';
+
+
+defineProps({
+  links: Array
+});
+
+
 </script>

@@ -61,11 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice', [SubscriptionInvoiceController::class, 'show'])
         ->name('invoice.show')
         ->middleware('EnsureUserIsSubscribed');
-   // Route::get('/invoice/{id}', [SubscriptionInvoiceController::class, 'show'])->name('invoice');
+    // Route::get('/invoice/{id}', [SubscriptionInvoiceController::class, 'show'])->name('invoice');
 
 
-    Route::resource('/courses', CoursesController::class);
-    Route::resource('/comments', CommentController::class);
+
 
 });
 

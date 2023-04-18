@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Account;
+use App\Enums\Roles;
 use App\Models\Comment;
 use App\Models\Course;
 use App\Models\Lesson;
@@ -23,19 +23,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $account = Account::create(['name' => 'PuroSaaS']);
 
         User::factory()->create([
-            'account_id' => $account->id,
             'first_name' => 'Joao Pedro',
             'last_name' => 'Lopes Zamonelo',
             'email' => 'jplopeszamonelo@hotmail.com',
             'password' => bcrypt('joao1998'),
             'owner' => true,
+            'role' => Roles::SUPER_ADMIN,
             'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
         ]);
 
-        User::factory(10)->create(['account_id' => $account->id]);
+        User::factory()->count(50)->create();
+
 
 
         $plans = [
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        Course::factory()->count(5)->create()->each(function ($curso) {
+        Course::factory()->count(50)->create()->each(function ($curso) {
             // Criar 5 módulos para cada curso
             $modulos = Module::factory()->count(5)->create(['course_id' => $curso->id]);
 
@@ -82,7 +82,6 @@ class DatabaseSeeder extends Seeder
                 $aulas->each(function ($aula) {
                     Comment::factory()->count(3)->create([
                         'lesson_id' => $aula->id,
-                        'user_id' => User::inRandomOrder()->first()->id,
 
                     ]);
                     Reply::factory()->count(3)->create();

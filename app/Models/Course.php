@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
@@ -14,8 +15,39 @@ class Course extends Model
         'user_id',
         'title',
         'description',
+        'thumbnail',
         'price',
     ];
+
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function members(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'course_members')
+            ->withPivot('is_admin', 'is_favorite')
+            ->withTimestamps();
+    }
+
+    public function hasUser(User $user)
+    {
+        return (bool)$this->members()->where('user_id', $user->id)->first();
+    }
+
+    public function isArchived()
+    {
+        return !is_null($this->archived_at);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+        ];
+    }
 
     public function user()
     {

@@ -14,7 +14,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => $this->faker->randomDigitNotNull,
             'lesson_id' => Lesson::factory(),
             'title' => $this->faker->sentence,
             'comment' => $this->faker->paragraphs($this->faker->numberBetween(0, 5), true)

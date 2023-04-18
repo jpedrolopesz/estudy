@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignKey('user_id')->constrained();
             $table->string('title');
             $table->string('thumbnail');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
+            $table->date('start_date')->nullable();
+            $table->date('due_date')->nullable();
+            $table->longText('settings')->nullable();
+            $table->timestamp('archived_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

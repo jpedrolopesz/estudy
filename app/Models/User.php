@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Roles;
+use App\Traits\HasAvatar;
+use App\Traits\HasStringPrimaryKey;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,25 +13,36 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Attributes\SearchUsingPrefix;
+use Laravel\Scout\Searchable;
+use Spatie\Activitylog\Traits\CausesActivity;
 use function Illuminate\Events\queueable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Billable, MustVerifyEmail;
+    use HasApiTokens, HasFactory, Notifiable,
+        SoftDeletes, Billable, MustVerifyEmail,
+        CausesActivity,
+        HasStringPrimaryKey, HasAvatar;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+
+    protected string $keyPrefix = 'usr';
+
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    protected $guarded = [];
     protected $fillable = [
         'email',
         'password',
         'first_name',
         'last_name',
         'owner',
-        'account_id',
         'trial_ends_at',
+        'is_active',
+        'role',
+        'should_be_logged_out',
 
     ];
 
@@ -50,7 +64,14 @@ class User extends Authenticatable
     protected $casts = [
         'trial_ends_at' => 'datetime',
         'owner' => 'boolean',
+        'should_be_logged_out' => 'boolean',
         'email_verified_at' => 'datetime',
+        'role' => Roles::class,
+        'is_admin' => 'boolean',
+        'is_active' => 'boolean',
+        'courses.pivot.is_favorite' => 'boolean',
+        'courses.pivot.is_admin' => 'boolean',
+
     ];
 
     protected static function booted()
@@ -62,17 +83,63 @@ class User extends Authenticatable
         }));
     }
 
+    public function ownedCourses()
+    {
+        return $this->hasMany(Course::class, 'user_id');
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_members')
+            ->withPivot(['is_admin', 'is_favorite'])
+            ->withTimestamps();
+    }
+
+    public function hasFavedCourse(Course $course)
+    {
+        if (!$course->hasUser($this)) {
+            return false;
+        }
+
+        return (bool)$this->courses()->where('id', $course->id)
+            ->first()?->pivot->is_favorite;
+    }
+
+    public function isCourseOwner(Course $course)
+    {
+        return $course->user_id == $this->id;
+    }
+
+    public function isCourseAdmin(Course $course)
+    {
+        if (!$course->hasUser($this)) {
+            return false;
+        }
+
+        return $this->courses()->whereId($course->id)->first()?->pivot->is_admin;
+    }
+
+    public function isCourseAdminOrOwner(Course $course)
+    {
+        return $this->isCourseOwner($course) || $this->isCourseAdmin($course);
+    }
+
+    public function isGuestOnCourse($course)
+    {
+        return $this->courses->contains($course) &&
+            $this->ownedCourses->doesntContain($course);
+    }
+
+
 
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-
-
-    public function account()
+    public function isAdminOrSuperAdmin()
     {
-        return $this->belongsTo(Account::class);
+        return $this->role == Roles::SUPER_ADMIN || $this->role == Roles::ADMIN;
     }
 
     public function replies()
@@ -91,10 +158,6 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
 
-    public function isDemoUser()
-    {
-        return $this->email === 'demo@demo.com';
-    }
 
     public function scopeOrderByName($query)
     {
@@ -126,5 +189,20 @@ class User extends Authenticatable
                 $query->onlyTrashed();
             }
         });
+    }
+
+    public function getStatusAttribute()
+    {
+        return $this->is_active ? 'Active' : 'Disabled';
+    }
+
+    #[SearchUsingPrefix(['first_name', 'last_name', 'email'])]
+    public function toSearchableArray()
+    {
+        return [
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email
+        ];
     }
 }
