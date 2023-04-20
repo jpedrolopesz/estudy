@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignKey('user_id')->constrained();
             $table->string('title');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();;
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
             $table->longText('settings')->nullable();

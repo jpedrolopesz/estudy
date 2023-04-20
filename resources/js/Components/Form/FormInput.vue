@@ -9,10 +9,7 @@
            :required="required"
            :autofocus="autofocus"
            :readonly="readonly"
-           :is-invalid="!!error"
            v-bind="$attrs"
-           :class="[readonly ? 'bg-slate-100 pointer-events-none' : 'bg-slate-50/50']"
-           should-fit-container
            @input="$emit('update:modelValue', $event.target.value)"
            :placeholder="placeholder" />
 

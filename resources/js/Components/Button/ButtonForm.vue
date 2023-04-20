@@ -1,11 +1,11 @@
 <template>
-  <Button :disabled="disabled || loading"
+  <button :disabled="disabled || loading"
           :type="type"
           v-bind="$attrs"
           :class="[btnClass, { 'w-full py-1.5 m-2': block }]"
           class="border border-transparent text-sm md:text-md font-semibold rounded transition ease-in-out duration-150">
     <slot />
-  </Button>
+  </button>
 </template>
 
 <script setup>

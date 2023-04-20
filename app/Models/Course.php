@@ -15,8 +15,11 @@ class Course extends Model
         'user_id',
         'title',
         'description',
-        'thumbnail',
         'price',
+    ];
+
+    protected $casts = [
+        'thumbnail' => 'json',
     ];
 
 

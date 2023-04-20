@@ -17,7 +17,6 @@ class CreateCourseAction
                 'thumbnail' => $data->thumbnail,
             ]);
 
-        $course->members()->sync($data->members);
 
         return $course;
     }

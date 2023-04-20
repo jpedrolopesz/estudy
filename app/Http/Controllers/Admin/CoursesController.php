@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Course\CreateCourseAction;
 use App\Actions\Course\GetAllCoursesAction;
 
-use App\Actions\Project\CreateProjectAction;
 use App\Actions\User\GetAllUsersAction;
 use App\Data\Course\CreateCourseData;
-use App\Enums\CodeTypes;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\UserResource;
@@ -57,9 +55,9 @@ class CoursesController extends Controller
     public function store(CreateCourseData $data)
     {
 
-        $project = CreateCourseAction::run($data);
+        $course = CreateCourseAction::run($data);
 
-        return Redirect::route('courses.index', $project);
+        return Redirect::route('courses.index', $course);
     }
 
     /**

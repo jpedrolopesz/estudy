@@ -27,27 +27,68 @@
 
               <form @submit.prevent="submit" class="m-4">
 
-                <div>
+                <div class="mb-4">
                   <FormInput
                     required
                     label="Title"
                     placeholder="Title course"
-                    id="project-name"
+                    id="course-tile"
                     :autofocus="true"
                     v-model="form.title"
                     :error="form.errors?.title"/>
                   <InputError class="mt-2" :message="form.errors.title" />
+                </div>
+
+                <div class="mb-4">
+                  <FormDescriptionEditor
+
+                    label="Description"
+                    placeholder="Enter short project description"
+                    v-model="form.description"
+                    :error="form.errors?.description"
+                  />
+                  <InputError class="mt-2" :message="form.errors.description" />
+                </div>
+
+
+                <div  class="mb-4">
+
+
+                  <UploadImage
+                  v-model="form.thumbnail"
+                  accept="image/*"
+
+                  />
 
                 </div>
 
-                <CreateCourseForm
-                  required
-                  label="Project name"
-                  placeholder="Enter a project name"
-                  id="project-name"
-                  :autofocus="true"
-                  v-model="form.title"
-                  :error="form.errors?.title"/>
+
+
+
+                <FormListBox
+                label="Teachers">
+
+                  <ul>
+                    <li v-for="user in users.data" :key="user.name">
+                      <label
+                        :class="{'bg-dark-100':user.id}"
+                        class="flex  border-b text-sm w-full hover:bg-gray-100 justify-between items-center px-2 py-1 cursor-pointer">
+                        <span>{{ user.name }}</span>
+
+                        <input
+                          :id="user.id"
+                          class="rounded-full appearance-none checked:bg-primary-600 text-primary-600 focus:ring-primary-600 h-5 w-5"
+                          :value="user.id"
+                          v-model="form.members"
+                          type="checkbox" />
+                      </label>
+
+                    </li>
+                  </ul>
+
+
+                </FormListBox>
+
 
 
 
@@ -204,37 +245,36 @@
 
 
 <script setup>
-
-import moment from "moment";
 import {Link, Head, usePage, useForm} from "@inertiajs/inertia-vue3";
 import ModalDelete from "@/Components/ModalDelete.vue";
 import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
 import Pagination from "@/Components/Pagination.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import Modal from "@/Components/Modal.vue";
-import CreateCourseForm from "@/Pages/Admin/Course/Partials/CreateCourseForm.vue";
 import ButtonForm from "@/Components/Button/ButtonForm.vue";
-import AvatarPhoto from "@/Components/Avatar/AvatarPhoto.vue";
-import FormInput from "@/Components/Form/FormInput.vue";
+import UploadImage from "@/Components/Uploads/UploadImage.vue";
 import InputError from "@/Components/InputError.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
+import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
+import FormListBox from "@/Components/Form/FormListBox.vue";
+
+const { auth } = usePage().props;
 
 const props = defineProps(
   {
     users: Object,
     courses: Object,
-    error: { type: String, default: null },
   });
+
 const { meta } = props.courses;
 
 const form = useForm({
   title: "",
   description: "",
-  thumbnail: "",
-  members: []
+  thumbnail: {
+    type: String,
+  },
 });
-
-
-const { auth } = usePage().props;
 
 defineEmits(["update:modelValue"]);
 
@@ -248,7 +288,4 @@ function submit() {
     }
   });
 }
-
-
-
 </script>
