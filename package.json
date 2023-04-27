@@ -30,6 +30,8 @@
         "filepond-plugin-image-preview": "^4.0.3",
         "moment": "^2.29.4",
         "vue-filepond": "^7.0.3",
-        "vue-image-crop-upload": "^3.0.3"
+        "vue-image-crop-upload": "^3.0.3",
+        "vuedraggable": "^4.1.0"
+
     }
 }

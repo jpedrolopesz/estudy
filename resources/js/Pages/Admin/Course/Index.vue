@@ -8,10 +8,10 @@
       <header class="px-4 py-4 flex items-center justify-between">
         <h2 class="text-xs font-semibold uppercase text-slate-500">All Courses <span class="text-slate-400 font-medium"> {{meta.total}} </span></h2>
 
-        <div class="flex ">
+        <div class="flex items-center">
 
           <Modal>
-            <button type="button" class="text-slate-500 bg-gray-100 hover:bg-gray-200 font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center ">
+            <button type="button" class="text-slate-500 bg-gray-100 hover:bg-gray-200 font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ">
 
               <svg class="w-5 h-5 mr-2 -ml-1 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -55,7 +55,7 @@
 
 
                   <UploadImage
-                  v-model="form.thumbnail"
+                    v-model="form.thumbnail"
                   accept="image/*"
 
                   />
@@ -112,8 +112,7 @@
               </template>
               <template  #content>
                 <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
-
-
+                  zz
 
                 </div>
 
@@ -271,9 +270,7 @@ const { meta } = props.courses;
 const form = useForm({
   title: "",
   description: "",
-  thumbnail: {
-    type: String,
-  },
+  thumbnail: "https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 });
 
 defineEmits(["update:modelValue"]);
