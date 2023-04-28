@@ -19,9 +19,6 @@ class CreateCourseData extends Data
         return [
             'title' => ['required', 'string', 'max:100'],
             'description' => ['required', 'string'],
-            'thumbnail' => [
-                'nullable', 'string'
-            ],
         ];
     }
 }

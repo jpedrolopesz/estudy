@@ -6,7 +6,7 @@ use App\Actions\Course\CreateCourseAction;
 use App\Actions\Course\GetAllCoursesAction;
 use App\Actions\Course\GetCourseModulesLessonsAction;
 use App\Actions\Course\GetCourseShowAction;
-use App\Actions\Modules\GetAllModulesAction;
+use App\Actions\Modules\GetAllModulesShowAction;
 use App\Actions\User\GetAllUsersAction;
 use App\Data\Course\CreateCourseData;
 use App\Http\Controllers\Controller;
@@ -60,6 +60,7 @@ class CoursesController extends Controller
     {
 
         $courses = CreateCourseAction::run($data);
+
 
         return Redirect::route('courses.index', $courses);
     }

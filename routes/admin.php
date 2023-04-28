@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Account\AdminController;
 use App\Http\Controllers\Admin\Account\PasswordAdminController;
 use App\Http\Controllers\Admin\CreatePlanController;
+use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\ModulesController;
 use App\Http\Controllers\Admin\Stripe\StripeController;
 use App\Http\Controllers\Admin\UsersController;
@@ -98,8 +99,16 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
           Route::controller(ModulesController::class)->group(function () {
 
               Route::get('modules/', 'show')->name('module.show');
+              Route::post('modules/', 'store')->name('module.store');
 
           });
+            // Modules settings
+
+            Route::controller(LessonsController::class)->group(function () {
+                Route::get('/modules/{module_id}/lessons', 'show')->name('lesson.show');
+                Route::post('/modules/{module}/lessons', 'store')->name('lesson.store');
+
+            });
             /*
 
 
@@ -133,6 +142,8 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
             */
         });
+
+
 
 
     });

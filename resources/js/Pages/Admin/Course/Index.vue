@@ -56,7 +56,7 @@
 
                   <UploadImage
                     v-model="form.thumbnail"
-                  accept="image/*"
+                     accept="image/*"
 
                   />
 
@@ -256,6 +256,7 @@ import InputError from "@/Components/InputError.vue";
 import FormInput from "@/Components/Form/FormInput.vue";
 import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 import FormListBox from "@/Components/Form/FormListBox.vue";
+import {onMounted, ref} from "vue";
 
 const { auth } = usePage().props;
 
@@ -270,13 +271,15 @@ const { meta } = props.courses;
 const form = useForm({
   title: "",
   description: "",
-  thumbnail: "https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  thumbnail: ""
 });
+
 
 defineEmits(["update:modelValue"]);
 
 function submit() {
   form.post(route("courses.store"), {
+
     preserveScroll: true,
     onError: (error) => console.log(error),
     onSuccess: () => {

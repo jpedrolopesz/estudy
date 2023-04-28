@@ -14,8 +14,10 @@ class CreateCourseAction
         $course = Course::create([
                 'title' => $data->title,
                 'description' => $data->description,
-                'thumbnail' => 'https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                'thumbnail' => $data->thumbnail[0],
             ]);
+
+
 
 
         return $course;

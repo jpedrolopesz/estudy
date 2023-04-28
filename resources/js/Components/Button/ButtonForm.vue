@@ -2,8 +2,8 @@
   <button :disabled="disabled || loading"
           :type="type"
           v-bind="$attrs"
-          :class="[btnClass, { 'w-full py-1.5 m-2': block }]"
-          class="border border-transparent text-sm md:text-md font-semibold rounded transition ease-in-out duration-150">
+          :class="[btnClass, { 'w-full py-1': block }]"
+          class="border border-transparent mt-4 text-sm md:text-md font-semibold rounded transition ease-in-out duration-150">
     <slot />
   </button>
 </template>
@@ -28,7 +28,7 @@ const btnClass = computed(() => {
     case "lightred":
       return "bg-red-200 hover:bg-red-300 disabled:pointer-events-none focus:ring-red-300 text-red-800";
     case "dark":
-      return "bg-slate-900 hover:bg-slate-700 disabled:pointer-events-none  focus:ring-slate-500 text-white";
+      return "bg-slate-700 hover:bg-slate-600 disabled:pointer-events-none  focus:ring-slate-300 text-white";
     case "success":
       return "bg-green-600 hover:bg-green-700 disabled:pointer-events-none  focus:ring-green-700 text-white";
     case "lightgreen":

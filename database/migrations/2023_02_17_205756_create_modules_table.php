@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained('courses');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->integer('order');
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
