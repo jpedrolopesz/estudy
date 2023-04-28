@@ -12,9 +12,9 @@
               <div class="min-w-0 flex-1">
 
                 <div class="mb-2">
-                  <h1 class="font-medium text-2xl lg:text-3xl opacity-75">{{module.title}}</h1>
+                  <h1 class="font-medium text-2xl lg:text-3xl opacity-75">{{course.title}}</h1>
                 </div>
-                <p class="mt-1 text-sm text-gray-600">{{module.description}}</p>
+                <p class="mt-1 text-sm text-gray-600">{{course.description}}</p>
               </div>
 
             </div>
@@ -32,13 +32,6 @@
 
               <div class="grid gap-2 overflow-y-auto h-96 ">
 
-                <div>
-                  <input type="file" ref="fileInput" @change="handleFileUpload">
-                  <div v-if="file">
-                    Arquivo selecionado: {{ file.name }}
-                    <button @click="uploadFile">Enviar</button>
-                  </div>
-                </div>
 
 
               </div>
@@ -74,44 +67,4 @@
 
 <script>
 
-import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
-import {Inertia} from "@inertiajs/inertia-vue3";
-
-export default {
-  components:{AdminLayout},
-  props:{module:Object},
-  data() {
-    return {
-      file: null,
-      isUploading: false,
-    }
-  },
-  methods: {
-    handleFileUpload(event) {
-      this.file = event.target.files[0];
-    },
-    uploadFile() {
-      let formData = new FormData();
-      formData.append('file', this.file);
-
-      this.isUploading = true;
-      fetch(route('lesson.store'), {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-      })
-        .then(response => {
-          this.isUploading = false;
-          this.file = null;
-          this.$toast.success('Upload concluído com sucesso!');
-        })
-        .catch(error => {
-          this.isUploading = false;
-          this.$toast.error('Ocorreu um erro ao enviar o arquivo.');
-        });
-    }
-  }
-}
 </script>

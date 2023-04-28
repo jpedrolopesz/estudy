@@ -72,102 +72,111 @@
               </div>
 
               <div class="grid gap-2 overflow-y-auto h-96 ">
-                  <draggable v-model="course.modules">
-                    <template #item>
-                      <div v-for="module in course.modules" :key="module.id" >
-                        <div class="bg-transparent shadow-sm rounded-sm border mb-2 border-slate-100 mx-4 p-0.5">
 
-                          <Disclosure  v-slot="{ open, close }">
-                            <div class="flex justify-between items-start">
-                              <div class="group flex items-center w-full rounded-lg py-2 text-left text-base font-bold text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                                <button class="cursor-grab handle mr-4 opacity-0 group-hover:opacity-100">
-                                  <svg class="w-6 h-6 fill-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-                                  </svg>
-                                </button>
-                                <DisclosureButton>
-                                  <svg class="h-4 w-4 text-gray-900 mr-2"
-                                       :class="open ? 'rotate-90 transform' : ''"
-                                       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                  </svg>
-                                </DisclosureButton>
-                                <div class="grow mt-0.5 mb-3 sm:mb-0 space-y-3">
-                                  <span class="font-medium text-gray-800 ml-2">{{ module.id }}</span>
-                                  <span class="font-medium text-gray-800 ml-2">{{ module.title }}</span>
-                                </div>
+                <draggable
+                  v-model="course.modules"
+                  tag="ul"
+                  itemKey="id"
+                >
+                  <template #item="{element: module}">
+                    <div class="bg-transparent shadow-sm rounded-sm mx-4 border mb-2 border-slate-100 p-0.5">
 
-                                <div class="flex items-center justify-end space-x-3">
-                                  <!-- Avatars -->
-                                  <div class="flex shrink-0 -space-x-3 -ml-px">
-                                    <a class="block" href="#0">
-                                      <img class="rounded-full border-2 border-white box-content" src="/images/user.jpeg" width="24" height="24" alt="User 07" />
-                                    </a>
-                                    <a class="block" href="#0">
-                                      <img class="rounded-full border-2 border-white box-content" src="/images/user.jpeg" width="24" height="24" alt="User 05" />
-                                    </a>
-                                  </div>
-                                  <button class="text-slate-400 hover:text-indigo-500">
-                                    <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
-                                      <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
-                                    </svg>
-                                  </button>
-                                </div>
-
-                              </div>
+                      <Disclosure v-slot="{ open, close }">
+                        <div class="flex justify-between items-start">
+                          <div class="group flex items-center w-full rounded-lg py-2 text-left text-base font-bold text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+                            <button class="cursor-grab handle mr-4 opacity-0 group-hover:opacity-100">
+                              <svg class="w-6 h-6 fill-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                              </svg>
+                            </button>
+                            <DisclosureButton>
+                              <svg class="h-4 w-4 text-gray-900 mr-2"
+                                   :class="open ? 'rotate-90 transform' : ''"
+                                   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                              </svg>
+                            </DisclosureButton>
+                            <div class="grow mt-0.5 mb-3 sm:mb-0 space-y-3">
+                              <span class="font-medium text-gray-800 ml-2">{{ module.id }}</span>
+                              <span class="font-medium text-gray-800 ml-2">{{ module.title }}</span>
                             </div>
 
-
-                            <DisclosurePanel class="py-2 m-4 text-sm text-gray-500">
-                              <button type="button"  class="bg-gray-50 font-medium text-gray-600 text-center w-full shadow-sm rounded-sm border mb-2 border-gray-100 p-1.5 hover:bg-gray-100">
-                                Add Lesson
+                            <div class="flex items-center justify-end space-x-3">
+                              <!-- Avatars -->
+                              <div class="flex shrink-0 -space-x-3 -ml-px">
+                                <a class="block" href="#0">
+                                  <img class="rounded-full border-2 border-white box-content" src="/images/user.jpeg" width="24" height="24" alt="User 07" />
+                                </a>
+                                <a class="block" href="#0">
+                                  <img class="rounded-full border-2 border-white box-content" src="/images/user.jpeg" width="24" height="24" alt="User 05" />
+                                </a>
+                              </div>
+                              <button class="text-slate-400 hover:text-indigo-500">
+                                <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
+                                  <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
+                                </svg>
                               </button>
-                              <draggable v-model="course.modules[0].lessons"
-                              >
-                                <template #item>
-                                  <ul v-for="lesson in course.modules[0].lessons" :key="lesson.id">
-                                    <li class="shadow-sm rounded-sm border mb-2 border-slate-100 p-1.5">
-                                      <div class="w-full md:flex items-center justify space-y-1.5 md:space-y-0">
-                                        <div class="flex-1">
-                                          <div class="flex  gap-3 sm:gap-2 flex-col justify-start items-start sm:flex-row sm:items-center sm:flex-1 sm:justify-start text-black cursor-pointer text-md">
-                                            <button class="cursor-grab handle mr-4 group-hover:opacity-100">
-                                              <svg class="w-6 h-6 fill-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-                                              </svg>
-                                            </button>
-                                            <div class="grow mt-0.5 mb-3 sm:mb-0 space-y-3">
+                            </div>
 
-                                              <span>{{lesson.id}}:
-                                                <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
-                                              </span>
-                                            </div>
-                                            <div class="flex items-center justify-end space-x-3">
-                                              <button class="text-slate-400 hover:text-indigo-500">
-                                                <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
-                                                  <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
-                                                </svg>
-                                              </button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </li>
-
-                                  </ul>
-                                </template>
-                              </draggable>
-
-
-                            </DisclosurePanel>
-                          </Disclosure>
+                          </div>
                         </div>
 
-                      </div>
-                    </template>
+
+                        <DisclosurePanel class="py-2 m-4 text-sm text-gray-500">
+                          <Link :href="route('lesson.create',[course.id, module.id])">
+                            <button type="button" class="bg-gray-50 font-medium text-gray-600 text-center w-full shadow-sm rounded-sm border mb-2 border-gray-100 p-1.5 hover:bg-gray-100">
+                              Add lesson
+                            </button>
+                          </Link>
+
+                          <draggable
+                            v-model="module.lessons"
+                            tag="ul"
+                            group="lessons"
+                            itemKey="id"
+                          >
+                            <template #item="{ element: lesson }">
+                              <li class="shadow-sm rounded-sm border mb-2 border-slate-100 p-1.5">
+                                <div class="w-full md:flex items-center justify space-y-1.5 md:space-y-0">
+                                  <div class="flex-1">
 
 
-                  </draggable>
-                </div>
+                                    <div class="flex  gap-3 sm:gap-2 flex-col justify-start items-start sm:flex-row sm:items-center sm:flex-1 sm:justify-start text-black cursor-pointer text-md">
+                                      <button class="cursor-grab handle mr-4 group-hover:opacity-100">
+                                        <svg class="w-6 h-6 fill-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                                        </svg>
+                                      </button>
+
+                                      <div class="grow mt-0.5 mb-3 sm:mb-0 space-y-3">
+
+                                        <span>{{lesson.id}}:
+                                          <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
+                                        </span>
+                                      </div>
+                                      <div class="flex items-center justify-end space-x-3">
+                                        <button class="text-slate-400 hover:text-indigo-500">
+                                          <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
+                                            <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
+                                          </svg>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                            </template>
+                          </draggable>
+
+
+                        </DisclosurePanel>
+                      </Disclosure>
+                    </div>
+                  </template>
+                </draggable>
+
+
+              </div>
 
 
 
@@ -210,12 +219,12 @@ import {ref} from "vue";
 import FormPopover from "@/Components/Form/FormPopover.vue";
 import FormInput from "@/Components/Form/FormInput.vue";
 import ButtonForm from "@/Components/Button/ButtonForm.vue";
-import {useForm} from "@inertiajs/inertia-vue3";
+import {useForm, Link} from "@inertiajs/inertia-vue3";
 import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 
 export default {
   components: {
-    FormDescriptionEditor,
+    FormDescriptionEditor, Link,
     ButtonForm, FormInput, FormPopover, AdminLayout, draggable, Disclosure, DisclosureButton, DisclosurePanel},
   props: {
     course:Object

@@ -105,7 +105,7 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
             // Modules settings
 
             Route::controller(LessonsController::class)->group(function () {
-                Route::get('/modules/{module_id}/lessons', 'show')->name('lesson.show');
+                Route::get('/module/{module_id}/create', 'create')->name('lesson.create');
                 Route::post('/modules/{module}/lessons', 'store')->name('lesson.store');
 
             });

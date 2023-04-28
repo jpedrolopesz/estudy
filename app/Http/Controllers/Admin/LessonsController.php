@@ -14,13 +14,13 @@ use Inertia\Inertia;
 
 class LessonsController extends Controller
 {
-    public function show($module_id)
+    public function create($module_id)
     {
+        $module = Module::find($module_id);
 
-        $lessons = Lesson::where('module_id', $module_id)->get();
 
         return Inertia::render('Admin/Course/Lessons/Create', [
-            'lessons' => $lessons,
+            'module' => $module,
         ]);
 
 
@@ -28,11 +28,26 @@ class LessonsController extends Controller
 
     public function store(Request $request, Course $course, Module $module)
     {
-        $lesson = new Lesson($request->all());
-        $lesson->module_id = $module->id;
-        $lesson->save();
+        dd($request->all());
+        $lesson = Lesson::find(1);
+        $pathToFile = $request->file('media')->store('media');
 
+        $lesson
+            ->addMedia($pathToFile)
+            ->toMediaCollection();
         return redirect()->route('modules.show', [$course, $module]);
+    }
+
+    public function edit($module_id)
+    {
+
+        $module = Lesson::where('module_id', $module_id)->get();
+
+        return Inertia::render('Admin/Course/Lessons/Create', [
+            'module' => $module,
+        ]);
+
+
     }
 
 
