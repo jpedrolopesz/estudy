@@ -14,28 +14,38 @@ use Inertia\Inertia;
 
 class LessonsController extends Controller
 {
-    public function create($module_id)
+    public function create($course_id,$module_id)
     {
+        $course = Course::find($course_id);
         $module = Module::find($module_id);
 
 
         return Inertia::render('Admin/Course/Lessons/Create', [
             'module' => $module,
+            'course' => $course,
         ]);
 
 
     }
 
-    public function store(Request $request, Course $course, Module $module)
+    public function store(Request $request)
     {
-        dd($request->all());
-        $lesson = Lesson::find(1);
-        $pathToFile = $request->file('media')->store('media');
 
-        $lesson
-            ->addMedia($pathToFile)
-            ->toMediaCollection();
-        return redirect()->route('modules.show', [$course, $module]);
+        $pathToFile = $request->file('video_url')->store('media');
+
+       $lesson = Lesson::create([
+            'module_id' => $request->input('module_id'),
+            'title' => $request->input('title'),
+            'video_url' => $pathToFile
+        ]);
+
+        if ($lesson) {
+            $lesson->addMedia($pathToFile);
+        } else {
+            // Tratar o erro de criação da lição aqui
+        }
+
+        return redirect()->back();
     }
 
     public function edit($module_id)

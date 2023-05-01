@@ -271,7 +271,7 @@ const { meta } = props.courses;
 const form = useForm({
   title: "",
   description: "",
-  thumbnail: ""
+  thumbnail: {type: Object}
 });
 
 

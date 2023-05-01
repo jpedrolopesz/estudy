@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('module_id')->constrained('modules');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('video_url');
-            $table->integer('order');
+            $table->string('video_url')->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

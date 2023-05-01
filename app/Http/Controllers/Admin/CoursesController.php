@@ -56,13 +56,26 @@ class CoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateCourseData $data, Request $request, Course $course)
+    public function store(Request $request)
     {
 
-        $courses = CreateCourseAction::run($data);
+        $pathToFile = $request->file('thumbnail')[0]->store('thumbnails');
+
+        $course = Course::create([
+            'user_id' => auth()->id(),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'thumbnail' => $pathToFile,
+        ]);
+
+        if ($course) {
+            $course->addMedia($pathToFile);
+        } else {
+            // Tratar o erro de criação da lição aqui
+        }
 
 
-        return Redirect::route('courses.index', $courses);
+        return redirect()->back();
     }
 
     /**

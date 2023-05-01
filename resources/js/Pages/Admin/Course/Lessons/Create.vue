@@ -24,30 +24,50 @@
 
 
         <div class="mt-1 md:col-span-2 md:mt-0">
-
+          <form @submit.prevent="submit">
           <div class=" shadow-lg sm:overflow-hidden rounded-t-md sm:rounded-b-md">
+
             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
 
 
-              <div class="grid gap-2 overflow-y-auto h-96 ">
+              <div class="grid gap-2 overflow-y-auto lg:h-[calc(80vh-54px)] ">
 
-                <div>
-                  <input type="file" ref="fileInput" @change="handleFileUpload">
-                  <div v-if="file">
-                    Arquivo selecionado: {{ file.name }}
-                    <button @click="uploadFile">Enviar</button>
+                <div class="mx-2">
+                  <div class="bg-gray-50 border border-gray-300 mx-auto rounded-md transition-all duration-200 w-full">
+
+
+                        <input type="file" @input="form.video_url = $event.target.files[0]" />
+                        <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                          {{ form.progress.percentage }}%
+                        </progress>
+
+
+
+                      <div>
+                        <iframe  class="w-full h-[calc(40vh-24px)] rounded-md " allow="accelerometer; clipboard-write; picture-in-picture"></iframe>
+                      </div>
+
+                  </div>
+
+                  <div>
+                    <FormInput
+                      v-model="form.title"
+                      label="Title"
+                      type="text"
+                    />
+
+                    <FormDescriptionEditor
+                      label="Description"
+                    />
+
                   </div>
                 </div>
-
-
               </div>
-
-
 
             </div>
 
-            <div class="flex justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
+            <div class="flex items-center  justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
 
               <div>
                 <Link :href="route('pages.plans.show')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
@@ -60,11 +80,13 @@
               </div>
 
               <div>
-
+                <ButtonForm color="dark" type="submit">Submit</ButtonForm>
               </div>
 
             </div>
+
           </div>
+        </form>
         </div>
       </div>
     </div>
@@ -72,46 +94,35 @@
 </template>
 
 
-<script>
+<script setup>
 
 import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
-import {Inertia} from "@inertiajs/inertia-vue3";
+import { useForm} from "@inertiajs/inertia-vue3";
+import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
+import ButtonForm from "@/Components/Button/ButtonForm.vue";
 
-export default {
-  components:{AdminLayout},
-  props:{module:Object},
-  data() {
-    return {
-      file: null,
-      isUploading: false,
-    }
-  },
-  methods: {
-    handleFileUpload(event) {
-      this.file = event.target.files[0];
+  const props = defineProps({
+    course:Object,
+    module:Object
+  })
+  const form = useForm({
+    title: null,
+    video_url: null,
+    progress: null,
+    module_id: props.module.id,
+    course_id: props.course.id
+  })
+
+function submit() {
+  form.post(`/admin/course/${props.course.id}/module/${props.module.id}/lessons`, {
+    onSuccess: () => form.reset(),
+    onProgress: ({ total, loaded }) => {
+      const percentage = Math.round((loaded / total) * 100);
+      form.progress = { total, loaded, percentage };
     },
-    uploadFile() {
-      let formData = new FormData();
-      formData.append('file', this.file);
+  });
 
-      this.isUploading = true;
-      fetch(route('lesson.store'), {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-      })
-        .then(response => {
-          this.isUploading = false;
-          this.file = null;
-          this.$toast.success('Upload concluído com sucesso!');
-        })
-        .catch(error => {
-          this.isUploading = false;
-          this.$toast.error('Ocorreu um erro ao enviar o arquivo.');
-        });
-    }
-  }
 }
+
 </script>

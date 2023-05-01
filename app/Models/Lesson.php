@@ -22,6 +22,7 @@ class Lesson extends Model implements HasMedia
         'comments'
     ];
 
+    protected $guarded = ['id'];
 
 
     public function module()
