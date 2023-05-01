@@ -96,24 +96,17 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                               </svg>
                             </DisclosureButton>
-                            <div class="grow mt-0.5 mb-3 sm:mb-0 space-y-3">
-                              <span class="font-medium text-gray-800 ml-2">{{ module.id }}</span>
-                              <span class="font-medium text-gray-800 ml-2">{{ module.title }}</span>
+                            <div class="font-medium text-gray-800 ml-2">{{module.id}}</div>
+
+                            <div class="grow mx-4 ">
+                              <input v-model="module.title" @click="showInput = true" class="font-medium text-gray-800 w-full ml-2"/>
                             </div>
 
-                            <div class="flex items-center justify-end space-x-3">
-                              <!-- Avatars -->
-                              <div class="flex shrink-0 -space-x-3 -ml-px">
-                                <a class="block" href="#0">
-                                  <img class="rounded-full border-2 border-white box-content" src="/images/user.jpeg" width="24" height="24" alt="User 07" />
-                                </a>
-                                <a class="block" href="#0">
-                                  <img class="rounded-full border-2 border-white box-content" src="/images/user.jpeg" width="24" height="24" alt="User 05" />
-                                </a>
-                              </div>
+                            <div class="justify-end space-x-3 " v-if="showInput">
+
                               <button class="text-slate-400 hover:text-indigo-500">
-                                <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
-                                  <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
+                                <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
+                                  <path d="M19.7 8.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM12.6 22H10v-2.6l6-6 2.6 2.6-6 6zm7.4-7.4L17.4 12l1.6-1.6 2.6 2.6-1.6 1.6z"></path>
                                 </svg>
                               </button>
                             </div>
@@ -215,7 +208,6 @@ import {
 } from "@headlessui/vue";
 
 import draggable from "vuedraggable";
-import {ref} from "vue";
 import FormPopover from "@/Components/Form/FormPopover.vue";
 import FormInput from "@/Components/Form/FormInput.vue";
 import ButtonForm from "@/Components/Button/ButtonForm.vue";
@@ -225,35 +217,25 @@ import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 export default {
   components: {
     FormDescriptionEditor, Link,
-    ButtonForm, FormInput, FormPopover, AdminLayout, draggable, Disclosure, DisclosureButton, DisclosurePanel},
+    ButtonForm, FormInput, FormPopover, AdminLayout,
+    draggable, Disclosure, DisclosureButton, DisclosurePanel
+  },
   props: {
     course:Object
   },
+  data() {
+    return {
+      showInput: false,
+    }
+  },
   setup(props) {
-
     const form = useForm({
       id: props.course.id,
       title: props.course.modules.title,
       description: props.course.modules.description,
     })
-    const showModule = ref('0')
-    const modulesState = {};
-
-    const toggleModule = (moduleId) => {
-
-      if (modulesState[moduleId] && modulesState[moduleId].open) {
-        modulesState[moduleId].open = false;
-      } else {
-        Object.keys(modulesState).forEach((id) => {
-          modulesState[id].open = false;
-        });
-        modulesState[moduleId] = { open: true };
-      }
-    };
-
-    return {showModule, toggleModule, form}
+    return {form}
   },
-
   methods: {
     submit() {
       this.form.post(route("module.store", this.course.id), {
@@ -265,10 +247,6 @@ export default {
         }
       });
       },
-    createModule() {
-      this.$inertia.post(`/courses/${this.module.id}`, {title: this.course.module.title})
-
-    },
     updateCourse() {
       this.$inertia.put(`/courses/${this.course.id}`, {title: this.course.title})
 

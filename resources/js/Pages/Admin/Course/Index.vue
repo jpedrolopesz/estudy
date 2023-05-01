@@ -279,7 +279,6 @@ defineEmits(["update:modelValue"]);
 
 function submit() {
   form.post(route("courses.store"), {
-
     preserveScroll: true,
     onError: (error) => console.log(error),
     onSuccess: () => {

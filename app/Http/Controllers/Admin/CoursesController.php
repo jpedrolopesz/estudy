@@ -2,34 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Course\CreateCourseAction;
 use App\Actions\Course\GetAllCoursesAction;
-use App\Actions\Course\GetCourseModulesLessonsAction;
 use App\Actions\Course\GetCourseShowAction;
-use App\Actions\Modules\GetAllModulesShowAction;
 use App\Actions\User\GetAllUsersAction;
-use App\Data\Course\CreateCourseData;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseResource;
-use App\Http\Resources\ModulesResource;
 use App\Http\Resources\UserResource;
 use App\Models\Course;
-use App\Models\Lesson;
 use App\Models\Module;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CoursesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Inertia\Response
-     */
-    public function index()
+    public function index(): \Inertia\Response
     {
         $course = GetAllCoursesAction::run(['perPage' => 10000]);
 
@@ -40,23 +29,7 @@ class CoursesController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         $pathToFile = $request->file('thumbnail')[0]->store('thumbnails');
@@ -78,13 +51,7 @@ class CoursesController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Course  $courses
-     * @return \Inertia\Response
-     */
-    public function show( $id)
+    public function show($id): \Inertia\Response
     {
         $course = Course::findOrFail($id);
         $lessonCount = 0;
@@ -105,20 +72,14 @@ class CoursesController extends Controller
 
     public function edit(int $id): \Inertia\Response
     {
-        return Inertia::render('Admin/Course/Edit', [
+        return Inertia::render('Admin/Course/EditAndCreate', [
             'course' => (new GetCourseShowAction())->execute($id),
 
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course  $courses
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, Module $module_id,$id)
+
+    public function update(Request $request, Module $module_id,$id): RedirectResponse
     {
 
         $course = Course::find($id);
@@ -135,28 +96,6 @@ class CoursesController extends Controller
 
         return redirect()->back();
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Course $courses
-     * @return Response
-     */
-    public function destroy(Course $courses)
-    {
-        //
-    }
-
-
-    /**
-     * @return Response
-     *
-     * @throws AuthorizationException
-     */
-    public function overview(Request $request, Course $course)
-    {
-        //
     }
 
 }
