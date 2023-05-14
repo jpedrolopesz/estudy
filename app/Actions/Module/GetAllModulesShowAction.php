@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Modules;
+namespace App\Actions\Module;
 
 use App\Data\Course\CourseFilterData;
 use App\Filters\CourseFilter;

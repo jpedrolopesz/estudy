@@ -15,7 +15,7 @@ class Module extends Model
         'module_id',
         'title',
         'description',
-        'order',
+        'sort_order',
     ];
 
     public function course()

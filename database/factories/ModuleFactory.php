@@ -12,14 +12,12 @@ class ModuleFactory extends Factory
 
     public function definition()
     {
-        static $order = 1;
 
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'course_id' => Course::factory(),
-            'order' => $order++
-
+            'sort_order' => $this->faker->numberBetween(1, 100),
         ];
     }
 }

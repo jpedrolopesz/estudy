@@ -10,14 +10,17 @@
 
         <div class="flex items-center">
 
-          <Modal>
-            <button type="button" class="text-slate-500 bg-gray-100 hover:bg-gray-200 font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ">
+          <Modal >
+            <template #button>
+              <button type="button" class="text-slate-500 bg-gray-100 hover:bg-gray-200 font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ">
 
-              <svg class="w-5 h-5 mr-2 -ml-1 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              Course
-            </button>
+                <svg class="w-5 h-5 mr-2 -ml-1 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Course
+              </button>
+            </template>
+
 
             <template #title>
               <h2> Create Course</h2>
@@ -164,8 +167,9 @@
               <td class="px-2 first:pl-5 last:pr-5 py-2.5 whitespace-nowrap ">
                 <div class="flex items-center">
                   <div class="w-8 h-8 shrink-0 mr-2 sm:mr-3">
-                    <img v-bind:src="course.thumbnail"  width="80" height="88" />
+                    <img v-bind:src="'/storage/thumbnails/' + course.thumbnail"  width="80" height="88" />
                   </div>
+
                   <div class="font-medium text-slate-800">{{course.title}}</div>
                 </div>
               </td>

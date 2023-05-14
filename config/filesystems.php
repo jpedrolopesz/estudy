@@ -29,11 +29,19 @@ return [
     */
 
     'disks' => [
-         'media' => [
+
+
+        'videos' => [
                 'driver' => 'local',
-                'root'   => public_path('media'),
-                'url'    => env('APP_URL').'/media',
+                'root'   => storage_path('app/public/videos'),
+                'url'    => env('APP_URL').'/storage',
          ],
+
+        'thumbnails' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/public/thumbnails'),
+            'url'    => env('APP_URL').'/storage',
+        ],
 
         'local' => [
             'driver' => 'local',

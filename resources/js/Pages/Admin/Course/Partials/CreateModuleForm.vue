@@ -45,7 +45,6 @@
 
 <script setup>
 import { colorPicker } from "@/Helpers/helpers";
-import Popper from "vue3-popper";
 
 
 const props = defineProps({

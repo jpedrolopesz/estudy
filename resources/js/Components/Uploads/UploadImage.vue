@@ -35,9 +35,10 @@ registerPlugin(
 onMounted(() => {
   const fileInput = document.querySelector('#' + props.id);
   const pond = create(fileInput, {
+
     storeAsFile: true,
     dropOnPage: true,
-    allowMultiple: true,
+    allowMultiple: false,
     maxFiles: 1,
     credits: null,
     labelIdle: props.labelIdle,

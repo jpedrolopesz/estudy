@@ -1,7 +1,7 @@
 <template>
   <div>
     <button type="button" @click="openModal">
-     <slot/>
+     <slot name="button"/>
     </button>
   </div>
   <TransitionRoot :show="isOpen" as="template">

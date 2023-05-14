@@ -34,6 +34,9 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         Route::get('/stripe/create', [StripeController::class, 'create'])->name('stripe.create');
 
 
+
+
+
         //** Users */
         Route::get('/users', [UsersController::class, 'index'])->name('users.index');
         Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
@@ -67,11 +70,13 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         });
 
 
-        Route::resource('/courses', CoursesController::class);
 
 
        // Route::resource('/comments', CommentController::class);
+        Route::resource('/courses', CoursesController::class);
 
+
+        Route::get('/courses', [CoursesController::class, 'index'])->name('courses.index');
         Route::group(['prefix' => 'course/{course}'], function () {
             // Courses boards
             Route::controller(CoursesController::class)->group(function () {
@@ -80,8 +85,10 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
                         'course' => $course,
                     ]);
                 })->name('courses.show');
-
                 Route::get('edit', 'edit')->name('courses.edit');
+
+
+
 
                 /**
                 Route::put('', 'update')->name('courses.update');
@@ -100,6 +107,9 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
               Route::get('modules/', 'show')->name('module.show');
               Route::post('modules/', 'store')->name('module.store');
+              Route::put('modules/', 'update')->name('module.update');
+              Route::put('/draggable', 'updateDraggable')->name('module.draggable');
+
 
           });
             // Modules settings
@@ -107,6 +117,8 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
             Route::controller(LessonsController::class)->group(function () {
                 Route::get('/module/{module_id}/create', 'create')->name('lesson.create');
                 Route::post('/module/{module_id}/lessons', 'store')->name('lesson.store');
+                Route::get('/module/{module_id}/lesson/{lesson_id}/edit', 'edit')->name('lesson.edit');
+
 
             });
             /*

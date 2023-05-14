@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained('courses');
+            $table->unsignedInteger('sort_order')->nullable()->index();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

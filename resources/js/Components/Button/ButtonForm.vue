@@ -2,7 +2,7 @@
   <button :disabled="disabled || loading"
           :type="type"
           v-bind="$attrs"
-          :class="[btnClass, { 'w-full mx-2 py-1.5': block }]"
+          :class="[btnClass, { 'w-full  py-1.5': block }]"
           class="border border-transparent mt-4 text-sm md:text-md font-semibold rounded transition ease-in-out duration-150">
     <slot />
   </button>

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Modules\CreateModuleAction;
-use App\Actions\Modules\GetAllModulesShowAction;
+use App\Actions\Module\CreateModuleAction;
+use App\Actions\Module\GetAllModulesShowAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CreateModuleRequest;
+use App\Http\Requests\StoreVideoRequest;
+use App\Jobs\ConvertVideoForDownloading;
+use App\Jobs\ConvertVideoForStreaming;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Module;
@@ -30,10 +33,11 @@ class LessonsController extends Controller
 
     public function store(Request $request)
     {
+        $filename = uniqid() . '.' . $request->file('video_url')->getClientOriginalExtension();
+        $pathToFile = $request->file('video_url')->store('videos', $filename);
 
-        $pathToFile = $request->file('video_url')->store('media');
 
-       $lesson = Lesson::create([
+        $lesson = Lesson::create([
             'module_id' => $request->input('module_id'),
             'title' => $request->input('title'),
             'video_url' => $pathToFile
@@ -45,19 +49,17 @@ class LessonsController extends Controller
             // Tratar o erro de criação da lição aqui
         }
 
+
         return redirect()->back();
     }
 
-    public function edit($module_id)
+    public function edit($module_id, $course_id, $lesson_id)
     {
-
-        $module = Lesson::where('module_id', $module_id)->get();
-
-        return Inertia::render('Admin/Course/Lessons/Create', [
-            'module' => $module,
+        return Inertia::render('Admin/Course/Lessons/Edit', [
+            'course' => Course::find($course_id),
+            'module' => Module::find($module_id),
+            'lesson' => Lesson::find($lesson_id)
         ]);
-
-
     }
 
 

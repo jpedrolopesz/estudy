@@ -18,11 +18,11 @@ class Lesson extends Model implements HasMedia
         'title',
         'description',
         'video_url',
-        'order',
+        'sort_order',
         'comments'
     ];
 
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
 
 
     public function module()

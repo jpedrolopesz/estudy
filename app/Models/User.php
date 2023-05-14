@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\Roles;
 use App\Traits\HasAvatar;
-use App\Traits\HasStringPrimaryKey;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,11 +21,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable,
         SoftDeletes, Billable, MustVerifyEmail,
-        CausesActivity,
-        HasStringPrimaryKey, HasAvatar;
-
-
-    protected string $keyPrefix = 'usr';
+        CausesActivity, HasAvatar;
 
     protected $keyType = 'string';
 

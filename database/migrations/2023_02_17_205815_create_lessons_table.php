@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->constrained('modules');
+            $table->unsignedInteger('sort_order')->nullable()->index();
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('video_url')->nullable();
-            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

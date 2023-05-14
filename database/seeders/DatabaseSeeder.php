@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
     {
 
         User::factory()->create([
+            'id' => 1,
             'first_name' => 'Joao Pedro',
             'last_name' => 'Lopes Zamonelo',
             'email' => 'jplopeszamonelo@hotmail.com',
@@ -92,6 +93,7 @@ class DatabaseSeeder extends Seeder
 
 
 
+        /*
 
         // Cria um curso com 2 módulos e 4 aulas em cada módulo
         $course1 = Course::create([
@@ -194,6 +196,7 @@ class DatabaseSeeder extends Seeder
 
 
 
+        **/
     }
 
 

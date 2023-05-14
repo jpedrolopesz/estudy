@@ -76,6 +76,7 @@ class HandleInertiaRequests extends Middleware
                     'error' => $request->session()->get('error'),
                 ];
             },
+
         ]);
     }
 }

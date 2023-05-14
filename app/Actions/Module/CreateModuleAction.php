@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Modules;
+namespace App\Actions\Module;
 
 use App\Http\Requests\Course\CreateModuleRequest;
 use App\Models\Module;

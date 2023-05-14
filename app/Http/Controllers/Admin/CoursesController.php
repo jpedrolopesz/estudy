@@ -32,7 +32,7 @@ class CoursesController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        $pathToFile = $request->file('thumbnail')[0]->store('thumbnails');
+        $pathToFile = $request->file('thumbnail')[0]->storeImg('public', 'thumbnails');
 
         $course = Course::create([
             'user_id' => auth()->id(),

@@ -13,7 +13,12 @@ class GetCourseShowAction
 {
     public function execute(int $id):array|Builder|Collection|Model
     {
-        return Course::with('modules.lessons')->findOrFail($id);
+        return Course::with(['modules' => function ($query) {
+            $query->orderBy('sort_order')->with(['lessons' => function ($query) {
+                $query->orderBy('sort_order');
+            }]);
+        }])->findOrFail($id);
+
     }
 }
 
