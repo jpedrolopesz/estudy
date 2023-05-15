@@ -3,9 +3,6 @@
 
   <AuthenticatedUserLayout>
 
-    <template #header>
-      <h2 class="font-medium text-2xl lg:text-3xl opacity-75">Account Settings</h2>
-    </template>
 
     <AccountUserLayout>
 

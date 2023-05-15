@@ -1,7 +1,7 @@
 <template>
 
   <main>
-    <div  class="flex px-4 mx-auto max-w-7xl xl:px-5">
+    <div  class="flex px-4  max-w-7xl xl:px-5">
       <Navigation/>
       <HeaderForm>
         <main >

@@ -24,11 +24,11 @@ const showingNavigationDropdown = ref(false);
         </div>
       </header>
 
-      <main class="ml-8 min-h-screen bg-dots-darker">
+      <main class=" min-h-screen bg-dots-darker">
 
         <Header/>
 
-        <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-9xl mx-auto">
+        <div class=" py-1 w-full max-w-9xl mx-auto">
           <slot />
         </div>
       </main>

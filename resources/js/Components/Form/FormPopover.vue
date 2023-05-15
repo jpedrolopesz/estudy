@@ -11,7 +11,7 @@
 
     </div>
 
-    <transition
+    <transition :show="isOpen"
       enter-active-class="transition ease-out duration-200"
       enter-from-class="transform opacity-0 scale-95"
       enter-to-class="transform opacity-100 scale-100"
@@ -19,6 +19,7 @@
       leave-from-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95">
       <div v-show="open"
+           @close="closeModal"
            class="absolute z-50 mt-2 bg-white rounded-md shadow-lg"
            :class="[alignmentClasses]"
            style="display: none;"
@@ -50,6 +51,14 @@ onMounted(() => document.addEventListener('keydown', closeOnEscape));
 onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
 
 
+const isOpen = ref(false)
+
+function closeModal() {
+  isOpen.value = false
+}
+function openModal() {
+  isOpen.value = true
+}
 
 const alignmentClasses = computed(() => {
   if (props.align === 'left') {

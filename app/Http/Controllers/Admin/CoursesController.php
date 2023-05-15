@@ -79,23 +79,38 @@ class CoursesController extends Controller
     }
 
 
-    public function update(Request $request, Module $module_id,$id): RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
+
+        dd($request->all());
+        $validatedData = $request->validate([
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
 
         $course = Course::find($id);
 
-        $course->update([
-            'title' => $request->input('title')
-        ]);
+        if (!$course) {
+            // Tratar o erro de curso não encontrado aqui
+        }
 
-        $module = $course->modules()->where('id', $module_id)->first();
+        $course->title = $validatedData['title'];
+        $course->description = $validatedData['description'];
 
-        $module->update([
-            'title' => $request->input('module_title')
-        ]);
+        if ($request->hasFile('thumbnail')) {
+            $pathToFile = $request->file('thumbnail')->store('public/thumbnails');
+            $course->thumbnail = $pathToFile;
+            $course->addMedia($pathToFile);
+        }
+
+        if ($course->save()) {
+            // Tratar sucesso da atualização aqui
+        } else {
+            // Tratar erro de atualização aqui
+        }
 
         return redirect()->back();
-
     }
 
 }

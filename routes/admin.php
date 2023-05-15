@@ -86,6 +86,7 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
                     ]);
                 })->name('courses.show');
                 Route::get('edit', 'edit')->name('courses.edit');
+                Route::put('', 'update')->name('course.update');
 
 
 

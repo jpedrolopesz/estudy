@@ -28,7 +28,7 @@
 
             <template #createForm>
 
-              <form @submit.prevent="submit" class="m-4">
+              <form @submit.prevent="submit" >
 
                 <div class="mb-4">
                   <FormInput

@@ -1,87 +1,19 @@
 <template>
   <AdminLayout>
-
-
-
     <div>
       <div class="md:grid md:grid-cols-3 md:gap-6 ml-6">
         <div class="md:col-span-1">
-
           <div class="w-full ">
             <div class="sm:flex sm:items-center mx-4 sm:justify-between">
 
-              <div class="min-w-10 flex-1 ml-2">
-                <div class="flex  justify-between">
-                  <h2 class="capitalize font-medium text-2xl opacity-75">{{ course.title }}</h2>
-                  <FormPopover  align="right" width="100">
-                    <template #trigger >
-                      <button type="button" class="px-1 py-0.5 text-lg font-bold rounded-md text-gray-900 hover:bg-gray-200 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-
-                        <svg class="w-7 h-7 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                        </svg>
-                      </button>
-                    </template>
-                    <template #content>
-
-                      <form @submit.prevent="submit">
-
-                        <div class="justify-center">
-                          <FormInput
-                            v-model="course.title"
-                            class="w-86 "
-                            required
-                            label="Title"
-                            placeholder="Module title"
-                            id="module-id"
-                            :autofocus="true"/>
-
-
-                          <FormDescriptionEditor
-                            v-model="course.description"
-                            class="w-86"
-                            label="Description"
-                            placeholder="Module description"
-                            id="module-id"
-                          />
-
-
-                          <div  class="mb-4">
-
-
-                            <UploadImage
-                              v-bind:src="'/storage/thumbnails/' + course.thumbnail"
-                              v-model="course.thumbnail"
-                              accept="image/*"
-
-                            />
-
-                          </div>
-
-                          <ButtonForm color="dark" :loading="form.processing">Update</ButtonForm>
-                        </div>
-                      </form>
-
-
-                    </template>
-                  </FormPopover>
-                </div>
-                <p class="normal-case font-medium text-sm text-gray-600 mt-2 opacity-75">{{ course.description }}</p>
-
-              </div>
-
+              <EditCourseForm :course="course"/>
 
             </div>
           </div>
-
         </div>
-
-
-        <div   class="mt-1 md:col-span-2 md:mt-0">
-
-          <div  class="shadow-lg bg-white overflow-hidden rounded-md">
+        <div class="mt-1 md:col-span-2 md:mt-0">
+          <div class="shadow-lg bg-white overflow-hidden rounded-md">
             <div v-if="course.modules[0]" class="mt-2">
-
               <TabGroup>
                 <TabList class="p-2 mx-2 text-sm font-medium flex ">
 
@@ -113,48 +45,19 @@
                   <TabPanel>
                     <div class="flex items-center mx-6 mb-4 justify-between">
                       <h2 class=" font-semibold text-slate-800">Add Module</h2>
-                      <FormPopover  align="right" width="100">
-                        <template #trigger >
-                            <button type="button" class="px-1.5 py-1 bg-gray-50 text-lg font-bold rounded-md text-gray-400 border border-slate-300 hover:bg-gray-200 hover:text-gray-500">
-                              <svg  class="w-4 h-4 fill-current" viewBox="0 0 16 16">
-                                <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-                              </svg>
-                            </button>
+                      <CreateModuleForm :course="course">
+                        <template #button>
+                          <button type="button" class="px-1.5 py-1 bg-gray-50 text-lg font-bold rounded-md text-gray-400 border border-slate-300 hover:bg-gray-200 hover:text-gray-500">
+                            <svg  class="w-4 h-4 fill-current" viewBox="0 0 16 16">
+                              <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
+                            </svg>
+                          </button>
                         </template>
-                        <template #content>
-
-                          <form  @submit.prevent="submit">
-
-                            <div class="justify-center">
-                              <FormInput
-                                v-model="form.title"
-                                class="w-86 "
-                                required
-                                label="Title"
-                                placeholder="Module title"
-                                :autofocus="true"/>
-
-
-                              <FormDescriptionEditor
-                                v-model="form.description"
-                                class="w-86 "
-                                label="Description"
-                                placeholder="Module description"
-                              />
-
-                              <ButtonForm color="dark" :loading="form.processing">Create</ButtonForm>
-                            </div>
-                          </form>
-
-
-                        </template>
-                      </FormPopover>
+                      </CreateModuleForm>
                     </div>
 
                     <div class="grid gap-2 overflow-y-auto  h-[calc(80vh-84px)] ">
-
-                      <div>
-                        <draggable
+                      <Draggable
                           tag="ul"
                           itemKey="id"
                           group="modules"
@@ -205,7 +108,7 @@
                                     </button>
                                   </Link>
 
-                                  <draggable
+                                  <Draggable
                                     :list="module.lessons"
                                     tag="ul"
                                     group="lessons"
@@ -245,20 +148,17 @@
                                         </div>
                                       </li>
                                     </template>
-                                  </draggable>
+                                  </Draggable>
 
 
                                 </DisclosurePanel>
                               </Disclosure>
                             </div>
                           </template>
-                        </draggable>
-                      </div>
-
+                        </Draggable>
                     </div>
 
                     <div class="flex  justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
-
                       <div>
                         <Link :href="route('courses.index')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
@@ -267,13 +167,9 @@
                           Previous
                         </Link>
                       </div>
-
                       <div>
-
                       </div>
-
                     </div>
-
                   </TabPanel>
                   <!-- TAB 2 -->
                   <TabPanel>
@@ -286,84 +182,50 @@
             </div>
 
             <div class="h-[calc(80vh-84px)]" v-else >
-
-
-
-
-                    <div class="m-20">
-                      <h2 class="text-md font-bold tracking-tight text-gray-800 sm:text-3xl">Create Your Own Module for the Course.</h2>
-                      <p class="mt-2 text-md text-gray-500">Customize Your Learning Experience and Share Your Knowledge.</p>
-
-                      <form class="mt-6">
-
-                        <form-input
-                          label="Module Title"
-                          placeholder="Introduction, welcome and etc..."
-                        ></form-input>
-
-                        <form-description-editor
-                          label="Description"
-                        ></form-description-editor>
-
-                       <button-form color="dark">Create</button-form>
-                      </form>
-                    </div>
-
-
-
+              <div class="m-20">
+                <FirstCreate
+                  title="Create Your Own Module for the Course."
+                  subtitle="Customize Your Learning Experience and Share Your Knowledge."
+                />
+                <CreateModuleForm :course="course">
+                  <template #button>
+                    <button type="button" class="btn mt-3 bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                      Create Module
+                    </button>
+                  </template>
+                </CreateModuleForm>
+              </div>
             </div>
-
           </div>
-
-
-
         </div>
-
-
-
-
-
-
       </div>
     </div>
   </AdminLayout>
 </template>
 
 <script>
-import AdminLayout from "../Layouts/AdminLayout.vue";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel, Popover,
-  Tab, TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels
-} from "@headlessui/vue";
-
-import draggable from "vuedraggable";
-import FormPopover from "@/Components/Form/FormPopover.vue";
-import FormInput from "@/Components/Form/FormInput.vue";
-import ButtonForm from "@/Components/Button/ButtonForm.vue";
-import {useForm, Link} from "@inertiajs/inertia-vue3";
-import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
-import UploadImage from "@/Components/Uploads/UploadImage.vue";
 import {ref, watch} from "vue";
-import { Inertia } from '@inertiajs/inertia'
-
-
+import {Link} from "@inertiajs/inertia-vue3";
+import { Inertia } from '@inertiajs/inertia';
+import Draggable from "vuedraggable";
+import { Disclosure, DisclosureButton, DisclosurePanel,
+  Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
+import AdminLayout from "../Layouts/AdminLayout.vue";
+import EditCourseForm from "@/Pages/Admin/Course/Partials/EditCourseForm.vue";
+import CreateModuleForm from "@/Pages/Admin/Course/Partials/CreateModuleForm.vue";
+import FirstCreate from "@/Pages/Admin/Course/Partials/FirstCreate.vue";
 export default {
   components: {
-    Popover,
+    FirstCreate,
+    CreateModuleForm,
+    EditCourseForm,
     TabGroup,
     TabPanel,
     TabPanels,
     Tab,
-    TabList,
-    UploadImage,
-    FormDescriptionEditor, Link,
-    ButtonForm, FormInput, FormPopover, AdminLayout,
-    draggable, Disclosure, DisclosureButton, DisclosurePanel
+    TabList, Link,
+     AdminLayout,
+    Draggable, Disclosure, DisclosureButton, DisclosurePanel
   },
   props: {
     course:Object
@@ -374,12 +236,6 @@ export default {
     }
   },
   setup(props) {
-    const form = useForm({
-      id: props.course.id,
-      title: props.course.modules.title,
-      description: props.course.modules.description,
-    })
-
 
     const modulesData = ref(props.course.modules);
     watch(() => props.course.modules, (value) => {
@@ -431,38 +287,8 @@ export default {
     }
 
 
-    return {form, onModuleDrag, onLessonDrag,}
+    return {onModuleDrag, onLessonDrag,}
   },
-  methods: {
-    closeModal() {
-      this.$emit('close-modal'); // emite um evento para fechar o modal
-    },
-    submit() {
-      this.form.post(route("module.store", this.course.id), {
-        preserveScroll: true,
-        onSuccess: () => {
-          this.closeModal()
-          this.form.reset()
-        },
-        onError: (error) => console.error(error)
-      });
-    },
-    update() {
-      this.form.put(route("module.update", this.course), {
-        preserveScroll: true,
-        onError: (error) => console.log(error),
-        onSuccess: () => {
-          form.reset();
-          isOpen.value = false;
-        }
-      });
-    },
-    updateCourse() {
-      this.$inertia.put(`/courses/${this.course.id}`,
-        {title: this.course.title})
-
-    },
-  }
 }
 </script>
 

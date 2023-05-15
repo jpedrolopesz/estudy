@@ -38,7 +38,7 @@ onMounted(() => {
 
     storeAsFile: true,
     dropOnPage: true,
-    allowMultiple: false,
+    allowMultiple: true,
     maxFiles: 1,
     credits: null,
     labelIdle: props.labelIdle,
