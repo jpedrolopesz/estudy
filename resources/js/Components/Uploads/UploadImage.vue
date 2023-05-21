@@ -1,5 +1,10 @@
 <template>
-  <input :id="id" type="file">
+  <div>
+    <label v-if="label" for="image" class="block my-2 text-sm font-medium text-gray-900">
+      {{label}}
+    </label>
+      <input :id="id" type="file" >
+  </div>
 </template>
 
 
@@ -16,14 +21,9 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 const props = defineProps({
-  id: {
-    type: String,
-    default: 'filepod_' + Math.floor(Math.random() * 100) + 1
-  },
-  labelIdle: {
-    default: 'Clique ou arraste seus arquivos aqui...',
-    type: String
-  }
+  id: { type: String, default: 'filepod_' + Math.floor(Math.random() * 100) + 1 },
+  labelIdle: { type: String, default: "",},
+  label: { type: String, default: "" },
 })
 const emit = defineEmits(['update:modelValue'])
 registerPlugin(
@@ -42,7 +42,7 @@ onMounted(() => {
     maxFiles: 1,
     credits: null,
     labelIdle: props.labelIdle,
-    labelFileTypeNotAllowed: 'Tipo do arquivo não permitido'
+    labelFileTypeNotAllowed: 'File type not allowed'
   });
   pond.on('updatefiles', (files) => {
     emit(

@@ -2,7 +2,7 @@
   <div class="min-w-10 flex-1 ml-2">
 
     <div class="flex  justify-between">
-      <h2 class="capitalize font-medium text-2xl opacity-75">{{ course.title }}</h2>
+      <h2 class="capitalize font-medium text-2xl opacity-75">{{ form.title }}</h2>
 
       <FormSlideOver>
         <template #button>
@@ -46,12 +46,7 @@
               <div  class="mb-4">
 
 
-                <UploadImage
-                  v-bind:src="'/storage/thumbnails/' + course.thumbnail"
-                  v-model="form.thumbnail"
-                  accept="image/*"
 
-                />
 
               </div>
 
@@ -62,47 +57,36 @@
         </template>
       </FormSlideOver>
     </div>
-    <p class="normal-case font-medium text-sm text-gray-600 mt-2 opacity-75">{{ course.description }}</p>
+    <p class="normal-case font-medium text-sm text-gray-600 mt-2 opacity-75">{{ form.description }}</p>
 
   </div>
 </template>
-<script>
-import FormSlideOver from "@/Components/Form/FormSlideOver.vue";
+
+<script setup>
 import FormInput from "@/Components/Form/FormInput.vue";
-import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
-import UploadImage from "@/Components/Uploads/UploadImage.vue";
 import ButtonForm from "@/Components/Button/ButtonForm.vue";
-import {Inertia} from "@inertiajs/inertia";
+import FormSlideOver from "@/Components/Form/FormSlideOver.vue";
+import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 
+const props = defineProps({
+  course:Object,
+});
+const form = useForm({
+  id: props.course.id,
+  title: props.course.title,
+  description: props.course.description,
+  thumbnail: props.course.thumbnail,
+});
 
-export default {
-
-  components: {
-    FormSlideOver, FormInput, FormDescriptionEditor, UploadImage, ButtonForm
-  },
-  props: {
-    course: Object
-  },
-  setup(props) {
-    const form = useForm({
-      id: props.course.id,
-      title: props.course.title,
-      description: props.course.description,
-      thumbnail: props.course.thumbnail,
-    })
-    return {form}
-  },
-  methods: {
-    courseUpdate(props) {
-      Inertia.put(route("course.update", this.course.id), {
-        title: props.course.title,
-        description: props.course.description,
-      })
-    },
-  }
-
-
-
-  }
+const courseUpdate = () => {
+  form.put(route('course.update', {
+    course: props.course.id
+    }),{
+      onError: (error) => {
+        console.error(error);
+      },
+    }
+  )
+ }
 </script>

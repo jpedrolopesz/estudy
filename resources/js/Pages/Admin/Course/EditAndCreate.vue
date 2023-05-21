@@ -102,7 +102,7 @@
                                   </div>
                                 </div>
                                 <DisclosurePanel class="py-2 m-4 text-sm text-gray-500">
-                                  <Link :href="route('lesson.create',[course.id, module.id])">
+                                  <Link :href="route('course.module.lesson.create', [this.course, module.id])">
                                     <button type="button" class="bg-gray-50 font-medium text-center w-full rounded-sm mb-2 p-1.5 text-gray-600 border border-slate-300 hover:bg-gray-200 hover:text-gray-500">
                                       Add lesson
                                     </button>
@@ -136,7 +136,7 @@
                                               </div>
                                               <div class="flex items-center justify-end space-x-3">
 
-                                                <Link :href="route('lesson.edit',[course.id, module.id, lesson.id])" class="text-slate-400 hover:text-indigo-500">
+                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-slate-400 hover:text-indigo-500">
                                                   <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
                                                     <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
                                                   </svg>
@@ -160,7 +160,7 @@
 
                     <div class="flex  justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
                       <div>
-                        <Link :href="route('courses.index')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                        <Link :href="route('course.index')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
                           </svg>
@@ -229,6 +229,7 @@ export default {
   },
   props: {
     course:Object
+
   },
   data() {
     return {

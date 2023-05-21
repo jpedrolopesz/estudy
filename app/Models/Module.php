@@ -12,7 +12,6 @@ class Module extends Model
 
     protected $fillable = [
         'course_id',
-        'module_id',
         'title',
         'description',
         'sort_order',

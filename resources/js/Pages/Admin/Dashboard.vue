@@ -7,7 +7,8 @@
           <div class="min-w-0 flex-1">
 
             <div class="mb-2">
-              <h1 class="text-2xl md:text-2xl text-slate-800 font-bold">Dashboard Admin</h1>
+                <header >Dashboard Admin</header>
+
             </div>
             <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 

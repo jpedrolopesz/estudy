@@ -3,20 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Actions\Lesson\UpdateDraggableLessonAction;
-use App\Actions\Module\CreateModuleAction;
 use App\Actions\Module\UpdateDraggableModuleAction;
+use App\Http\Requests\Module\CreateUpdateModuleRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Course\CreateModuleRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Course;
 use App\Models\Module;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class ModulesController extends Controller
 {
-
-    public function store(CreateModuleRequest $request)
+    public function store(CreateUpdateModuleRequest $request)
     {
         $module = Module::create([
             'course_id' => $request->id,
@@ -27,18 +25,17 @@ class ModulesController extends Controller
         return Redirect::back();
     }
 
-    public function update(CreateModuleRequest $request)
+    public function update(CreateUpdateModuleRequest $request, Course $course, Module $module): RedirectResponse
     {
 
-        dd($request->all());
-        $module = Module::where('id', $request->module_id)->update([
-            'course_id' => $request->id,
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
 
-        return $module;
+        $module->update($request->all());
+
+
+        return redirect()->back();
+
     }
+
 
     public function destroy(string $id)
     {

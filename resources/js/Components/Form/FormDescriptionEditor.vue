@@ -8,6 +8,7 @@
                 :value="modelValue"
                 :maxlength="max"
                 :required="required"
+                :placeholder="placeholder"
                 :autofocus="autofocus"
                 :readonly="readonly"
                 @input="$emit('update:modelValue', $event.target.value)">

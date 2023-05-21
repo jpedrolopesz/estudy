@@ -6,6 +6,7 @@ use App\Actions\Course\GetAllCoursesAction;
 use App\Actions\Course\GetCourseShowAction;
 use App\Actions\User\GetAllUsersAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Course\CreateUpdateCourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\UserResource;
 use App\Models\Course;
@@ -14,6 +15,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CoursesController extends Controller
@@ -82,35 +84,18 @@ class CoursesController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
 
-        dd($request->all());
-        $validatedData = $request->validate([
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'title' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:500',
-        ]);
 
         $course = Course::find($id);
 
         if (!$course) {
-            // Tratar o erro de curso não encontrado aqui
+            return redirect()->back()->with('error', 'Curso não encontrado.');
         }
 
-        $course->title = $validatedData['title'];
-        $course->description = $validatedData['description'];
+        $course->fill($request->all());
+        $course->save();
 
-        if ($request->hasFile('thumbnail')) {
-            $pathToFile = $request->file('thumbnail')->store('public/thumbnails');
-            $course->thumbnail = $pathToFile;
-            $course->addMedia($pathToFile);
-        }
 
-        if ($course->save()) {
-            // Tratar sucesso da atualização aqui
-        } else {
-            // Tratar erro de atualização aqui
-        }
-
-        return redirect()->back();
+        return back();
     }
 
 }

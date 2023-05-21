@@ -9,9 +9,11 @@
            :required="required"
            :autofocus="autofocus"
            :readonly="readonly"
+           :placeholder="placeholder"
            v-bind="$attrs"
            @input="$emit('update:modelValue', $event.target.value)"
-           :placeholder="placeholder" />
+
+  />
 
 </template>
 
@@ -25,7 +27,7 @@ defineProps({
     default: undefined
   },
   modelValue: { type: [String, Number], default: "" },
-  error: { type: String, default: null },
+  error: { type: String, default: "null" },
   required: { type: Boolean, default: false },
   autofocus: { type: Boolean, default: false },
   placeholder: { type: String, default: "" },

@@ -2,11 +2,9 @@
 
   <Head  title="Profile" />
 
-  <AuthenticatedLayout>
-
-
+  <AdminLayout>
     <AccountLayout>
-      <div class="mt-5 md:col-span-2 md:mt-0">
+      <div>
         <header>
           <h2 class="text-lg ml-5 mt-2.5 font-medium text-gray-900">Profile Information</h2>
 
@@ -107,26 +105,26 @@
 
       </div>
     </AccountLayout>
-  </AuthenticatedLayout>
+  </AdminLayout>
 
 </template>
 
 <script>
-import AuthenticatedLayout from '../../Layouts/AdminLayout.vue';
 import AccountLayout from "../../Layouts/Account/AccountLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import {Head,Link, useForm} from "@inertiajs/inertia-vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
 
 
 export default {
   components: {
+    AdminLayout,
     PrimaryButton,
     InputError,
     AccountLayout,
-    AuthenticatedLayout,
     BreadcrumbLink,
     FormSearch,
     Link, Head

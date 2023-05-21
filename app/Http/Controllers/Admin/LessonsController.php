@@ -2,36 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Module\CreateModuleAction;
-use App\Actions\Module\GetAllModulesShowAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Course\CreateModuleRequest;
-use App\Http\Requests\StoreVideoRequest;
-use App\Jobs\ConvertVideoForDownloading;
-use App\Jobs\ConvertVideoForStreaming;
-use App\Models\Course;
-use App\Models\Lesson;
-use App\Models\Module;
+use App\Http\Requests\Lesson\CreateUpdateLessonRequest;
+use App\Models\{ Course, Module, Lesson};
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class LessonsController extends Controller
 {
-    public function create($course_id,$module_id)
+    public function create(int $id, Module $module): Response
     {
-        $course = Course::find($course_id);
-        $module = Module::find($module_id);
-
+        $course = Course::with(['modules' => function ($query) {
+            $query->orderBy('sort_order')->with(['lessons' => function ($query) {
+                $query->orderBy('sort_order');
+            }]);
+        }])->findOrFail($id);
 
         return Inertia::render('Admin/Course/Lessons/Create', [
-            'module' => $module,
             'course' => $course,
+            'module' => $module,
         ]);
 
 
     }
 
-    public function store(Request $request)
+    public function store(CreateUpdateLessonRequest $request)
     {
         $filename = uniqid() . '.' . $request->file('video_url')->getClientOriginalExtension();
         $pathToFile = $request->file('video_url')->store('videos', $filename);
@@ -53,22 +49,32 @@ class LessonsController extends Controller
         return redirect()->back();
     }
 
-    public function edit($module_id, $course_id, $lesson_id)
+    public function edit(int $id, Module $module, Lesson $lesson): Response
     {
+       $course = Course::with(['modules' => function ($query) {
+            $query->orderBy('sort_order')->with(['lessons' => function ($query) {
+                $query->orderBy('sort_order');
+            }]);
+        }])->findOrFail($id);
+
+
         return Inertia::render('Admin/Course/Lessons/Edit', [
-            'course' => Course::find($course_id),
-            'module' => Module::find($module_id),
-            'lesson' => Lesson::find($lesson_id)
+            'course' => $course,
+            'module' => $module,
+            'lesson' => $lesson
         ]);
     }
 
 
 
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
+    public function update(CreateUpdateLessonRequest $request, Course $course, Module $module, Lesson $lesson)
+    {
+        $lesson->update($request->all());
+
+        return back();
+
+    }
 
     public function destroy(string $id)
     {

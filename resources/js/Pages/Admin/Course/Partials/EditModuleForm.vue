@@ -1,77 +1,90 @@
 <template>
+  <div class="min-w-10 flex-1 ml-2">
 
-  <FormSlideOver>
-
-    <template #button>
-      <button type="button" class="px-1.5 py-1 bg-gray-50 text-lg font-bold rounded-md text-gray-400 border border-slate-300 hover:bg-gray-200 hover:text-gray-500">
-        <svg  class="w-4 h-4 fill-current" viewBox="0 0 16 16">
-          <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-        </svg>
-      </button>
-    </template>
-
-    <template #title>
-      <h2> Edit Module</h2>
-    </template>
-
-    <template #form>
-
-      <form  @submit.prevent="update">
-
-        <div class="justify-center">
-          <FormInput
-            v-model="form.title"
-            class="w-86 "
-            required
-            label="Title"
-            placeholder="Module title"
-            :autofocus="true"/>
+    <div class="flex  justify-between">
+      <h2 class="capitalize font-medium text-2xl opacity-75">{{ props.module.title }}</h2>
 
 
-          <FormDescriptionEditor
-            v-model="form.description"
-            class="w-86 "
-            label="Description"
-            placeholder="Module description"
-          />
+      <FormSlideOver>
+        <template #button>
+          <button type="button" class="px-1 py-0.5 text-lg font-bold rounded-md text-gray-900 hover:bg-gray-200 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
 
-          <ButtonForm color="dark" :loading="form.processing">Create</ButtonForm>
-        </div>
-      </form>
+            <svg class="w-7 h-7 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg>
+          </button>
+        </template>
 
-    </template>
+        <template #title>
+          <h2>Edit Module</h2>
+        </template>
 
-  </FormSlideOver>
+        <template #form>
+
+          <form @submit.prevent="moduleUpdate">
 
 
+            <div class="justify-center">
+              <div class="mb-2">
+                <FormInput
+                  v-model="form.title"
+                  class="w-86 "
+                  required
+                  label="Title"
+                  placeholder="Module title"
+                  :autofocus="true"
+                />
+                <InputError class="mt-2" :message="form.errors.title" />
+              </div>
+
+
+              <div class="mb-2">
+                <FormDescriptionEditor
+                  v-model="form.description"
+                  class="w-86 "
+                  label="Description"
+                  placeholder="Module description"
+                />
+                <InputError class="mt-2" :message="form.errors.description" />
+              </div>
+
+
+
+              <ButtonForm color="dark" :loading="form.processing">Update</ButtonForm>
+            </div>
+          </form>
+
+        </template>
+      </FormSlideOver>
+    </div>
+    <p class="normal-case font-medium text-sm text-gray-600 mt-2 opacity-75">{{ form.description }}</p>
+  </div>
 </template>
 
 
-
-<script>
-
-
-import {defineComponent} from "vue";
+<script setup>
 import FormSlideOver from "@/Components/Form/FormSlideOver.vue";
 import FormInput from "@/Components/Form/FormInput.vue";
 import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 import ButtonForm from "@/Components/Button/ButtonForm.vue";
+import InputError from "@/Components/InputError.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 
-export default defineComponent({
-  components: {
-    ButtonForm, FormDescriptionEditor, FormInput, FormSlideOver
-  },
-  props: {
-    course:Object
-  },
-  setup(props) {
+
+const props = defineProps({
+    course: Object,
+    module: Object,
+  })
+
     const form = useForm({
-      id: props.course.id,
-      title: props.course.modules.title,
-      description: props.course.modules.description,
-    })
-    return {form}
-  }
-})
+      title: props.module.title,
+      description: props.module.description,
+    });
+
+    const moduleUpdate = () => {
+      form.put(route('course.module.update', {
+        course: props.course.id,
+        module: props.module.id,
+      }), );
+}
 </script>

@@ -43,7 +43,7 @@
 
                   </header>
                   <div class="m-4">
-                    <slot  name="form"  />
+                    <slot name="form"  />
                   </div>
 
                 </section>

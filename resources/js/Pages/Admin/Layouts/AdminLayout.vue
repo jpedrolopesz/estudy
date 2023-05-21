@@ -18,17 +18,10 @@ const showingNavigationDropdown = ref(false);
 
       <Toast/>
 
-      <header v-if="$slots.header">
-        <div class="ml-14 px-4 mt-5 sm:px-6 lg:px-8">
-          <slot name="header" />
-        </div>
-      </header>
+      <main class="ml-16 mr-4 min-h-screen bg-dots-darker">
+        <Header class="mb-2"/>
 
-      <main class=" min-h-screen bg-dots-darker">
-
-        <Header/>
-
-        <div class=" py-1 w-full max-w-9xl mx-auto">
+        <div class="py-1 w-full max-w-9xl mx-auto">
           <slot />
         </div>
       </main>

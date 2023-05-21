@@ -1,8 +1,5 @@
 <template>
-  <nav>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-2">
-      <div class="flex items-center justify-between mt-3.5">
+  <div class="flex items-center justify-between mt-3.5">
         <div>
 
           <div class="text-center ml-5">
@@ -58,8 +55,6 @@
 
         </div>
       </div>
-    </div>
-  </nav>
 </template>
 
 <script setup>
