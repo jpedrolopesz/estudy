@@ -15,7 +15,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'thumbnail' => fake()->imageUrl($width=400, $height=400),
+            'thumbnail' => 'RlMZkSU90YmNYA11xK5FmGgzTXOXinU3bWP25HBD.png',
             'price' => $this->faker->randomFloat(2, 10, 100),
             'user_id' => 1
         ];

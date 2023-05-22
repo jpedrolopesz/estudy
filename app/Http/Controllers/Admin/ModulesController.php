@@ -22,7 +22,7 @@ class ModulesController extends Controller
             'description' => $request->description,
         ]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Your request has been successfully completed.');
     }
 
     public function update(CreateUpdateModuleRequest $request, Course $course, Module $module): RedirectResponse
@@ -32,14 +32,22 @@ class ModulesController extends Controller
         $module->update($request->all());
 
 
-        return redirect()->back();
+        return Redirect::back()->with('success', 'Your request has been successfully completed.');
 
     }
 
 
-    public function destroy(string $id)
+    public function destroy(string $course, string $module)
     {
-        //
+        $course = Course::find($course);
+        $module = optional($course)->modules()->find($module);
+
+        if ($module) {
+            $module->delete();
+            return Redirect::back()->with('success', 'Your request has been successfully completed.');
+        } else {
+            return Redirect::back()->with('error', 'Error: Please check your request to resolve it efficiently.');
+        }
     }
 
 
@@ -56,6 +64,6 @@ class ModulesController extends Controller
             UpdateDraggableModuleAction::run($request->payload);
         }
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Your request has been successfully completed.');
     }
 }

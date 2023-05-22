@@ -1,26 +1,28 @@
 <template>
 
-<VideoPlayer
-  class="w-full h-[calc(60vh-64px)] video-player vjs-big-play-centered"
-  :src="'/storage/videos/' + form.video_url"
-  crossorigin="anonymous"
-  playsinline
-  controls
-  :volume="0.6"
-  :height="320"
-  :playback-rates="[0.7, 1.0, 1.5, 2.0]"
-  @mounted="handleMounted"
-  @ready="handleEvent($event)"
-  @play="handleEvent($event)"
-  @pause="handleEvent($event)"
-  @ended="handleEvent($event)"
-  @loadeddata="handleEvent($event)"
-  @waiting="handleEvent($event)"
-  @playing="handleEvent($event)"
-  @canplay="handleEvent($event)"
-  @canplaythrough="handleEvent($event)"
-  @timeupdate="handleEvent(player?.currentTime())"
-/>
+  <div class="max-w-7xl max-h-screen justify-items-start bg-gray-50 border border-gray-300 rounded-md">
+    <VideoPlayer
+    class="w-full h-[calc(50vh-54px)] video-player vjs-big-play-centered"
+    :src="'/storage/videos/' + form.video_url"
+    crossorigin="anonymous"
+    playsinline
+    controls
+    :volume="0.6"
+    :height="320"
+    :playback-rates="[0.7, 1.0, 1.5, 2.0]"
+    @mounted="handleMounted"
+    @ready="handleEvent($event)"
+    @play="handleEvent($event)"
+    @pause="handleEvent($event)"
+    @ended="handleEvent($event)"
+    @loadeddata="handleEvent($event)"
+    @waiting="handleEvent($event)"
+    @playing="handleEvent($event)"
+    @canplay="handleEvent($event)"
+    @canplaythrough="handleEvent($event)"
+    @timeupdate="handleEvent(player?.currentTime())"
+  />
+  </div>
 
 
 
@@ -36,6 +38,8 @@ import {useForm} from "@inertiajs/inertia-vue3";
 
 const props = defineProps({
   course:Object,
+  label: { type: String, default: ""}
+
 
 })
 const form = useForm({

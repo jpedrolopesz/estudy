@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label v-if="title" class="text-md font-bold tracking-tight text-gray-800 sm:text-3xl">
+    <label v-if="title" class="text-2xl font-bold tracking-tight text-gray-800 sm:text-3xl">
       {{title}}
     </label>
     <p v-if="subtitle" class="mt-2 text-md text-gray-500">

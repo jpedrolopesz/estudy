@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Course\GetAllCoursesAction;
 use App\Actions\Course\GetCourseShowAction;
 use App\Actions\User\GetAllUsersAction;
+use App\Filters\CourseFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CreateUpdateCourseRequest;
 use App\Http\Resources\CourseResource;
@@ -24,10 +25,10 @@ class CoursesController extends Controller
     {
         $course = GetAllCoursesAction::run(['perPage' => 10000]);
 
-
         return Inertia::render('Admin/Course/Index', [
-            'users' => UserResource::collection(GetAllUsersAction::run(['perPage' => 10000])),
             'courses' => CourseResource::collection($course),
+            'filters' => Course::query(),
+
         ]);
     }
 
@@ -46,11 +47,12 @@ class CoursesController extends Controller
         if ($course) {
             $course->addMedia($pathToFile);
         } else {
-            // Tratar o erro de criação da lição aqui
+            return redirect()->back()->with('error', 'Error: Please check your request to resolve it efficiently.');
         }
 
 
-        return redirect()->back();
+        return Redirect::route('course.edit', $course)
+            ->with('success', 'Your request has been successfully completed.');
     }
 
     public function show($id): \Inertia\Response
@@ -88,14 +90,27 @@ class CoursesController extends Controller
         $course = Course::find($id);
 
         if (!$course) {
-            return redirect()->back()->with('error', 'Curso não encontrado.');
+            return redirect()->back()->with('error', 'Error: Please check your request to resolve it efficiently.');
         }
 
         $course->fill($request->all());
         $course->save();
 
 
-        return back();
+        return redirect()->back()->with('success', 'Your request has been successfully completed.');
+    }
+
+    public function destroy(string $id)
+    {
+        $course = Course::find($id);
+        if ($course && $course->exists()) {
+            $course->delete();
+            return redirect()->back()->with('success', 'Your request has been successfully completed.');
+
+        } else {
+            return redirect()->back()->with('error', 'Error: Please check your request to resolve it efficiently.');
+
+        }
     }
 
 }

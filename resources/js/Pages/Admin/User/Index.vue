@@ -8,17 +8,33 @@
 
     <div class="bg-white ml-2 shadow-md rounded-md border border-slate-200 relative">
 
-      <header class="px-4 py-4 flex items-center justify-between">
-        <h2 class="text-xs font-semibold uppercase text-slate-500">All Users <span class="text-slate-400 font-medium"> {{meta.total}} </span></h2>
+      <header class="px-4 py-2 flex items-center justify-between">
+        <h2 class="text-xs font-semibold uppercase text-gray-500 hidden sm:block">All Courses <span class="text-gray-400 font-medium"> {{meta.total}} </span></h2>
 
-        <div>
-          <button type="button" class=" px-1 py-0.5 text-lg font-bold rounded-md text-gray-900 hover:bg-gray-200 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-          </button>
+        <div class="flex items-center">
+
+          <FormSearch  class="w-full ">
+            <label class="block text-gray-700">Trashed:</label>
+            <select  class="border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2">
+              <option :value="null" />
+              <option value="with">With Trashed</option>
+              <option value="only">Only Trashed</option>
+            </select>
+
+          </FormSearch>
+
+
+
+              <button type="button" class="flex ml-4  px-5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+                <PlusIcon class="w-5 h-5 mr-1 "/>
+                User
+              </button>
+
+
+
         </div>
       </header>
+
 
       <div>
 
@@ -86,7 +102,7 @@
               <td class="px-2 first:pl-5 last:pr-5  whitespace-nowrap w-px">
                 <div class="space-x-1 inline-flex">
 
-                  <Link href=""  class="text-slate-400 hover:text-slate-500 rounded-full">
+                  <Link :href="route('user.edit', user.id)"  class="text-slate-400 hover:text-slate-500 rounded-full">
                     <span class="sr-only">Edit</span>
                     <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
                       <path d="M19.7 8.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM12.6 22H10v-2.6l6-6 2.6 2.6-6 6zm7.4-7.4L17.4 12l1.6-1.6 2.6 2.6-1.6 1.6z"></path>
@@ -141,12 +157,13 @@
 
 <script setup>
 import { useMounted } from "@/Composables/useMounted";
-import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
-import FormSearch from "@/Components/FormSearch.vue";
-import ModalDelete from "@/Components/ModalDelete.vue";
 import { Link, Head } from '@inertiajs/inertia-vue3';
+import { PlusIcon } from '@heroicons/vue/24/outline';
+import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
+import ModalDelete from "@/Components/ModalDelete.vue";
 import Pagination from "@/Components/Pagination.vue";
-import SearchGlobal from "@/Components/Search/SearchGlobal.vue";
+import FormSearch from "@/Components/FormSearch.vue";
+
 
 const props = defineProps(
   {

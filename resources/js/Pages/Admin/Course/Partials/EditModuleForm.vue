@@ -1,10 +1,6 @@
 <template>
-  <div class="min-w-10 flex-1 ml-2">
-
-    <div class="flex  justify-between">
-      <h2 class="capitalize font-medium text-2xl opacity-75">{{ props.module.title }}</h2>
-
-
+  <div>
+    <div class="flex justify-between items-center">
       <FormSlideOver>
         <template #button>
           <button type="button" class="px-1 py-0.5 text-lg font-bold rounded-md text-gray-900 hover:bg-gray-200 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -57,7 +53,6 @@
         </template>
       </FormSlideOver>
     </div>
-    <p class="normal-case font-medium text-sm text-gray-600 mt-2 opacity-75">{{ form.description }}</p>
   </div>
 </template>
 

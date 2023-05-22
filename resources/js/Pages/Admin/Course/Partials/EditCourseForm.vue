@@ -1,8 +1,9 @@
 <template>
-  <div class="min-w-10 flex-1 ml-2">
+  <div>
+    <div class="flex justify-between items-start">
+      <h2 class="font-medium break-words text-lg lg:text-2xl opacity-75">{{ form.title }}</h2>
 
-    <div class="flex  justify-between">
-      <h2 class="capitalize font-medium text-2xl opacity-75">{{ form.title }}</h2>
+      <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
       <FormSlideOver>
         <template #button>
@@ -56,8 +57,10 @@
 
         </template>
       </FormSlideOver>
+
+        </div>
     </div>
-    <p class="normal-case font-medium text-sm text-gray-600 mt-2 opacity-75">{{ form.description }}</p>
+    <p class="normal-case break-words mt-1 text-sm text-gray-600">{{ form.description }}</p>
 
   </div>
 </template>

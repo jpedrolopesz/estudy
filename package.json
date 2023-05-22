@@ -22,6 +22,7 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.13",
         "@heroicons/vue": "^2.0.12",
+        "@icon-park/vue-next": "^1.4.2",
         "@popperjs/core": "^2.11.6",
         "@videojs-player/vue": "^1.0.0",
         "filepond": "^4.30.4",
@@ -30,9 +31,8 @@
         "filepond-plugin-image-exif-orientation": "^1.0.11",
         "filepond-plugin-image-preview": "^4.0.3",
         "moment": "^2.29.4",
-        "video.js": "^8.3.0",
         "vue-filepond": "^7.0.3",
-        "vue-image-crop-upload": "^3.0.3",
+        "vue-material-design-icons": "^5.2.0",
         "vuedraggable": "^4.1.0"
     }
 }

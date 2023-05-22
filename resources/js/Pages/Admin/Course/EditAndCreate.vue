@@ -1,12 +1,15 @@
 <template>
+  <Head title="Edit and Create" />
+
   <AdminLayout>
     <div>
-      <div class="md:grid md:grid-cols-3 md:gap-6 ml-6">
+      <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
           <div class="w-full ">
-            <div class="sm:flex sm:items-center mx-4 sm:justify-between">
-
-              <EditCourseForm :course="course"/>
+            <div class="sm:flex sm:items-center mx-8 sm:justify-between">
+              <div class="min-w-0 flex-1">
+                <EditCourseForm :course="course"/>
+              </div>
 
             </div>
           </div>
@@ -14,46 +17,59 @@
         <div class="mt-1 md:col-span-2 md:mt-0">
           <div class="shadow-lg bg-white overflow-hidden rounded-md">
             <div v-if="course.modules[0]" class="mt-2">
+
               <TabGroup>
-                <TabList class="p-2 mx-2 text-sm font-medium flex ">
-
-                  <Tab v-slot="{ selected }" class="mx-2 mr-4">
-                    <button :class="['flex text-slate-800',
-                       selected ? '' : 'text-slate-200 hover:text-slate-600']">
-                      <svg class="w-4 h-4 shrink-0 fill-current text-slate-400 mr-2" viewBox=" 0 0 16 16">
-                        <path d="M15 4c.6 0 1 .4 1 1v10c0 .6-.4 1-1 1H3c-1.7 0-3-1.3-3-3V3c0-1.7 1.3-3 3-3h7c.6 0 1 .4 1 1v3h4zM2 3v1h7V2H3c-.6 0-1 .4-1 1zm12 11V6H2v7c0 .6.4 1 1 1h11zm-3-5h2v2h-2V9z" />
-                      </svg>
+                <TabList class="py-1 border-b rounded-t-md items-center">
+                  <div class="text-sm font-medium flex flex-nowrap mt-1 sm:-mx-6 lg:-mx-8 overflow-x-auto">
+                  <Tab  v-slot="{ selected }" class="pb-3 sm:ml-4 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
+                    <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
+                      <FolderIcon class="w-5 h-4.5 mr-1"/>
                       <span>Modules</span>
-                    </button>
+                    </div>
                   </Tab>
 
-                  <Tab v-slot="{ selected }" class="mx-2 mr-4">
-                    <button :class="['flex text-slate-800',
-                       selected ? '' : 'text-slate-200 hover:text-slate-600']">
-                      <svg class="w-4 h-4 shrink-0 fill-current text-slate-400 mr-2" viewBox=" 0 0 16 16">
-                        <path d="M15 4c.6 0 1 .4 1 1v10c0 .6-.4 1-1 1H3c-1.7 0-3-1.3-3-3V3c0-1.7 1.3-3 3-3h7c.6 0 1 .4 1 1v3h4zM2 3v1h7V2H3c-.6 0-1 .4-1 1zm12 11V6H2v7c0 .6.4 1 1 1h11zm-3-5h2v2h-2V9z" />
-                      </svg>
+                  <Tab v-slot="{ selected }" class="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
+                    <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
+                      <BanknotesIcon class="w-5 h-5 mr-1"/>
                       <span>Billing</span>
-                    </button>
-
+                    </div>
                   </Tab>
-
+                  </div>
 
                 </TabList>
                 <TabPanels>
                   <!-- TAB 1 -->
                   <TabPanel>
-                    <div class="flex items-center mx-6 mb-4 justify-between">
-                      <h2 class=" font-semibold text-slate-800">Add Module</h2>
-                      <CreateModuleForm :course="course">
-                        <template #button>
-                          <button type="button" class="px-1.5 py-1 bg-gray-50 text-lg font-bold rounded-md text-gray-400 border border-slate-300 hover:bg-gray-200 hover:text-gray-500">
-                            <svg  class="w-4 h-4 fill-current" viewBox="0 0 16 16">
-                              <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-                            </svg>
-                          </button>
-                        </template>
-                      </CreateModuleForm>
+
+                    <div class="flex mx-5 my-2  justify-between">
+
+
+                        <div class="items-center mt-2 text-center">
+
+                          <span class="text-lg font-medium text-gray-800 ">Content</span>
+
+                        </div>
+
+
+                      <div class="flex">
+
+                        <button type="button" class="items-center mr-2 px-3 py-1.5 border border-gray-300  rounded-md text-gray-500 bg-transparent hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+                          </svg>
+
+                        </button>
+                        <CreateModuleForm :course="course">
+                          <template #button>
+                            <button type="button" class="flex px-1.5 py-1.5 bg-transparent text-sm font-bold rounded-md text-gray-500 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+                              <PlusIcon class="w-5 h-5 "/>
+                              Module
+                            </button>
+                          </template>
+                        </CreateModuleForm>
+                      </div>
+
                     </div>
 
                     <div class="grid gap-2 overflow-y-auto  h-[calc(80vh-84px)] ">
@@ -65,45 +81,46 @@
                           @change="onModuleDrag"
                         >
                           <template #item="{element: module}">
-                            <div class="group cursor-grab hover:border-slate-500 rounded-md mx-4 border mb-4 border-slate-300 p-0.5">
+                            <div class="group cursor-grab hover:border-gray-500 rounded-md mx-4 border mb-4 border-gray-300 p-0.5">
 
                               <Disclosure v-slot="{ open, close }">
                                 <div class="flex justify-between items-start">
                                   <div class="group flex items-center w-full rounded-lg py-2 text-left text-base font-bold text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                                     <button class="cursor-grab ">
-                                      <svg  width="40" height="30" viewBox="0 96 960 960">
-                                        <path d="M357.27 878.717q-24.616 0-42.301-17.934-17.686-17.935-17.686-42.672 0-24.071 17.91-41.77t42.446-17.699q24.244 0 41.981 17.948 17.738 17.947 17.738 42.018 0 24.738-17.913 42.423-17.913 17.686-42.175 17.686Zm245.032 0q-24.365 0-42.051-17.934-17.686-17.935-17.686-42.672 0-24.071 17.925-41.77 17.924-17.699 42.279-17.699 24.063 0 41.967 17.948 17.904 17.947 17.904 42.018 0 24.738-17.987 42.423-17.986 17.686-42.351 17.686ZM357.27 635.871q-24.616 0-42.301-17.456-17.686-17.455-17.686-42.748 0-24.355 17.91-42.113t42.446-17.758q24.244 0 41.981 17.84 17.738 17.841 17.738 42.293 0 25.391-17.913 42.666-17.913 17.276-42.175 17.276Zm245.032 0q-24.365 0-42.051-17.456-17.686-17.455-17.686-42.748 0-24.355 17.925-42.113 17.924-17.758 42.279-17.758 24.063 0 41.967 17.84 17.904 17.841 17.904 42.293 0 25.391-17.987 42.666-17.986 17.276-42.351 17.276ZM357.27 393.358q-24.616 0-42.301-17.935-17.686-17.934-17.686-42.671 0-24.071 17.91-41.77t42.446-17.699q24.244 0 41.981 17.948 17.738 17.947 17.738 42.018 0 24.738-17.913 42.423-17.913 17.686-42.175 17.686Zm245.032 0q-24.365 0-42.051-17.935-17.686-17.934-17.686-42.671 0-24.071 17.925-41.77 17.924-17.699 42.279-17.699 24.063 0 41.967 17.948 17.904 17.947 17.904 42.018 0 24.738-17.987 42.423-17.986 17.686-42.351 17.686Z"/>
-                                      </svg>
+
+                                      <ChevronUpDownIcon class="w-6 h-6 hover:fill-gray-800 "/>
+
                                     </button>
                                     <DisclosureButton>
-                                      <svg height="14" viewBox="0 96 960 960" width="14"
-                                           class="ml-2"
-                                           :class="open ? 'rotate-90 transform' : ''">
-                                        <path d="M321 994.088 231.912 905l329-329-329-329L321 157.912 739.088 576 321 994.088Z"/></svg>
-
+                                      <ChevronRightIcon class="ml-2 w-4 h-4 hover:fill-gray-900" :class="open ? 'rotate-90 transform' : ''" />
                                     </DisclosureButton>
 
-                                    <span class="font-medium text-gray-800 ml-2">{{module.sort_order}}</span>
+                                    <div class="grow flex justify-between items-center mx-4">
+                                      <span class="font-medium text-gray-800 w-full ml-2 bg-transparent">{{module.title}}</span>
+                                      <div class="flex" v-if="open">
+                                        <ModalDelete  >
+                                          <div class="flex ml-2 justify-between ">
+                                            <Link :href="route('course.module.destroy', [course.id, module.id])" as="button" type="button" method="DELETE"
+                                                  class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
+                                              Yes, delete
+                                            </Link>
+                                          </div>
+                                        </ModalDelete>
+                                        <EditModuleForm :course="course" :module="module" >
+                                          <template #button>
+                                            <button  type="button" class="text-gray-400 hover:text-gray-500 px-2 py-0.5  rounded-md hover:bg-gray-200">
+                                              <EllipsisHorizontalIcon />
+                                            </button>
+                                          </template>
+                                        </EditModuleForm>
+                                      </div>
 
-                                    <div class="grow mx-4 ">
-
-                                      <input v-model="module.title"
-                                             @click="showInput = true"
-                                             class="font-medium text-gray-800 w-full ml-2 bg-transparent"
-                                      />
-                                    </div>
-                                    <div class="justify-end space-x-3 " v-if="showInput">
-                                      <button @submit.prevent="submitUpdate" class="text-slate-400 hover:text-indigo-500">
-                                        <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
-                                          <path d="M19.7 8.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM12.6 22H10v-2.6l6-6 2.6 2.6-6 6zm7.4-7.4L17.4 12l1.6-1.6 2.6 2.6-1.6 1.6z"></path>
-                                        </svg>
-                                      </button>
                                     </div>
                                   </div>
                                 </div>
                                 <DisclosurePanel class="py-2 m-4 text-sm text-gray-500">
                                   <Link :href="route('course.module.lesson.create', [this.course, module.id])">
-                                    <button type="button" class="bg-gray-50 font-medium text-center w-full rounded-sm mb-2 p-1.5 text-gray-600 border border-slate-300 hover:bg-gray-200 hover:text-gray-500">
+                                    <button type="button" class="w-full mb-2 px-1.5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
                                       Add lesson
                                     </button>
                                   </Link>
@@ -116,30 +133,33 @@
                                     @change="onLessonDrag"
                                   >
                                     <template #item="{ element: lesson }">
-                                      <li class="bg-white rounded-sm border mb-2 border-slate-200 p-1.5 hover:bg-slate-50">
+                                      <li class="bg-white hover:border-gray-500 rounded-md border mb-4 border-gray-300 p-0.5">
                                         <div class="w-full md:flex items-center justify space-y-1.5 md:space-y-0">
                                           <div class="flex-1">
 
 
-                                            <div class="flex  gap-3 sm:gap-2 flex-col justify-start items-start sm:flex-row sm:items-center sm:flex-1 sm:justify-start text-black cursor-pointer text-md">
-                                              <button class="cursor-grab handle mr-4 group-hover:opacity-100">
-                                                <svg class="w-6 h-6 fill-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-                                                </svg>
+                                            <div class="flex gap-3 sm:gap-2 justify-start items-center sm:items-center text-black cursor-pointer text-md">
+                                              <button class="cursor-grab handle mr-4 ">
+                                                <ChevronUpDownIcon class="w-5 h-5 hover:fill-gray-800 "/>
                                               </button>
 
-                                              <div class="grow mt-0.5 mb-3 sm:mb-0 space-y-3">
+                                              <div class="grow m-1">
+                                                <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
 
-                                                <span>{{lesson.sort_order}}:
-                                                  <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
-                                               </span>
                                               </div>
-                                              <div class="flex items-center justify-end space-x-3">
+                                              <div class="flex items-center justify-end space-x-3 ">
+                                                <ModalDelete >
 
-                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-slate-400 hover:text-indigo-500">
-                                                  <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
-                                                    <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
-                                                  </svg>
+                                                  <div class="flex ml-2 justify-between ">
+                                                    <Link :href="route('course.module.lesson.destroy', [course.id, module.id, lesson.id])" as="button" type="button" method="DELETE"
+                                                          class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
+                                                      Yes, delete
+                                                    </Link>
+                                                  </div>
+                                                </ModalDelete>
+
+                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-0.5  rounded-md hover:bg-gray-200">
+                                                  <ViewfinderCircleIcon class="w-5 h-5 " />
                                                 </Link>
 
                                               </div>
@@ -158,7 +178,7 @@
                         </Draggable>
                     </div>
 
-                    <div class="flex  justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
+                    <div class="flex  justify-between bg-gray-50 px-4 py-1 text-right sm:px-6">
                       <div>
                         <Link :href="route('course.index')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
@@ -174,27 +194,39 @@
                   <!-- TAB 2 -->
                   <TabPanel>
                     <div class="flex items-center mx-6 mb-4 justify-between">
-                      <h2 class=" font-semibold text-slate-800">Billing</h2>
+                      <h2 class=" font-semibold text-gray-800">Billing</h2>
                     </div>
                   </TabPanel>
                 </TabPanels>
               </TabGroup>
             </div>
 
-            <div class="h-[calc(80vh-84px)]" v-else >
-              <div class="m-20">
-                <FirstCreate
-                  title="Create Your Own Module for the Course."
-                  subtitle="Customize Your Learning Experience and Share Your Knowledge."
-                />
-                <CreateModuleForm :course="course">
-                  <template #button>
-                    <button type="button" class="btn mt-3 bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                      Create Module
-                    </button>
-                  </template>
-                </CreateModuleForm>
+
+            <div v-else class="h-[calc(80vh-84px)] " >
+              <div class="px-4 sm:py-10  bg-transparent max-w-7xl sm:px-6 lg:px-8">
+                <div class="grid items-center grid-cols-1 gap-y-8 sm:grid-cols-2 ">
+                  <div class="order-2 ml-20">
+                    <img class="w-3/4 sm:w-full  " src="/asset/podcasts.svg" alt="" />
+                  </div>
+
+                  <div class="order-1">
+                    <FirstCreate
+                      title="From Knowledge to Transformation: Creating Your First Online Course Step by Step!"
+                      subtitle="Unveiling the Doors of Online Education: Unlock Your Potential, Inspire Students, and Create a Memorable Course to Transform Lives!"
+                    />
+                    <CreateModuleForm :course="course">
+                      <template #button>
+                        <button type="button" class="btn mt-10 bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                          Create Now
+                        </button>
+                      </template>
+                    </CreateModuleForm>
+
+                  </div>
+                </div>
+
               </div>
+
             </div>
           </div>
         </div>
@@ -203,93 +235,80 @@
   </AdminLayout>
 </template>
 
-<script>
+<script setup>
 import {ref, watch} from "vue";
-import {Link} from "@inertiajs/inertia-vue3";
+import {Link, Head} from "@inertiajs/inertia-vue3";
 import { Inertia } from '@inertiajs/inertia';
 import Draggable from "vuedraggable";
-import { Disclosure, DisclosureButton, DisclosurePanel,
-  Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
+import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
+import { PlusIcon } from '@heroicons/vue/24/outline';
+import { ChevronRightIcon } from '@heroicons/vue/24/outline';
+import { ViewfinderCircleIcon } from '@heroicons/vue/24/outline';
+import { ChevronUpDownIcon } from '@heroicons/vue/24/outline';
+import { FolderIcon } from '@heroicons/vue/24/outline';
+import { BanknotesIcon } from '@heroicons/vue/24/outline';
 import AdminLayout from "../Layouts/AdminLayout.vue";
 import EditCourseForm from "@/Pages/Admin/Course/Partials/EditCourseForm.vue";
 import CreateModuleForm from "@/Pages/Admin/Course/Partials/CreateModuleForm.vue";
+import EditModuleForm from "@/Pages/Admin/Course/Partials/EditModuleForm.vue";
 import FirstCreate from "@/Pages/Admin/Course/Partials/FirstCreate.vue";
-export default {
-  components: {
-    FirstCreate,
-    CreateModuleForm,
-    EditCourseForm,
-    TabGroup,
-    TabPanel,
-    TabPanels,
-    Tab,
-    TabList, Link,
-     AdminLayout,
-    Draggable, Disclosure, DisclosureButton, DisclosurePanel
-  },
-  props: {
-    course:Object
+import ModalDelete from "@/Components/ModalDelete.vue";
 
-  },
-  data() {
-    return {
-      showInput: false,
-    }
-  },
-  setup(props) {
 
-    const modulesData = ref(props.course.modules);
-    watch(() => props.course.modules, (value) => {
-      modulesData.value = value;
+
+
+import {Disclosure, DisclosureButton, DisclosurePanel, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
+
+const props = defineProps({
+  course: Object
+});
+
+const modulesData = ref(props.course.modules);
+watch(() => props.course.modules, (value) => {
+  modulesData.value = value;
+});
+function onModuleDrag(e) {
+  if (e.moved) {
+    const data = modulesData.value.map((module, index) => {
+      return { sort_order: index + 1, id: module.id };
     });
-    function onModuleDrag(e) {
-      if (e.moved) {
-        const data = modulesData.value.map((module, index) => {
-          return { sort_order: index + 1, id: module.id };
-        });
-        Inertia.put(
-          route("module.draggable", [route().params.course]),
-          {
-            payload: data,
-            type: "module"
-          },
-          {
-            preserveScroll: true,
-            onSuccess: () => (modulesData.value = props.course.modules),
-            onError: (error) => console.error(error) // Log any errors to the console
-          }
-        );
+    Inertia.put(
+      route("module.draggable", [route().params.course]),
+      {
+        payload: data,
+        type: "module"
+      },
+      {
+        preserveScroll: true,
+        onSuccess: () => (modulesData.value = props.course.modules),
+        onError: (error) => console.error(error) // Log any errors to the console
       }
-    }
+    );
+  }
+}
+const lessonsData = ref([]);
+watch(() => props.course.modules, (modules) => {
+  lessonsData.value = modules.flatMap((module) => module.lessons);
+}, { deep: true });
 
-    const lessonsData = ref([]);
-    watch(() => props.course.modules, (modules) => {
-      lessonsData.value = modules.flatMap((module) => module.lessons);
-    }, { deep: true });
-
-    function onLessonDrag(e) {
-      if (e.moved) {
-        const data = lessonsData.value.map((lesson, index) => {
-          return { sort_order: index + 1, id: lesson.id };
-        });
-        Inertia.put(
-          route("module.draggable", [route().params.course]),
-          {
-            payload: data,
-            type: "lesson"
-          },
-          {
-            preserveScroll: true,
-            onSuccess: (value) => (lessonsData.value = value),
-            onError: (error) => console.error(error)
-          }
-        );
+function onLessonDrag(e) {
+  if (e.moved) {
+    const data = lessonsData.value.map((lesson, index) => {
+      return { sort_order: index + 1, id: lesson.id };
+    });
+    Inertia.put(
+      route("module.draggable", [route().params.course]),
+      {
+        payload: data,
+        type: "lesson"
+      },
+      {
+        preserveScroll: true,
+        onSuccess: (value) => (lessonsData.value = value),
+        onError: (error) => console.error(error)
       }
-    }
-
-
-    return {onModuleDrag, onLessonDrag,}
-  },
+    );
+  }
 }
 </script>
 

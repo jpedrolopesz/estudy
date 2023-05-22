@@ -80,6 +80,7 @@ import { MagnifyingGlassIcon, CheckCircleIcon } from "@heroicons/vue/24/outline"
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import { usePage, Link } from "@inertiajs/inertia-vue3";
 import { debounce } from "lodash";
+import {Inertia} from "@inertiajs/inertia";
 
 const { auth } = usePage().props;
 const query = ref("");
@@ -93,7 +94,7 @@ watch(() => query.value, (_) => {
 
 watch(() => selectedItem.value, (value) => {
   if (value && value.link) {
-    router.get(value?.link);
+    Inertia.get(value?.link);
     selectedItem.value = null;
   }
 });

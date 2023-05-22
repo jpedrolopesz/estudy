@@ -13,11 +13,11 @@
 }
 
 .btn {
-  @apply px-2.5 py-1.5;
+  @apply px-3.5 py-2.5;
 }
 
 .btn-lg {
-  @apply px-3.5 py-2.5;
+  @apply px-5 py-3.5;
 }
 
 .btn-sm {

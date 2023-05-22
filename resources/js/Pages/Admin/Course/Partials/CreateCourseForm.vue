@@ -1,22 +1,12 @@
 <template>
 
-  <FormSlideOver>
-    <template #button>
+  <FormSlideOver >
+    <template #button> <slot name="button"/> </template>
 
-      <slot name="button"/>
-
-    </template>
-
-    <template #title>
-      <h2> Create Course</h2>
-    </template>
+    <template #title> <h2> Create Course</h2> </template>
 
     <template #form>
-
-
-
       <form @submit.prevent="courseCreate" >
-
         <div class="mb-2">
           <FormInput
             required
@@ -71,6 +61,7 @@ import InputError from "@/Components/InputError.vue";
 import UploadImage from "@/Components/Uploads/UploadImage.vue";
 import ButtonForm from "@/Components/Button/ButtonForm.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
+import {ref} from "vue";
 
 
 const props = defineProps({
@@ -83,15 +74,13 @@ const form = useForm({
   thumbnail: {type: Object}
 });
 
-
 function courseCreate() {
   form.post(route("course.store"), {
     preserveScroll: true,
     onError: (error) => console.log(error),
     onSuccess: () => {
       form.reset();
-      this.$inertia.reload();
-      isOpen.value = false;
+
     }
   });
 }

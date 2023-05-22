@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Lesson\CreateUpdateLessonRequest;
 use App\Models\{ Course, Module, Lesson};
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -27,7 +27,7 @@ class LessonsController extends Controller
 
     }
 
-    public function store(CreateUpdateLessonRequest $request)
+    public function store(CreateUpdateLessonRequest $request, Course $course)
     {
         $filename = uniqid() . '.' . $request->file('video_url')->getClientOriginalExtension();
         $pathToFile = $request->file('video_url')->store('videos', $filename);
@@ -42,12 +42,12 @@ class LessonsController extends Controller
         if ($lesson) {
             $lesson->addMedia($pathToFile);
         } else {
-            // Tratar o erro de criação da lição aqui
+            return Redirect::route()->with('error', 'Error: Please check your request to resolve it efficiently.');
         }
 
 
-        return redirect()->back();
-    }
+        return Redirect::route('course.edit', $course)
+            ->with('success', 'Your request has been successfully completed.');    }
 
     public function edit(int $id, Module $module, Lesson $lesson): Response
     {
@@ -72,12 +72,22 @@ class LessonsController extends Controller
     {
         $lesson->update($request->all());
 
-        return back();
+        return Redirect::back()->with('success', 'Your request has been successfully completed.');
 
     }
 
-    public function destroy(string $id)
+    public function destroy(string $course, string $module, string $lesson)
     {
-        //
+        $course = Course::find($course);
+        $module = optional($course)->modules()->find($module);
+        $lesson = optional($module)->lessons()->find($lesson);
+
+        if ($lesson) {
+            $lesson->delete();
+            return Redirect::back()->with('success', 'Your request has been successfully completed.');
+        } else {
+            // O curso, módulo ou lição não foram encontrados ou não existem
+            // Trate o erro ou faça o redirecionamento adequado
+        }
     }
 }

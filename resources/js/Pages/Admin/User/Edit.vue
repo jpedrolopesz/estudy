@@ -1,7 +1,7 @@
 <template>
   <Head  title="User Edit" />
 
-  <AuthenticatedLayout>
+  <AdminLayout>
 
     <div>
       <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -12,29 +12,9 @@
               <div class="min-w-0 flex-1">
 
                 <div class="mb-2">
-                  <h1 class="font-medium text-2xl lg:text-3xl opacity-75">Account Settings</h1>
+                  <h1 class="font-medium text-lg lg:text-2xl opacity-75">Account Settings</h1>
                 </div>
                 <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-
-                  <nav class="flex mb-2" aria-label="Breadcrumb">
-                    <ul class="inline-flex flex-wrap text-sm font-medium">
-                      <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                        <BreadcrumbLink :href="route('dashboard')" :active="route().current('dashboard')">
-                          Home
-                        </BreadcrumbLink>
-                      </li>
-                      <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                        <BreadcrumbLink  :active="route().current('users.index')">
-                          Users
-                        </BreadcrumbLink>
-                      </li>
-                      <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                        <BreadcrumbLink  :active="route().current('user.edit')">
-                          Edit
-                        </BreadcrumbLink>
-                      </li>
-                    </ul>
-                  </nav>
 
 
                 </div>
@@ -52,10 +32,10 @@
         <div class="mt-1 md:col-span-2 md:mt-0">
           <TabGroup>
 
-            <TabList class="mt-1 p-2 bg-white border-b rounded-t-md items-center">
+            <TabList class="py-1 bg-white border-b rounded-t-md items-center">
 
               <!-- Start -->
-                  <div class="text-sm font-medium flex flex-nowrap mt-3 sm:-mx-6 lg:-mx-8 overflow-x-auto ">
+                  <div class="text-sm font-medium flex flex-nowrap mt-2 sm:-mx-6 lg:-mx-8 overflow-x-auto ">
                     <Tab  v-slot="{ selected }" class="pb-3 sm:ml-4 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                       <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
@@ -108,22 +88,28 @@
                       </div>
                       <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-2">
-                          <label for="name" class="block text-sm font-medium text-gray-700">First name*</label>
-                          <input  v-model="form.first_name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-
+                          <FormInput
+                            v-model="form.first_name"
+                            required
+                            label="First name"
+                            :autofocus="true"
+                          />
                           <InputError class="mt-2" :message="form.errors.first_name" />
+
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                          <label for="name" class="block text-sm font-medium text-gray-700">Last name*</label>
-                          <input  v-model="form.last_name"  type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-
+                            <FormInput
+                              v-model="form.last_name"
+                              required
+                              label="Last name"
+                            />
                           <InputError class="mt-2" :message="form.errors.last_name" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-1">
-                          <label for="role" class="block text-sm font-medium text-gray-700">Owner</label>
-                          <select v-model="form.owner" name="role" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                          <label for="role" class="form-label !pt-1 block mb-2 text-sm font-medium text-gray-900">Owner</label>
+                          <select v-model="form.owner" name="role" class="w-full p-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block">
                             <option :value="false">No</option>
                             <option :value="true">Yes</option>
 
@@ -131,39 +117,16 @@
                           <InputError class="mt-2" :message="form.errors.owner" />
                         </div>
 
-                        <div class="col-span-6 sm:col-span-2">
-                          <label for="email" class="block text-sm font-medium text-gray-700">Email address*</label>
-                          <input v-model="form.email" type="text" name="email" id="email" autocomplete="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                        <div class="col-span-6">
+                          <FormInput
+                            v-model="form.email"
+                            required
+                            label="Email"
+                          />
                           <InputError class="mt-2" :message="form.errors.email" />
                         </div>
 
 
-                        <div class="col-span-6 sm:col-span-2">
-                          <label for="street-address" class="block text-sm font-medium text-gray-700">Country</label>
-                          <input v-model="form.country" type="text" name="country" id="country" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                          <label for="state-province" class="block text-sm font-medium text-gray-700">State / Province</label>
-                          <input v-model="form.state_province" type="text" name="state-province" id="state-province"  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                          <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
-                          <input v-model="form.street_address" type="text" name="street-address" id="street-address" autocomplete="street-address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-4 lg:col-span-2">
-                          <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                          <input v-model="form.city" type="text" name="city" id="city" autocomplete="address-level2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-
-
-
-                        <div class="col-span-6 sm:col-span-2 lg:col-span-1">
-                          <label for="zip-code" class="block text-sm font-medium text-gray-700">Postal code</label>
-                          <input v-model="form.zip_code" type="number" name="zip-code" id="zip-code" autocomplete="postal-code" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
                       </div>
 
                     </div>
@@ -349,81 +312,48 @@
       </div>
     </div>
 
-  </AuthenticatedLayout>
+  </AdminLayout>
 
 </template>
 
 
-<script>
-
-import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
-import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
-import { Link, Head ,useForm } from '@inertiajs/inertia-vue3';
-import InputError from "@/Components/InputError.vue";
+<script setup>
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
-import FileInput from "@/Components/FileInput.vue";
+import {Link,useForm, Head} from "@inertiajs/inertia-vue3";
 import TrashedMessage from "@/Components/TrashedMessage.vue";
+import InputError from "@/Components/InputError.vue";
+import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
 
-export default {
-  components: {
-    TrashedMessage,
-    AuthenticatedLayout,
-    BreadcrumbLink,
-    FileInput,
-    InputError,
-    Head, Link,
-    TabGroup, TabList,
-    Tab, TabPanels, TabPanel,
-  },
-  props: {
-    user: Object,
-    invoices:{
-      type: Object || Array,
-      require: true
-    },
-    subscription:{
-      type: Object || Array,
-      require: true
-    },
-  },
-  setup(props) {
-    console.log(props.invoices[0])
-    console.log(props.subscription)
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        _method: 'post',
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        owner: this.user.owner,
-        photo: '',
-        password: '',
-        password_current: this.user.password_current,
-        password_confirmation: this.user.password_confirmation,
+const props = defineProps({
+  user: Object,
+  invoices:{ type: Object || Array, require: true},
+  subscription:{ type: Object || Array, require: true},
+});
 
-      }),
-    }
-  },
-  methods: {
-    update() {
-      this.form.post(route('users.update', this.user.id), {
-        onSuccess: () => this.form.reset('password', 'photo'),
-      })
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this user?')) {
-        this.$inertia.delete(`/users/${this.user.id}`)
-      }
-    },
+const form = useForm({
+  first_name: props.user.first_name,
+  last_name: props.user.last_name,
+  email: props.user.email,
+  owner: props.user.owner,
+  photo: '',
+  password: '',
+  password_current: props.user.password_current,
+  password_confirmation: props.user.password_confirmation,
+});
 
-    restore() {
-      this.form.put(route('users.restore', this.user.id))
+const update = () => {
+  form.post(route('users.update', {
+    user: props.user.id}),
+    {
+    onSuccess: () => form.reset('password', 'photo'),
+  })
+};
 
-    },
-  },
+function restore () {
+  form.put(route('users.restore', props.user.id))
+
 }
+
 </script>
 

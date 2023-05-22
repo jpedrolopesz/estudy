@@ -1,7 +1,7 @@
 <template>
   <Head  title="Plans" />
 
-  <AuthenticatedLayout>
+  <AdminLayout>
 
 
     <div class="w-full ">
@@ -138,14 +138,14 @@
 
 
 
-  </AuthenticatedLayout>
+  </AdminLayout>
 
 </template>
 
 
 <script>
 
-import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
+import AdminLayout from "../Layouts/AdminLayout.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import ModalDelete from "@/Components/ModalDelete.vue";
@@ -160,10 +160,7 @@ import { ref } from 'vue';
 
 export default {
 
-  components: {
-    AuthenticatedLayout, BreadcrumbLink, Modal,
-    FormSearch, ModalDelete, Link, Pagination, Head,
-  },
+
   props: {
     filters: Object,
     plans: {

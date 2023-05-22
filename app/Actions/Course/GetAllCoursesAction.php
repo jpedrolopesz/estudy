@@ -18,12 +18,9 @@ class GetAllCoursesAction
         ]);
 
         return Pipeline::send($data)
-            ->through([
-                CourseFilter::class,
-            ])
             ->then(fn($data) => $data->builder)
-            ->with(['owner', 'members'])
-            ->paginate(8)
+            ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
+            ->paginate(4)
             ->withQueryString();
     }
 
