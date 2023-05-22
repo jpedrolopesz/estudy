@@ -2,7 +2,6 @@
 
 namespace App\Actions\Module;
 
-use App\Http\Requests\Course\CreateModuleRequest;
 use App\Models\Module;
 use Illuminate\Http\Request;
 

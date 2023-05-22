@@ -2,7 +2,7 @@
 
   <Head  title="Plan Create" />
 
-  <AuthenticatedLayout>
+  <AdminLayout>
 
     <div>
       <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -17,25 +17,6 @@
                 </div>
                 <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
-                  <nav class="flex mb-2" aria-label="Breadcrumb">
-                    <ul class="inline-flex flex-wrap text-sm font-medium">
-                      <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                        <BreadcrumbLink :href="route('dashboard')" :active="route().current('dashboard')">
-                          Home
-                        </BreadcrumbLink>
-                      </li>
-                      <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                        <BreadcrumbLink  :active="route().current('pages.plans.show')">
-                          Plans
-                        </BreadcrumbLink>
-                      </li>
-                      <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                        <BreadcrumbLink  :active="route().current('pages.plans.create')">
-                          Create
-                        </BreadcrumbLink>
-                      </li>
-                    </ul>
-                  </nav>
 
 
                 </div>
@@ -108,7 +89,7 @@
                 <div class="flex justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
 
                   <div>
-                    <Link :href="route('pages.plans.show')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                    <Link :href="route('plan.index')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
                       </svg>
@@ -130,48 +111,32 @@
       </div>
     </div>
 
-  </AuthenticatedLayout>
+  </AdminLayout>
 
 </template>
 
 
-<script>
-
-import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
-import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
+<script setup>
+import { Link, Head , useForm } from '@inertiajs/inertia-vue3';
+import AdminLayout from "../Layouts/AdminLayout.vue";
 import InputError from "@/Components/InputError.vue";
-import { Link, Head ,useForm } from '@inertiajs/inertia-vue3';
 
+const props = defineProps({
+  plan:Object
+});
 
-export default {
-  components: {
-    AuthenticatedLayout,
-    BreadcrumbLink,
-    InputError,
-    Head, Link,
+const form = useForm({
+  name: '',
+  slug: '',
+  price: '',
+  stripe_id: '',
+  description: '',
+  max_users: ''
+})
 
-  },
-  props: {
-    plan: Object,
-  },
-  setup(){
-    const form = useForm({
-      _method: 'post',
-      name: null,
-      slug: null,
-      price: null,
-      stripe_id: null,
-      description: null,
-      max_users: null
-
-    });
-    return {form};
-  },
-  methods: {
-    create() {
-      this.form.post(route('plans.store'))
-    },
-  },
+const create = () => {
+  form.post(route('plan.store'))
 }
+
 </script>
 

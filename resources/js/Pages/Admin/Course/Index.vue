@@ -177,8 +177,6 @@ import FirstCreate from "@/Pages/Admin/Course/Partials/FirstCreate.vue";
 import CreateCourseForm from "@/Pages/Admin/Course/Partials/CreateCourseForm.vue";
 
 
-
-
 const { auth } = usePage().props;
 
 const props = defineProps(

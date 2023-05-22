@@ -1,10 +1,7 @@
 <template>
   <Head  title="Users" />
 
-  <AuthenticatedLayout>
-
-
-
+  <AdminLayout>
 
     <div class="bg-white ml-2 shadow-md rounded-md border border-slate-200 relative">
 
@@ -34,7 +31,6 @@
 
         </div>
       </header>
-
 
       <div>
 
@@ -115,7 +111,7 @@
                     <div class="flex ml-2 justify-between">
 
 
-                      <Link :href="route('users.destroy', user.id)" as="button" type="button" method="DELETE"
+                      <Link :href="route('user.destroy', user.id)" as="button" type="button" method="DELETE"
                             class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
                         Yes, delete
                       </Link>
@@ -150,7 +146,7 @@
     </div>
 
 
-  </AuthenticatedLayout>
+  </AdminLayout>
 
 </template>
 
@@ -159,7 +155,7 @@
 import { useMounted } from "@/Composables/useMounted";
 import { Link, Head } from '@inertiajs/inertia-vue3';
 import { PlusIcon } from '@heroicons/vue/24/outline';
-import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
+import AdminLayout from "../Layouts/AdminLayout.vue";
 import ModalDelete from "@/Components/ModalDelete.vue";
 import Pagination from "@/Components/Pagination.vue";
 import FormSearch from "@/Components/FormSearch.vue";

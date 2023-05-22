@@ -19,9 +19,9 @@
 
       <div class="relative w-full ">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 ">
-          <MagnifyingGlassIcon v-if="!search" class="w-5 h-5 text-gray-500 "/>
-          <XMarkIcon v-if="search" type="button"
-                     @click="$emit('reset')" class="w-5 h-5 text-gray-500 cursor-pointer"/>
+          <MagnifyingGlassIcon v-if="!searchValue" class="w-5 h-5 text-gray-500 "/>
+          <XMarkIcon v-if="searchValue" type="button"
+                     @click="resetSearch" class="w-5 h-5 text-gray-500 cursor-pointer"/>
         </div>
 
         <input class="bg-transparent border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full pl-10 py-1.5"
@@ -48,12 +48,13 @@ defineEmits(['update:modelValue', 'reset']);
   const props = defineProps({
     modelValue: String,
     search: Object,
-    maxWidth: {
-      type: Number,
-      default: 300,
-    }
   })
 
- props.search = ref('');
+const searchValue = ref(props.modelValue);
+
+const resetSearch = () => {
+  searchValue.value = '';
+  this.$emit('reset');
+};
 
 </script>

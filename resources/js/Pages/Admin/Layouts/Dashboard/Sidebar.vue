@@ -28,7 +28,7 @@
         <span class="tooltip">Dashboard</span>
       </li>
       <li>
-        <NavLink :href="route('users.index')" :active="route().current('users.index')">
+        <NavLink :href="route('user.index')" :active="route().current('user.index')">
           <div class="flex items-center p-1 ">
 
             <UsersIcon class="w-6 h-6 mr-1"/>
@@ -50,7 +50,7 @@
         <span class="tooltip">Courses</span>
       </li>
       <li>
-        <NavLink :href="route('pages.plans.show')" :active="route().current('pages.plans.show')">
+        <NavLink :href="route('plan.index')" :active="route().current('plan.index')">
           <div class="flex items-center p-1 ">
 
             <TicketIcon class="w-6 h-6 mr-1" />

@@ -35,18 +35,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
 
 
-
-
-        //** Users */
-        Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-        Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
-        Route::post('users', [UsersController::class, 'store'])->name('users.store');
-        Route::get('users/{user}/edit', [UsersController::class, 'edit'])->name('user.edit');
-        Route::post('users/{user}', [UsersController::class, 'update'])->name('users.update');
-        Route::delete('users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
-        Route::put('users/{user}/restore', [UsersController::class, 'restore'])->name('users.restore');
-
-
         //** Account Admin */
 
         Route::get('/profile', [AdminController::class, 'edit'])->name('admin.profile.edit');
@@ -56,33 +44,35 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         Route::post('/password', [PasswordAdminController::class, 'update'])->name('admin.password.update');
 
 
-        //** Create Plans */
-        Route::group(['prefix' => 'plan'], function () {
-
-            Route::get('/create', [CreatePlanController::class, 'create'])->name('pages.plans.create');
-            Route::post('/', [CreatePlanController::class, 'store'])->name('plans.store');
-            Route::put('/{id}', [CreatePlanController::class, 'update'])->name('plans.update');
-            Route::delete('/{id}', [CreatePlanController::class, 'destroy'])->name('plans.destroy');
-            Route::get('/', [CreatePlanController::class, 'show'])->name('pages.plans.show');
-            Route::get('/{plan}/edit', [CreatePlanController::class, 'edit'])->name('pages.plans.edit');
-            Route::put('/{plan}/restore', [CreatePlanController::class, 'restore'])->name('plans.restore');
-
-        });
 
 
+            // Route::resource('/comments', CommentController::class);
 
 
-       // Route::resource('/comments', CommentController::class);
+              // ================ USERS ================= //
+             Route::resource('user', UsersController::class);
+             Route::controller(UsersController::class)->group(function () {
 
-        // ================ COURSES ================= //
+                 Route::put('user/{user}/restore', 'restore')->name('user.restore');
 
+             });
+
+             // ================ PLANS ================= //
+             Route::resource('plan', CreatePlanController::class);
+             Route::controller(CreatePlanController::class)->group(function () {
+
+                 Route::put('plan/{plan}/restore',  'restore')->name('plan.restore');
+
+
+             });
+
+             // ================ COURSES ================= //
             Route::resource('course', CoursesController::class);
             Route::controller(CoursesController::class)->group(function () {
-
                 //
             });
 
-            // ================ MODULES ================= //
+             // ================ MODULES ================= //
             Route::resource('course.module', ModulesController::class);
             Route::controller(ModulesController::class)->group(function () {
 

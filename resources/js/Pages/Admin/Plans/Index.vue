@@ -4,43 +4,35 @@
   <AdminLayout>
 
 
-    <div class="w-full ">
-      <div class="sm:flex sm:items-center mx-8 sm:justify-between">
-        <div class="min-w-0 flex-1">
 
-          <div class="mb-2">
-            <h1 class="font-medium text-2xl lg:text-3xl opacity-75">Plans</h1>
-          </div>
-        </div>
+    <div class="bg-white ml-2 shadow-lg rounded-md border border-slate-200 relative">
+      <header class="px-4 py-2 flex items-center justify-between">
+        <h2 class="text-xs font-semibold uppercase text-gray-500 hidden sm:block">All Plans <span class="text-gray-400 font-medium">  </span></h2>
 
         <div class="flex items-center">
-          <FormSearch class="w-full m-6" v-model="form.search" @reset="reset">
+
+          <FormSearch v-model="search"  class="w-full ">
             <label class="block text-gray-700">Trashed:</label>
-            <select v-model="form.trashed" class="border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2">
+            <select  class="border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2">
               <option :value="null" />
               <option value="with">With Trashed</option>
               <option value="only">Only Trashed</option>
             </select>
+
           </FormSearch>
 
 
-          <div>
-            <Link :href="route('pages.plans.create')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-              Plans
-            </Link>
-          </div>
+
+          <button type="button" class="flex ml-4  px-5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+            <PlusIcon class="w-5 h-5 mr-1 "/>
+            Plan
+          </button>
+
+
+
         </div>
-      </div>
-    </div>
-
-
-    <div class="bg-white ml-2 shadow-lg rounded-md border border-slate-200 relative">
-      <header class="px-5 py-4">
-        <h2 class="font-semibold text-slate-800">All Plans <span class="text-slate-400 font-medium">{{plans.length}}  </span></h2>
       </header>
+
       <div>
         <!-- Table -->
         <div class="overflow-x-auto  ">
@@ -71,12 +63,12 @@
             </thead>
             <!-- Table body -->
             <tbody class="text-sm divide-y divide-slate-200 "
-                   v-for="plan in plans"
+                   v-for="plan in plans.data"
                    :key="plan.id">
             <tr>
               <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap ">
 
-                  <div class="text-left">{{plan.name}}</div>
+                <div class="text-left">{{plan.name}}</div>
 
               </td>
               <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
@@ -97,7 +89,7 @@
               <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
                 <div class="space-x-1 inline-flex">
 
-                  <Link :href="route('pages.plans.edit', plan.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
+                  <Link :href="route('plan.edit', plan.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                     <span class="sr-only">Edit</span>
                     <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
                       <path d="M19.7 8.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM12.6 22H10v-2.6l6-6 2.6 2.6-6 6zm7.4-7.4L17.4 12l1.6-1.6 2.6 2.6-1.6 1.6z"></path>
@@ -110,7 +102,7 @@
                     <div class="flex ml-2 justify-between">
 
 
-                      <Link :href="route('plans.destroy', plan.id)" as="button" type="button" method="DELETE"
+                      <Link :href="route('plan.destroy', plan.id)" as="button" type="button" method="DELETE"
                             class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
                         Yes, delete
                       </Link>
@@ -143,58 +135,28 @@
 </template>
 
 
-<script>
+<script setup>
 
+import {ref, watch} from 'vue';
+import {Inertia} from "@inertiajs/inertia";
+import { Link, Head } from '@inertiajs/inertia-vue3';
+import { PlusIcon } from '@heroicons/vue/24/outline';
 import AdminLayout from "../Layouts/AdminLayout.vue";
-import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import ModalDelete from "@/Components/ModalDelete.vue";
-import Modal from "@/Components/Modal.vue";
-import Pagination from "@/Components/Pagination.vue";
-import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
-import pickBy from 'lodash/pickBy'
-import { Link, Head } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue';
 
 
-export default {
+const props = defineProps({
+  filters: Object,
+  plans: { type: Object, required: true},
+})
 
-
-  props: {
-    filters: Object,
-    plans: {
-      type: Object,
-      required: true
-    },
-
-  },
-  data() {
-    return {
-
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/admin/plan', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-
-
-  },
-}
-
-
+let search = ref('');
+watch(search, (value) => {Inertia.get("/admin/plan", {
+    search: value }, {preserveState: true,
+  }
+);
+});
+function reset() { search.value = ''}
 
 </script>

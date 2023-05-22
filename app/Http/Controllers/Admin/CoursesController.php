@@ -3,20 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Actions\Course\GetAllCoursesAction;
-use App\Actions\Course\GetCourseShowAction;
-use App\Actions\User\GetAllUsersAction;
-use App\Filters\CourseFilter;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Course\CreateUpdateCourseRequest;
-use App\Http\Resources\CourseResource;
-use App\Http\Resources\UserResource;
-use App\Models\Course;
-use App\Models\Module;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Actions\Course\ShowCourseAction;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Resources\CourseResource;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Course;
 use Inertia\Inertia;
 
 class CoursesController extends Controller
@@ -77,7 +70,7 @@ class CoursesController extends Controller
     public function edit(int $id): \Inertia\Response
     {
         return Inertia::render('Admin/Course/EditAndCreate', [
-            'course' => (new GetCourseShowAction())->execute($id),
+            'course' => (new ShowCourseAction())->execute($id),
 
         ]);
     }

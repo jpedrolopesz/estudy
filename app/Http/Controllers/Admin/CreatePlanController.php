@@ -2,47 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Plan\GetAllPlansAction;
+use App\Actions\Plan\ShowPlanAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUpdatePlanRequest;
+use App\Http\Resources\PlanResource;
 use App\Models\Plan;
 use App\Models\PlanFeature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class CreatePlanController extends Controller
 {
-    private Plan $repository;
 
-    public function __construct(Plan $plan)
+
+    public function index(): \Inertia\Response
     {
+        $plan = GetAllPlansAction::run(['perPage' => 10000]);
 
-        $this->repository = $plan;
+        return Inertia('Admin/Plans/Index',[
+            'plans' => PlanResource::collection($plan),
+            'filters' => Plan::query(),
 
-    }
-
-    public function show()
-    {
-
-        return Inertia('Admin/Plans/Show',[
-
-            'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
-
-            'plans' => $this->repository->with('planFeatures')
-                ->orderBy('price')
-                ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
-                ->get()
-                ->transform(fn ($plan) => [
-                    'id' => $plan->id,
-                    'name' => $plan->name,
-                    'slug' => $plan->slug,
-                    'price' => $plan->price,
-                    'deleted_at' => $plan->deleted_at,
-
-                    'plan_features' => $plan->planFeatures
-
-                ]),
         ]);
     }
 
@@ -51,43 +35,35 @@ class CreatePlanController extends Controller
         return Inertia('Admin/Plans/Create');
     }
 
-    public function store(StoreUpdatePlanRequest $request)
+    public function store(StoreUpdatePlanRequest $request, Plan $plan)
     {
 
         $data = $request->all();
         $data['url'] = Str::kebab($request->name);
-        $plan = $this->repository->create($data);
+        $plan = $plan->create($data);
 
         $plan->planFeatures()->create([
              'max_users' => $request->max_users,
             ]);
 
 
-        return Redirect::route('pages.plans.show')
+        return Redirect::route('plan.index')
             ->with('success', 'Your plan has been created successfully');
     }
 
 
-    public function edit(Plan $plan)
+
+    public function edit(int $id): \Inertia\Response
     {
+        return Inertia::render('Admin/Plans/Edit', [
+            'plan' => (new ShowPlanAction())->execute($id),
 
-        return Inertia('Admin/Plans/Edit',[
-            'plan' =>  [
-                'id' => $plan->id,
-                'name' => $plan->name,
-                'slug' => $plan->slug,
-                'price' => $plan->price,
-                'stripe_id' => $plan->stripe_id,
-                'description' => $plan->description,
-                'deleted_at' => $plan->deleted_at,
-                'plan_features' => $plan->planFeatures
-                ] ]);
-
+        ]);
     }
 
     public function update(StoreUpdatePlanRequest $request, $id)
     {
-        $plan = $this->repository->where('id', $id)->first();
+        $plan = Plan::where('id', $id)->first();
 
 
         if (!$plan)
@@ -105,7 +81,7 @@ class CreatePlanController extends Controller
 
     public function destroy($id)
     {
-        $plan = $this->repository->where('id', $id)->first();
+        $plan = Plan::where('id', $id)->first();
 
         if (!$plan)
             return redirect()->back();
