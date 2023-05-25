@@ -177,10 +177,11 @@ class User extends Authenticatable
             });
         })->when($filters['role'] ?? null, function ($query, $role) {
             $query->whereRole($role);
+
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
-            if ($trashed === 'with') {
+            if ($trashed === 'a') {
                 $query->withTrashed();
-            } elseif ($trashed === 'only') {
+            } elseif ($trashed === 'd') {
                 $query->onlyTrashed();
             }
         });

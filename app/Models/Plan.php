@@ -54,9 +54,9 @@ class Plan extends Model
                     ->orWhere('slug', 'like', '%'.$search.'%');
             });
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
-            if ($trashed === 'with') {
+            if ($trashed === 'a') {
                 $query->withTrashed();
-            } elseif ($trashed === 'only') {
+            } elseif ($trashed === 'd') {
                 $query->onlyTrashed();
             }
         });

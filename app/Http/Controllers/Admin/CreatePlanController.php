@@ -25,8 +25,6 @@ class CreatePlanController extends Controller
 
         return Inertia('Admin/Plans/Index',[
             'plans' => PlanResource::collection($plan),
-            'filters' => Plan::query(),
-
         ]);
     }
 

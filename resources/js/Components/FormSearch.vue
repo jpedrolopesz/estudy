@@ -19,9 +19,9 @@
 
       <div class="relative w-full ">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 ">
-          <MagnifyingGlassIcon v-if="!searchValue" class="w-5 h-5 text-gray-500 "/>
-          <XMarkIcon v-if="searchValue" type="button"
-                     @click="resetSearch" class="w-5 h-5 text-gray-500 cursor-pointer"/>
+          <MagnifyingGlassIcon v-if="!modelValue" class="w-5 h-5 text-gray-500 "/>
+          <XMarkIcon v-if="modelValue" type="button"
+                     @click="$emit('reset')" class="w-5 h-5 text-gray-500 cursor-pointer"/>
         </div>
 
         <input class="bg-transparent border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full pl-10 py-1.5"
@@ -38,10 +38,9 @@
 </template>
 
 <script setup>
+import {defineEmits} from "vue";
 import SearchDropdown from "@/Components/SearchDropdown.vue";
 import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
-
-import {ref, defineEmits} from "vue";
 
 defineEmits(['update:modelValue', 'reset']);
 
@@ -50,11 +49,5 @@ defineEmits(['update:modelValue', 'reset']);
     search: Object,
   })
 
-const searchValue = ref(props.modelValue);
-
-const resetSearch = () => {
-  searchValue.value = '';
-  this.$emit('reset');
-};
 
 </script>

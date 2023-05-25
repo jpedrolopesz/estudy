@@ -2,10 +2,10 @@
 
 namespace App\Actions\Plan;
 
-use App\Data\Plan\PlanFilterData;
-use App\Filters\PlanFilter;
-use Illuminate\Support\Facades\Pipeline;
 use App\Models\Plan;
+use App\Data\Plan\PlanFilterData;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Pipeline;
 
 class GetAllPlansAction
 {
@@ -17,13 +17,9 @@ class GetAllPlansAction
         ]);
 
         return Pipeline::send($data)
-            ->through([
-                PlanFilter::class,
-            ])
-
             ->then(fn ($data) => $data->builder)
-            ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
-            ->paginate(8)
+            ->filter(Request::only('search', 'trashed'))
+            ->paginate(6)
             ->withQueryString();
     }
 }

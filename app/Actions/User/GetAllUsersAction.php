@@ -2,10 +2,11 @@
 
 namespace App\Actions\User;
 
-use App\Data\User\UserFilterData;
-use App\Filters\UserFilter;
-use App\Models\User;
 use Illuminate\Support\Facades\Pipeline;
+use Illuminate\Support\Facades\Request;
+use App\Data\User\UserFilterData;
+use App\Models\User;
+
 
 class GetAllUsersAction
 {
@@ -17,11 +18,9 @@ class GetAllUsersAction
         ]);
 
         return Pipeline::send($data)
-            ->through([
-                UserFilter::class,
-            ])
             ->then(fn ($data) => $data->builder)
-            ->paginate(8)
+            ->filter(Request::only('search', 'trashed', 'role'))
+            ->paginate(7)
             ->withQueryString();
     }
 }

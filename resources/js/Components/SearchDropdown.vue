@@ -7,12 +7,10 @@
     <!-- Full Screen Dropdown Overlay -->
     <div v-show="open" class="fixed inset-0 z-40" @click="open = false"></div>
 
-
     <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
       leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-      <div v-show="open" class="absolute z-50 mt-2 rounded-md shadow-lg"
+      <div v-show="open" class="absolute  z-50 mt-2 rounded-md shadow-lg"
            :class="[widthClass, alignmentClasses]" style="display: none;">
-
         <div  :class="contentClasses">
           <slot name="dropdown" />
         </div>
@@ -32,7 +30,7 @@ const props = defineProps({
     default: '48'
   },
   contentClasses: {
-    default: () => ['py-2', 'bg-white']
+    default: () => [ 'bg-white']
   }
 });
 
@@ -47,7 +45,7 @@ onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
 
 const widthClass = computed(() => {
   return {
-    '48': 'w-56 p-4 bg-white',
+    '48': 'w-56 bg-white',
   }[props.width.toString()];
 });
 

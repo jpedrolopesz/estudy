@@ -2,21 +2,49 @@
   <Head title="Courses" />
 
   <AdminLayout>
-    <div v-if="courses.data[0]">
-      <div class="bg-white ml-2 shadow-lg rounded-md border border-gray-200 relative">
+      <div class="bg-white ml-2 shadow-md rounded-md border border-gray-200 relative">
         <header class="px-4 py-2 flex items-center justify-between">
-          <h2 class="text-xs font-semibold uppercase text-gray-500 hidden sm:block">All Courses <span class="text-gray-400 font-medium"> {{meta.total}} </span></h2>
+          <h2 class="text-xs font-semibold uppercase text-gray-500 hidden sm:block">
+            All Courses {{meta.total}}
+           </h2>
 
           <div class="flex items-center">
 
-            <FormSearch :search="search" class="w-full " v-model="search" @reset="reset">
-              <label class="block text-gray-700">Trashed:</label>
-              <select  class="border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2">
-                <option :value="null" />
-                <option value="with">With Trashed</option>
-                <option value="only">Only Trashed</option>
-              </select>
+            <FormSearch class="w-full " v-model="search" @reset="reset">
 
+              <RadioGroup v-model="trashed" class="py-2">
+                <RadioGroupLabel class="text-xs font-semibold uppercase text-gray-500  px-6">Filters</RadioGroupLabel>
+                  <RadioGroupOption v-slot="{ checked }" value="a">
+                  <span class="flex items-center w-full border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
+                        :class="checked ? 'bg-gray-100' : 'flex items-center w-full hover:bg-gray-50 py-1 px-1.5 cursor-pointer'">
+                    <svg class="shrink-0 mr-2 fill-current text-gray-400 opacity-0"
+                         :class="checked ? 'opacity-100' : ''"
+                         width="11" height="7" viewBox="0 0 11 7">
+                    <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
+                   </svg>
+                    All Courses
+                  </span>
+                  </RadioGroupOption>
+
+
+                <RadioGroupOption v-slot="{ checked }" value="d">
+                 <span class="flex items-center w-full border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
+                       :class="checked ? 'bg-gray-100' : 'flex items-center w-full hover:bg-gray-50 py-1 px-1.5 cursor-pointer'">
+                    <svg class="shrink-0 mr-2 fill-current text-gray-400 opacity-0"
+                         :class="checked ? 'opacity-100' : ''"
+                         width="11" height="7" viewBox="0 0 11 7">
+                    <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
+                   </svg>
+                   Deleted Courses
+                  </span>
+                </RadioGroupOption>
+              </RadioGroup>
+
+              <div class="py-2 px-3 border-t border-gray-100 bg-gray-50">
+                <button @click="reset" class="py-0.5 px-2 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+                  Clear
+                </button>
+              </div>
             </FormSearch>
 
             <CreateCourseForm  :courses="courses">
@@ -40,29 +68,31 @@
           <div >
             <table class="table-auto w-full ">
               <!-- Table header -->
-              <thead class="text-xs uppercase text-gray-500 bg-gray-50 border-t border-b">
-              <tr>
-                <th scope="col" class="px-6 py-3">
-                  <div class="font-medium text-left">Course</div>
+              <thead class="text-xs uppercase font-semibold text-gray-500 bg-gray-50 border-y">
+
+              <tr v-if="course[0]">
+                <th scope="col" class="px-2 py-3 pr-5 whitespace-nowrap">
+                  <div class="font-semibold  text-left">Course</div>
                 </th>
 
-                <th scope="col" class="px-6 py-3">
-                  <div class="font-medium text-left">Status</div>
+                <th scope="col" class="px-2 py-3 pr-5 whitespace-nowrap">
+                  <div class="font-semibold  text-left">Status</div>
                 </th>
-                <th scope="col" class="px-6 py-3">
-                  <div class="font-medium text-left">Status</div>
+                <th scope="col" class="px-2 py-3 pr-5 whitespace-nowrap">
+                  <div class="font-semibold  text-left">Status</div>
                 </th>
               </tr>
               </thead>
 
               <!-- Table body -->
               <tbody>
+              <tr v-for="course in courses.data"
+                  :key="course.id"
+                  class="text-sm border-t border-gray-200">
 
-              <tr v-for="course in courses.data" :key="course.id" class="text-sm border-b border-gray-200">
-
-                <td  class="px-2 py-2 " >
+                <td class="px-2 py-2" >
                   <div class="flex items-center">
-                    <div >
+                    <div>
                       <img v-bind:src="'/storage/thumbnails/' + course.thumbnail"  class="object-cover rounded-md h-86 md:h-auto md:w-48 " />
                     </div>
 
@@ -88,38 +118,61 @@
                       </svg>
                     </Link>
 
-
                     <ModalDelete >
-
                       <div class="flex ml-2 justify-between">
-
-
                         <Link :href="route('course.destroy', course.id)" as="button" type="button" method="DELETE"
                               class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
                           Yes, delete
                         </Link>
-
                       </div>
                     </ModalDelete>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+
+              <tr v-if="course[0]">
+                <td v-if="courses.meta.total === 0" class="px-6 py-4 "  >
+                  <span>No course found.</span>
+                </td>
+              </tr>
+              <tr v-if="!course[0]">
+
+                <td class="h-[calc(70vh-84px)] " >
+                  <div class="px-4 sm:py-10 lg:mx-28 bg-transparent max-w-7xl sm:px-6 lg:px-8">
+                    <div class="grid items-center grid-cols-1 gap-y-8 sm:grid-cols-2 ">
+                      <div class="order-2 ml-20">
+                        <img class="w-3/4 sm:w-full  " src="/asset/podcasts.svg" alt="" />
+                      </div>
+
+                      <div class="order-1">
+                        <FirstCreate
+                          title="From Knowledge to Transformation: Creating Your First Online Course Step by Step!"
+                          subtitle="Unveiling the Doors of Online Education: Unlock Your Potential, Inspire Students, and Create a Memorable Course to Transform Lives!"
+                        />
+                        <CreateCourseForm :course="courses">
+                          <template #button>
+                            <button type="button" class="btn mt-10 bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                              Create Now
+                            </button>
+                          </template>
+                        </CreateCourseForm>
+
+                      </div>
+                    </div>
 
                   </div>
                 </td>
-
-
-
               </tr>
-
-
-              </tbody>
-
             </table>
 
 
 
 
 
+
           </div>
-          <div class="grid px-4 py-2 text-xs font-semibold uppercase text-gray-500 bg-gray-50 dark:border-gray-700 bg-gray-50 sm:grid-cols-9">
+          <div class="grid px-4 py-4 text-xs font-semibold uppercase text-gray-500 border-t rounded-b-md  bg-gray-50 sm:grid-cols-9">
             <span class="flex items-center col-span-3">
               Showing {{ meta.from }}-{{ meta.to }} of {{ meta.total }}
              </span>
@@ -131,34 +184,7 @@
         </div>
       </div>
 
-    </div>
 
-      <div class="h-[calc(80vh-84px)] " v-else >
-
-          <div class="px-4 sm:py-10 lg:mx-28 bg-transparent max-w-7xl sm:px-6 lg:px-8">
-              <div class="grid items-center grid-cols-1 gap-y-8 sm:grid-cols-2 ">
-                <div class="order-2 ml-20">
-                  <img class="w-3/4 sm:w-full  " src="/asset/podcasts.svg" alt="" />
-                </div>
-
-                <div class="order-1">
-                  <FirstCreate
-                    title="From Knowledge to Transformation: Creating Your First Online Course Step by Step!"
-                    subtitle="Unveiling the Doors of Online Education: Unlock Your Potential, Inspire Students, and Create a Memorable Course to Transform Lives!"
-                  />
-                  <CreateCourseForm :course="courses">
-                    <template #button>
-                      <button type="button" class="btn mt-10 bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                        Create Now
-                      </button>
-                    </template>
-                  </CreateCourseForm>
-
-                </div>
-              </div>
-
-          </div>
-      </div>
 
   </AdminLayout>
 </template>
@@ -175,6 +201,7 @@ import FormSearch from "@/Components/FormSearch.vue";
 import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
 import FirstCreate from "@/Pages/Admin/Course/Partials/FirstCreate.vue";
 import CreateCourseForm from "@/Pages/Admin/Course/Partials/CreateCourseForm.vue";
+import {RadioGroup, RadioGroupLabel, RadioGroupOption} from "@headlessui/vue";
 
 
 const { auth } = usePage().props;
@@ -182,16 +209,27 @@ const { auth } = usePage().props;
 const props = defineProps(
   {
     courses: Object,
+    course: Object,
     filters: Object,
   });
 
 let search = ref('');
 watch(search, (value) => {Inertia.get("/admin/course", {
-  search: value }, {preserveState: true,
-    }
-  );
+    search: value }, {preserveState: true,
+  }
+);
 });
-function reset() { search.value = ''}
+
+let trashed = ref('');
+watch(trashed, (value) => {Inertia.get("/admin/course", {
+  trashed: value }, {preserveState: true,
+  }
+);
+});
+function reset() {
+  search.value = ''
+  trashed.value = ''
+}
 
 
 const { meta } = props.courses;

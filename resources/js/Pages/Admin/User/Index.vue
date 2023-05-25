@@ -2,61 +2,82 @@
   <Head  title="Users" />
 
   <AdminLayout>
-
-    <div class="bg-white ml-2 shadow-md rounded-md border border-slate-200 relative">
-
+    <div class="bg-white ml-2 shadow-md rounded-md border border-gray-200 relative">
       <header class="px-4 py-2 flex items-center justify-between">
-        <h2 class="text-xs font-semibold uppercase text-gray-500 hidden sm:block">All Courses <span class="text-gray-400 font-medium"> {{meta.total}} </span></h2>
+        <h2 class="text-xs font-semibold uppercase text-gray-500 hidden sm:block">
+          All Users {{meta.total}}
+        </h2>
+
 
         <div class="flex items-center">
 
-          <FormSearch  class="w-full ">
-            <label class="block text-gray-700">Trashed:</label>
-            <select  class="border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2">
-              <option :value="null" />
-              <option value="with">With Trashed</option>
-              <option value="only">Only Trashed</option>
-            </select>
+          <FormSearch v-model="search" @reset="reset" class="w-full ">
+            <RadioGroup v-model="trashed" class="py-2">
+              <RadioGroupLabel class="text-xs font-semibold uppercase text-gray-500  px-6">Filters</RadioGroupLabel>
+              <RadioGroupOption v-slot="{ checked }" value="a">
+                  <span class="flex items-center w-full border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
+                        :class="checked ? 'bg-gray-100' : 'flex items-center w-full hover:bg-gray-50 py-1 px-1.5 cursor-pointer'">
+                    <svg class="shrink-0 mr-2 fill-current text-gray-400 opacity-0"
+                         :class="checked ? 'opacity-100' : ''"
+                         width="11" height="7" viewBox="0 0 11 7">
+                    <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
+                   </svg>
+                    All Users
+                  </span>
+              </RadioGroupOption>
 
+
+              <RadioGroupOption v-slot="{ checked }" value="d">
+                 <span class="flex items-center w-full border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
+                       :class="checked ? 'bg-gray-100' : 'flex items-center w-full hover:bg-gray-50 py-1 px-1.5 cursor-pointer'">
+                    <svg class="shrink-0 mr-2 fill-current text-gray-400 opacity-0"
+                         :class="checked ? 'opacity-100' : ''"
+                         width="11" height="7" viewBox="0 0 11 7">
+                    <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
+                   </svg>
+                   Deleted Users
+                  </span>
+              </RadioGroupOption>
+            </RadioGroup>
+
+            <div class="py-2 px-3 border-t border-gray-100 bg-gray-50">
+              <button @click="reset" class="py-0.5 px-2 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+                Clear
+              </button>
+            </div>
           </FormSearch>
 
 
 
-              <button type="button" class="flex ml-4  px-5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
-                <PlusIcon class="w-5 h-5 mr-1 "/>
-                User
-              </button>
-
-
+          <Link :href="route('user.create')" type="button" class="flex ml-4  px-5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+            <PlusIcon class="w-5 h-5 mr-1 "/>
+            User
+          </Link>
 
         </div>
       </header>
 
       <div>
-
         <!-- Table -->
-        <div class="overflow-x-auto rounded-b-md ">
+        <div>
           <table class="table-auto w-full ">
             <!-- Table header -->
-            <thead class="text-xs py-2.5 font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b ">
+            <thead class="text-xs uppercase font-semibold text-gray-500 bg-gray-50 border-y">
             <tr>
-              <th class="px-2 first:pl-5 last:pr-5 whitespace-nowrap">
+              <th class="px-2 py-3 pr-5 whitespace-nowrap">
                 <div class="font-semibold text-left">Profiles</div>
               </th>
-              <th class="px-2 first:pl-5 last:pr-5 whitespace-nowrap">
+              <th class="px-2 py-3 pr-5 whitespace-nowrap">
                 <div class="font-semibold text-left">Email</div>
               </th>
-              <th colspan="2" class="px-2 first:pl-5 last:pr-5 whitespace-nowrap">
+              <th colspan="2" class="px-2 py-3 pr-5 whitespace-nowrap">
                 <div class="font-semibold text-left">Role</div>
               </th>
-              <th class="px-2 first:pl-5 last:pr-5 whitespace-nowrap">
+              <th class="px-2 py-3 pr-5 whitespace-nowrap">
                 <div class="font-semibold text-left">Status</div>
               </th>
-              <th class="px-2 first:pl-5 last:pr-5 whitespace-nowrap">
+              <th class="px-2 py-3 pr-5 whitespace-nowrap">
                 <span class="font-semibold text-left">Action</span>
-              </th>
-              <th class="px-2 first:pl-5 last:pr-5  whitespace-nowrap">
-                <span class="sr-only">Menu</span>
               </th>
 
             </tr>
@@ -64,11 +85,9 @@
 
             <!-- Table body -->
             <tbody>
-            <tr
-              class="text-sm "
-              v-for="(user, idx) in users.data"
-              :key="user.id"
-              :class="[idx === 0 ? 'border-dark-300' : 'border-gray-200', 'border-t']">
+            <tr v-for="user in users.data"
+               :key="user.id"
+               class="text-sm border-t border-gray-200 hover:bg-gray-50">
 
               <td class="px-2 first:pl-5 last:pr-5 py-2.5 whitespace-nowrap ">
                 <div class="flex items-center">
@@ -85,9 +104,8 @@
                 <div class="text-left">{{ user.owner ? 'Owner' : 'User' }}</div>
               </td>
               <td class="px-2 first:pl-5 last:pr-5 whitespace-nowrap">
-                <div class="sr-only"></div>
+                <div class="text-left"></div>
               </td>
-
 
 
               <td class="px-2 inline-flex first:pl-5 last:pr-5 py-3 whitespace-nowrap">
@@ -105,32 +123,21 @@
                     </svg>
                   </Link>
 
-
-                  <ModalDelete >
-
+                  <ModalDelete>
                     <div class="flex ml-2 justify-between">
-
-
                       <Link :href="route('user.destroy', user.id)" as="button" type="button" method="DELETE"
                             class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
                         Yes, delete
                       </Link>
-
                     </div>
                   </ModalDelete>
-
                 </div>
               </td>
-
             </tr>
-
-
             </tbody>
-
           </table>
 
-          <div
-            class="grid px-4 py-4 text-xs font-semibold uppercase text-slate-500 bg-slate-50 dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+          <div class="grid px-4 py-4 text-xs font-semibold uppercase text-gray-500 border-t rounded-b-md  bg-gray-50 sm:grid-cols-9">
           <span class="flex items-center col-span-3">
               Showing {{ meta.from }}-{{ meta.to }} of {{ meta.total }}
           </span>
@@ -159,13 +166,34 @@ import AdminLayout from "../Layouts/AdminLayout.vue";
 import ModalDelete from "@/Components/ModalDelete.vue";
 import Pagination from "@/Components/Pagination.vue";
 import FormSearch from "@/Components/FormSearch.vue";
-
+import {ref, watch} from "vue";
+import {Inertia} from "@inertiajs/inertia";
+import {RadioGroup, RadioGroupLabel, RadioGroupOption} from "@headlessui/vue";
 
 const props = defineProps(
   {
-    filters: Object,
-    users: Object,
+    filters:Object,
+    users:Object,
   });
+
+let search = ref('');
+watch(search, (value) => {Inertia.get("/admin/user", {
+    search: value }, {preserveState: true,
+  }
+)});
+
+let trashed = ref('');
+watch(trashed, (value) => {Inertia.get("/admin/user", {
+  trashed: value }, {preserveState: true,
+  }
+)});
+
+function reset() {
+  search.value = ''
+  trashed.value = ''
+}
+
+
 
 const { isMounted } = useMounted();
 const { meta } = props.users;

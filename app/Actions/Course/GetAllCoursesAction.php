@@ -2,10 +2,12 @@
 
 namespace App\Actions\Course;
 
-use App\Data\Course\CourseFilterData;
-use App\Filters\CourseFilter;
-use App\Models\Course;
 use Illuminate\Support\Facades\Pipeline;
+use Illuminate\Support\Facades\Request;
+use App\Data\Course\CourseFilterData;
+use App\Models\Course;
+
+
 
 class GetAllCoursesAction
 {
@@ -19,7 +21,7 @@ class GetAllCoursesAction
 
         return Pipeline::send($data)
             ->then(fn($data) => $data->builder)
-            ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
+            ->filter(Request::only('search', 'trashed'))
             ->paginate(4)
             ->withQueryString();
     }

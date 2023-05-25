@@ -20,6 +20,7 @@ class CoursesController extends Controller
 
         return Inertia::render('Admin/Course/Index', [
             'courses' => CourseResource::collection($course),
+            'course' => Course::with('modules')->get(),
             'filters' => Course::query(),
 
         ]);

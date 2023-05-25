@@ -24,7 +24,7 @@ class UsersController extends Controller
         $users = GetAllUsersAction::run(['perPage' => 10000]);
 
         return Inertia::render('Admin/User/Index', [
-            'users' => UserResource::collection($users)
+            'users' => UserResource::collection($users),
         ]);
 
 
