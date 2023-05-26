@@ -11,8 +11,8 @@ const showingNavigationDropdown = ref(false);
 
   <div class="flex bg-gray-50 min-h-screen overflow-hidden">
 
-    <!-- Sidebar -->
-    <Sidebar/>
+    <!-- Sidebar
+    <Sidebar/> -->
 
     <!-- Content area -->
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">

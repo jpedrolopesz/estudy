@@ -32,7 +32,7 @@ defineProps({
   autofocus: { type: Boolean, default: false },
   placeholder: { type: String, default: "" },
   label: { type: String, default: "" },
-  type: { type: String, default: "text" },
+  type: { type: String, default: "" },
   readonly: { type: Boolean, default: false }
 });
 </script>

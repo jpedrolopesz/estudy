@@ -1,22 +1,24 @@
 <template>
-  <AuthenticatedUserLayout>
 
-    <div class="flex bg-gray-50 flex-col overflow-hidden">
+  <AdminLayout>
+    <div class="flex bg-transparent flex-col overflow-hidden">
 
       <VideoPlayer :course="course"/>
 
     </div>
 
-  </AuthenticatedUserLayout>
+  </AdminLayout>
+
 </template>
 
 <script>
-import AuthenticatedUserLayout from "@/Pages/User/Layouts/Dashboard/AuthenticatedUserLayout.vue";
 import VideoPlayer from "../Course/Partials/VideoPlayer.vue"
+import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
 
 export default {
   components: {
-    VideoPlayer, AuthenticatedUserLayout,
+    AdminLayout,
+    VideoPlayer,
   },
   emits: ['moduleSelect'],
 

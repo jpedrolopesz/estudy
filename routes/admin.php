@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Stripe\StripeController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Models\Course;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

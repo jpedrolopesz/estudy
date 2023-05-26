@@ -15,30 +15,9 @@
                 <div class="min-w-0 flex-1">
 
                   <div class="mb-2">
-                    <h1 class="font-medium text-2xl lg:text-3xl opacity-75">User</h1>
+                    <h1 class="font-medium text-2xl lg:text-3xl opacity-75">User Create</h1>
                   </div>
-                  <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
-                    <nav class="flex mb-2" aria-label="Breadcrumb">
-                      <ul class="inline-flex flex-wrap text-sm font-medium">
-                        <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                          <BreadcrumbLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Home
-                          </BreadcrumbLink>
-                        </li>
-                        <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                          <BreadcrumbLink  :active="route().current('user.index')">
-                            Users
-                          </BreadcrumbLink>
-                        </li>
-                        <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                          <BreadcrumbLink  :active="route().current('user.create')">
-                            Create
-                          </BreadcrumbLink>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
                   <p class="mt-1 text-sm text-gray-600">This information will be displayed publicly so be careful what you share.</p>
 
                 </div>
@@ -80,42 +59,50 @@
                   </div>
 
                   <div class="grid grid-cols-6 gap-6">
-                        <div class="col-span-6 sm:col-span-2">
-                          <label for="name" class="block text-sm font-medium text-gray-700">First name</label>
-                          <input v-model="form.first_name" type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                          <InputError class="mt-2" :message="form.errors.first_name" />
-                        </div>
+                    <div class="col-span-6 sm:col-span-2">
+                      <FormInput
 
-                        <div class="col-span-6 sm:col-span-3">
-                          <label for="name" class="block text-sm font-medium text-gray-700">Last name</label>
-                          <input v-model="form.last_name" type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                          <InputError class="mt-2" :message="form.errors.last_name" />
-                        </div>
+                        v-model="form.first_name"
+                        required
+                        label="First name"
+                        :autofocus="true"
+                      />
+                      <InputError class="mt-2" :message="form.errors.first_name" />
 
-                        <div class="col-span-6 sm:col-span-1">
-                          <label for="role" class="block text-sm font-medium text-gray-700">Owner</label>
-                          <select v-model="form.owner" name="role" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                            <option :value="false">No</option>
-                            <option :value="true">Yes</option>
+                    </div>
 
-                          </select>
-                          <InputError class="mt-2" :message="form.errors.owner" />
-                        </div>
+                    <div class="col-span-6 sm:col-span-3">
+                      <FormInput
+                        v-model="form.last_name"
+                        required
+                        label="Last name"
+                      />
+                      <InputError class="mt-2" :message="form.errors.last_name" />
+                    </div>
 
-                        <div class="col-span-6 sm:col-span-6">
-                          <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
-                          <input v-model="form.email" type="text" name="email" id="email" autocomplete="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                          <InputError class="mt-2" :message="form.errors.email" />
-                        </div>
+                    <div class="col-span-6 sm:col-span-1">
+                      <label for="role" class="form-label !pt-1 block mb-2 text-sm font-medium text-gray-900">Owner</label>
+                      <select v-model="form.owner" name="role" class="w-full p-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block">
+                        <option :value="false">No</option>
+                        <option :value="true">Yes</option>
 
-                        <div class="col-span-6">
-                          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                          <input v-model="form.password" type="password" name="password" id="password"  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                          <InputError class="mt-2" :message="form.errors.password" />
-                        </div>
+                      </select>
+                      <InputError class="mt-2" :message="form.errors.owner" />
+                    </div>
+
+                    <div class="col-span-6">
+                      <FormInput
+                        v-model="form.email"
+                        required
+                        label="Email"
+                      />
+                      <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
 
 
-                      </div>
+                  </div>
+
+
 
                 </div>
                 <div class="flex justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
@@ -155,9 +142,11 @@ import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import { useForm, Link, Head } from '@inertiajs/inertia-vue3'
 import InputError from "@/Components/InputError.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
 
 export default {
   components: {
+    FormInput,
     InputError,
     AuthenticatedLayout,
     BreadcrumbLink,

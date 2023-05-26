@@ -54,7 +54,7 @@ class CreatePlanController extends Controller
     public function edit(int $id): \Inertia\Response
     {
         return Inertia::render('Admin/Plans/Edit', [
-            'plan' => (new ShowPlanAction())->execute($id),
+            'plan' => Plan::with('planFeatures')->find($id)
 
         ]);
     }

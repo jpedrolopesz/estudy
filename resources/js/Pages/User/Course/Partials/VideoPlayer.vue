@@ -30,12 +30,12 @@
     </div>
   </div>
 
-  <div class="w-full h-full bg-gray-50 flex items-stretch flex-wrap md:flex-nowrap -md:pb-16 order-3 md:w-[calc(100%+150px+180px)] lg:w-[calc(100%+280px+150px)]">
+  <div class="h-auto bg-transparent flex items-stretch flex-wrap md:flex-nowrap -md:pb-16 order-3 md:w-[calc(100%+150px+180px)] lg:w-[calc(100%+280px+150px)]">
 
-    <div class="hidden lg:block transition-all duration-200 mt-2 md:mt-6 mt-12 md:relative overflow-y-scroll md:h-auto mb-3 md:mb-0 w-full md:w-[220px] lg:w-[290px] xl:w-[390px] !block md:order-1 md:mr-[350px] lg:mr-[450px]">
+    <div class="shadow-lg bg-white p-2 overflow-x-hidden rounded-md  transition-all duration-200 mt-2 md:mt-6 mt-12  overflow-y-scroll mb-3 md:mb-0 w-full md:w-[220px] lg:w-[290px] xl:w-[390px] !block md:order-1 md:mr-[350px] lg:mr-[450px]">
 
-      <div class="py-6 px-3 md:px-0 pt-0 md:pr-6 md:absolute w-full h-full">
-        <div class="flex items-center justify-between bg-gray-50 pb-6 sticky top-0 w-full z-30">
+      <div >
+        <div class="flex items-center justify-between  pb-6 sticky top-0 w-full z-30">
           <h1 class="font-medium text-gray-500 leading-none ">
             Episodes (18)
           </h1>
@@ -49,7 +49,11 @@
 
         </div>
 
-        <ModuleAndLesson :course="course" @update-video-url="updateVideoUrl" @update-module="updateModule" @lesson-selected="handleLessonSelected"/>
+        <ModuleAndLesson class="px-2"
+          :course="course"
+          @update-video-url="updateVideoUrl"
+          @update-module="updateModule"
+          @lesson-selected="handleLessonSelected"/>
 
       </div>
 
@@ -62,15 +66,16 @@
       <div>
           <div class="flex items-center justify-between bg-gray-50 pb-6 sticky top-0 w-full z-30">
 
-            <div class="text-gray-800 opacity-70 mb-4 text-lg font-bold mt-4">{{ selectedLesson.title }}</div>
+            <div class="text-gray-800 text-lg font-semibold ">
+              {{ selectedLesson.title }}</div>
 
             <div class="flex mt-2 items-center">
               <button class="p-2 mr-4 rounded-md bg-gray-200 hover:bg-gray-300">
-                <i class='bx bx-left-arrow-alt nav__link'></i>
+                <ChevronLeftIcon class="w-5 h-5 text-gray-600 "/>
               </button>
 
               <button class="p-2 rounded-md bg-gray-200 hover:bg-gray-300 ">
-                <i class='bx bx-right-arrow-alt nav__link'></i>
+                <ChevronRightIcon class="w-5 h-5 text-gray-600 "/>
               </button>
             </div>
         </div>
@@ -142,12 +147,13 @@
 <script>
 import ModuleAndLesson from "@/Pages/User/Course/Partials/ModuleAndLesson.vue";
 import VideoSection from "@/Pages/User/Course/Partials/VideoSection.vue";
+import { ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/24/outline';
 import moment from "moment";
 
 
 export default {
   name: 'VideoPlayer',
-  components: {VideoSection, ModuleAndLesson},
+  components: {VideoSection, ModuleAndLesson, ChevronRightIcon, ChevronLeftIcon},
   props: {
     course: Object,
   },

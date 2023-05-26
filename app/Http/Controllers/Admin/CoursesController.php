@@ -51,18 +51,8 @@ class CoursesController extends Controller
 
     public function show($id): \Inertia\Response
     {
-        $course = Course::findOrFail($id);
-        $lessonCount = 0;
-        foreach ($course->modules as $module) {
-            foreach ($module->lessons as $lesson) {
-                $lessonCount++;
-                $file = $lesson->files;
-                $comments = $lesson->comments;
-            }
-        }
-        return Inertia::render('Admin/Course/Modules/Index', [
-            'course' => $course,
-            'lesson' => $lessonCount,
+        return Inertia::render('User/Course/Show', [
+            'course' => (new ShowCourseAction())->execute($id),
 
         ]);
     }
