@@ -1,16 +1,17 @@
 <template>
 
   <div>
-    <div v-for="module in course.modules" :key="module.id" >
+
+    <div v-for="(module, index) in course.modules" :key="index" >
       <Disclosure v-slot="{ open }">
         <DisclosureButton
-          :class="['modules', module.id === showModule ? 'border-gray-300' : '']"
-          class="flex justify-between hover:border-gray-500 items-center px-3 py-3 bg-white rounded lg:flex-grow mb-1 w-full border border-gray-100 hover:bg-gray-50 bg-gray-50"
+          :class="['modules', module.id === showModule ? 'border-gray-500 ' : '']"
+          class="flex justify-between shadow-sm my-3 hover:border-gray-500 items-center px-3 py-3 bg-white rounded lg:flex-grow mb-1 w-full border border-gray-100 hover:bg-gray-50 bg-gray-50"
           @click.prevent="toggleModule(module.id)"
-          @click="updateModule(module.title)"
+          @click="updateModule(module.id)"
         >
-        <button  class="truncate text-base text-sm">
-          {{ module.title}}
+        <button class="truncate  text-left text-sm font-medium text-gray-500]">
+        {{index + 1 }} - {{ module.title }}
         </button>
 
           <ChevronRightIcon class="w-5 h-5 text-gray-500" :class="open ? 'rotate-90 transform' : ''"/>

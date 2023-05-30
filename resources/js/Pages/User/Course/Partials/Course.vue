@@ -22,11 +22,11 @@
           <div class=" max-w-5xl mx-auto flex flex-col lg:flex-row lg:space-x-4 xl:space-x-10  ">
             <div>
               <div class="mb-6">
-                <img class="w-full rounded-sm" :src="'/storage/thumbnails' + selectedComment.thumbnail " width="640" height="360" />
+                <img class="w-full rounded-sm" :src="'/storage/thumbnails' + selectedContent.thumbnail " width="640" height="360" />
               </div>
               <div class="mb-4 ">
-                <h1 class="text-2xl md:text-3xl text-gray-800 font-bold mb-2">{{selectedComment.title}}</h1>
-                <p class="mb-6">{{selectedComment.description}}</p>
+                <h1 class="text-2xl md:text-3xl text-gray-800 font-bold mb-2">{{selectedContent.title}}</h1>
+                <p class="mb-6">{{selectedContent.description}}</p>
               </div>
             </div>
 
@@ -36,12 +36,12 @@
               <!-- 1st block -->
               <div class="bg-white p-5 shadow rounded-md border border-gray-200lg:w-72 xl:w-80">
                 <div class="space-y-2">
-                  <button class="btn w-full bg-gray-500 hover:bg-indigo-600 text-white">
+                  <Link :href="route('showCourse', selectedContent)" class="btn w-full bg-gray-500 hover:bg-indigo-600 text-white">
                     <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 16 16">
                       <path d="m2.457 8.516.969-.99 2.516 2.481 5.324-5.304.985.989-6.309 6.284z" />
                     </svg>
                     <span class="ml-1">Acessar</span>
-                  </button>
+                  </Link>
                   <button class="btn w-full shadow border border-gray-200 hover:border-gray-300 text-gray-600">
                     <svg class="w-4 h-4 fill-gray-500 shrink-0" viewBox="0 0 16 16">
                       <path d="M14.682 2.318A4.485 4.485 0 0 0 11.5 1 4.377 4.377 0 0 0 8 2.707 4.383 4.383 0 0 0 4.5 1a4.5 4.5 0 0 0-3.182 7.682L8 15l6.682-6.318a4.5 4.5 0 0 0 0-6.364Zm-1.4 4.933L8 12.247l-5.285-5A2.5 2.5 0 0 1 4.5 3c1.437 0 2.312.681 3.5 2.625C9.187 3.681 10.062 3 11.5 3a2.5 2.5 0 0 1 1.785 4.251h-.003Z" />
@@ -87,7 +87,7 @@
                   <div class="text-sm text-gray-800 font-semibold">Content</div>
                 </div>
                 <ul class="space-y-3">
-                  <li  v-for="module in selectedComment.modules"  >
+                  <li  v-for="module in selectedContent.modules"  >
                     <div class="flex items-center justify-between">
 
                           <span class="text-sm font-medium text-gray-800 truncate">{{module.title}}</span>
@@ -115,21 +115,21 @@
 </template>
 
 <script>
+import { Link} from '@inertiajs/inertia-vue3';
 import ListCourse from "./ListCourse.vue";
 import CourseHeader from "./CourseHeader.vue";
 import {ref} from "vue";
 
 
 export default {
-  name: 'Chat',
-  components: {CourseHeader, ListCourse},
+  components: {CourseHeader, ListCourse, Link},
   props: {
     courses:Object,
   },
   emits: ['selectedCourse', 'close-msgsidebar', 'toggle-msgsidebar'],
   data() {
     return {
-      selectedComment: '',
+      selectedContent: '',
     }
   },
   setup() {
@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     handleCourseSelected(course) {
-      this.selectedComment = course;
+      this.selectedContent = course;
     },
   }
 }

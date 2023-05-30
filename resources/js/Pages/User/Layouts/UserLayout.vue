@@ -7,7 +7,7 @@
 
 
       <main class=" ml-16 mr-4 min-h-screen bg-dots-darker overflow-hidden">
-        <Header class="mb-2"/>
+
 
         <div class="py-1 w-full max-w-9xl mx-auto">
           <slot />
@@ -21,7 +21,6 @@
 <script setup>
 import { ref } from 'vue';
 import Sidebar from "./Dashboard/Sidebar.vue";
-import Header from "./Dashboard/Header.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>

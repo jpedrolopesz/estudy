@@ -9,27 +9,18 @@
   </UserLayout>
 </template>
 
-<script>
+<script setup>
 import UserLayout from "@/Pages/User/Layouts/UserLayout.vue";
 import Course from "./Partials/Course.vue"
 import {ref} from "vue";
 
 
-export default {
-  components:{ UserLayout, Course},
-  props: {
-    courses:Object,
-    msgSidebarOpen:Boolean
-  },
-  setup() {
-    const msgSidebarOpen = ref(true);
-    const handleCloseSidebar = () => {
-      msgSidebarOpen.value = false;
-    };
-    return {
-      msgSidebarOpen,
-      handleCloseSidebar,
-    }
-  },
-}
+defineProps({
+  courses:Object,
+  msgSidebarOpen:Boolean
+})
+
+const msgSidebarOpen = ref(true);
+const handleCloseSidebar = () => { msgSidebarOpen.value = false};
+
 </script>

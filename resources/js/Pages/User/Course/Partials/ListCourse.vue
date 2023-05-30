@@ -15,9 +15,9 @@
       </header>
 
 
-      <div class="overflow-y-auto ">
+      <div class="overflow-y-auto h-[calc(84vh-64px)]">
         <ul>
-          <li class="mx-2 shadow-sm rounded-sm border my-4 border-gray-200  hover:bg-gray-50"
+          <li class="mx-2 shadow-sm rounded-sm border my-2 border-gray-200  hover:bg-gray-50"
               v-for="course in courses" :key="course.id"
               @click="selectCourse(course)"
               @click.stop="$emit('close-msgsidebar')">
@@ -27,9 +27,14 @@
               </div>
               <div class="flex-grow grid-rows-3 justify-between ">
                 <span class="flex-shrink-0 flex-grow-0 text-left text-base font-bold text-gray-600">{{ course.title }}</span>
-                <p class="flex-shrink-0 flex-grow-0 text-left text-xs font-medium text-[#7b8392]">40+ lessons · 4+ hours</p>
+                <h2 class="text-xs mt-2 font-semibold uppercase text-gray-500 hidden sm:block">
+                  Progress
+                </h2>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4 ">
+                  <div class="bg-gray-600 h-2.5 rounded-full 0" style="width: 45%"></div>
+                </div>
 
-                <div class=" mt-4 text-sm text-gray-60">Acessar </div>
+                <div class=" mt-4 text-sm text-gray-60">Acessar</div>
 
               </div>
             </div>
@@ -48,7 +53,6 @@
 
 <script setup>
 import { defineEmits, defineProps } from 'vue';
-
 
 
 const props = defineProps({

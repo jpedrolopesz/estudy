@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="flex ">
+      <div class="flex">
         <!-- Close button -->
         <button
           class="md:hidden text-gray-400 hover:text-gray-500 bg-white px-6 py-1 rounded-md border border-gray-200 hover:border-gray-400 "

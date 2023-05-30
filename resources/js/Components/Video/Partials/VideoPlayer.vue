@@ -1,54 +1,14 @@
 <template>
   <div class="flex bg-transparent flex-col overflow-hidden">
 
-  <div class="order-1  md:order-2 flex flex-col">
-    <div class="w-full flex items-center px-3 md:px-6">
-      <div class="flex items-center justify-between w-full">
-        <div class="flex items-center min-w-0">
-          <div class="text-gray-400 leading-none overflow-hidden truncate text-ellipsis">
-            <nav class="flex " aria-label="Breadcrumb">
-              <ul class="inline-flex flex-wrap text-sm font-medium">
-                <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                  <a href="">
-                    {{course.title}}
-                  </a>
-                </li>
-
-                <li v-if="moduleSelect" class=" after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                  <a href="">
-                    {{moduleSelect}}
-                  </a>
-                </li>
-
-              </ul>
-            </nav>
-          </div>
-
-
-        </div>
-
-      </div>
-    </div>
-  </div>
 
   <div class="h-auto bg-transparent flex items-stretch flex-wrap md:flex-nowrap -md:pb-16 order-3 md:w-[calc(100%+150px+180px)] lg:w-[calc(100%+280px+150px)]">
 
-    <div class="shadow-lg bg-white p-2 overflow-x-hidden rounded-md  transition-all duration-200 mt-2 md:mt-6 mt-12  overflow-y-scroll mb-3 md:mb-0 w-full md:w-[220px] lg:w-[290px] xl:w-[390px] !block md:order-1 md:mr-[350px] lg:mr-[450px]">
+    <div class="shadow-md bg-white p-2 overflow-x-hidden rounded-sm h-[calc(80vh-64px)] transition-all duration-200 mt-2 md:mt-6 mt-12  overflow-y-scroll mb-3 md:mb-0 w-full md:w-[220px] lg:w-[290px] xl:w-[390px] !block md:order-1 md:mr-[350px] lg:mr-[450px]">
 
-      <div >
-        <div class="flex items-center justify-between  pb-6 sticky top-0 w-full z-30">
-          <h1 class="font-medium text-gray-500 leading-none ">
-            Episodes (18)
-          </h1>
+      <div>
 
-          <div class="flex items-center">
-            <button class="flex p-2 rounded-md font-medium text-gray-500 leading-none bg-gray-200 hover:bg-gray-300">
-              <i class='bx bx-left-arrow-alt nav__link'></i>
-              <span class="truncate">Back To</span>
-            </button>
-          </div>
 
-        </div>
 
         <ModuleAndLesson class="px-2"
           :course="course"
@@ -67,8 +27,10 @@
       <div>
           <div class="flex items-center justify-between bg-gray-50 pb-6 sticky top-0 w-full z-30">
 
-            <div class="text-gray-800 text-lg font-semibold ">
-              {{ selectedLesson.title }}</div>
+
+              <p class="flex-shrink-0 flex-grow-0 text-left text-xl font-bold text-gray-800">
+              {{ selectedLesson.title }}
+              </p>
 
             <div class="flex mt-2 items-center">
               <button class="p-2 mr-4 rounded-md bg-gray-200 hover:bg-gray-300">
