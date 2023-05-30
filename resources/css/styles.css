@@ -1,25 +1,4 @@
 
-:root {
-    --nav-width: 219px;
-    /*========== Colors ==========*/
-    --first-color: #58555E;
-    --first-color-light: #F4F0FA;
-    --title-color: #19181B;
-    --text-color: #58555E;
-    --text-color-light: #A5A1AA;
-    --body-color: #F9F6FD;
-    --container-color: #FFFFFF;
-    /*========== z index ==========*/
-    --z-fixed: 100;
-}
-
-body {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-}
-
-
 .sidebar {
 
 }
@@ -29,7 +8,6 @@ body {
 }
 
 .sidebar .logo_class .logo {
-  color: var(--title-color);
   display: flex;
   height: 50px;
   width: 100%;
@@ -50,7 +28,6 @@ body {
 
 
 .sidebar #menu {
-  color: var(--title-color);
   position: absolute;
   left: 50%;
   top: 20px;
@@ -80,10 +57,8 @@ body {
   border-radius: 12px;
   outline: none;
   border: none;
-  background-color: var(--text-color-light);
   padding-left: 50px;
   font-size: 12px;
-  color:var(--container-color);
 ;
 }
 
@@ -99,10 +74,9 @@ body {
 .sidebar ul li .tooltip {
   position: absolute;
   height: 35px;
-  left: 70px;
+  left: 60px;
   border-radius: 6px;
   width: 140px;
-  background:var(--container-color);
   line-height: 35px;
   text-align: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -110,7 +84,6 @@ body {
   opacity: 0;
   pointer-events: none;
   display: block;
-  z-index: var(--z-fixed);
 }
 
 .sidebar .links_name {
@@ -133,13 +106,9 @@ body {
   top: 10%;
 }
 
-.sidebar ul li a:hover {
-  color: var(--first-color);
-  background: var(--body-color);
-}
+
 
 .sidebar ul li a {
-  color: var(--text-color);
   display: flex;
   border-radius: 10px;
   white-space: nowrap;
@@ -155,7 +124,6 @@ body {
 
 .sidebar .profile_content {
   position: absolute;
-  color: var(--title-color);
   bottom: 0;
   left: 0;
   width: 100%;
@@ -220,7 +188,6 @@ body {
 .nav__link {
   display: flex;
   align-items: center;
-  color: var(--text-color);
 }
 
 .nav__icon {
@@ -258,7 +225,6 @@ body {
 .home_content .text {
   font-size: 25px;
   font-weight: 500;
-  color: var(--title-color);
   margin: 12px;
 }
 

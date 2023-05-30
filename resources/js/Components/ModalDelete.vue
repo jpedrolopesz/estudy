@@ -1,6 +1,6 @@
 <template>
 
-  <button type="button" @click="open = true" class="text-gray-400 hover:text-gray-500 px-2 py-0.5  rounded-md hover:bg-gray-200">
+  <button type="button" @click="open = true" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-100">
 
       <TrashIcon class="w-5 h-5"/>
 

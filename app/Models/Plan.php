@@ -11,8 +11,6 @@ class Plan extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $dates = ['deleted_at'];
-
     protected $fillable = [
         'id',
         'url',
@@ -24,8 +22,6 @@ class Plan extends Model
         'active',
         'recommended',
         'description',
-        'deleted_at'
-
     ];
 
     public function users()

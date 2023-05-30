@@ -1,4 +1,5 @@
 <template>
+  <div class="flex bg-transparent flex-col overflow-hidden">
 
   <div class="order-1  md:order-2 flex flex-col">
     <div class="w-full flex items-center px-3 md:px-6">
@@ -141,15 +142,15 @@
     </div>
   </div>
 
+  </div>
 </template>
 
 
 <script>
-import ModuleAndLesson from "@/Pages/User/Course/Partials/ModuleAndLesson.vue";
-import VideoSection from "@/Pages/User/Course/Partials/VideoSection.vue";
-import { ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/24/outline';
 import moment from "moment";
-
+import VideoSection from "./VideoSection.vue";
+import ModuleAndLesson from "./ModuleAndLesson.vue";
+import { ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/24/outline';
 
 export default {
   name: 'VideoPlayer',

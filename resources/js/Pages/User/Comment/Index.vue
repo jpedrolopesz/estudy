@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import AuthenticatedUserLayout from "@/Pages/User/Layouts/Dashboard/AuthenticatedUserLayout.vue";
+import AuthenticatedUserLayout from "@/Pages/User/Layouts/UserLayout.vue";
 import Chat from "@/Pages/User/Comment/Partials/Chat.vue";
 import {ref} from "vue";
 import ChatHeader from "@/Pages/User/Comment/Partials/ChatHeader.vue";

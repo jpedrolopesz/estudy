@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import AuthenticatedUserLayout from "../../Layouts/Dashboard/AuthenticatedUserLayout.vue";
+import AuthenticatedUserLayout from "../../Layouts/UserLayout.vue";
 import AccountUserLayout from "../../Layouts/Account/AccountUserLayout.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';

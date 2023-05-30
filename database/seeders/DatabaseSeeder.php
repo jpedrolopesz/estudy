@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\Roles;
 use App\Models\Comment;
 use App\Models\Course;
@@ -35,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
         ]);
 
-        User::factory()->count(50)->create();
+        User::factory()->count(10)->create();
 
 
 
@@ -71,13 +70,13 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        Course::factory()->count(10)->create()->each(function ($curso) {
+        Course::factory()->count(4)->create()->each(function ($curso) {
             // Criar 5 módulos para cada curso
             $modulos = Module::factory()->count(5)->create(['course_id' => $curso->id]);
 
             // Para cada módulo, criar 5 aulas
             $modulos->each(function ($modulo) {
-                $aulas = Lesson::factory()->count(5)->create(['module_id' => $modulo->id]);
+                $aulas = Lesson::factory()->count(3)->create(['module_id' => $modulo->id]);
 
                 // Para cada aula, criar 3 comentários
                 $aulas->each(function ($aula) {

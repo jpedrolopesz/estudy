@@ -205,7 +205,7 @@
 </template>
 
 <script>
-import AuthenticatedUserLayout from "../../Layouts/Dashboard/AuthenticatedUserLayout.vue";
+import AuthenticatedUserLayout from "../../Layouts/UserLayout.vue";
 import AccountUserLayout from "../../Layouts/Account/AccountUserLayout.vue";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 import { ref } from 'vue'

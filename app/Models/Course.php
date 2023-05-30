@@ -15,20 +15,20 @@ class Course extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
+
     protected $fillable = [
         'user_id',
         'title',
         'description',
         'price',
-        'thumbnail'
+        'thumbnail',
     ];
-
-
 
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
 
     public function members(): BelongsToMany
     {
@@ -37,22 +37,16 @@ class Course extends Model implements HasMedia
             ->withTimestamps();
     }
 
+    public function isUserEnrolled(User $user)
+    {
+        return $this->members()->where('users.id', $user->id)->exists();
+    }
+
     public function hasUser(User $user)
     {
         return (bool)$this->members()->where('user_id', $user->id)->first();
     }
 
-    public function isArchived()
-    {
-        return !is_null($this->archived_at);
-    }
-
-    public function toSearchableArray()
-    {
-        return [
-            'name' => $this->name,
-        ];
-    }
 
     public function user()
     {

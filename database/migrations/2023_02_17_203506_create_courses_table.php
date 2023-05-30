@@ -19,11 +19,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('thumbnail')->nullable();;
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2)->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('due_date')->nullable();
-            $table->longText('settings')->nullable();
-            $table->timestamp('archived_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -70,7 +70,9 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
              // ================ COURSES ================= //
             Route::resource('course', CoursesController::class);
             Route::controller(CoursesController::class)->group(function () {
-                //
+
+                Route::put('course/{course}/restore',  'restore')->name('course.restore');
+
             });
 
              // ================ MODULES ================= //

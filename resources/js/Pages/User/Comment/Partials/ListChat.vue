@@ -56,9 +56,7 @@
 import moment from "moment/moment";
 import FormSearch from "@/Components/FormSearch.vue";
 import FormSearchSideBar from "@/Components/FormSearchSideBar.vue";
-import throttle from "lodash/throttle";
-import pickBy from "lodash/pickBy";
-import mapValues from "lodash/mapValues";
+
 
 export default {
   name: 'ListChat',

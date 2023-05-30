@@ -13,6 +13,7 @@ class CourseResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'thumbnail' => $this->thumbnail,
+            'deleted_at' => $this->deleted_at,
         ];
     }
 }

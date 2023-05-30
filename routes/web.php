@@ -1,24 +1,24 @@
 <?php
 
-use App\Http\Controllers\User\Account\DeleteController;
-use App\Http\Controllers\User\Account\PlanController;
-use App\Http\Controllers\User\Account\PasswordController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionInvoiceController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionController;
+use App\Http\Controllers\User\Account\PasswordController;
+use App\Http\Controllers\User\Account\DeleteController;
 use App\Http\Controllers\User\Account\UserController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\User\Account\PlanController;
+use App\Http\Controllers\PurchasesController;
+use App\Http\Controllers\User\CourseUserController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
+
+
+Route::get('/courses', [CourseUserController::class, 'index'])->name('course.user.index');
+Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');
+
 
 
 

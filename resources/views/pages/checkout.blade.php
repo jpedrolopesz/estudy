@@ -1,7 +1,5 @@
 @extends('guest')
 
-
-
 <section>
 
   <div class="grid grid-cols-1 lg:grid-cols-2">

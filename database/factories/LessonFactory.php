@@ -14,7 +14,6 @@ class LessonFactory extends Factory
     {
         return [
             'module_id' => Module::factory(),
-            'sort_order' => $this->faker->numberBetween(1, 100),
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'video_url' => 'https://www.youtube.com/embed/MlgbDr-9SJE',

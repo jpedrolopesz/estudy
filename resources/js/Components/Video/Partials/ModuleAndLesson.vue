@@ -53,8 +53,7 @@
 <script>
 
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
-import {  ChevronRightIcon, PlayIcon} from '@heroicons/vue/24/outline';
-
+import {ChevronRightIcon, PlayIcon} from '@heroicons/vue/24/outline';
 import {ref} from "vue";
 
 export default {

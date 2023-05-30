@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Plan\GetAllPlansAction;
-use App\Actions\Plan\ShowPlanAction;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUpdatePlanRequest;
+use App\Actions\Plan\GetAllPlansAction;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\PlanResource;
-use App\Models\Plan;
-use App\Models\PlanFeature;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use App\Models\Plan;
 use Inertia\Inertia;
 
 class CreatePlanController extends Controller
 {
-
-
     public function index(): \Inertia\Response
     {
         $plan = GetAllPlansAction::run(['perPage' => 10000]);
@@ -95,6 +89,7 @@ class CreatePlanController extends Controller
 
     public function restore(Plan $plan)
     {
+
         $plan->restore();
 
         return Redirect::back()->with('success', 'Plan restored.');

@@ -9,36 +9,27 @@
         <div class="flex items-center">
 
           <FormSearch  v-model="search"  @reset="reset" class="w-full">
-            <RadioGroup v-model="trashed" class="py-2">
-              <RadioGroupLabel class="text-xs font-semibold uppercase text-gray-500  px-6">Filters</RadioGroupLabel>
-              <RadioGroupOption v-slot="{ checked }" value="a">
-                  <span class="flex items-center w-full border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
+            <RadioGroup v-model="trashed">
+              <RadioGroupLabel class="text-xs font-semibold uppercase text-gray-500 px-1">Filters</RadioGroupLabel>
+              <RadioGroupOption v-slot="{ checked }" value="a" >
+
+                  <span class="flex items-center text-xs font-semibold uppercase text-gray-500  border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
                         :class="checked ? 'bg-gray-100' : 'flex items-center w-full hover:bg-gray-50 py-1 px-1.5 cursor-pointer'">
-                    <svg class="shrink-0 mr-2 fill-current text-gray-400 opacity-0"
-                         :class="checked ? 'opacity-100' : ''"
-                         width="11" height="7" viewBox="0 0 11 7">
-                    <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
-                   </svg>
                     All Plans
                   </span>
               </RadioGroupOption>
 
 
               <RadioGroupOption v-slot="{ checked }" value="d">
-                 <span class="flex items-center w-full border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
+                  <span class="flex items-center  text-xs font-semibold uppercase text-gray-500  border-t border-gray-100 hover:bg-gray-50 py-1 px-1.5 cursor-pointer"
                        :class="checked ? 'bg-gray-100' : 'flex items-center w-full hover:bg-gray-50 py-1 px-1.5 cursor-pointer'">
-                    <svg class="shrink-0 mr-2 fill-current text-gray-400 opacity-0"
-                         :class="checked ? 'opacity-100' : ''"
-                         width="11" height="7" viewBox="0 0 11 7">
-                    <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
-                   </svg>
                    Deleted Plans
                   </span>
               </RadioGroupOption>
             </RadioGroup>
 
-            <div class="py-2 px-3 border-t border-gray-100 bg-gray-50">
-              <button @click="reset" class="py-0.5 px-2 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+            <div class="py-2 px-1 border-t border-gray-100 bg-gray-50">
+              <button @click="reset" class="py-0.5 px-2 bg-gray-50 text-xs font-semibold uppercase text-gray-500 rounded-md  border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
                 Clear
               </button>
             </div>
@@ -54,7 +45,7 @@
 
       <div>
         <!-- Table -->
-        <div class="overflow-x-auto  ">
+        <div class="overflow-x-auto">
           <table class="table-auto w-full">
             <!-- Table header -->
             <thead class="text-xs font-semibold  uppercase text-slate-500 bg-slate-50  border-t border-b border-slate-200">
@@ -102,15 +93,17 @@
               </td>
 
               <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
-                <div class="space-x-1 inline-flex">
+                <Link v-if="plan.deleted_at" :href="route('plan.restore', plan.id)" as="button" type="button" method="PUT" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-100">
+                  <ArrowPathIcon class="w-5 h-5"/>
 
-                  <Link :href="route('plan.edit', plan.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
-                    <span class="sr-only">Edit</span>
-                    <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
-                      <path d="M19.7 8.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM12.6 22H10v-2.6l6-6 2.6 2.6-6 6zm7.4-7.4L17.4 12l1.6-1.6 2.6 2.6-1.6 1.6z"></path>
-                    </svg>
+                </Link>
+
+                <div v-if="!plan.deleted_at" class="space-x-1 inline-flex">
+                  <Link :href="route('plan.edit', plan.id)" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-100">
+                    <PaintBrushIcon class="w-5 h-5"/>
+
                   </Link>
-                  <ModalDelete v-if="!plan.deleted_at" >
+                  <ModalDelete  >
                     <div class="flex ml-2 justify-between">
                       <Link :href="route('plan.destroy', plan.id)" as="button" type="button" method="DELETE"
                             class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
@@ -159,7 +152,7 @@
 import {ref, watch} from 'vue';
 import {Inertia} from "@inertiajs/inertia";
 import { Link, Head } from '@inertiajs/inertia-vue3';
-import { PlusIcon } from '@heroicons/vue/24/outline';
+import { PlusIcon, PaintBrushIcon, ArrowPathIcon } from '@heroicons/vue/24/outline';
 import AdminLayout from "../Layouts/AdminLayout.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import Pagination from "@/Components/Pagination.vue";

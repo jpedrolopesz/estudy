@@ -16,7 +16,6 @@ class CourseFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'thumbnail' => 'RlMZkSU90YmNYA11xK5FmGgzTXOXinU3bWP25HBD.png',
-            'price' => $this->faker->randomFloat(2, 10, 100),
             'user_id' => 1
         ];
     }

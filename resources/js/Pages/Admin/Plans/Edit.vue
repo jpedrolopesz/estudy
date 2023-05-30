@@ -129,6 +129,7 @@
 
                 <div>
 
+
                   <button  type="submit" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                    Update
                   </button>
@@ -151,7 +152,6 @@
 import AdminLayout from "../Layouts/AdminLayout.vue";
 import { Link, Head ,useForm } from '@inertiajs/inertia-vue3';
 import InputError from "@/Components/InputError.vue";
-import TrashedMessage from "@/Components/TrashedMessage.vue";
 import FormInput from "@/Components/Form/FormInput.vue";
 import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 
@@ -174,6 +174,11 @@ const update = () => {
       plan: props.plan.id}),)
 };
 
+
+function restore () {
+  form.put(route('user.restore', props.user.id))
+
+}
 
 
 </script>

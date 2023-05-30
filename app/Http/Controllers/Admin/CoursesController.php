@@ -20,9 +20,7 @@ class CoursesController extends Controller
 
         return Inertia::render('Admin/Course/Index', [
             'courses' => CourseResource::collection($course),
-            'course' => Course::with('modules')->get(),
-            'filters' => Course::query(),
-
+            'course' => Course::all(),
         ]);
     }
 
@@ -51,7 +49,7 @@ class CoursesController extends Controller
 
     public function show($id): \Inertia\Response
     {
-        return Inertia::render('User/Course/Show', [
+        return Inertia::render('Admin/Course/Show', [
             'course' => (new ShowCourseAction())->execute($id),
 
         ]);
@@ -96,5 +94,14 @@ class CoursesController extends Controller
 
         }
     }
+
+    public function restore(Course $course)
+    {
+        $course->restore();
+
+        return back();
+
+    }
+
 
 }
