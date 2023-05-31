@@ -1,15 +1,13 @@
 <template>
-  <div class="sticky top-16">
-    <div class="flex items-center justify-between bg-white rounded-t-lg border-b  px-4 sm:px-6 md:px-5 h-16">
+  <div>
+    <div class="flex items-center justify-between  rounded-t-lg   px-4 sm:px-6 md:px-5 ">
 
-      <div class="flex">
+      <div class="flex ">
        <slot/>
       </div>
 
-      <div class="flex items-center">
-        <!-- Close button -->
         <button
-          class="md:hidden  text-slate-400 hover:text-slate-500 mr-4"
+          class="md:hidden text-gray-400 hover:text-gray-500  px-2 py-0.5 rounded-md border border-gray-200 hover:border-gray-400 "
           @click.stop="$emit('toggle-msgsidebar')"
           aria-controls="messages-sidebar"
           :aria-expanded="msgSidebarOpen"
@@ -19,8 +17,7 @@
             <path d="M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z" />
           </svg>
         </button>
-        <!-- People list -->
-      </div>
+
 
     </div>
   </div>

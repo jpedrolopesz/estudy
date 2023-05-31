@@ -7,7 +7,7 @@
         @course-selected="handleCourseSelected"
         @close-msgsidebar="msgSidebarOpen = false"/>
 
-      <div class="w-full  bg-white shadow-md rounded-md border border-gray-200 flex flex-col overflow-y-auto">
+      <div class="w-full  bg-white  shadow-md rounded-md flex flex-col overflow-y-auto">
 
       <CourseHeader
         :msgSidebarOpen="msgSidebarOpen"

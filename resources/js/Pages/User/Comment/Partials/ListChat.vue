@@ -2,17 +2,18 @@
 
 
   <div id="messages-sidebar"
-       class="flex shadow-lg flex-col absolute z-20 top-20 bottom-0 right-1.5 w-4/5 md:w-auto md:static md:top-auto md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
-       :class="msgSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+       class="flex bg-white shadow-md  rounded-md mx-2 border border-gray-200 flex-col absolute right-20 w-5/6 md:w-auto md:static  md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
+       :class="msgSidebarOpen ? 'translate-y-1 translate-x-20 ' : '-translate-x-full '"
   >
     <div class="flex rounded-t-lg border-b h-16 bg-white justify-between">
       <h1 class="font-medium m-2 text-lg lg:text-2xl opacity-75">Comments</h1>
       <FormSearchSideBar/>
 
     </div>
-    <div class="flex-auto bg-white rounded-b-lg border-1 border-gray-100 overflow-y-auto">
+    <div  class="overflow-y-auto h-[calc(94vh-64px)]">
+
       <ul>
-        <li v-for="comment in comments" :key="comment.id" class="block border-b"
+        <li v-for="comment in comments" :key="comment.id" class="ml-2 rounded-sm border my-2 border-gray-200 hover:bg-gray-50"
             @click="selectComment(comment)"
             @click.stop="$emit('close-msgsidebar')"
         >

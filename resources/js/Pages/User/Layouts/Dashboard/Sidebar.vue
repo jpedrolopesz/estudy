@@ -39,6 +39,28 @@
             </NavLink>
             <span class="tooltip bg-white">Courses</span>
           </li>
+          <li>
+            <NavLink :href="route('comments.index')" :active="route().current('comments.index')">
+              <div class="flex items-center p-1 ">
+
+                <ChatBubbleLeftRightIcon class="w-6 h-6 mr-1" />
+
+                <span class="ml-3 links_name">Comments</span>
+              </div>
+            </NavLink>
+            <span class="tooltip bg-white">Comments</span>
+          </li>
+          <li>
+            <NavLink :href="route('comments.index')" :active="route().current('comments.index')">
+              <div class="flex items-center p-1 ">
+
+                <IdentificationIcon class="w-6 h-6 mr-1" />
+
+                <span class="ml-3 links_name">Billing</span>
+              </div>
+            </NavLink>
+            <span class="tooltip bg-white">Billing</span>
+          </li>
 
         </ul>
 
@@ -55,6 +77,15 @@
                 </div>
               </NavLink>
               <span class="tooltip bg-white">Notification</span>
+            </li>
+            <li>
+              <NavLink :href="route('admin.profile.edit')" :active="route().current('admin.profile.edit')">
+                <div class="flex items-center p-1 ">
+                  <Cog6ToothIcon class="w-6 h-6 mr-1" />
+                  <span class="ml-3 links_name">Settings</span>
+                </div>
+              </NavLink>
+              <span class="tooltip bg-white">Settings</span>
             </li>
             <li>
               <NavLink :href="route('admin.profile.edit')" :active="route().current('admin.profile.edit')">
@@ -107,11 +138,16 @@
 <script setup>
 import NavLink from '@/Components/NavLink.vue';
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import { Bars3CenterLeftIcon } from '@heroicons/vue/24/outline';
-import { ChartPieIcon } from '@heroicons/vue/24/outline';
-import { VideoCameraIcon } from '@heroicons/vue/24/outline';
-import { Cog6ToothIcon } from '@heroicons/vue/24/outline';
-import { BellIcon } from '@heroicons/vue/24/outline';
+import {
+  Bars3CenterLeftIcon,
+  ChartPieIcon,
+  VideoCameraIcon,
+  Cog6ToothIcon,
+  BellIcon,
+  ChatBubbleLeftRightIcon,
+  IdentificationIcon
+} from '@heroicons/vue/24/outline';
+
 import {onMounted} from "vue";
 
 onMounted(() => {

@@ -5,10 +5,7 @@
 
       <Sidebar/>
 
-
       <main class=" ml-16 mr-4 min-h-screen bg-dots-darker overflow-hidden">
-
-
         <div class="py-1 w-full max-w-9xl mx-auto">
           <slot />
         </div>

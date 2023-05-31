@@ -1,6 +1,6 @@
 <template>
   <UserLayout>
-        <Course class="h-[calc(98vh-64px)]"
+        <Course class="h-[calc(104vh-64px)] m-2"
           :courses="courses"
           :msgSidebarOpen="msgSidebarOpen"
           @close-msgsidebar="msgSidebarOpen = false"

@@ -1,9 +1,14 @@
 <template>
 
   <div id="course-sidebar"
-       class="flex bg-white shadow-md rounded-md mr-4 border border-gray-200 flex-col absolute z-20 pb-4 right-20 w-4/5 md:w-auto md:static  md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
-       :class="msgSidebarOpen ? 'translate-y-10 translate-x-20 ' : '-translate-x-full '"
+       class="flex bg-white shadow-md  rounded-md mx-2 border border-gray-200 flex-col absolute right-20 w-5/6 md:w-auto md:static  md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
+       :class="msgSidebarOpen ? 'translate-y-1 translate-x-20 ' : '-translate-x-full '"
   >
+    <div class="flex rounded-t-lg border-b h-16 bg-white justify-between">
+      <h1 class="font-medium m-2 text-lg lg:text-2xl opacity-75">Courses</h1>
+      <FormSearchSideBar/>
+
+    </div>
 
     <div>
 
@@ -53,6 +58,7 @@
 
 <script setup>
 import { defineEmits, defineProps } from 'vue';
+import FormSearchSideBar from "@/Components/FormSearchSideBar.vue";
 
 
 const props = defineProps({
