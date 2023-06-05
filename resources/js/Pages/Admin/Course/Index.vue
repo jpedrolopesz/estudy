@@ -82,7 +82,7 @@
                 <td class="px-2 py-2" >
                   <div class="flex items-center">
                     <div>
-                      <img v-bind:src="'/storage/thumbnails/' + course.thumbnail"  class="object-cover rounded-md h-86 md:h-auto md:w-48 " />
+                      <img v-bind:src="'/storage/' + course.thumbnail"  class="object-cover rounded-md h-86 md:h-auto md:w-48 " />
                     </div>
 
                     <div class="flex flex-col p-4 leading-normal">

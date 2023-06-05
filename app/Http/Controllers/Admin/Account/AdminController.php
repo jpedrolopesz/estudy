@@ -38,17 +38,25 @@ class AdminController extends Controller
      * @return RedirectResponse
      */
 
-    public function update(ProfileUpdateRequest $request):RedirectResponse
+    public function update(ProfileUpdateRequest $request): \Illuminate\Http\RedirectResponse
     {
         $request->user()->fill($request->validated());
 
+        if ($request->hasFile('photo')) {
+            // Excluir imagem antiga
+            $oldPhoto = $request->user()->photo;
+            if (!empty($oldPhoto)) {
+                $oldPhotoPath = public_path('storage/user/' . $oldPhoto);
+                if (file_exists($oldPhotoPath)) {
+                    unlink($oldPhotoPath);
+                }
+            }
 
-        if( $request->hasFile('photo')) {
+            // Salvar nova imagem
             $image = $request->file('photo');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             Image::make($image)->resize(120, 120)->save(public_path('storage/user/' . $filename));
-            auth()->user()->photo = $filename;
-
+            $request->user()->photo = $filename;
         }
 
         if ($request->user()->isDirty('email')) {
@@ -56,7 +64,6 @@ class AdminController extends Controller
         }
 
         $request->user()->save();
-
 
         return Redirect::back()->with('success', 'Successfully updated');
     }

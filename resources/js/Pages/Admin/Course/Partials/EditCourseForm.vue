@@ -46,6 +46,30 @@
 
               <div  class="mb-4">
 
+                <div class="col-span-full">
+                  <label for="thumbnail" class="block text-sm font-medium leading-6 text-gray-900">Thumbnail</label>
+                  <div class="flex items-center justify-center w-full">
+                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                      <input type="file" ref="imageInputRef" name="thumbnail" @change="updateImagePreview" class="sr-only"/>
+
+                      <div  class="flex hover:opacity-80 flex-col items-center justify-center w-full max-w-4xl mx-auto grid grid-cols-1 ">
+                        <div class="relative  p-3 col-start-2 row-start-5 flex flex-col-reverse rounded-lg bg-gradient-to-t from-gray-500/95 via-gray-500/80  ">
+                          <button type="button"  @click.prevent="selectNewImage" class="flex px-1.5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+                            <ArrowPathRoundedSquareIcon class="w-5 h-5 mr-2"/>
+                            Image Change
+                          </button>
+                        </div>
+                        <div class="grid gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0">
+                          <img  v-if="imagePreview" :src="imagePreview"  class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full ">
+                          <img v-if="!imagePreview" :src="'/storage/' + form.thumbnail"  class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full ">
+
+                        </div>
+
+                      </div>
+                    </label>
+                  </div>
+                  <InputError class="mt-2" :message="form.errors.thumbnail" />
+                </div>
 
 
 
@@ -69,8 +93,12 @@
 import FormInput from "@/Components/Form/FormInput.vue";
 import ButtonForm from "@/Components/Button/ButtonForm.vue";
 import FormSlideOver from "@/Components/Form/FormSlideOver.vue";
+import { ArrowPathRoundedSquareIcon } from '@heroicons/vue/24/outline';
 import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
+import { defineProps } from 'vue';
+import {ref} from "vue";
+import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
   course:Object,
@@ -82,8 +110,28 @@ const form = useForm({
   thumbnail: props.course.thumbnail,
 });
 
+const imageInputRef = ref(null);
+const selectNewImage = () => {
+  imageInputRef.value.click();
+};
+
+const updateImagePreview = () => {
+  const file = imageInputRef.value.files[0];
+
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    imagePreview.value = e.target.result;
+    form.thumbnail = file;
+  };
+
+  reader.readAsDataURL(file);
+};
+const imagePreview = ref(null);
+
 const courseUpdate = () => {
-  form.put(route('course.update', {
+  form.post(route('course.update', {
+    _method: 'put',
     course: props.course.id
     }),{
       onError: (error) => {

@@ -18,7 +18,7 @@ class CreateUpdateCourseRequest extends FormRequest
             'user_id' => 'nullable',
             'title' => 'required|string|max:55|min:4',
             'description' => 'nullable|string|max:255|min:10',
-            //'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumbnail' => 'required|nullable|sometimes|string|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 

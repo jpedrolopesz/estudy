@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Course\GetAllCoursesAction;
 use App\Actions\Course\ShowCourseAction;
+use App\Http\Requests\Course\CreateUpdateCourseRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\CourseResource;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Intervention\Image\Facades\Image;
 
 class CoursesController extends Controller
 {
@@ -24,28 +27,29 @@ class CoursesController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
-    {
+    public function store(CreateUpdateCourseRequest $request): RedirectResponse
+   {
+       if ($request->hasFile('thumbnail')) {
+           $image = $request->file('thumbnail');
+           $filename = time() . '.' . $image->getClientOriginalExtension();
+           $thumbnailPath = 'thumbnails/' . $filename;
+           $thumbnail = Image::make($image)->resize(800, 400);
 
-        $pathToFile = $request->file('thumbnail')[0]->storeImg('public', 'thumbnails');
+           Storage::disk('public')->put($thumbnailPath, $thumbnail->stream());
+       } else {
+           $thumbnailPath = null;
+       }
 
-        $course = Course::create([
-            'user_id' => auth()->id(),
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'thumbnail' => $pathToFile,
-        ]);
+       $course = Course::create([
+           'user_id' => auth()->id(),
+           'title' => $request->input('title'),
+           'description' => $request->input('description'),
+           'thumbnail' => $thumbnailPath,
+       ]);
 
-        if ($course) {
-            $course->addMedia($pathToFile);
-        } else {
-            return redirect()->back()->with('error', 'Error: Please check your request to resolve it efficiently.');
-        }
-
-
-        return Redirect::route('course.edit', $course)
-            ->with('success', 'Your request has been successfully completed.');
-    }
+       return Redirect::route('course.edit', $course)
+           ->with('success', 'Your request has been successfully completed.');
+   }
 
     public function show($id): \Inertia\Response
     {
@@ -58,6 +62,7 @@ class CoursesController extends Controller
 
     public function edit(int $id): \Inertia\Response
     {
+
         return Inertia::render('Admin/Course/EditAndCreate', [
             'course' => (new ShowCourseAction())->execute($id),
 
@@ -65,22 +70,37 @@ class CoursesController extends Controller
     }
 
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(CreateUpdateCourseRequest $request, $id): RedirectResponse
     {
+        $course = Course::findOrFail($id);
 
+        dd($request->all());
+        if ($request->hasFile('thumbnail')) {
+            $oldPhotoPath = public_path('storage/' . $course->thumbnail);
 
-        $course = Course::find($id);
+            if (file_exists($oldPhotoPath)) {
+                unlink($oldPhotoPath);
+            }
 
-        if (!$course) {
-            return redirect()->back()->with('error', 'Error: Please check your request to resolve it efficiently.');
+            $image = $request->file('thumbnail');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $thumbnailPath = 'thumbnails/' . $filename;
+            $thumbnail = Image::make($image)->resize(800, 400);
+
+            Storage::disk('public')->put($thumbnailPath, $thumbnail->stream());
+        } else {
+            $thumbnailPath = $course->thumbnail;
         }
 
-        $course->fill($request->all());
-        $course->save();
+        $course->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'thumbnail' => $thumbnailPath,
+        ]);
 
-
-        return redirect()->back()->with('success', 'Your request has been successfully completed.');
+        return Redirect::back()->with('success', 'Your request has been successfully completed.');
     }
+
 
     public function destroy(string $id)
     {

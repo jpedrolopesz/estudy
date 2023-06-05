@@ -52,7 +52,6 @@ class UserController extends Controller
         $request->user()->save();
 
 
-
         return Redirect::back()->with('success', 'Successfully updated');
     }
 
