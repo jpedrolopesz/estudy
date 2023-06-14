@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserSubscriptionController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionInvoiceController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionController;
 use App\Http\Controllers\User\Account\PasswordController;
@@ -20,6 +21,16 @@ Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
 Route::get('/courses', [CourseUserController::class, 'index'])->name('course.user.index');
 Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');
 Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched'])->name('lessons.markAsWatched');
+
+
+
+
+Route::get('register/s', [RegisteredUserSubscriptionController::class, 'create'])->name('register.subscription');
+Route::post('register', [RegisteredUserSubscriptionController::class, 'store']);
+
+
+
+
 
 
 Route::resource('comments', CommentUserController::class);

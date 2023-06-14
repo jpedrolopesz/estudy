@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\Payments\GetPaymentAction;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -13,19 +12,25 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Laravel\Cashier\Cashier;
 
-class RegisteredUserController extends Controller
+class RegisteredUserSubscriptionController extends Controller
 {
     /**
      * Display the registration view.
      *
      * @return Response
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
 
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/RegisterSubscription', [
+            'stripekey' => Cashier::stripe(['api_key' => config('cashier.secret')]),
+            'intent' => $request->user() ? $request->user()->createSetupIntent() : null
+        ]);
+
     }
+
 
     /**
      * Handle an incoming registration request.
