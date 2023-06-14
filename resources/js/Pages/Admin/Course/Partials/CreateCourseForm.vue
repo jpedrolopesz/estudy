@@ -36,7 +36,7 @@
             <div class="flex items-center justify-center w-full">
               <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                 <div v-if="!imagePreview" class="flex flex-col items-center justify-center ">
-                 <CloudArrowUpIcon class="w-10 h-10 mb-1 text-gray-400"/>
+                   <CloudArrowUpIcon class="w-10 h-10 mb-1 text-gray-400"/>
                   <p class="mb-2 text-sm text-gray-500">
                     <span class="font-semibold"
                           type="button" @click.prevent="selectNewImage">

@@ -53,10 +53,12 @@ class Course extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+
     public function modules() :HasMany
     {
         return $this->hasMany(Module::class);
     }
+
 
     public function scopeFilter($query, array $filters)
     {

@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('slug');
             $table->string('url');
             $table->integer('price');
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('stripe_id')->unique();
-            $table->boolean('active')->default(false);
-            $table->boolean('recommended')->default(false);
             $table->string('description')->nullable();
+            $table->boolean('active')->default(false);
+            $table->unsignedBigInteger('user_id')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 

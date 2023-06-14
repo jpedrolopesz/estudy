@@ -74,7 +74,6 @@ class CoursesController extends Controller
     {
         $course = Course::findOrFail($id);
 
-        dd($request->all());
         if ($request->hasFile('thumbnail')) {
             $oldPhotoPath = public_path('storage/' . $course->thumbnail);
 

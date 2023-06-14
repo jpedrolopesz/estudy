@@ -19,10 +19,9 @@ class Lesson extends Model implements HasMedia
         'description',
         'video_url',
         'sort_order',
+        'watched',
         'comments'
     ];
-
-    // protected $guarded = ['id'];
 
 
     public function module()
@@ -30,13 +29,20 @@ class Lesson extends Model implements HasMedia
         return $this->belongsTo(Module::class);
     }
 
+    public function lessonUserViews()
+    {
+        return $this->hasMany(LessonUserView::class);
+    }
+
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
-
-    public function files()
+    public function users()
     {
-        return $this->hasMany(File::class);
+        return $this->belongsToMany(User::class)->withPivot('watched')->withTimestamps();
     }
+
+
 }

@@ -37,9 +37,10 @@
                       <div class="text-center">
                         <FilmIcon class="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
                         <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                          <label for="file" class="relative cursor-pointer rounded-md  font-semibold text-gray-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600 focus-within:ring-offset-2 hover:text-gray-500">
+                          <label for="file-upload" class="relative px-1 cursor-pointer rounded-md bg-transparent border font-semibold text-gray-900 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600 focus-within:ring-offset-2 hover:text-gray-500">
                             <span>Upload a file</span>
-                            <input type="file"  @input="form.video_url = $event.target.files[0]" />
+                            <input id="file-upload" name="file-upload" type="file" class="sr-only"
+                                   @input="form.video_url = $event.target.files[0]" />
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                               {{ form.progress.percentage }}%
                             </progress>
@@ -49,7 +50,8 @@
                         <p class="text-xs leading-5 text-gray-600">MP4 up to 5GB</p>
                       </div>
 
-                    <!--  <div><iframe  class="w-full h-[calc(40vh-24px)] rounded-md " allow="accelerometer; clipboard-write; picture-in-picture"></iframe></div>-->
+
+
                     </div>
 
 
@@ -130,6 +132,7 @@ import { FilmIcon } from '@heroicons/vue/24/outline';
   const form = useForm({
     title: null,
     video_url: null,
+    description: null,
     progress: null,
     course_id: props.course.id,
     module_id: props.module.id

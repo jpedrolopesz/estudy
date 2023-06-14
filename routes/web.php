@@ -19,6 +19,7 @@ Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
 
 Route::get('/courses', [CourseUserController::class, 'index'])->name('course.user.index');
 Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');
+Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched'])->name('lessons.markAsWatched');
 
 
 Route::resource('comments', CommentUserController::class);

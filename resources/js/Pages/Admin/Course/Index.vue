@@ -202,6 +202,7 @@ import { PlusIcon, EyeIcon, PaintBrushIcon, ArrowPathIcon } from '@heroicons/vue
 
 const { auth } = usePage().props;
 
+
 const props = defineProps(
   {
     courses: Object,

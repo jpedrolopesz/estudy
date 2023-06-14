@@ -27,15 +27,20 @@
                       </label>
                       <button type="button" class="flex px-1.5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
                         <ArrowPathRoundedSquareIcon class="w-5 h-5 mr-2"/>
-                        <input type="file"  @change="handleVideoChange" />
+                        <label for="file-upload" class="cursor-pointer" >
+                          <span>Video Change</span>
+                        <input type="file" id="file-upload" name="file-upload"  ref="videoInputRef" class="sr-only" @change="updateVideoPreview" />
+                        </label>
                         <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                           {{ form.progress.percentage }}%
                         </progress>
-                        Video Change
                       </button>
                     </div>
 
-                    <PlayVideo :course="course"/>
+                    <PlayVideo  :lesson="lesson"/>
+
+
+                    {{lesson.video_url}} // O BACKEND ESTA SALVANDO ERRADO
 
                     <div>
 
@@ -103,6 +108,7 @@ import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
 import { useForm, Link, Head} from "@inertiajs/inertia-vue3";
 import InputError from "@/Components/InputError.vue";
 import { ArrowPathRoundedSquareIcon } from '@heroicons/vue/24/outline';
+import {ref} from "vue";
 
 
 const props = defineProps({
@@ -112,20 +118,37 @@ const props = defineProps({
 });
 
 const form = useForm({
+  module_id: props.module.id,
   title: props.lesson.title,
   description: props.lesson.description,
   video_url: props.lesson.video_url,
 });
 
-const handleVideoChange = (event) => {
-  form.video_url = URL.createObjectURL(event.target.files[0]);
+const videoInputRef = ref(null);
+const selectNewVideo = () => {
+  videoInputRef.value.click();
 };
 
+const updateVideoPreview = () => {
+  const file = videoInputRef.value.files[0];
+
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    videoPreview.value = e.target.result;
+    form.video_url = file;
+  };
+
+  reader.readAsDataURL(file);
+};
+const videoPreview = ref(null);
+
 const lessonUpdate = () => {
-  form.put(route('course.module.lesson.update', {
+  form.post(route('course.module.lesson.update', {
+    _method: 'put',
     course: props.course.id,
     module: props.module.id,
-    lesson: props.lesson.id
+    lesson: props.lesson.id,
   }),
 
   )

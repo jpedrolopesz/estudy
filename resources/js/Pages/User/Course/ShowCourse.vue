@@ -1,6 +1,8 @@
 <template>
   <UserLayout>
     <VideoPlayGlobal class="h-[calc(104vh-64px)] m-2" :course="course"/>
+
+
   </UserLayout>
 </template>
 <script setup>

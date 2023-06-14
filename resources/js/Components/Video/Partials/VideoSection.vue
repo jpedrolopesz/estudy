@@ -3,7 +3,7 @@
     <div class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
       <VideoPlayer
         class="w-full h-[calc(80vh-64px)] video-player vjs-big-play-centered"
-        v-bind:src="'/storage/videos/' + videoUrl"
+        v-bind:src="'/storage/' + videoUrl"
 
         crossorigin="anonymous"
         playsinline
@@ -37,11 +37,11 @@
 import { shallowRef } from 'vue'
 import { VideoPlayer } from '@videojs-player/vue'
 import 'video.js/dist/video-js.css'
+import {VideoJsPlayer} from "video.js";
 
 const props = defineProps({
   course:Object,
   videoUrl: String,
-
   label: { type: String, default: ""}
 
 
@@ -52,11 +52,9 @@ const player = shallowRef<VideoJsPlayer>()
 
 const handleMounted = (payload: any) => {
   player.value = payload.player
-  console.log('Basic player mounted', payload)
 }
 
 const handleEvent = (log: any) => {
-  console.log('Basic player event', log)
 }
 </script>
 

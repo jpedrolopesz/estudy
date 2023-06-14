@@ -40,22 +40,22 @@ class DatabaseSeeder extends Seeder
 
         $plans = [
             [
-                'name' => 'Gold', 'url' => 'gold', 'slug' => 'monthly', 'price' => 990, 'stripe_id' => 'price_1LSRHkGQW0U1PfqxJO7EGsHx'
+                'name' => 'Gold', 'url' => 'gold', 'slug' => 'monthly', 'price' => 990, 'stripe_id' => 'price_1LSRHkGQW0U1PfqxJO7EGsHx', 'description' => 'A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção gráfica'
             ],
             [
-                'name' => 'Gold', 'url' => 'gold', 'slug' => 'yearly', 'price' => 9990, 'stripe_id' => 'price_1LTBIAGQW0U1Pfqxdr82APbW'
+                'name' => 'Gold', 'url' => 'gold', 'slug' => 'yearly', 'price' => 9990, 'stripe_id' => 'price_1LTBIAGQW0U1Pfqxdr82APbW', 'description' => 'A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção gráficas'
             ],
             [
-                'name' => 'Diamond', 'url' => 'diamond', 'slug' => 'monthly', 'price' => 3990, 'stripe_id' => 'price_1LSmsIGQW0U1PfqxxsV7db73'
+                'name' => 'Diamond', 'url' => 'diamond', 'slug' => 'monthly', 'price' => 3990, 'stripe_id' => 'price_1LSmsIGQW0U1PfqxxsV7db73', 'description' => 'A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção '
             ],
             [
-                'name' => 'Diamond', 'url' => 'diamond', 'slug' => 'yearly', 'price' => 33990, 'stripe_id' => 'price_1Lb6p6GQW0U1PfqxjKs6uVX2'
+                'name' => 'Diamond', 'url' => 'diamond', 'slug' => 'yearly', 'price' => 33990, 'stripe_id' => 'price_1Lb6p6GQW0U1PfqxjKs6uVX2', 'description' => 'A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção'
             ],
             [
-                'name' => 'Premium', 'url' => 'premium', 'slug' => 'monthly', 'price' => 6990, 'stripe_id' => 'price_1LSRIVGQW0U1PfqxnFnKpQmh'
+                'name' => 'Premium', 'url' => 'premium', 'slug' => 'monthly', 'price' => 6990, 'stripe_id' => 'price_1LSRIVGQW0U1PfqxnFnKpQmh', 'description' => 'A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção'
             ],
             [
-                'name' => 'Premium', 'url' => 'premium', 'slug' => 'yearly', 'price' => 66990, 'stripe_id' => 'price_1Lb6kvGQW0U1PfqxQFJJcEBN'
+                'name' => 'Premium', 'url' => 'premium', 'slug' => 'yearly', 'price' => 66990, 'stripe_id' => 'price_1Lb6kvGQW0U1PfqxQFJJcEBN', 'description' => 'A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção'
             ]
 
 

@@ -53,13 +53,13 @@
 
                       <div class="flex">
 
-                        <button type="button" class="items-center mr-2 px-3 py-1.5 border border-gray-300  rounded-md text-gray-500 bg-transparent hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
 
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
-                          </svg>
+                          <Link :href="route('course.show', course.id)"
+                                class="px-1.5 py-1.5 mr-2 bg-transparent text-sm font-bold rounded-md text-gray-500 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+                            <EyeIcon class="w-5 h-5"/>
+                          </Link>
 
-                        </button>
+
                         <CreateModuleForm :course="course">
                           <template #button>
                             <button type="button" class="flex px-1.5 py-1.5 bg-transparent text-sm font-bold rounded-md text-gray-500 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
@@ -147,10 +147,10 @@
                                                 <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
 
                                               </div>
-                                              <div class="flex items-center justify-end space-x-3 ">
+                                              <div class="flex items-center justify-end ">
                                                 <ModalDelete >
 
-                                                  <div class="flex ml-2 justify-between ">
+                                                  <div class="flex justify-between ">
                                                     <Link :href="route('course.module.lesson.destroy', [course.id, module.id, lesson.id])" as="button" type="button" method="DELETE"
                                                           class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
                                                       Yes, delete
@@ -158,8 +158,8 @@
                                                   </div>
                                                 </ModalDelete>
 
-                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-0.5  rounded-md hover:bg-gray-200">
-                                                  <ViewfinderCircleIcon class="w-5 h-5 " />
+                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-200">
+                                                  <PaintBrushIcon class="w-5 h-5 " />
                                                 </Link>
 
                                               </div>
@@ -240,23 +240,13 @@ import {ref, watch} from "vue";
 import {Link, Head} from "@inertiajs/inertia-vue3";
 import { Inertia } from '@inertiajs/inertia';
 import Draggable from "vuedraggable";
-import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
-import { PlusIcon } from '@heroicons/vue/24/outline';
-import { ChevronRightIcon } from '@heroicons/vue/24/outline';
-import { ViewfinderCircleIcon } from '@heroicons/vue/24/outline';
-import { ChevronUpDownIcon } from '@heroicons/vue/24/outline';
-import { FolderIcon } from '@heroicons/vue/24/outline';
-import { BanknotesIcon } from '@heroicons/vue/24/outline';
+import { EllipsisHorizontalIcon,EyeIcon,PaintBrushIcon,PlusIcon,ChevronRightIcon,ChevronUpDownIcon,BanknotesIcon,FolderIcon  } from '@heroicons/vue/24/outline';
 import AdminLayout from "../Layouts/AdminLayout.vue";
 import EditCourseForm from "@/Pages/Admin/Course/Partials/EditCourseForm.vue";
 import CreateModuleForm from "@/Pages/Admin/Course/Partials/CreateModuleForm.vue";
 import EditModuleForm from "@/Pages/Admin/Course/Partials/EditModuleForm.vue";
 import FirstCreate from "@/Pages/Admin/Course/Partials/FirstCreate.vue";
 import ModalDelete from "@/Components/ModalDelete.vue";
-
-
-
-
 import {Disclosure, DisclosureButton, DisclosurePanel, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
 
 const props = defineProps({

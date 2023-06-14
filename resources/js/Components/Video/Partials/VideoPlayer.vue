@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-y-auto ">
 
-  <div class="h-auto bg-white border border-gray-500  flex items-stretch flex-wrap md:flex-nowrap -md:pb-16 order-3 w-6/6">
+  <div class="h-auto bg-white border border-gray-500  flex items-stretch flex-wrap md:flex-nowrap -md:pb-16 order-1 w-6/6">
 
     <div class="shadow-md border border-gray-500  bg-white p-2 overflow-x-hidden rounded-sm h-[calc(80vh-64px)] transition-all duration-200  md:mt-6 mt-12  overflow-y-scroll mb-3 md:mb-0 w-full md:w-[220px] lg:w-[290px] xl:w-[390px] !block md:order-1 md:mr-[20px] lg:mr-[20px]">
 
@@ -41,11 +41,13 @@
 
           <!-- Tab 1-->
           <TabPanel>
-            <ModuleAndLesson class="px-2 "
-                             :course="course"
-                             @update-video-url="updateVideoUrl"
-                             @update-module="updateModule"
-                             @lesson-selected="handleLessonSelected"/>
+            <ModuleAndLesson
+              class="px-2 "
+              :course="course"
+              :selected-lesson="selectedLesson"
+              @update-video-url="updateVideoUrl"
+              @update-module="updateModule"
+              @lesson-selected="handleLessonSelected"/>
           </TabPanel>
 
           <!-- Tab 2-->
@@ -121,24 +123,36 @@
 
       <VideoSection :video-url="videoUrl"/>
 
-      <div>
-          <div class="flex items-center justify-between bg-gray-50 pb-2 sticky top-0 w-full z-30">
+      <div class="flex">
+        <div class=" justify-start bg-blue-500 pb-2 sticky w-3/4">
+          <p class="text-left text-xl font-bold text-gray-800">{{ selectedLesson.title }}</p>
 
-
-              <p class="flex-shrink-0 flex-grow-0 text-left text-xl font-bold text-gray-800">
-              {{ selectedLesson.title }}
-              </p>
-
-            <div class="flex mt-2 items-center">
-              <button class="p-2 mr-4 rounded-md bg-gray-200 hover:bg-gray-300">
-                <ChevronLeftIcon class="w-5 h-5 text-gray-600 "/>
-              </button>
-
-              <button class="p-2 rounded-md bg-gray-200 hover:bg-gray-300 ">
-                <ChevronRightIcon class="w-5 h-5 text-gray-600 "/>
-              </button>
-            </div>
         </div>
+          <div class=" bg-red-500  w-2/6">
+
+
+            <div class="flex flex-wrap justify-end">
+              <div>
+                <button class="px-6 py-1.5 m-1 rounded-md bg-gray-200 hover:bg-gray-300">
+                  Visto
+                </button>
+              </div>
+
+              <div class="flex">
+                <button class="p-2 mr-4 rounded-md bg-gray-200 hover:bg-gray-300">
+                  <ChevronLeftIcon class="w-5 h-5 text-gray-600 "/>
+                </button>
+
+                <button class="p-2 rounded-md bg-gray-200 hover:bg-gray-300 ">
+                  <ChevronRightIcon class="w-5 h-5 text-gray-600 "/>
+                </button>
+              </div>
+
+            </div>
+
+
+          </div>
+
 
 
 
@@ -191,7 +205,6 @@ export default {
     handleLessonSelected(lesson) {
       this.selectedLesson = lesson;
     },
-
   }
 
 }

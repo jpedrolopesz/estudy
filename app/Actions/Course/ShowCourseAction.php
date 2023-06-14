@@ -17,7 +17,7 @@ class ShowCourseAction
             $query->orderBy('sort_order')->with(['lessons' => function ($query) {
                 $query->orderBy('sort_order');
             }]);
-        }])->findOrFail($id);
+        }])->with('user')->findOrFail($id);
 
     }
 }

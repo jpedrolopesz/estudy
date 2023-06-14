@@ -17,24 +17,19 @@ class ShowSubscribedCourseAction
     {
         $user = Auth::user();
 
-        // Verifique se o usuário está autenticado e se comprou o curso
-        if ($user  &&  $user->subscribed('default')) {
-
-            //dd($user->subscribed('default'));
-            // O usuário tem acesso ao curso, retorne os dados
-
-            return Course::with(['modules' => function ($query) {
-                $query->orderBy('sort_order')->with(['lessons' => function ($query) {
-                    $query->orderBy('sort_order');
+        if (!$user->subscribed('default')) {
+            return Course::with(['modules' => function ($query) use ($user) {
+                $query->orderBy('sort_order')->with(['lessons' => function ($query) use ($user) {
+                    $query->orderBy('sort_order')->with(['lessonUserViews' => function ($query) use ($user) {
+                        $query->where('user_id', $user->id);
+                    }]);
                 }]);
             }])->findOrFail($id);
         }
 
-        // Caso o usuário não tenha acesso, você pode retornar um erro, redirecionar para uma página de erro ou tomar outra ação adequada ao seu aplicativo.
-
-        // Por exemplo, retornar uma resposta vazia ou lançar uma exceção
         return [];
     }
+
 
 }
 

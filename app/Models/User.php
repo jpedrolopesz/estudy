@@ -62,8 +62,6 @@ class User extends Authenticatable
         'role' => Roles::class,
         'is_admin' => 'boolean',
         'is_active' => 'boolean',
-        'courses.pivot.is_favorite' => 'boolean',
-        'courses.pivot.is_admin' => 'boolean',
     ];
 
     protected static function booted()
@@ -91,6 +89,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class, 'course_members')
             ->withPivot(['is_admin', 'is_favorite'])
             ->withTimestamps();
+    }
+
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class)->withPivot('watched')->withTimestamps();
     }
 
 
@@ -184,13 +187,6 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
 
-    /**
-     * Scope a query to order by name.
-     */
-    public function scopeOrderByName($query)
-    {
-        $query->orderBy('last_name')->orderBy('first_name');
-    }
 
     /**
      * Scope a query to filter by role.

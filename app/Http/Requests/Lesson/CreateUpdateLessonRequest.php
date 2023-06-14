@@ -17,7 +17,7 @@ class CreateUpdateLessonRequest extends FormRequest
         return [
             'module_id' => 'required|numeric',
             'title' => 'required|string|max:55|min:4',
-            'description' => 'nullable|string|max:255|min:10',
+            'description' => 'nullable|string|max:255',
         ];
     }
 

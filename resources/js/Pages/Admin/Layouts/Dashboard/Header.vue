@@ -1,30 +1,11 @@
 <template>
-  <div class="flex items-center justify-between mt-3.5">
-        <div>
-
-          <div class="text-center ml-5">
-            <!-- Start -->
-            <ul class="inline-flex flex-wrap text-sm font-medium">
-              <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                <a class="text-slate-500 hover:text-indigo-500" href="#0">Home</a>
-              </li>
-              <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                <a class="text-slate-500 hover:text-indigo-500" href="#0">Settings</a>
-              </li>
-              <li class="after:content-['/'] last:after:hidden after:text-slate-400 after:px-2">
-                <a class="text-slate-500 hover:text-indigo-500" href="#0">Notifications</a>
-              </li>
-            </ul>
-            <!-- End -->
-          </div>
+  <div class="flex items-center justify-end mt-3.5">
 
 
-        </div>
 
         <div class=" z-30 sm:flex sm:items-center sm:ml-6">
           <!-- Settings Dropdown -->
 
-          <SearchGlobal/>
 
           <div class="ml-3 mt-1 relative">
             <Dropdown align="right" width="48">
@@ -58,11 +39,10 @@
 </template>
 
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import { Link } from '@inertiajs/inertia-vue3';
-import SearchGlobal from "@/Components/Search/SearchGlobal.vue";
+
+
 </script>
 
 
