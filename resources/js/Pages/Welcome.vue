@@ -309,7 +309,7 @@
               {{ selected.description}}
             </p>
             <div class="absolute inset-x-0 bottom-6 w-full px-6 sm:static sm:px-0">
-              <Link :href="route('subscription.subscription',selected.id)"
+              <Link :href="route('register.subscription', selected.id)"
                 class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-lg before:bg-gray-800 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
                 <span class="relative text-base font-semibold text-white ">Start plan</span>
               </Link>

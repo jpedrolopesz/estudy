@@ -1,7 +1,7 @@
 <template>
   <Head title="Register" />
 
-  <div class="grid grid-cols-1 lg:grid-cols-2">
+  <div class="grid grid-cols-1 h-screen lg:grid-cols-2">
 
     <div class="flex items-center justify-center px-4  bg-white sm:px-6 lg:px-8 sm:py-6 ">
 
@@ -29,7 +29,7 @@
                       <button
                         :class="[ selected ? 'bg-gray-600 text-gray-100' : 'text-gray-500 hover:bg-gray/[0.12] hover:text-gray-600']"
                         :disabled="selectedTab < index"
-                        class="flex items-center justify-center bg-gray-100 border border-gray-300 w-6 h-6 rounded-full text-xs font-semibold text-gray-500">
+                        class="flex items-center justify-center bg-gray-100 border border-gray-300 w-6 h-6 rounded-full text-xs font-semibold text-gray-100">
                         {{ tab }}
                       </button>
                     </Tab>
@@ -37,12 +37,35 @@
                 </div>
               </TabList>
               <TabPanels class="py-10">
-                <TabPanel >
-                  <div class="py-8">
-                    <h1 class="text-3xl text-gray-800 font-semibold mb-6">Enter with your existing credentials or create a new account.</h1>
-                    <form>
 
-                      <div v-if="auth">
+                <!-- TAB 1 -->
+                <TabPanel>
+                    <form>
+                      <div v-if="auth.user">
+                        <h1 class="text-2xl text-center text-gray-800 font-semibold mb-6">Choose Your Path: Continue with Your Account or Create a New One.</h1>
+
+
+                        <label class="flex-1 mb-4 relative block cursor-pointer">
+                          <input @click="selectedOption = 'payment'" type="radio"
+                                 name="radio-buttons" class="peer sr-only"  />
+                          <div class="h-full text-center bg-white  rounded border border-gray-200 hover:border-gray-300 shadow-sm duration-150 ease-in-out">
+
+                            <div class="flex items-center p-2">
+                              <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/pricing/2/avatar.jpg" alt="" />
+                              <div class="ml-4">
+                                <p class="text-base font-semibold text-gray-600">Brooklyn Simmons</p>
+                                <p class="mt-px text-sm text-gray-400">Digital Marketer</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 border-2 border-transparent peer-checked:border-gray-400 rounded pointer-events-none" aria-hidden="true"></div>
+                        </label>
+                      </div>
+
+                      <div v-else>
+                        <div class="text-2xl text-center text-gray-800 font-semibold mb-6">
+                          Take Control of Your Destiny: Sign In or Register.</div>
+
                         <div class="sm:flex space-y-3 sm:space-y-0 sm:space-x-4 mb-8">
                           <label class="flex-1 relative block cursor-pointer">
                             <input @click="selectedOption = 'login'" type="radio"
@@ -67,82 +90,104 @@
                         </div>
 
 
-                      </div>
-                      <div v-else>
-                        <label class="flex-1 mb-4 relative block cursor-pointer">
-                          <input @click="selectedOption = 'login'" type="radio"
-                                 name="radio-buttons" class="peer sr-only"  />
-                          <div class="h-full text-center bg-white px-4 py-6 rounded border border-gray-200 hover:border-gray-300 shadow-sm duration-150 ease-in-out">
 
-                            <div class="font-semibold text-2xl text-gray-800 mb-1">Continua com:</div>
-                            <div class="text-sm">{{auth.user.first_name}}</div>
-                          </div>
-                          <div class="absolute inset-0 border-2 border-transparent peer-checked:border-gray-400 rounded pointer-events-none" aria-hidden="true"></div>
-                        </label>
                       </div>
 
                       <div class="flex items-center justify-between">
 
-                        <Link v-if="!auth" :href="route('logout.noRedirect')" class="underline" method="DELETE" as="button">
+                        <button @click="logout" v-if="auth.user" class="underline" >
                           Log Out
-                        </Link> <!-- PAREI AQUI -->
+                        </button>
                         <div></div>
 
-                        <PrimaryButton @click="concluirEtapa(1)" :disabled="!selectedOption" class="ml-4">
-                          Next Step -&gt;
+                        <PrimaryButton @click="completeStep(1)" :disabled="!selectedOption" class="ml-4">
+                          Next Step <ChevronRightIcon class="w-4 h-4"/>
                         </PrimaryButton>
                       </div>
                     </form>
 
-                  </div>
-
                 </TabPanel>
 
                 <!-- TAB 2 -->
-                <TabPanel>
+                 <TabPanel>
+                   <div v-if="!auth.user">
+                     <LoginCheckoutTab
+                       v-if="selectedOption === 'login'"
+                       @option-selected="handleOptionSelected"
+                       v-bind:selected-option="selectedOption"
+                       :selectTab="selectTab"
+                       :selectedTab="selectedTab"
+                     >
+                       <template #login>
+                         <button @click="backTab" class="underline">Back</button>
+
+                         <PrimaryButton @click="completeStep(2)" v-if="auth.user"  :disabled="!selectedOption"  class="ml-4">
+                           Next Step <ChevronRightIcon class="w-4 h-4"/>
+                         </PrimaryButton>
+                       </template>
+                     </LoginCheckoutTab>
+                   </div>
+
+                   <div v-if="!auth.user">
+                     <RegisterCheckoutTab
+                       v-if="selectedOption === 'register'"
+                       @option-selected="handleOptionSelected"
+                       v-bind:selected-option="selectedOption"
+                     >
+                       <template #register>
+                         <button @click="backTab" class="underline">Back</button>
+                         <PrimaryButton @click="completeStep(2)" v-if="auth.user" :disabled="!selectedOption"  class="ml-4">
+                           Next Step <ChevronRightIcon class="w-4 h-4"/>
+                         </PrimaryButton>
+                       </template>
+                     </RegisterCheckoutTab>
+                   </div>
+
+
+                   <div v-if="auth.user">
+                     <div  class="text-center py-3">
+
+                       <div class="inline-flex rounded-full bg-gray-100 mb-6">
+                         <CheckCircleIcon class="w-16 h-16 text-gray-600"  />
+                       </div>
+                       <h1 class="text-3xl text-gray-800 font-semibold mb-2">You're one step away from securing your purchase!</h1>
+                       <p class="text-lg text-gray-600 font-normal mb-8">Congratulations on authenticating! Proceed to payment and get your product now.</p>
+                     </div>
+
+
+                     <div class="flex items-center justify-between mt-4">
+
+                       <button @click="backTab" class="underline">Back</button>
+                       <PrimaryButton @click="completeStep(2)"  :disabled="!selectedOption"  class="ml-4">
+                         Next Step <ChevronRightIcon class="w-4 h-4"/>
+                       </PrimaryButton>
+
+                     </div>
+                   </div>
 
 
 
-                    <LoginCheckoutTab
-                      v-if="selectedOption === 'login'"
-                      @option-selected="handleOptionSelected"
-                      v-bind:selected-option="selectedOption"
-                    />
-
-                    <RegisterCheckoutTab
-                      v-if="selectedOption === 'register'"
-                      @option-selected="handleOptionSelected"
-                      v-bind:selected-option="selectedOption"
-                    />
-
-
-
-                  <div class="flex items-center justify-between mt-4 ">
-                    <button @click="backTab" class="underline">Back</button>
-                    <PrimaryButton @click="concluirEtapa(2)" :disabled="!selectedOption" class="ml-4">
-                      Next Step -&gt;
-                    </PrimaryButton>
-                  </div>
                 </TabPanel>
 
                 <!-- TAB 3 -->
-                <TabPanel>
+                 <TabPanel>
                   <CheckoutTab
                     :intent="intent"
                     :stripekey="stripekey"
-                  >
-                    <template #back>
+                    :plan="plan"
+                  ><template #back>
                       <button @click="backTab" class="underline">Back</button>
                     </template>
                   </CheckoutTab>
 
-                  <button @click="concluirEtapa(3)">Concluir Etapa 3</button>
+                  <button @click="completeStep(3)">Concluir Etapa 3</button>
                 </TabPanel>
 
+                <!-- TAB 4 -->
                 <TabPanel>
 
 
-                  <button @click="concluirEtapa(4)">Concluir Etapa 4</button>
+                  <button @click="completeStep(4)">Concluir Etapa 4</button>
                 </TabPanel>
               </TabPanels>
             </TabGroup>
@@ -193,9 +238,9 @@
                 </svg>
               </div>
 
-              <blockquote class="mt-6">
+              <div class="mt-6">
                 <p class="text-md leading-relaxed text-white">You made it so simple. The system is much faster and easier to work with than my old system.</p>
-              </blockquote>
+              </div>
 
               <div class="flex items-center mt-8">
                 <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/pricing/2/avatar.jpg" alt="" />
@@ -210,11 +255,11 @@
           <div >
             <div class="overflow-hidden bg-white rounded-md">
               <div class="px-4 my-12">
-                <h3 class="text-xs font-semibold tracking-widest text-black uppercase">Name</h3>
+                <h3 class="text-xs font-semibold tracking-widest text-black uppercase">{{plan.name}}</h3>
                 <div>
-                  <span class="align-top mt-4 text-3xl font-bold sm:text-3xl text-black">$</span>
+                  <span class="align-top mt-4 text-3xl font-bold sm:text-3xl text-black">${{plan.price}}</span>
                   <span class="align-top mt-4 text-3xl font-bold sm:text-3xl text-black">
-                    <span class="text-3xl font-bold sm:text-2xl text-black">/ </span>
+                    <span class="text-3xl font-bold sm:text-2xl text-black">/{{plan.slug}}</span>
                     </span>
                 </div>
                 <div class="text-xs mt-2 font-normal leading-tight text-gray-500">
@@ -276,8 +321,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import {Head, useForm, usePage, Link} from '@inertiajs/inertia-vue3';
+import {onMounted, ref} from "vue";
+import {Head, useForm, usePage} from '@inertiajs/inertia-vue3';
+import {CheckCircleIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
+
 import LoginCheckoutTab from "./Partials/LoginCheckoutTab.vue";
 import RegisterCheckoutTab from "./Partials/RegisterCheckoutTab.vue";
 import CheckoutTab from "@/Pages/Auth/Partials/CheckoutTab.vue";
@@ -286,8 +333,9 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 
 const props = defineProps({
+  plan: Object,
   intent: Object,
-  stripekey: [Object, Array]
+  stripekey: String,
 });
 
 const isProcessing = ref(false);
@@ -301,29 +349,30 @@ const form = useForm({
 });
 
 
-const tabs = ref([1,2,3,4]);
-const selectedTab = ref(0);
-const selectedOption = ref(null);
+const tabs = ref([1, 2, 3, 4]);
+const selectedTab = ref(localStorage.getItem('tabActive') || null);
+const selectedOption = ref(localStorage.getItem('selectedOption') || null);
 const { auth } = usePage().props.value;
 
-
-
-
-const concluirEtapa = (index) => {
-  if (selectedOption.value === 'login') {
-    if (auth.value) {
-      selectedTab.value = 2;
-    } else {
-      selectedTab.value = 1;
-    }
-  } else if (selectedOption.value === 'register') {
-    if (auth.value) {
-      selectedTab.value = 2;
-    } else {
-      selectedTab.value = 1;
-    }
+const completeStep = (index) => {
+  if (selectedOption.value === 'login' || selectedOption.value === 'register') {
+    selectTab(auth.user ? 2 : 1);
+  } else if (selectedOption.value === 'payment') {
+    selectTab(2);
   }
 };
+
+function selectTab(tabIndex) {
+  if (selectedTab.value === 1 && selectedOption.value === null) {
+    tabIndex = 0;
+  }
+  localStorage.setItem('tabActive', tabIndex);
+  localStorage.setItem('selectedOption', selectedOption.value);
+  selectedTab.value = tabIndex;
+}
+
+
+
 
 
 const changeTab = (index) => {
@@ -344,6 +393,13 @@ const submit = () => {
     onFinish: () => form.reset('password', 'password_confirmation'),
   });
 };
+const logout = () => {
+  form.post(route('logout.noRedirect'),{
+    preserveScroll: true,
+
+  });
+}
+
 </script>
 
 

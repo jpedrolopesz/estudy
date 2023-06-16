@@ -24,6 +24,7 @@
         "@heroicons/vue": "^2.0.12",
         "@icon-park/vue-next": "^1.4.2",
         "@popperjs/core": "^2.11.6",
+        "@stripe/stripe-js": "^1.54.0",
         "@videojs-player/vue": "^1.0.0",
         "filepond": "^4.30.4",
         "filepond-plugin-file-validate-size": "^2.2.8",

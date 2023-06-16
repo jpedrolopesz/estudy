@@ -6,6 +6,10 @@
   </div>
   <h2  class="text-3xl font-bold leading-tight text-black sm:text-4xl">Login</h2>
 
+  <button @click="recarregar">Recarregar</button>
+
+
+
 
   <form @submit.prevent="submit">
     <div>
@@ -27,19 +31,26 @@
       </label>
     </div>
 
-    <div class="flex items-center justify-end mt-4">
+    <div class="flex items-center justify-between mt-4">
 
-      <button @click="selectOption('register')" class="underline text-sm text-gray-600 hover:text-gray-900">
-        Not already registered?
-      </button>
+      <slot name="login"/>
 
-      <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-        Forgot your password?
-      </Link>
 
-      <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-        Log in
-      </PrimaryButton>
+      <div class="flex items-center justify-end ">
+
+        <button @click="selectOption('register')" class="underline text-sm text-gray-600 hover:text-gray-900">
+          Not already registered?
+        </button>
+
+        <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+          Forgot your password?
+        </Link>
+
+        <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+          Log in
+        </PrimaryButton>
+      </div>
+
     </div>
   </form>
 </template>
@@ -51,7 +62,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import { defineEmits } from 'vue';
+import {defineEmits, onMounted} from 'vue';
+import {Inertia} from "@inertiajs/inertia";
 
 
 defineProps({
@@ -73,8 +85,11 @@ function selectOption(option) {
   emits('option-selected', option);
 }
 
+
 const submit = () => {
-  form.post(route('login'), {
+  form.post(route('login.noRedirect'), {
+    preserveScroll: true,
+    onSuccess: () =>    window.location.reload(),
     onFinish: () => form.reset('password'),
   });
 };

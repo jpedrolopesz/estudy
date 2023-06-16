@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginTabController;
 use App\Http\Controllers\Auth\RegisteredUserSubscriptionController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionInvoiceController;
 use App\Http\Controllers\User\Account\Subscription\SubscriptionController;
@@ -25,9 +26,12 @@ Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched
 
 
 
-Route::get('register/s', [RegisteredUserSubscriptionController::class, 'create'])->name('register.subscription');
+//TABS
+Route::get('register/{id}', [RegisteredUserSubscriptionController::class, 'create'])->name('register.subscription');
+Route::post('register/paySubscription', [RegisteredUserSubscriptionController::class, 'paySubscription'])->name('paySubscription');
 Route::post('register', [RegisteredUserSubscriptionController::class, 'store']);
-
+Route::post('login/no-redirect', [LoginTabController::class, 'store'])->name('login.noRedirect');;
+Route::post('logout/no-redirect', [LoginTabController::class, 'logout'])->name('logout.noRedirect');
 
 
 

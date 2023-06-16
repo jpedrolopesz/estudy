@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plan;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Cashier\Cashier;
+use Laravel\Cashier\Exceptions\IncompletePayment;
+use Stripe\Stripe;
 
 class RegisteredUserSubscriptionController extends Controller
 {
@@ -21,11 +26,14 @@ class RegisteredUserSubscriptionController extends Controller
      *
      * @return Response
      */
-    public function create(Request $request): Response
+    public function create(Request $request, $id): Response
     {
+        // $stripekey = Cashier::stripe(['api_key' => config('cashier.secret')]);
+
 
         return Inertia::render('Auth/RegisterSubscription', [
-            'stripekey' => Cashier::stripe(['api_key' => config('cashier.secret')]),
+            'plan' =>   Plan::findOrFail($id),
+            'stripekey' => config('cashier.key'),
             'intent' => $request->user() ? $request->user()->createSetupIntent() : null
         ]);
 
@@ -36,9 +44,9 @@ class RegisteredUserSubscriptionController extends Controller
      * Handle an incoming registration request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -64,4 +72,23 @@ class RegisteredUserSubscriptionController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+
+    /**
+     * @throws ValidationException
+     */
+    public function paySubscription(Request $request): RedirectResponse
+    {
+        $plan = Plan::findOrFail($request->input('billing_plan_id'));
+
+
+        $request->user()->newSubscription('default', $plan->stripe_id)
+            ->create($request->paymentMethod['id']);
+
+
+        return redirect()->back()
+            ->with('success', 'Your data has been successfully updated.');
+    }
+
+
 }

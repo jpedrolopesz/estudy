@@ -36,7 +36,6 @@ class User extends Authenticatable
         'trial_ends_at',
         'is_active',
         'role',
-        'should_be_logged_out',
     ];
 
     /**

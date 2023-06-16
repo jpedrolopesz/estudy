@@ -54,22 +54,5 @@ class AuthenticatedSessionController extends Controller
 
     }
 
-    /**
-     * Destroy an authenticated session.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function noRedirect(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect()->back();
-    }
-
 
 }

@@ -37,14 +37,21 @@
       </div>
     </div>
 
-    <div class="flex items-center justify-end mt-4">
-      <button @click="selectOption('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-        Already registered?
-      </button>
 
-      <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-        Register
-      </PrimaryButton>
+    <div class="flex items-center justify-between mt-4">
+
+      <slot name="register"/>
+
+      <div class="flex items-center justify-end">
+        <button @click="selectOption('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
+          Already registered?
+        </button>
+
+        <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+          Register
+        </PrimaryButton>
+      </div>
+
     </div>
   </form>
 
@@ -78,6 +85,11 @@ const emits = defineEmits(['option-selected']);
 function selectOption(option) {
   emits('option-selected', option);
 }
+
+function recarregar() {
+  window.location.reload();
+}
+
 
 
 const submit = () => {
