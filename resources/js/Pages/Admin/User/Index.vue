@@ -82,7 +82,7 @@
               <td class="px-2 first:pl-5 last:pr-5 py-2.5 whitespace-nowrap ">
                 <div class="flex items-center">
                   <div class="w-8 h-8 shrink-0 mr-2 sm:mr-3">
-                    <img  class="rounded-full" v-bind:src="'/storage/user/' + user.photo" />
+                    <img  class="rounded-full" :src="'/storage/user/' + user.photo" />
                   </div>
                   <div class="font-medium text-slate-800">{{user.name}}</div>
                 </div>

@@ -82,7 +82,7 @@
                           <label class="relative ml-4 cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                             <span class="ml-2 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Upload a file</span>
 
-                            <input  type="file" name="image" @input="form.avatar = $event.target.files[0]" style="display: none" class="sr-only">
+                            <input  type="file" name="image" @input="form.photo = $event.target.files[0]" style="display: none" class="sr-only">
                           </label>
                         </div>
                       </div>

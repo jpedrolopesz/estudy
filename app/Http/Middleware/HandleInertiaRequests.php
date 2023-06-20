@@ -42,7 +42,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
 
             'auth' => function () use ($request) {
-                $user = $request->user();
+                $user = auth()->user();
                 $isSubscribed = $user ? $user->subscribed('default') : false;
                 $subscription = null ?  $user->subscription('default') : false;
 
