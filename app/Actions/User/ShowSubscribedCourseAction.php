@@ -20,11 +20,16 @@ class ShowSubscribedCourseAction
         if (!$user->subscribed('default')) {
             return Course::with(['modules' => function ($query) use ($user) {
                 $query->orderBy('sort_order')->with(['lessons' => function ($query) use ($user) {
-                    $query->orderBy('sort_order')->with(['lessonUserViews' => function ($query) use ($user) {
-                        $query->where('user_id', $user->id);
-                    }]);
+                    $query->orderBy('sort_order')
+                        ->with(['comments' => function ($query) use ($user) {
+                            $query->with('user','replies');
+                        }])
+                        ->with(['lessonUserViews' => function ($query) use ($user) {
+                            $query->where('user_id', $user->id);
+                        }]);
                 }]);
             }])->findOrFail($id);
+
         }
 
         return [];

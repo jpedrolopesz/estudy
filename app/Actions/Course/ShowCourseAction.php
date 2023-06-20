@@ -15,7 +15,9 @@ class ShowCourseAction
     {
         return Course::with(['modules' => function ($query) {
             $query->orderBy('sort_order')->with(['lessons' => function ($query) {
-                $query->orderBy('sort_order');
+                $query->orderBy('sort_order')->with(['comments' => function ($query) {
+                    $query->with('replies');
+                }]);
             }]);
         }])->with('user')->findOrFail($id);
 

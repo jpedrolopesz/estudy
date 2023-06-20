@@ -1,4 +1,6 @@
 <template>
+
+  <div >{{currentPlan.stripe_status}}</div>
   <form  id="payment-form">
     <div id="card-element">
       <!-- Elements will create input elements here -->
@@ -28,11 +30,13 @@ import { loadStripe } from '@stripe/stripe-js';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Inertia} from "@inertiajs/inertia";
 
+
 export default {
   components: { PrimaryButton },
   props: {
     intent: Object,
     plan: Object,
+    currentPlan: Object,
     stripekey: String
   },
   setup(props) {
@@ -86,7 +90,7 @@ export default {
               }
             }
           } catch (error) {
-            console.error('Erro na solicitação:', error);
+            console.error('Error in request:', error);
           }
         });
 

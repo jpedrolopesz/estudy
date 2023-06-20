@@ -1,16 +1,8 @@
 <template>
-
-
   <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
     {{ status }}
   </div>
   <h2  class="text-3xl font-bold leading-tight text-black sm:text-4xl">Login</h2>
-
-  <button @click="recarregar">Recarregar</button>
-
-
-
-
   <form @submit.prevent="submit">
     <div>
       <InputLabel for="email" value="Email" />
@@ -89,7 +81,7 @@ function selectOption(option) {
 const submit = () => {
   form.post(route('login.noRedirect'), {
     preserveScroll: true,
-    onSuccess: () =>    window.location.reload(),
+    onSuccess: () => window.location.reload(),
     onFinish: () => form.reset('password'),
   });
 };

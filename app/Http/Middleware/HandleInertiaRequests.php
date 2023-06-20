@@ -41,28 +41,33 @@ class HandleInertiaRequests extends Middleware
 
         return array_merge(parent::share($request), [
 
-            'permission' => function () use ($request,) {
-            return [
-                'isAdmin' => ''
-
-                ];
-
-            },
-
-
-
             'auth' => function () use ($request) {
-                return [
-                    'user' => $request->user() ? [
-                        'id' => $request->user()->id,
-                        'first_name' => $request->user()->first_name,
-                        'last_name' => $request->user()->last_name,
-                        'email' => $request->user()->email,
-                        'owner' => $request->user()->owner,
-                        'photo' => $request->user()->photo,
+                $user = $request->user();
+                $isSubscribed = $user ? $user->subscribed('default') : false;
+                $subscription = null ?  $user->subscription('default') : false;
 
-                    ] : null,
-                ];
+                if ($subscription) {
+                    return [
+                        'user' => $user,
+
+                        'subscription_status' => match (true) {
+                            $subscription->onTrial() => 'trial',
+                            $subscription->recurring() => 'active',
+                            $subscription->canceled() => 'canceled',
+                            $subscription->onGracePeriod() => 'grace_period',
+                            $subscription->ended() => 'ended',
+                            default => null,
+                        },
+                        'is_subscribed' => $isSubscribed,
+
+                    ];
+                } else {
+                    return [
+                        'user' => $user,
+                        'is_subscribed' => null,
+                        'subscription_status' => null,
+                    ];
+                }
             },
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

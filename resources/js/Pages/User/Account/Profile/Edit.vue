@@ -1,7 +1,7 @@
 <template>
   <Head  title="Profile" />
 
-  <AuthenticatedUserLayout>
+  <UserLayout>
 
 
     <AccountUserLayout>
@@ -107,12 +107,12 @@
       </div>
 
     </AccountUserLayout>
-  </AuthenticatedUserLayout>
+  </UserLayout>
 
 </template>
 
 <script>
-import AuthenticatedUserLayout from "../../Layouts/UserLayout.vue";
+import UserLayout from "../../Layouts/UserLayout.vue";
 import AccountUserLayout from "../../Layouts/Account/AccountUserLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
@@ -122,7 +122,7 @@ import {Link, Head, useForm, usePage} from "@inertiajs/inertia-vue3";
 
 export default {
   components: {
-    AuthenticatedUserLayout,
+    UserLayout,
     AccountUserLayout,
     PrimaryButton,
     InputError,

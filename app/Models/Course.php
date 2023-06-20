@@ -15,7 +15,6 @@ class Course extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
-
     protected $fillable = [
         'user_id',
         'title',

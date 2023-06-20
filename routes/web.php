@@ -29,8 +29,8 @@ Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched
 //TABS
 Route::get('register/{id}', [RegisteredUserSubscriptionController::class, 'create'])->name('register.subscription');
 Route::post('register/paySubscription', [RegisteredUserSubscriptionController::class, 'paySubscription'])->name('paySubscription');
-Route::post('register', [RegisteredUserSubscriptionController::class, 'store']);
-Route::post('login/no-redirect', [LoginTabController::class, 'store'])->name('login.noRedirect');;
+Route::post('register/no-redirect', [RegisteredUserSubscriptionController::class, 'store'])->name('register.noRedirect');
+Route::post('login/no-redirect', [LoginTabController::class, 'store'])->name('login.noRedirect');
 Route::post('logout/no-redirect', [LoginTabController::class, 'logout'])->name('logout.noRedirect');
 
 

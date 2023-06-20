@@ -15,9 +15,6 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
-use Laravel\Cashier\Cashier;
-use Laravel\Cashier\Exceptions\IncompletePayment;
-use Stripe\Stripe;
 
 class RegisteredUserSubscriptionController extends Controller
 {
@@ -28,12 +25,13 @@ class RegisteredUserSubscriptionController extends Controller
      */
     public function create(Request $request, $id): Response
     {
-        // $stripekey = Cashier::stripe(['api_key' => config('cashier.secret')]);
-
+        $plan = Plan::findOrFail($id);
 
         return Inertia::render('Auth/RegisterSubscription', [
-            'plan' =>   Plan::findOrFail($id),
+            'plan' => $plan,
             'stripekey' => config('cashier.key'),
+            'user' => auth()->user(),
+            'currentPlan' => true,
             'intent' => $request->user() ? $request->user()->createSetupIntent() : null
         ]);
 
@@ -66,11 +64,12 @@ class RegisteredUserSubscriptionController extends Controller
             'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
         ]);
 
-        event(new Registered($user));
 
-        Auth::login($user);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->back();
+        }
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->back();
     }
 
 

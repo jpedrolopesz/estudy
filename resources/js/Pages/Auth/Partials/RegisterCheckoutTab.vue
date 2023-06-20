@@ -1,6 +1,8 @@
 <template>
 
   <h2  class="text-3xl font-bold leading-tight text-black sm:text-4xl">Register</h2>
+  <button @click="recarregar">Recarregar</button>
+
   <form @submit.prevent="submit">
     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -90,11 +92,11 @@ function recarregar() {
   window.location.reload();
 }
 
-
-
 const submit = () => {
-  form.post(route('register'), {
+  form.post(route('register.noRedirect'), {
     onFinish: () => form.reset('password', 'password_confirmation'),
+    onSuccess: () => window.location.reload(),
+
   });
 };
 </script>

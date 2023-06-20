@@ -51,10 +51,10 @@
                           <div class="h-full text-center bg-white  rounded border border-gray-200 hover:border-gray-300 shadow-sm duration-150 ease-in-out">
 
                             <div class="flex items-center p-2">
-                              <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/pricing/2/avatar.jpg" alt="" />
+                              <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" :src="'/storage/' + auth.user.photo" />
                               <div class="ml-4">
-                                <p class="text-base font-semibold text-gray-600">Brooklyn Simmons</p>
-                                <p class="mt-px text-sm text-gray-400">Digital Marketer</p>
+                                <p class="text-start font-semibold text-gray-600">{{auth.user.first_name}}</p>
+                                <p class="mt-px text-sm text-gray-400">{{ auth.user.email }}</p>
                               </div>
                             </div>
                           </div>
@@ -173,6 +173,7 @@
                  <TabPanel>
                   <CheckoutTab
                     :intent="intent"
+                    :currentPlan="currentPlan"
                     :stripekey="stripekey"
                     :plan="plan"
                   ><template #back>
@@ -189,6 +190,7 @@
 
                   <button @click="completeStep(4)">Concluir Etapa 4</button>
                 </TabPanel>
+
               </TabPanels>
             </TabGroup>
 
@@ -321,34 +323,26 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {Head, useForm, usePage} from '@inertiajs/inertia-vue3';
 import {CheckCircleIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
-
+import {TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
+import CheckoutTab from "@/Pages/Auth/Partials/CheckoutTab.vue";
 import LoginCheckoutTab from "./Partials/LoginCheckoutTab.vue";
 import RegisterCheckoutTab from "./Partials/RegisterCheckoutTab.vue";
-import CheckoutTab from "@/Pages/Auth/Partials/CheckoutTab.vue";
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 
 const props = defineProps({
   plan: Object,
   intent: Object,
+  user: Object,
+  currentPlan: Object,
   stripekey: String,
 });
 
-const isProcessing = ref(false);
 
-const form = useForm({
-  first_name: '',
-  last_name: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
-});
-
-
+const form = useForm({});
 const tabs = ref([1, 2, 3, 4]);
 const selectedTab = ref(localStorage.getItem('tabActive') || null);
 const selectedOption = ref(localStorage.getItem('selectedOption') || null);
@@ -371,32 +365,13 @@ function selectTab(tabIndex) {
   selectedTab.value = tabIndex;
 }
 
+const changeTab = (index) => { selectedTab.value = index};
+const backTab = () => { selectedTab.value -= 1 };
 
+function handleOptionSelected(option) { selectedOption.value = option }
 
-
-
-const changeTab = (index) => {
-  selectedTab.value = index;
-};
-const backTab = () => {
-  selectedTab.value -= 1;
-};
-
-function handleOptionSelected(option) {
-  selectedOption.value = option;
-}
-
-
-
-const submit = () => {
-  form.post(route('register'), {
-    onFinish: () => form.reset('password', 'password_confirmation'),
-  });
-};
-const logout = () => {
-  form.post(route('logout.noRedirect'),{
+const logout = () => { form.post(route('logout.noRedirect'),{
     preserveScroll: true,
-
   });
 }
 

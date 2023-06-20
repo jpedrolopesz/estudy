@@ -1,55 +1,53 @@
 <template>
-
   <div>
-
-    <div v-for="(module, index) in course.modules" :key="index" >
+    <div v-for="(module, index) in course.modules" :key="index">
       <Disclosure v-slot="{ open }">
         <DisclosureButton
-          :class="['modules', module.id === showModule ? 'border-gray-500 ' : '']"
           class="flex justify-between shadow-sm my-3 hover:border-gray-500 items-center px-3 py-3 bg-white rounded lg:flex-grow mb-1 w-full border border-gray-100 hover:bg-gray-50 bg-gray-50"
           @click.prevent="toggleModule(module.id)"
           @click="updateModule(module.id)"
         >
-        <button class="truncate  text-left text-sm font-medium text-gray-500]">
-        {{index + 1 }} - {{ module.title }}
-        </button>
+          <button class="truncate  text-left text-sm font-medium text-gray-500]">
+            {{ index + 1 }} - {{ module.title }}
+          </button>
 
-          <ChevronRightIcon class="w-5 h-5 text-gray-500" :class="open ? 'rotate-90 transform' : ''"/>
-
+          <ChevronRightIcon class="w-5 h-5 text-gray-500" :class="open ? 'rotate-90 transform' : ''" />
         </DisclosureButton>
 
-        <DisclosurePanel class="px-2 pb-2 text-sm text-gray-500">
-          <div v-show="module.id = showModule" >
+        <DisclosurePanel class="px-2 pb-2 text-sm text-gray-500" v-show="module.isOpen">
+          <div>
             <ul>
-              <li class="cursor-pointer border hover:border-gray-500 flex justify-between items-center px-3 py-2 bg-white rounded lg:flex-grow mb-1 w-full"
+              <li class="cursor-pointer border mb-1 hover:border-gray-500 flex justify-between items-center px-2 py-2 bg-white rounded "
                   v-for="lesson in module.lessons" :key="lesson.id"
                   @click="selectLesson(lesson)"
               >
                 <a @click="updateVideoUrl(lesson.video_url)"
                    class="flex items-center w-full">
-                   <div class="flex justify-center w-6 h-6 items-center mr-5  rounded-full bg-gray-100">
-                     <div v-if="lesson.lesson_user_views && lesson.lesson_user_views.length > 0">
-                       <div v-for="lessonShow in lesson.lesson_user_views[0].watched" :key="lessonShow">
-                         <CheckCircleIcon class="w-6 h-6  text-gray-500"/>
-                      </div>
-                     </div>
+                   <div class="flex items-center justify-center bg-gray-100 border border-gray-300 hover:border-gray-800 w-5 h-5  rounded-full">
+                     <button @click="toggleWatched(lesson)">
+                       <div v-if="lesson.lesson_user_views?.length && lesson.lesson_user_views[0].watched === 1">
+                         <div v-for="lessonShow in lesson.lesson_user_views[0].watched" :key="lessonShow">
+                           <CheckCircleIcon class="w-6 h-6 text-gray-500"/>
+                         </div>
+                       </div>
 
+                       <div v-else>
+                         <div class="hover:bg-gray-300  items-center rounded-full">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 100 100">
+                             <circle cx="50" cy="50" r="40" fill="transparent" />
+                           </svg>
+                         </div>
+                       </div>
+                     </button>
                    </div>
 
-                  <div class="flex-grow min-w-0">
+                  <div class="flex-grow mx-1 min-w-0">
                     <h2 class="leading-snug truncate text-ellipsis text-sm">
                        {{lesson.title}}
                     </h2>
                     </div>
-                   <button @click="toggleWatched(lesson)">
-
-Aqui
-                    </button>
 
 
-                  <div class="text-xs text-dark-2 opacity-75 flex items-center ml-4">
-                    <div class="whitespace-nowrap">05:40</div>
-                  </div>
 
                 </a>
               </li>
@@ -58,18 +56,12 @@ Aqui
         </DisclosurePanel>
       </Disclosure>
     </div>
-
-
-    {{watched}}
-
-
   </div>
-
 </template>
 
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { ChevronRightIcon, PlayIcon, CheckCircleIcon } from '@heroicons/vue/24/outline';
+import { ChevronRightIcon, CheckCircleIcon } from '@heroicons/vue/24/outline';
 import { ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-vue3";
@@ -87,11 +79,16 @@ const modulesState = {};
 
 
 
-const toggleModule = (moduleId) => { if (modulesState[moduleId] && modulesState[moduleId].open) {
-  modulesState[moduleId].open = false;
-} else { Object.keys(modulesState).forEach((id) => { modulesState[id].open = false;});
-  modulesState[moduleId] = { open: true };
-}};
+const toggleModule = (moduleId) => {
+  Object.keys(modulesState).forEach((id) => {
+    if (id === moduleId) {
+      modulesState[id].isOpen = true;
+    } else {
+      modulesState[id].isOpen = false;
+    }
+  });
+};
+
 
 
 const updateVideoUrl = (videoUrl) => {   emit("update-video-url", videoUrl);};
@@ -109,8 +106,6 @@ const toggleWatched = (lesson) => {
     watched: lesson.watched,
   }), {}, {
     preserveState: true,
-    onSuccess: () => {
-    },
   });
 }
 
