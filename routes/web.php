@@ -8,7 +8,6 @@ use App\Http\Controllers\User\Account\PasswordController;
 use App\Http\Controllers\User\Account\DeleteController;
 use App\Http\Controllers\User\Account\UserController;
 use App\Http\Controllers\User\Account\PlanController;
-use App\Http\Controllers\PurchasesController;
 use App\Http\Controllers\User\CommentUserController;
 use App\Http\Controllers\User\CourseUserController;
 use App\Http\Controllers\WebsiteController;
@@ -37,7 +36,7 @@ Route::post('logout/no-redirect', [LoginTabController::class, 'logout'])->name('
 
 
 
-Route::resource('comments', CommentUserController::class);
+Route::resource('support', CommentUserController::class);
 
 
 // Panel User

@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 
-class CommentUserController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class CommentUserController extends Controller
             ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
             ->get();
 
-        return Inertia::render('User/Support/Index',[
+        return Inertia::render('Admin/Comments/Index',[
             'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
             'comments' => $comments
         ] );
@@ -29,9 +30,9 @@ class CommentUserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         //
     }
@@ -39,21 +40,20 @@ class CommentUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function show($id)
+    public function show($id): Response
     {
 
     }
@@ -62,9 +62,9 @@ class CommentUserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit($id)
+    public function edit($id): Response
     {
         //
     }
@@ -72,11 +72,11 @@ class CommentUserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): Response
     {
         //
     }
@@ -85,7 +85,7 @@ class CommentUserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

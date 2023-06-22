@@ -105,7 +105,6 @@ import {
   ChartPieIcon,
   VideoCameraIcon,
   Cog6ToothIcon,
-  BellIcon,
   ChatBubbleLeftRightIcon,
   IdentificationIcon
 } from '@heroicons/vue/24/outline';

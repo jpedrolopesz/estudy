@@ -33,7 +33,14 @@
           <!-- Tab 2-->
           <TabPanel>
             <div >
-              <div class="text-gray-800 my-2 opacity-70 text-lg font-bold">Comments</div>
+              <div class="flex justify-between items-center">
+                <div class="text-gray-800 my-2 opacity-70 text-lg font-bold">Comments</div>
+                <CommentLesson :course="course" :selectedLesson="selectedLesson">
+                  <template #button>
+                    Aqui
+                  </template>
+                </CommentLesson>
+              </div>
               <ul>
                 <li  v-for="comment in selectedLesson.comments" :key="comment.id" class="mb-4 relative">
                     <div>
@@ -56,6 +63,8 @@
                   </li>
                 </ul>
             </div>
+
+
           </TabPanel>
 
           <!-- Tab 3-->
@@ -70,6 +79,7 @@
         </TabPanels>
           </TabGroup>
         </div>
+
       </div>
 
       <div class="px-0 md:px-6 md:mt-6 transition-all duration-200 mb-3 md:mb-0 flex-grow order-first w-full md:w-auto">
@@ -101,10 +111,14 @@ import VideoSection from "./VideoSection.vue";
 import ModuleAndLesson from "./ModuleAndLesson.vue";
 import { ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/24/outline';
 import {Tab, TabGroup, TabList, TabPanel, TabPanels} from "@headlessui/vue";
+import Modal from "@/Components/Modal.vue";
+import CommentLesson from "@/Components/Video/Partials/CommentLesson.vue";
 
 export default {
   name: 'VideoPlayer',
   components: {
+    CommentLesson,
+    Modal,
     Tab,
     TabPanel, TabPanels, TabList, TabGroup, VideoSection, ModuleAndLesson, ChevronRightIcon, ChevronLeftIcon},
   props: {

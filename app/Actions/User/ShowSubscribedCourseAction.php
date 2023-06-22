@@ -18,11 +18,11 @@ class ShowSubscribedCourseAction
         $user = Auth::user();
 
         if (!$user->subscribed('default')) {
-            return Course::with(['modules' => function ($query) use ($user) {
+            $course = Course::with(['modules' => function ($query) use ($user) {
                 $query->orderBy('sort_order')->with(['lessons' => function ($query) use ($user) {
                     $query->orderBy('sort_order')
                         ->with(['comments' => function ($query) use ($user) {
-                            $query->with('user','replies');
+                            $query->with('user', 'replies');
                         }])
                         ->with(['lessonUserViews' => function ($query) use ($user) {
                             $query->where('user_id', $user->id);
@@ -30,6 +30,27 @@ class ShowSubscribedCourseAction
                 }]);
             }])->findOrFail($id);
 
+            $totalLessons = $course->modules->sum(function ($module) {
+                return $module->lessons->count();
+            });
+
+            $watchedLessons = $course->modules->sum(function ($module) use ($user) {
+                return $module->lessons->sum(function ($lesson) use ($user) {
+                    return $lesson->lessonUserViews->where('user_id', $user->id)->where('watched', true)->count();
+                });
+            });
+
+            $progressPercentage = 0;
+            if ($totalLessons > 0) {
+                $progressPercentage = ($watchedLessons / $totalLessons) * 100;
+            }
+
+
+            return [
+                'course' => $course,
+                'progressPercentage' => $progressPercentage,
+
+            ];
         }
 
         return [];

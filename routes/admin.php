@@ -1,16 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\Account\AdminController;
-use App\Http\Controllers\Admin\Account\PasswordAdminController;
+
+use App\Http\Controllers\Admin\CommentsController;
 use App\Http\Controllers\Admin\CreatePlanController;
 use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\ModulesController;
 use App\Http\Controllers\Admin\Stripe\StripeController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CoursesController;
-use App\Models\Course;
-use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,31 +27,25 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         })->name('checkout.index');
 
 
-        // Stripe Test
-        Route::get('/stripe', [StripeController::class, 'show'])->name('stripe.show');
-        Route::get('/stripe/create', [StripeController::class, 'create'])->name('stripe.create');
+            // Stripe Test
+            Route::get('/stripe', [StripeController::class, 'show'])->name('stripe.show');
+            Route::get('/stripe/create', [StripeController::class, 'create'])->name('stripe.create');
 
 
 
-        //** Account Admin */
+            // ================ COMMENTS ================= //
 
-        Route::get('/profile', [AdminController::class, 'edit'])->name('admin.profile.edit');
-        Route::post('/profile', [AdminController::class, 'update'])->name('admin.profile.update');
+            Route::resource('/comments', CommentsController::class);
+            Route::controller(CommentsController::class)->group(function () {
+            //
+            });
 
-        Route::get('/password', [PasswordAdminController::class, 'edit'])->name('admin.password.edit');
-        Route::post('/password', [PasswordAdminController::class, 'update'])->name('admin.password.update');
-
-
-
-
-            // Route::resource('/comments', CommentController::class);
-
-
-              // ================ USERS ================= //
+            // ================ USERS ================= //
              Route::resource('user', UsersController::class);
              Route::controller(UsersController::class)->group(function () {
 
                  Route::put('user/{user}/restore', 'restore')->name('user.restore');
+                 Route::put('user/{user}/password', 'updatePassword')->name('user.password');
 
              });
 

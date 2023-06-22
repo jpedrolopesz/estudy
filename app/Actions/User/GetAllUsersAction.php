@@ -19,7 +19,7 @@ class GetAllUsersAction
 
         return Pipeline::send($data)
             ->then(fn ($data) => $data->builder)
-            ->filter(Request::only('search', 'trashed', 'role'))
+            ->filter(Request::only('search', 'trashed'))
             ->paginate(7)
             ->withQueryString();
     }

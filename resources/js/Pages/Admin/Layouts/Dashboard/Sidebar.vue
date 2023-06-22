@@ -39,6 +39,17 @@
         <span class="tooltip bg-white">Users</span>
       </li>
       <li>
+        <NavLink :href="route('comments.index')" :active="route().current('comments.index')">
+          <div class="flex items-center p-1 ">
+
+            <ChatBubbleLeftRightIcon class="w-6 h-6 mr-1" />
+
+            <span class="ml-3 links_name">Comments</span>
+          </div>
+        </NavLink>
+        <span class="tooltip bg-white">Comments</span>
+      </li>
+      <li>
         <NavLink :href="route('course.index')" :active="route().current('course.index')">
           <div class="flex items-center p-1 ">
 
@@ -68,7 +79,7 @@
         Settings</p>
       <ul class="-space-y-4">
         <li>
-          <NavLink :href="route('admin.profile.edit')" :active="route().current('admin.profile.edit')">
+          <NavLink :href="route('user.edit', $page.props.auth.user.id)" :active="route().current('user.edit')">
             <div class="flex items-center p-1 ">
               <Cog6ToothIcon class="w-6 h-6 mr-1" />
               <span class="ml-3 links_name">Settings</span>
@@ -99,14 +110,7 @@
 import {onMounted} from 'vue';
 import NavLink from '@/Components/NavLink.vue';
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import { Bars3CenterLeftIcon } from '@heroicons/vue/24/outline';
-import { UsersIcon } from '@heroicons/vue/24/outline';
-import { ChartPieIcon } from '@heroicons/vue/24/outline';
-import { VideoCameraIcon } from '@heroicons/vue/24/outline';
-import { TicketIcon } from '@heroicons/vue/24/outline';
-import { Cog6ToothIcon } from '@heroicons/vue/24/outline';
-import { BellIcon } from '@heroicons/vue/24/outline';
-
+import { Bars3CenterLeftIcon,ChatBubbleLeftRightIcon,UsersIcon,ChartPieIcon,VideoCameraIcon,TicketIcon,Cog6ToothIcon } from '@heroicons/vue/24/outline';
 
 
 onMounted(() => {

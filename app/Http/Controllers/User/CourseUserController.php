@@ -23,6 +23,12 @@ class CourseUserController extends Controller
             ->select('courses.*', 'users.first_name', 'users.photo')
             ->get();
 
+        $showCourseAction = new ShowSubscribedCourseAction();
+
+        foreach ($courses as $course) {
+            $courseData = $showCourseAction->execute($course->id);
+            $course->progressPercentage = $courseData['progressPercentage'];
+        }
         return Inertia::render('User/Course/Index', [
             'courses' => $courses,
         ]);
@@ -30,8 +36,11 @@ class CourseUserController extends Controller
 
     public function showCourse(int $id): \Inertia\Response
     {
+
+        $courseData = (new ShowSubscribedCourseAction())->execute($id);
+
         return Inertia::render('User/Course/ShowCourse', [
-            'course' => (new ShowSubscribedCourseAction())->execute($id),
+            'course' => $courseData['course'],
         ]);
 
     }
@@ -55,6 +64,10 @@ class CourseUserController extends Controller
         }
         return back();
     }
+
+
+
+
 
 
 

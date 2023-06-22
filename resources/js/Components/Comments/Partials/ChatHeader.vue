@@ -7,7 +7,7 @@
       </div>
 
         <button
-          class="md:hidden text-gray-400 hover:text-gray-500  px-2 py-0.5 rounded-md border border-gray-200 hover:border-gray-400 "
+          class="md:hidden text-gray-400 hover:text-gray-500 mt-1 px-2 py-0.5 rounded-md border border-gray-200 hover:border-gray-400 "
           @click.stop="$emit('toggle-msgsidebar')"
           aria-controls="messages-sidebar"
           :aria-expanded="msgSidebarOpen"

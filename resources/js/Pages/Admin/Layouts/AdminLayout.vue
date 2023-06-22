@@ -1,22 +1,21 @@
 <template>
 
-  <div class="flex bg-gray-50 min-h-screen overflow-hidden">
 
-    <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+    <div class=" bg-gray-50 overflow-y-auto overflow-hidden">
 
       <Sidebar/>
 
       <Toast/>
 
-      <main class="ml-16 mr-4 min-h-screen bg-dots-darker">
-        <Header class="mb-2"/>
+      <main class=" ml-16 mr-4 min-h-screen bg-dots-darker overflow-hidden">
+        <Header />
 
         <div class="py-1 w-full max-w-9xl mx-auto">
           <slot />
         </div>
       </main>
     </div>
-  </div>
+
 </template>
 
 <script setup>

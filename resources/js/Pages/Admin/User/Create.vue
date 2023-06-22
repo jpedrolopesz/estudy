@@ -2,10 +2,7 @@
 
   <Head  title="User Create" />
 
-  <AuthenticatedLayout>
-
-
-
+  <AdminLayout>
       <div>
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
@@ -99,6 +96,16 @@
                       <InputError class="mt-2" :message="form.errors.email" />
                     </div>
 
+                    <div class="col-span-6">
+                      <FormInput
+                        v-model="form.password"
+                        type="password"
+                        required
+                        label="Password"
+                      />
+                      <InputError class="mt-2" :message="form.errors.password" />
+                    </div>
+
 
                   </div>
 
@@ -130,14 +137,14 @@
 
 
 
-  </AuthenticatedLayout>
+  </AdminLayout>
 
 </template>
 
 
 <script>
 
-import AuthenticatedLayout from "../Layouts/AdminLayout.vue";
+import AdminLayout from "../Layouts/AdminLayout.vue";
 import BreadcrumbLink from "@/Components/BreadcrumbLink.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import { useForm, Link, Head } from '@inertiajs/inertia-vue3'
@@ -148,7 +155,7 @@ export default {
   components: {
     FormInput,
     InputError,
-    AuthenticatedLayout,
+    AdminLayout,
     BreadcrumbLink,
     FormSearch,
     Link,

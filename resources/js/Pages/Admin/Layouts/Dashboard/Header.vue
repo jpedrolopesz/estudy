@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-end mt-3.5">
+  <div class="flex items-center justify-end mb-2">
 
 
 
@@ -23,7 +23,7 @@
                   </div>
                   <div class="text-xs text-slate-500 italic"> {{ $page.props.auth.user.email }}</div>
                 </div>
-                <DropdownLink :href="route('admin.profile.edit')" >
+                <DropdownLink  :href="route('user.edit', $page.props.auth.user.id)" >
                   Account
                 </DropdownLink>
                 <DropdownLink :href="route('logout')" method="post" as="button">

@@ -10,6 +10,7 @@
       <div class="w-full bg-white shadow-md rounded-md flex flex-col overflow-y-auto">
 
       <CourseHeader
+        :class="msgSidebarOpen ? 'hidden' : ''"
         :msgSidebarOpen="msgSidebarOpen"
         @toggle-msgsidebar="msgSidebarOpen = !msgSidebarOpen"
       />
@@ -48,10 +49,8 @@
               <div class="bg-white p-5 shadow-sm rounded-md border border-gray-200lg:w-72 xl:w-80">
                 <div class="space-y-2">
                   <Link :href="route('showCourse', selectedContent)" class="btn w-full bg-gray-500 hover:bg-gray-600 text-white">
-                    <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 16 16">
-                      <path d="m2.457 8.516.969-.99 2.516 2.481 5.324-5.304.985.989-6.309 6.284z" />
-                    </svg>
-                    <span class="ml-1">Acessar</span>
+                    <span class="ml-1">Access</span>
+                    <ForwardIcon class="ml-1 w-5 h-5 text-white"/>
                   </Link>
 
                 </div>
@@ -59,7 +58,7 @@
 
               <div class="bg-white p-5 shadow-sm rounded-md border border-gray-200 lg:w-72 xl:w-80 overflow-y-auto overflow-x-hidden h-[calc(64vh-24px)]">
                 <div class="flex justify-between space-x-1 mb-5">
-                  <div class="text-sm text-gray-800 font-semibold">Content</div>
+                  <div class="text-sm text-gray-800 font-semibold">Modules</div>
                 </div>
                 <ul class="space-y-2">
                   <li class="cursor-pointer border hover:border-gray-500 flex justify-between items-center px-3 py-2 bg-white rounded  mb-1"
@@ -103,15 +102,16 @@
 import { Link} from '@inertiajs/inertia-vue3';
 import ListCourse from "./ListCourse.vue";
 import CourseHeader from "./CourseHeader.vue";
-import { PlayIcon } from '@heroicons/vue/24/outline';
+import { PlayIcon, ForwardIcon } from '@heroicons/vue/24/outline';
 
 import {ref} from "vue";
 
 
 export default {
-  components: {CourseHeader, ListCourse,PlayIcon, Link},
+  components: {CourseHeader, ListCourse,PlayIcon,ForwardIcon, Link},
   props: {
     courses:Object,
+
   },
   emits: ['selectedCourse', 'close-msgsidebar', 'toggle-msgsidebar'],
   data() {

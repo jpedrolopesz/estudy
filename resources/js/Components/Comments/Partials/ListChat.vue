@@ -2,7 +2,7 @@
 
 
   <div id="messages-sidebar"
-       class="flex bg-white shadow-md  rounded-md mx-2 border border-gray-200 flex-col absolute right-20 w-5/6 md:w-auto md:static  md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
+       class="flex bg-white shadow-md rounded-md mx-2 border border-gray-200 flex-col absolute right-20 w-5/6 md:w-auto md:static  md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
        :class="msgSidebarOpen ? 'translate-y-1 translate-x-20 ' : '-translate-x-full '"
   >
     <div class="flex rounded-t-lg border-b h-16 bg-white justify-between">
@@ -10,10 +10,10 @@
       <FormSearchSideBar/>
 
     </div>
-    <div  class="overflow-y-auto h-[calc(94vh-64px)]">
+    <div  class="overflow-y-auto h-[calc(92vh-64px)]">
 
       <ul>
-        <li v-for="comment in comments" :key="comment.id" class="ml-2 rounded-sm border my-2 border-gray-200 hover:bg-gray-50"
+        <li v-for="comment in comments" :key="comment.id" class="ml-2 rounded-sm border cursor-pointer my-2 border-gray-200 hover:bg-gray-50"
             @click="selectComment(comment)"
             @click.stop="$emit('close-msgsidebar')"
         >
@@ -32,20 +32,6 @@
         </li>
       </ul>
 
-      <a class="block border-b">
-        <div class="border-l-2 border-blue-500 bg-blue-100 p-3 space-y-4">
-          <div class="flex flex-row items-center space-x-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <strong class="flex-grow text-sm">Nikola Tesla</strong>
-            <div class="text-sm text-gray-600">5hr</div>
-          </div>
-
-          <div class="flex flex-row items-center space-x-1">
-            <svg class="flex-none w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <div class="flex-grow truncate text-xs">some message content whedkjwhed wkjehdkjweh dkjhwekjdhwekjhd </div>
-          </div>
-        </div>
-      </a>
 
     </div>
   </div>

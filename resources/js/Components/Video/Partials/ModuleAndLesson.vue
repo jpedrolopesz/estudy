@@ -59,9 +59,6 @@
       </Disclosure>
     </div>
   </div>
-
-
-
 </template>
 
 <script setup>

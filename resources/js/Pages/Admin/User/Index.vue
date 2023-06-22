@@ -106,18 +106,26 @@
               <td class="px-2 first:pl-5 last:pr-5  whitespace-nowrap w-px">
                 <div class="space-x-1 inline-flex">
 
-                  <Link :href="route('user.edit', user.id)"  class="text-gray-400 hover:text-gray-500 px-2 py-1.5 rounded-md hover:bg-gray-100">
-                   <PaintBrushIcon class="w-5 h-5"/>
+                  <Link v-if="user.deleted_at" :href="route('user.restore', user.id)" as="button" type="button" method="PUT" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-100">
+                    <ArrowPathIcon class="w-5 h-5"/>
+
                   </Link>
 
-                  <ModalDelete>
-                    <div class="flex ml-2 justify-between">
-                      <Link :href="route('user.destroy', user.id)" as="button" type="button" method="DELETE"
-                            class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
-                        Yes, delete
-                      </Link>
-                    </div>
-                  </ModalDelete>
+                  <div v-if="!user.deleted_at" class="flex">
+                    <Link :href="route('user.edit', user.id)"  class="text-gray-400 hover:text-gray-500 px-2 py-1.5 rounded-md hover:bg-gray-100">
+                      <PaintBrushIcon class="w-5 h-5"/>
+                    </Link>
+
+                    <ModalDelete>
+                      <div class="flex ml-2 justify-between">
+                        <Link :href="route('user.destroy', user.id)" as="button" type="button" method="DELETE"
+                              class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
+                          Yes, delete
+                        </Link>
+                      </div>
+                    </ModalDelete>
+                  </div>
+
                 </div>
               </td>
             </tr>
@@ -148,18 +156,17 @@
 <script setup>
 import { useMounted } from "@/Composables/useMounted";
 import { Link, Head } from '@inertiajs/inertia-vue3';
-import { PlusIcon, PaintBrushIcon } from '@heroicons/vue/24/outline';
+import { PlusIcon, PaintBrushIcon,ArrowPathIcon } from '@heroicons/vue/24/outline';
 import AdminLayout from "../Layouts/AdminLayout.vue";
 import ModalDelete from "@/Components/ModalDelete.vue";
 import Pagination from "@/Components/Pagination.vue";
 import FormSearch from "@/Components/FormSearch.vue";
 import {ref, watch} from "vue";
 import {Inertia} from "@inertiajs/inertia";
-import {RadioGroup, RadioGroupLabel, RadioGroupOption} from "@headlessui/vue";
+import {RadioGroup, RadioGroupLabel, RadioGroupOption, } from "@headlessui/vue";
 
-const props = defineProps(
-  {
-    users:Object,
+const props = defineProps({
+  users:Object,
   });
 
 let search = ref('');

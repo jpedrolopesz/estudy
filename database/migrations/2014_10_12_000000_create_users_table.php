@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->boolean('owner')->default(false);
             $table->integer('role')->default((Roles::MEMBER)->value);
-            $table->string('photo' )->default('default.png');;
+            $table->string('photo' )->default('default.png');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

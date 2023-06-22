@@ -17,7 +17,8 @@ import {ref} from "vue";
 
 defineProps({
   courses:Object,
-  msgSidebarOpen:Boolean
+  msgSidebarOpen:Boolean,
+
 })
 
 const msgSidebarOpen = ref(true);

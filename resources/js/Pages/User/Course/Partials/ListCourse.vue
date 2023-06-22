@@ -22,7 +22,7 @@
 
       <div class="overflow-y-auto h-[calc(84vh-64px)]">
         <ul>
-          <li class="mx-2 shadow-sm rounded-sm border my-2 border-gray-200  hover:bg-gray-50"
+          <li class="mx-2 shadow-sm rounded-sm border my-2 border-gray-200 cursor-pointer hover:bg-gray-50"
               v-for="course in courses" :key="course.id"
               @click="selectCourse(course)"
               @click.stop="$emit('close-msgsidebar')">
@@ -35,11 +35,13 @@
                 <h2 class="text-xs mt-2 font-semibold uppercase text-gray-500 hidden sm:block">
                   Progress
                 </h2>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4 ">
-                  <div class="bg-gray-600 h-2.5 rounded-full 0" style="width: 45%"></div>
-                </div>
 
-                <div class=" mt-4 text-sm text-gray-60">Acessar</div>
+
+                <div class="w-full bg-gray-200 rounded-full">
+                  <div class="bg-gray-600 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" :style="{width: course.progressPercentage + '%'}">
+                    {{ Math.round(course.progressPercentage) }}%
+                  </div>
+                </div>
 
               </div>
             </div>

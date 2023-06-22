@@ -34,8 +34,6 @@ class User extends Authenticatable
         'last_name',
         'owner',
         'trial_ends_at',
-        'is_active',
-        'role',
     ];
 
     /**
@@ -58,9 +56,7 @@ class User extends Authenticatable
         'owner' => 'boolean',
         'should_be_logged_out' => 'boolean',
         'email_verified_at' => 'datetime',
-        'role' => Roles::class,
         'is_admin' => 'boolean',
-        'is_active' => 'boolean',
     ];
 
     protected static function booted()
@@ -213,8 +209,6 @@ class User extends Authenticatable
                     ->orWhere('last_name', 'like', '%' . $search . '%')
                     ->orWhere('email', 'like', '%' . $search . '%');
             });
-        })->when($filters['role'] ?? null, function ($query, $role) {
-            $query->whereRole($role);
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'a') {
                 $query->withTrashed();
