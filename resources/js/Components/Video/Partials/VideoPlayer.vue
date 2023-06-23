@@ -35,7 +35,7 @@
             <div >
               <div class="flex justify-between items-center">
                 <div class="text-gray-800 my-2 opacity-70 text-lg font-bold">Comments</div>
-                <CommentLesson :course="course" :selectedLesson="selectedLesson">
+                <CommentLesson  :selectedLesson="selectedLesson">
                   <template #button>
                     Aqui
                   </template>
@@ -43,8 +43,9 @@
               </div>
               <ul>
                 <li  v-for="comment in selectedLesson.comments" :key="comment.id" class="mb-4 relative">
+
                     <div>
-                      <div class="p-4  bg-white rounded-lg border border-gray-200 shadow-sm ">
+                      <div class="p-2 bg-white rounded-lg border border-gray-200 shadow-sm ">
                         <div class="justify-between items-center mb-3 flex">
 
                           <div class="flex space-x-2 text-sm font-normal text-gray-500 ">
@@ -55,12 +56,99 @@
                           </div>
                           <time class="mb-1 text-xs font-normal text-gray-400">{{moment(comment.created_at).format("DD-MM-YYYY") }}</time>
                         </div>
-                        <div class="p-3 text-xs italic font-normal text-gray-500 bg-gray-50 rounded-lg border border-gray-200 ">
-                          {{comment.comment}}
+                        <div class="max-w-lg">
+
+                          <div class="line-clamp-3 p-2 text-xs italic font-normal text-gray-500 bg-gray-50 rounded-lg border border-gray-200 trucate ">
+                            <span class="font-semibold">Title: {{comment.title}}</span>
+                            <p class="mt-3">{{comment.comment}}</p>
+                          </div>
+                          <div class="mt-2">
+
+                          </div>
                         </div>
+                        <div>
+                          <Modal>
+                            <template #button>
+                              <div @click="selectComment(comment)" class="text-sm text-gray-500 font-semibold hover:text-gray-900 ">View All</div>
+                            </template>
+                            <template #title>
+                              <div>
+                                <span class="text-md font-semibold">{{selectedLesson.title}}</span>
+                                <div class="flex items-center">
+                                  <ChatBubbleLeftEllipsisIcon class="mr-1 w-4 h-4"/>
+                                  <p class="text-sm font-semibold"> {{comment.title}}</p>
+                                </div>
+                              </div>
+
+                            </template>
+
+                            <template #createForm>
+
+                              <div class="flex h-[calc(91vh-64px)] overflow-y-scroll mt-4 mx-1 flex-col space-y-2 justify-between">
+
+                                <div class="flex flex-row space-x-2 m-2"
+                                     :class="$page.props.auth.user.id === comment.user.id ? 'flex flex-row space-x-2 flex-row-reverse space-x-reverse ml-14 ' : ''">
+                                  <div class="flex flex-col">
+                                    <div class="text-sm font-normal text-gray-500 ">
+                                       <span class="flex items-center  mb-1 text-sm font-medium text-gray-500"
+                                            :class="$page.props.auth.user.id === comment.user.id ? 'justify-end ' : ''">
+                                        <img :src="'/storage/user/' + comment.user.photo"  class=" rounded-full w-5 h-5 mr-2 "/>
+                                        {{ comment.user.first_name }} {{comment.user.last_name  }}
+                                      </span>
+                                      <p class="border bg-gray-50 rounded-b-md  p-5"
+                                         :class="$page.props.auth.user.id === comment.user.id ? 'rounded-l-md ' : 'rounded-r-md'">
+                                      {{comment.comment}}</p>
+                                    </div>
+                                  </div>
+                                </div>
+
+
+
+                                <div v-for="reply in comment.replies" :key="reply.id">
+
+                                  <div class="flex flex-row space-x-2 "
+                                       :class="$page.props.auth.user.id === reply.user.id ? 'flex flex-row space-x-2 flex-row-reverse space-x-reverse ml-14 mr-2 ' : ''">
+                                    <div class="flex flex-col">
+                                      <div class="text-sm font-normal text-gray-500 ">
+                                       <span class="flex items-center  mb-1 text-sm font-medium text-gray-500"
+                                             :class="$page.props.auth.user.id === reply.user.id ? 'justify-end ' : ''">
+                                        <img :src="'/storage/user/' + reply.user.photo"  class=" rounded-full w-5 h-5 mr-2 "/>
+                                        {{ reply.user.first_name }}
+                                      </span>
+                                        <p class="border bg-gray-50 rounded-b-md p-3"
+                                           :class="$page.props.auth.user.id === reply.user.id ? 'rounded-l-md' : 'rounded-r-md'">
+                                        {{reply.reply}}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+
+
+
+                              </div>
+                              <form @submit.prevent="replyStore">
+                                <label for="chat" class="sr-only">Your message</label>
+                                <div class="flex items-center border-t  px-3 py-2 rounded-t-lg bg-gray-50">
+                                  <textarea id="chat" rows="1" v-model="form.reply" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500" placeholder="Your message..."></textarea>
+                                  <button type="submit" class="inline-flex justify-center p-2 text-gray-600 rounded-full cursor-pointer hover:bg-gray-100 ">
+                                    <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+                                    <span class="sr-only">Send message</span>
+                                  </button>
+                                </div>
+                              </form>
+
+
+
+                            </template>
+                          </Modal>
+
+                        </div>
+
                       </div>
                     </div>
-                  </li>
+
+                </li>
                 </ul>
             </div>
 
@@ -109,10 +197,13 @@
 import moment from "moment";
 import VideoSection from "./VideoSection.vue";
 import ModuleAndLesson from "./ModuleAndLesson.vue";
-import { ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/24/outline';
+import { ChevronLeftIcon, ChevronRightIcon, ChatBubbleLeftEllipsisIcon} from '@heroicons/vue/24/outline';
 import {Tab, TabGroup, TabList, TabPanel, TabPanels} from "@headlessui/vue";
 import Modal from "@/Components/Modal.vue";
 import CommentLesson from "@/Components/Video/Partials/CommentLesson.vue";
+import {Inertia} from "@inertiajs/inertia";
+import {useForm, usePage} from "@inertiajs/inertia-vue3";
+import {onMounted, ref} from "vue";
 
 export default {
   name: 'VideoPlayer',
@@ -120,7 +211,7 @@ export default {
     CommentLesson,
     Modal,
     Tab,
-    TabPanel, TabPanels, TabList, TabGroup, VideoSection, ModuleAndLesson, ChevronRightIcon, ChevronLeftIcon},
+    TabPanel, TabPanels, TabList, TabGroup, VideoSection, ModuleAndLesson,ChatBubbleLeftEllipsisIcon, ChevronRightIcon, ChevronLeftIcon},
   props: {
     course: Object,
     lesson:Object
@@ -135,8 +226,37 @@ export default {
       moment: moment
     }
   },
+  setup() {
+    const selectedComment = ref('')
+
+    const {auth} = usePage().props.value
+    const form = useForm({
+      reply: '',
+    })
+
+
+    const selectComment = (comment) => {
+      selectedComment.value = comment
+    }
+
+
+    return {auth,form, selectComment, selectedComment};
+  },
 
   methods: {
+
+    replyStore(){
+      Inertia.post(route('storeReply', {
+        reply: this.form.reply,
+        user_id: this.auth.user.id,
+        comment_id: this.selectedComment.id ,
+        comment: true
+      },{
+        preserveScroll:true,
+        onSuccess: () => Inertia.reload()
+      }))
+    },
+
     updateVideoUrl(videoUrl) {
       this.videoUrl = videoUrl;
     },
@@ -146,7 +266,6 @@ export default {
     handleLessonSelected(lesson) {
       this.selectedLesson = lesson;
     },
-
     previousLesson() {
       const lessons = this.course.modules.flatMap(module => module.lessons);
       const currentIndex = lessons.findIndex(lesson => lesson.id === this.selectedLesson.id);

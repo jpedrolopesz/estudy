@@ -22,7 +22,9 @@ class ShowSubscribedCourseAction
                 $query->orderBy('sort_order')->with(['lessons' => function ($query) use ($user) {
                     $query->orderBy('sort_order')
                         ->with(['comments' => function ($query) use ($user) {
-                            $query->with('user', 'replies');
+                            $query->with(['user', 'replies' => function ($query) use ($user) {
+                                $query->with('user')->where('user_id', $user->id);
+                            }]);
                         }])
                         ->with(['lessonUserViews' => function ($query) use ($user) {
                             $query->where('user_id', $user->id);

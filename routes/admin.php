@@ -37,7 +37,8 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
             Route::resource('/comments', CommentsController::class);
             Route::controller(CommentsController::class)->group(function () {
-            //
+                Route::post('comments/{comment}/reply','storeReply')->name('storeReply');
+
             });
 
             // ================ USERS ================= //

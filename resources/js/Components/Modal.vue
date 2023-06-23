@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="button" @click="openModal">
+    <button  type="button" @click="openModal">
      <slot name="button"/>
     </button>
   </div>
@@ -30,7 +30,7 @@
               leave-to="translate-x-full">
               <DialogPanel class="pointer-events-auto relative w-screen max-w-5xl md:max-w-md">
                 <section class="absolute right-0 bottom-0 bg-white w-full h-full shadow flex flex-col">
-                  <header class="h-14 border-b border-gray-200 px-4 flex items-center justify-between">
+                  <header class="h-auto border-b border-gray-200 px-4 flex items-center justify-between">
                     <DialogTitle class="text-lg font-medium text-gray-900">
                       <slot name="title" />
                     </DialogTitle>
