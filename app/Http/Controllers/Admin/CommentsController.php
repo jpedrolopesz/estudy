@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Comment\GetAllCommentsAction;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Reply;
 use Illuminate\Http\Request;
@@ -16,14 +18,12 @@ class CommentsController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-        $comments = Comment::with('user', 'replies', 'replies.user')
-            ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
-            ->get();
+        $comments = GetAllCommentsAction::run(['perPage' => 10000]);
+
 
         return Inertia::render('Admin/Comments/Index',[
-            'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
             'comments' => $comments
         ] );
     }

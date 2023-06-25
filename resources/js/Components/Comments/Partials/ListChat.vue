@@ -24,10 +24,15 @@
               <div class="text-xs text-gray-600">{{moment(comment.created_at).format("DD-MM-YYYY") }}</div>
             </div>
 
-            <div class="flex flex-row items-center space-x-1">
-              <svg class="flex-none w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <div class="flex-grow truncate text-xs">{{comment.title}} </div>
+            <div class="flex items-center">
+              <BookmarkIcon class="w-4 h-4 mr-0.5"/>
+              <p class="truncate text-xs">{{comment.title}}</p>
             </div>
+            <div class="flex items-center">
+              <PhotoIcon class="w-4 h-4 mr-0.5"/>
+              <p class="text-xs">{{ comment.lesson.title }}</p>
+            </div>
+
           </div>
         </li>
       </ul>
@@ -43,11 +48,13 @@
 import moment from "moment/moment";
 import FormSearch from "@/Components/FormSearch.vue";
 import FormSearchSideBar from "@/Components/FormSearchSideBar.vue";
+import { BookmarkIcon, PhotoIcon } from '@heroicons/vue/24/outline';
+
 
 
 export default {
   name: 'ListChat',
-  components: {FormSearchSideBar, FormSearch},
+  components: {FormSearchSideBar, BookmarkIcon,PhotoIcon, FormSearch},
   props: {
     comments: Object,
     msgSidebarOpen:Boolean
