@@ -23,7 +23,7 @@
         </div>
       </ChatHeader>
 
-      <main class="overflow-y-auto" :class="msgSidebarOpen ? 'hidden' : ''">
+      <main class="overflow-y-scroll" :class="msgSidebarOpen ? 'hidden' : ''">
         <div class="p-12 w-full ">
           <div class="flex-auto overflow-y-auto space-y-4">
             <div class="flex flex-row space-x-2 m-2"
@@ -101,6 +101,7 @@ import ChatHeader from "@/Components/Comments/Partials/ChatHeader.vue";
 import FormComment from "@/Components/Form/FormComment.vue";
 import { UserCircleIcon, PhotoIcon, BookmarkIcon } from '@heroicons/vue/24/outline';
 import {useForm, usePage} from "@inertiajs/inertia-vue3";
+import {Inertia} from "@inertiajs/inertia";
 
 export default {
   name: 'Chat',
@@ -112,20 +113,20 @@ export default {
   emits: ['selectedComment', 'close-msgsidebar', 'toggle-msgsidebar'],
   data() {
     return {
-      selectedComment: '',
       moment: moment
     }
   },
   setup() {
     const sidebarOpen = ref(false)
     const msgSidebarOpen = ref(true)
-
+    const selectedComment = ref("");
     const {auth} = usePage().props.value
     const form = useForm({
       reply: ''
     })
 
     return {
+      selectedComment,
       sidebarOpen,
       msgSidebarOpen,
       form,
@@ -134,14 +135,20 @@ export default {
   },
   methods: {
     replySubmit() {
-      this.form.post(route('storeReply',{
-        reply: this.form.reply,
-        user_id: this.auth.user.id,
-        comment_id: this.selectedComment.id,
-        comment: true
-      },{
-        preserveScroll:true
-      }))
+      this.form.post(
+        route('storeReply', {
+          reply: this.form.reply,
+          user_id: this.auth.user.id,
+          comment_id: this.selectedComment.id,
+          comment: true
+        }),
+        {
+          onSuccess: () => {
+            this.form.reply = '';
+            this.selectedComment = this.comments.find(comment => comment.id === this.selectedComment.id);
+          }
+        }
+      );
     },
     handleCommentSelected(comment) {
       this.selectedComment = comment;

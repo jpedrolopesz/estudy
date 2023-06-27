@@ -60,7 +60,7 @@ Route::group(['prefix' => 'subscription', 'middleware' => ['auth','verified'],'a
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile', [UserController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
 
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::post('/password', [PasswordController::class, 'update'])->name('update.password');

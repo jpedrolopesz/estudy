@@ -201,9 +201,8 @@ import { ChevronLeftIcon, ChevronRightIcon, ChatBubbleLeftEllipsisIcon} from '@h
 import {Tab, TabGroup, TabList, TabPanel, TabPanels} from "@headlessui/vue";
 import Modal from "@/Components/Modal.vue";
 import CommentLesson from "@/Components/Video/Partials/CommentLesson.vue";
-import {Inertia} from "@inertiajs/inertia";
 import {useForm, usePage} from "@inertiajs/inertia-vue3";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 
 export default {
   name: 'VideoPlayer',
@@ -227,7 +226,7 @@ export default {
     }
   },
   setup() {
-    const selectedComment = ref('')
+    const selectedComment = ref("")
 
     const {auth} = usePage().props.value
     const form = useForm({
@@ -243,18 +242,23 @@ export default {
     return {auth,form, selectComment, selectedComment};
   },
 
+
   methods: {
 
     replyStore(){
-      Inertia.post(route('storeReply', {
-        reply: this.form.reply,
-        user_id: this.auth.user.id,
-        comment_id: this.selectedComment.id ,
-        comment: true
-      },{
-        preserveScroll:true,
-        onSuccess: () => Inertia.reload()
-      }))
+      this.form.post(
+        route('storeReply', {
+          reply: this.form.reply,
+          user_id: this.auth.user.id,
+          comment_id: this.selectedComment.id ,
+          comment: true
+        }),
+        {
+          onSuccess: () => {
+            this.form.reply = '';
+          }
+        }
+      );
     },
 
     updateVideoUrl(videoUrl) {

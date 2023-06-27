@@ -2,93 +2,75 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\Comment\GetAllCommentsAction;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class CommentUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Inertia\Response
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
-        $comments = Comment::with('user', 'replies', 'replies.user')
-            ->filter(\Illuminate\Support\Facades\Request::only('search', 'role', 'trashed'))
-            ->get();
+
+        $comments = GetAllCommentsAction::run(['perPage' => 10000]);
 
         return Inertia::render('User/Support/Index',[
-            'filters' => \Illuminate\Support\Facades\Request::all('search', 'role', 'trashed'),
             'comments' => $comments
         ] );
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'nullable|string',
+            'comment' => 'required|string',
+            'lesson_id' => 'required|exists:lessons,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $comment = Comment::create([
+            'lesson_id' => $validatedData['lesson_id'],
+            'user_id' => $validatedData['user_id'],
+            'title' => $validatedData['title'],
+            'comment' => $validatedData['comment'],
+        ]);
+
+        return redirect()->back()->with('success', 'Commented');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function storeReply(Request $request, $support)
     {
 
+        $validatedData = $request->validate([
+            'reply' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+            'comment_id' => 'required|exists:users,id',
+        ]);
+
+
+        $reply = new Reply();
+        $reply->comment_id = $validatedData['comment_id'];
+        $reply->user_id = $validatedData['user_id'];
+        $reply->reply = $validatedData['reply'];
+        $reply->save();
+
+        return redirect()->back()->with('success', 'Commented Success');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

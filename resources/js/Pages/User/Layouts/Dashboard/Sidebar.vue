@@ -38,7 +38,7 @@
             <span class="tooltip bg-white">Courses</span>
           </li>
           <li>
-            <NavLink :href="route('comments.index')" :active="route().current('comments.index')">
+            <NavLink :href="route('support.index')" :active="route().current('support.index')">
               <div class="flex items-center p-1 ">
 
                 <ChatBubbleLeftRightIcon class="w-6 h-6 mr-1" />
@@ -48,18 +48,6 @@
             </NavLink>
             <span class="tooltip bg-white">Comments</span>
           </li>
-          <li>
-            <NavLink :href="route('comments.index')" :active="route().current('comments.index')">
-              <div class="flex items-center p-1 ">
-
-                <IdentificationIcon class="w-6 h-6 mr-1" />
-
-                <span class="ml-3 links_name">Billing</span>
-              </div>
-            </NavLink>
-            <span class="tooltip bg-white">Billing</span>
-          </li>
-
         </ul>
 
         <!-- Profile Content -->

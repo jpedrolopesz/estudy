@@ -2,8 +2,6 @@
   <Head  title="Profile" />
 
   <UserLayout>
-
-
     <AccountUserLayout>
 
       <div class="mt-5 md:col-span-2 md:mt-0">
@@ -69,21 +67,6 @@
 
                 </div>
 
-                <div v-if="form.mustVerifyEmail && form.email_verified_at === null">
-                  <p class="text-sm mt-2 text-gray-800">
-                    Your email address is unverified.
-                    <Link :href="route('verification.send')" method="post"
-                      as="button" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      Click here to re-send the verification email.
-                    </Link>
-                  </p>
-
-                  <div v-show="props.status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600">
-                    A new verification link has been sent to your email address.
-                  </div>
-                </div>
-
 
             </div>
             <div class="bg-gray-50 rounded-b-lg px-4 py-3 text-right sm:px-6">
@@ -130,18 +113,16 @@ export default {
   },
   setup( props){
 
-    const user = usePage().props.value.auth.user;
+    const {auth} = usePage().props.value.auth.user;
 
     const form = useForm({
+      id: props.user.id,
       photo: props.user.photo,
       first_name: props.user.first_name,
       last_name: props.user.last_name,
       email: props.user.email,
-      mustVerifyEmail: props.user.email_verified_at,
-      status: props.status
-
     });
-    return {form};
+    return {form, auth};
   },
   props:{
     user:Object,
@@ -158,7 +139,10 @@ export default {
       if (this.$refs.photo) {
         this.form.photo = this.$refs.photo.files[0];
       }
-      this.form.post(route("profile.update"));
+      this.form.post(route("profile.update",{
+        _method: 'put',
+        user: this.form.id
+      }))
     },
     resetForm() {
       this.form.clearErrors();

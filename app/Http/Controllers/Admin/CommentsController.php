@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Comment\GetAllCommentsAction;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Reply;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class CommentsController extends Controller
@@ -28,24 +26,14 @@ class CommentsController extends Controller
         ] );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create(): Response
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        // Valide os dados do formulário, se necessário
         $validatedData = $request->validate([
             'title' => 'nullable|string',
             'comment' => 'required|string',
@@ -53,7 +41,6 @@ class CommentsController extends Controller
             'user_id' => 'required|exists:users,id',
         ]);
 
-        // Crie o novo comentário
         $comment = Comment::create([
             'lesson_id' => $validatedData['lesson_id'],
             'user_id' => $validatedData['user_id'],
@@ -61,8 +48,7 @@ class CommentsController extends Controller
             'comment' => $validatedData['comment'],
         ]);
 
-        // Retorne uma resposta ou redirecione, conforme necessário
-        return redirect()->back()->with('success', 'Commented ok');
+        return redirect()->back()->with('success', 'Commented Success');
 
     }
 
@@ -85,49 +71,4 @@ class CommentsController extends Controller
         return redirect()->back()->with('success', 'Commented Success');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id): Response
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id): Response
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id): Response
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

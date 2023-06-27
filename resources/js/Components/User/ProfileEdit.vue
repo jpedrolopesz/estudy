@@ -131,7 +131,7 @@ export default {
     };
   },
   methods: {
-    submit(props) {
+    submit() {
       if (this.$refs.photo) {
         this.form.photo = this.$refs.photo.files[0];
       }

@@ -11,9 +11,7 @@
             </button>
           </template>
         <template #dropdown>
-
             <slot />
-
         </template>
       </SearchDropdown>
 

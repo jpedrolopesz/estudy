@@ -30,16 +30,35 @@ class Comment extends Model
         return $this->hasMany(Reply::class);
     }
 
+
+
     public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where(function ($query) use ($search) {
+        $query->when($filters['search'] ?? null, function ($query, $search) use ($filters) {
+            $query->where(function ($query) use ($search, $filters) {
                 $query->where('title', 'like', '%'.$search.'%')
-                    ->orWhere('user_name', 'like', '%'.$search.'%')
-                    ->orWhere('email', 'like', '%'.$search.'%');
+                    ->orWhereHas('lesson', function ($query) use ($search) {
+                        $query->where('title', 'like', '%'.$search.'%');
+                    })
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('first_name', 'like', '%'.$search.'%')
+                            ->orWhere('last_name', 'like', '%'.$search.'%')
+                            ->orWhere('email', 'like', '%'.$search.'%');
+                    });
+
             });
         });
+        $query->when($filters['reply'] ?? null, function ($query, $hasReplies) {
+            if ($hasReplies === 'answered') {
+                $query->whereHas('replies');
+            } elseif ($hasReplies === 'unanswered') {
+                $query->whereDoesntHave('replies');
+            }
+        });
+
     }
+
+
 }
 
 

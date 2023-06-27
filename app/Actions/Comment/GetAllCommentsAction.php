@@ -22,7 +22,7 @@ class GetAllCommentsAction
 
         return Pipeline::send($data)
             ->then(fn($data) => $data->builder)
-            ->filter(Request::only('search'))
+            ->filter(Request::only('search', 'reply'))
             ->with(['lesson', 'user', 'replies' => function ($query) {
                 $query->with('user');
             }])
