@@ -172,17 +172,17 @@
                 <!-- TAB 3 -->
                  <TabPanel>
                   <CheckoutTab
+                    v-if="auth.user"
                     :intent="intent"
                     :currentPlan="currentPlan"
                     :stripekey="stripekey"
                     :plan="plan"
-                  ><template #back>
+                  >
+                    <template #back>
                       <button @click="backTab" class="underline">Back</button>
                     </template>
                   </CheckoutTab>
-
-                  <button @click="completeStep(3)">Concluir Etapa 3</button>
-                </TabPanel>
+                 </TabPanel>
 
                 <!-- TAB 4 -->
                 <TabPanel>
@@ -323,7 +323,7 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {onBeforeMount, onBeforeUnmount, onMounted, ref, watch, watchEffect} from "vue";
 import {Head, useForm, usePage} from '@inertiajs/inertia-vue3';
 import {CheckCircleIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import {TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
@@ -331,6 +331,7 @@ import CheckoutTab from "@/Pages/Auth/Partials/CheckoutTab.vue";
 import LoginCheckoutTab from "./Partials/LoginCheckoutTab.vue";
 import RegisterCheckoutTab from "./Partials/RegisterCheckoutTab.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import {Inertia} from "@inertiajs/inertia";
 
 
 const props = defineProps({
@@ -344,26 +345,64 @@ const props = defineProps({
 
 const form = useForm({});
 const tabs = ref([1, 2, 3, 4]);
+
 const selectedTab = ref(localStorage.getItem('tabActive') || null);
+
 const selectedOption = ref(localStorage.getItem('selectedOption') || null);
 const { auth } = usePage().props.value;
 
-const completeStep = (index) => {
+function completeStep(index) {
   if (selectedOption.value === 'login' || selectedOption.value === 'register') {
-    selectTab(auth.user ? 2 : 1);
+    if (auth.user) {
+      selectTab(2); // Usuário autenticado, vai para a Tab 2 (pagamento)
+    } else {
+      selectTab(1); // Usuário não autenticado, volta para a Tab 1 (confirmação de autenticação)
+      localStorage.removeItem('tabActive'); // Remove o valor do localStorage
+      localStorage.removeItem('selectedOption');
+    }
   } else if (selectedOption.value === 'payment') {
-    selectTab(2);
+    selectTab(2); // Sempre vai para a Tab 2 (pagamento) quando a opção é pagamento
   }
-};
+}
+
+
 
 function selectTab(tabIndex) {
-  if (selectedTab.value === 1 && selectedOption.value === null) {
-    tabIndex = 0;
+  if (!auth.user && tabIndex === 2) {
+    tabIndex = 1; // Redireciona para a Tab 1 (confirmação de autenticação)
+    localStorage.removeItem('tabActive'); // Remove o valor do localStorage
+    localStorage.removeItem('selectedOption');
   }
+
   localStorage.setItem('tabActive', tabIndex);
   localStorage.setItem('selectedOption', selectedOption.value);
   selectedTab.value = tabIndex;
 }
+
+onBeforeMount(() => {
+
+  const tabActive = localStorage.getItem('tabActive');
+  const selectedOption = localStorage.getItem('selectedOption');
+
+  if (tabActive === null || tabActive === undefined || selectedOption === null || selectedOption === undefined) {
+    selectTab(0); // Definir a Tab como 0 (Login ou Register)
+    localStorage.setItem('tabActive', 0);
+  }
+
+  if (!auth.user && tabActive === '2') {
+    selectTab(0); // Redireciona para a Tab 0 (Login ou Register)
+    Inertia.reload(); // Executa o inertia.reload()
+  }
+});
+
+onBeforeUnmount(() => {
+  localStorage.removeItem('tabActive'); // Remove o valor do localStorage ao desmontar o componente
+  localStorage.removeItem('selectedOption');
+
+});
+
+
+
 
 const changeTab = (index) => { selectedTab.value = index};
 const backTab = () => { selectedTab.value -= 1 };
