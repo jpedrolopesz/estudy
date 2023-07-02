@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
+use App\Models\PlanFeature;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -30,9 +31,15 @@ class RegisteredUserSubscriptionController extends Controller
         return Inertia::render('Auth/RegisterSubscription', [
             'plan' => $plan,
             'stripekey' => config('cashier.key'),
-            'user' => auth()->user(),
-            'currentPlan' => true,
-            'intent' => $request->user() ? $request->user()->createSetupIntent() : null
+            'plans' => Plan::all(),
+            'plansMonthly' =>
+                PlanFeature::join('plans', 'plan_features.plan_id', '=', 'plans.id')
+                    ->where('plans.slug', 'monthly')
+                    ->get(),
+            'plansYearly' =>
+                PlanFeature::join('plans', 'plan_features.plan_id', '=', 'plans.id')
+                    ->where('plans.slug', 'yearly')
+                    ->get(),
         ]);
 
     }
@@ -83,6 +90,23 @@ class RegisteredUserSubscriptionController extends Controller
 
         $request->user()->newSubscription('default', $plan->stripe_id)
             ->create($request->paymentMethod['id']);
+
+
+        return redirect()->back()
+            ->with('success', 'Your data has been successfully updated.');
+    }
+
+
+    /**
+     * @throws ValidationException
+     */
+    public function paySubscriptionUpdate(Request $request): RedirectResponse
+    {
+        $plan = Plan::findOrFail($request->input('billing_plan_id'));
+
+
+
+        $request->user()->subscription('default', $plan->stripe_id)->swapAndInvoice($request->plan);
 
 
         return redirect()->back()

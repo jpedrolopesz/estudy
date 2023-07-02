@@ -15,7 +15,7 @@ class WebsiteController extends Controller
     {
 
 
-        return Inertia::render('Welcome',[
+        return Inertia::render('Home/Welcome',[
             'plans' => Plan::all(),
             'plansMonthly' =>
                 PlanFeature::join('plans', 'plan_features.plan_id', '=', 'plans.id')

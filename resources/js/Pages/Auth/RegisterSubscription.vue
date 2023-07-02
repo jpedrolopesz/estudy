@@ -19,7 +19,8 @@
           </a>
         </div>
 
-        <div class="px-4 pt-12 pb-8">
+
+        <div  class="px-4 pt-12 pb-8">
           <div class="max-w-md mx-auto w-full">
             <TabGroup :selectedIndex="selectedTab" @change="changeTab">
               <TabList class="relative">
@@ -115,8 +116,6 @@
                        v-if="selectedOption === 'login'"
                        @option-selected="handleOptionSelected"
                        v-bind:selected-option="selectedOption"
-                       :selectTab="selectTab"
-                       :selectedTab="selectedTab"
                      >
                        <template #login>
                          <button @click="backTab" class="underline">Back</button>
@@ -173,23 +172,18 @@
                  <TabPanel>
                   <CheckoutTab
                     v-if="auth.user"
-                    :intent="intent"
-                    :currentPlan="currentPlan"
                     :stripekey="stripekey"
                     :plan="plan"
                   >
                     <template #back>
                       <button @click="backTab" class="underline">Back</button>
+
                     </template>
                   </CheckoutTab>
+
                  </TabPanel>
 
-                <!-- TAB 4 -->
-                <TabPanel>
 
-
-                  <button @click="completeStep(4)">Concluir Etapa 4</button>
-                </TabPanel>
 
               </TabPanels>
             </TabGroup>
@@ -208,7 +202,7 @@
 
       <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:items-stretch md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-10">
-          <div class="flex flex-col justify-between lg:py-5">
+          <div v-if="!auth.is_subscribed" class="flex flex-col justify-between lg:py-5">
             <h2 class="text-2xl font-bold leading-tight text-white sm:text-4xl lg:leading-tight lg:text-3xl">Join the pros and be part of something fantastic</h2>
 
             <div class="mt-4">
@@ -241,19 +235,41 @@
               </div>
 
               <div class="mt-6">
-                <p class="text-md leading-relaxed text-white">You made it so simple. The system is much faster and easier to work with than my old system.</p>
+                <p class="text-md leading-relaxed text-white">You made it so simple. Studying with you became much faster and easier than the old teaching system.</p>
               </div>
 
               <div class="flex items-center mt-8">
-                <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/pricing/2/avatar.jpg" alt="" />
+                <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="/storage/user/default.png" />
                 <div class="ml-4">
-                  <p class="text-base font-semibold text-white">Brooklyn Simmons</p>
+                  <p class="text-base font-semibold text-white">João Zamopeteer</p>
                   <p class="mt-px text-sm text-gray-400">Digital Marketer</p>
                 </div>
               </div>
             </div>
           </div>
 
+
+          <div v-else>
+
+            <div v-if="plan.stripe_id === auth.subscription.stripe_price" >
+              <h2 class="text-2xl font-bold leading-tight text-white sm:text-4xl lg:leading-tight lg:text-3xl">This is your current plan. To update your plan, you must choose another plan.</h2>
+
+
+              <ModalPlans>
+                <Plans
+                  :plans="plans"
+                  :plansMonthly="plansMonthly"
+                  :plansYearly="plansYearly"
+                />
+              </ModalPlans>
+
+            </div>
+
+            <h2 v-if="plan.stripe_id != auth.subscription.stripe_price" class="text-2xl font-bold leading-tight text-white sm:text-4xl lg:leading-tight lg:text-3xl">
+              Your current plan will be replaced after updating to the desired new plan.
+            </h2>
+
+          </div>
           <div >
             <div class="overflow-hidden bg-white rounded-md">
               <div class="px-4 my-12">
@@ -265,7 +281,7 @@
                     </span>
                 </div>
                 <div class="text-xs mt-2 font-normal leading-tight text-gray-500">
-                  Automatically renews after 1
+                  Automatically renews after the cycle.
                 </div>
 
 
@@ -323,7 +339,7 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onBeforeUnmount, onMounted, ref, watch, watchEffect} from "vue";
+import {onBeforeMount, onBeforeUnmount, ref} from "vue";
 import {Head, useForm, usePage} from '@inertiajs/inertia-vue3';
 import {CheckCircleIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import {TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
@@ -332,36 +348,42 @@ import LoginCheckoutTab from "./Partials/LoginCheckoutTab.vue";
 import RegisterCheckoutTab from "./Partials/RegisterCheckoutTab.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Inertia} from "@inertiajs/inertia";
+import Plans from "@/Pages/Home/Partials/Plans.vue";
+import ModalSuccess from "@/Components/ModalSuccess.vue";
+import Modal from "@/Components/Modal.vue";
+import ModalPlans from "@/Components/ModalPlans.vue";
 
 
 const props = defineProps({
   plan: Object,
-  intent: Object,
-  user: Object,
-  currentPlan: Object,
   stripekey: String,
+  plans:Object,
+  plansMonthly:Object,
+  plansYearly:Object
 });
 
 
 const form = useForm({});
-const tabs = ref([1, 2, 3, 4]);
+const tabs = ref([1, 2, 3]);
 
 const selectedTab = ref(localStorage.getItem('tabActive') || null);
 
 const selectedOption = ref(localStorage.getItem('selectedOption') || null);
 const { auth } = usePage().props.value;
 
+
+
 function completeStep(index) {
   if (selectedOption.value === 'login' || selectedOption.value === 'register') {
     if (auth.user) {
-      selectTab(2); // Usuário autenticado, vai para a Tab 2 (pagamento)
+      selectTab(2);
     } else {
-      selectTab(1); // Usuário não autenticado, volta para a Tab 1 (confirmação de autenticação)
-      localStorage.removeItem('tabActive'); // Remove o valor do localStorage
+      selectTab(1);
+      localStorage.removeItem('tabActive');
       localStorage.removeItem('selectedOption');
     }
   } else if (selectedOption.value === 'payment') {
-    selectTab(2); // Sempre vai para a Tab 2 (pagamento) quando a opção é pagamento
+    selectTab(2);
   }
 }
 
@@ -369,8 +391,8 @@ function completeStep(index) {
 
 function selectTab(tabIndex) {
   if (!auth.user && tabIndex === 2) {
-    tabIndex = 1; // Redireciona para a Tab 1 (confirmação de autenticação)
-    localStorage.removeItem('tabActive'); // Remove o valor do localStorage
+    tabIndex = 1;
+    localStorage.removeItem('tabActive');
     localStorage.removeItem('selectedOption');
   }
 
@@ -385,18 +407,18 @@ onBeforeMount(() => {
   const selectedOption = localStorage.getItem('selectedOption');
 
   if (tabActive === null || tabActive === undefined || selectedOption === null || selectedOption === undefined) {
-    selectTab(0); // Definir a Tab como 0 (Login ou Register)
+    selectTab(0);
     localStorage.setItem('tabActive', 0);
   }
 
   if (!auth.user && tabActive === '2') {
-    selectTab(0); // Redireciona para a Tab 0 (Login ou Register)
-    Inertia.reload(); // Executa o inertia.reload()
+    selectTab(0);
+    Inertia.reload();
   }
 });
 
 onBeforeUnmount(() => {
-  localStorage.removeItem('tabActive'); // Remove o valor do localStorage ao desmontar o componente
+  localStorage.removeItem('tabActive');
   localStorage.removeItem('selectedOption');
 
 });

@@ -44,28 +44,19 @@ class HandleInertiaRequests extends Middleware
             'auth' => function () use ($request) {
                 $user = auth()->user();
                 $isSubscribed = $user ? $user->subscribed('default') : false;
-                $subscription = null ?  $user->subscription('default') : false;
 
-                if ($subscription) {
+                if ($isSubscribed) {
+                    $subscription =  $user->subscription('default');
+
                     return [
                         'user' => $user,
-
-                        'subscription_status' => match (true) {
-                            $subscription->onTrial() => 'trial',
-                            $subscription->recurring() => 'active',
-                            $subscription->canceled() => 'canceled',
-                            $subscription->onGracePeriod() => 'grace_period',
-                            $subscription->ended() => 'ended',
-                            default => null,
-                        },
+                        'subscription' => $subscription,
                         'is_subscribed' => $isSubscribed,
-
                     ];
                 } else {
                     return [
                         'user' => $user,
                         'is_subscribed' => null,
-                        'subscription_status' => null,
                     ];
                 }
             },
