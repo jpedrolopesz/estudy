@@ -50,13 +50,8 @@ Route::get('/dashboard', function () {
 /** Subscription */
 Route::group(['prefix' => 'subscription', 'middleware' => ['auth','verified'],'as' => 'subscription.'], function (){
     Route::get('/{plan_id}', [SubscriptionController::class, 'subscription'])->name('subscription');
-    Route::post('/', [SubscriptionController::class, 'processSubscription'])->name('process');
-    Route::post('/plans', [SubscriptionController::class, 'update'])->name('subscription.update');
     Route::post('/cancel', [SubscriptionController::class, 'cancel'])->name('cancel');
     Route::post('/resume', [SubscriptionController::class, 'resume'])->name('resume');
-
-
-    //Route::post('/cancel', [SubscriptionCancelController::class, 'cancel'])->name('cancel');
 
 });
 
