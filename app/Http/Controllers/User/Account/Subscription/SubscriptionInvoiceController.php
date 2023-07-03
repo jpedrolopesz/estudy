@@ -9,7 +9,7 @@ use Inertia\Inertia;
 
 class SubscriptionInvoiceController extends Controller
 {
-    public function show()
+    public function show(): \Inertia\Response
     {
         $onGracePeriod = false;
         if( auth()->user()->subscribed('default')) {

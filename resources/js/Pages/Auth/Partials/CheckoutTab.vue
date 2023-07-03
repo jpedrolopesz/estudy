@@ -42,10 +42,10 @@
 
         </div>
         <div v-else>
-          <button name="plan" id="plan" value="{{plan.stripe_id}}" type="submit"
+          <Link  :href="route('paySubscription.update', {billing_plan_id: plan.id, plan: plan.stripe_id})" as="button" type="button" method="post"
                   class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
             Update ${{plan.price}}
-          </button>
+          </Link>
         </div>
 
       </div>
@@ -82,12 +82,12 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Inertia} from "@inertiajs/inertia";
 import { CheckCircleIcon } from '@heroicons/vue/24/outline'
 import ModalSuccess from "@/Components/ModalSuccess.vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {usePage, Link} from "@inertiajs/inertia-vue3";
 
 
 
 export default {
-  components: {ModalSuccess, PrimaryButton, CheckCircleIcon },
+  components: {ModalSuccess, PrimaryButton, CheckCircleIcon, Link },
   props: {
     plan: Object,
     stripekey: String,

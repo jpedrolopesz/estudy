@@ -102,9 +102,8 @@ class RegisteredUserSubscriptionController extends Controller
      */
     public function paySubscriptionUpdate(Request $request): RedirectResponse
     {
+
         $plan = Plan::findOrFail($request->input('billing_plan_id'));
-
-
 
         $request->user()->subscription('default', $plan->stripe_id)->swapAndInvoice($request->plan);
 

@@ -120,7 +120,7 @@
                        <template #login>
                          <button @click="backTab" class="underline">Back</button>
 
-                         <PrimaryButton @click="completeStep(2)" v-if="auth.user"  :disabled="!selectedOption"  class="ml-4">
+                         <PrimaryButton @click="completeStep(2)" v-if="auth.user" type="button"  :disabled="!selectedOption"  class="ml-4">
                            Next Step <ChevronRightIcon class="w-4 h-4"/>
                          </PrimaryButton>
                        </template>

@@ -60,19 +60,19 @@
 
 
                     <div v-else-if="plan.stripe_id !== currentPlan.stripe_price">
-                        <a  v-bind:href="route('subscription.subscription', plan.id)"
+                        <Link  :href="route('register.subscription', plan.id)"
                                  class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
                           Update
-                        </a>
+                        </Link>
                     </div>
 
 
                   </div>
 
                   <div v-else-if="currentPlan !== true">
-                    <a v-if="plan.stripe_id " v-bind:href="route('subscription.subscription', plan.id)"  class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
+                    <Link v-if="plan.stripe_id " :href="route('register.subscription', plan.id)"  class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
                       Choose plan
-                    </a>
+                    </Link>
                   </div>
 
 
@@ -144,19 +144,19 @@
 
 
                 <div v-else-if="plan.stripe_id !== currentPlan.stripe_price">
-                  <a  v-bind:href="route('subscription.subscription', plan.id)"
+                  <Link :href="route('register.subscription', plan.id)"
                       class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
                     Update
-                  </a>
+                  </Link>
                 </div>
 
 
               </div>
 
               <div v-else-if="currentPlan !== true">
-                <a v-if="plan.stripe_id " v-bind:href="route('subscription.subscription', plan.id)"  class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
+                <Link v-if="plan.stripe_id " :href="route('register.subscription', plan.id)"  class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
                   Choose plan
-                </a>
+                </Link>
               </div>
 
             </div>
@@ -228,9 +228,5 @@ export default {
     plansYearly:Object,
     currentPlan:Object,
   },
-
-  setup(props) {
-    console.log(props.currentPlan)
-  }
   }
 </script>
