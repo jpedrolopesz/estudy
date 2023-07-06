@@ -17,7 +17,7 @@ class CreatePlanFeaturesTable extends Migration
         Schema::create('plan_features', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('plan_id');
-            $table->string('name');
+            $table->unsignedInteger('max_users')->nullable();
             $table->timestamps();
 
             $table->foreign('plan_id')
