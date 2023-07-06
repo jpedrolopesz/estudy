@@ -30,7 +30,7 @@ const widthClass = computed(() => {
 
 const alignmentClasses = computed(() => {
     if (props.align === 'left') {
-        return 'origin-top-left left-0';
+        return 'origin-top-left left-16 -top-28';
     } else if (props.align === 'right') {
         return 'origin-top-right right-0';
     } else {

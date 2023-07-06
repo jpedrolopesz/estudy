@@ -51,7 +51,7 @@
 
               </TabPanel>
 
-              <!-- Tab 2 - Password (route('user.update', this.user.id)) -->
+              <!-- Tab 2 -->
               <TabPanel>
                 <ProfilePassword :user="user"/>
                 <input type="hidden" name="tab" value="tab2">
@@ -169,7 +169,6 @@
 
 <script setup>
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
-import {useForm} from "@inertiajs/inertia-vue3";
 import AdminLayout from "@/Pages/Admin/Layouts/AdminLayout.vue";
 import ProfileEdit from "@/Components/User/ProfileEdit.vue";
 import ProfilePassword from "@/Components/User/ProfilePassword.vue";

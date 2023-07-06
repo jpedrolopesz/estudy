@@ -135,10 +135,8 @@
 
                 <td class="h-[calc(70vh-84px)] " >
                   <div class="px-4 sm:py-10 lg:mx-28 bg-transparent max-w-7xl sm:px-6 lg:px-8">
-                    <div class="grid items-center grid-cols-1 gap-y-8 sm:grid-cols-2 ">
-                      <div class="order-2 ml-20">
-                        <img class="w-3/4 sm:w-full  " src="/asset/podcasts.svg" alt="" />
-                      </div>
+                    <div class="items-center  ">
+
 
                       <div class="order-1">
                         <FirstCreate

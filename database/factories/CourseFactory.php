@@ -15,7 +15,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'thumbnail' => 'RlMZkSU90YmNYA11xK5FmGgzTXOXinU3bWP25HBD.png',
+            'thumbnail' => $this->faker->imageUrl($width=400, $height=400),
             'user_id' => 1
         ];
     }

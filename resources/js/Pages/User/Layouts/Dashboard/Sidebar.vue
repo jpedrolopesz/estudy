@@ -17,16 +17,6 @@
         <p class="links_name px-6  text-xs font-semibold leading-4 tracking-wider text-gray-500 uppercase md:block">Main</p>
         <ul class="-space-y-4">
           <li>
-            <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-              <div class="flex items-center p-1 ">
-                <ChartPieIcon class="w-6 h-6 mr-1"/>
-                <span class="ml-3 links_name">Dashboard</span>
-              </div>
-            </NavLink>
-            <span class="tooltip bg-white">Dashboard</span>
-          </li>
-
-          <li>
             <NavLink :href="route('course.user.index')" :active="route().current('course.user.index')">
               <div class="flex items-center p-1 ">
 
@@ -63,7 +53,18 @@
                 </div>
               </NavLink>
               <span class="tooltip bg-white">Settings</span>
+            </li
+            >
+            <li>
+              <NavLink  method="POST" :href="route('logout.user')">
+                <div class="flex items-center p-1 ">
+                  <ArrowLeftOnRectangleIcon class="w-6 h-6 mr-1" />
+                  <span class="ml-3 links_name">Logout</span>
+                </div>
+              </NavLink>
+              <span class="tooltip bg-white">Logout</span>
             </li>
+
           </ul>
 
           <div class="profile pl-6 pr-4 py-4 bg-gray-700 flex items-center justify-between">
@@ -90,14 +91,14 @@ import NavLink from '@/Components/NavLink.vue';
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import {
   Bars3CenterLeftIcon,
-  ChartPieIcon,
   VideoCameraIcon,
   Cog6ToothIcon,
+  ArrowLeftOnRectangleIcon,
   ChatBubbleLeftRightIcon,
-  IdentificationIcon
 } from '@heroicons/vue/24/outline';
 
 import {onMounted} from "vue";
+
 
 onMounted(() => {
   const menu = document.querySelector("#menu");

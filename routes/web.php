@@ -12,17 +12,9 @@ use App\Http\Controllers\User\CommentUserController;
 use App\Http\Controllers\User\CourseUserController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 
 Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
-
-
-Route::get('/courses', [CourseUserController::class, 'index'])->name('course.user.index');
-Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');
-Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched'])->name('lessons.markAsWatched');
-
-
 
 
 //TABS
@@ -30,32 +22,17 @@ Route::get('register/{id}', [RegisteredUserSubscriptionController::class, 'creat
 Route::post('register/paySubscription', [RegisteredUserSubscriptionController::class, 'paySubscription'])->name('paySubscription');
 Route::post('register/paySubscription/update', [RegisteredUserSubscriptionController::class, 'paySubscriptionUpdate'])->name('paySubscription.update');
 
-
 Route::post('register/no-redirect', [RegisteredUserSubscriptionController::class, 'store'])->name('register.noRedirect');
 Route::post('login/no-redirect', [LoginTabController::class, 'store'])->name('login.noRedirect');
 Route::post('logout/no-redirect', [LoginTabController::class, 'logout'])->name('logout.noRedirect');
 
+Route::group([ 'middleware' => ['auth','verified']], function (){
 
+    Route::get('/courses', [CourseUserController::class, 'index'])->name('course.user.index');
+    Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');
+    Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched'])->name('lessons.markAsWatched');
 
-
-
-Route::resource('support', CommentUserController::class);
-
-
-// Panel User
-Route::get('/dashboard', function () {
-    return Inertia::render('User/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-/** Subscription */
-Route::group(['prefix' => 'subscription', 'middleware' => ['auth','verified'],'as' => 'subscription.'], function (){
-    Route::get('/{plan_id}', [SubscriptionController::class, 'subscription'])->name('subscription');
-    Route::post('/cancel', [SubscriptionController::class, 'cancel'])->name('cancel');
-    Route::post('/resume', [SubscriptionController::class, 'resume'])->name('resume');
-
-});
-
-Route::middleware('auth')->group(function () {
+    Route::resource('support', CommentUserController::class);
 
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
@@ -69,17 +46,18 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/plans', [PlanController::class, 'show'])->name('plans.show');
 
-    /** Invoice */
-    Route::get('/invoice', [SubscriptionInvoiceController::class, 'show'])
-        ->name('invoice.show')
-        ->middleware('EnsureUserIsSubscribed');
-    // Route::get('/invoice/{id}', [SubscriptionInvoiceController::class, 'show'])->name('invoice');
+    /** Subscription */
+    Route::group(['prefix' => 'subscription', 'as' => 'subscription.'], function (){
+        Route::post('/cancel', [SubscriptionController::class, 'cancel'])->name('cancel');
+        Route::post('/resume', [SubscriptionController::class, 'resume'])->name('resume');
 
+    });
+    /** Invoice */
+    Route::get('/invoice', [SubscriptionInvoiceController::class, 'show'])->name('invoice.show')->middleware('EnsureUserIsSubscribed');
 
 
 
 });
-
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

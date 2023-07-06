@@ -18,7 +18,7 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function create()
+    public function create(): \Inertia\Response
     {
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
@@ -29,29 +29,43 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @param LoginRequest $request
      * @return RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        if(Auth::user()->owner == '1') {
+        if (Auth::user()->owner == '1') {
 
             return redirect('/admin/dashboard')->with('success', 'Your login was successful');
+        } elseif (Auth::user()->owner == '0') {
 
-        }
-        else if(Auth::user()->owner == '0'){
-
-            return redirect('/dashboard')->with('success', 'Your login was successful');
-
-        }
-        else{
+            return redirect(RouteServiceProvider::HOME)->with('success', 'Your login was successful');
+        } else {
             return redirect('/');
         }
 
+
+    }
+
+    /**
+     * Destroy an authenticated session.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return back();
     }
 
 

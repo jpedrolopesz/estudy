@@ -3,11 +3,12 @@
 
 use App\Http\Controllers\Admin\CommentsController;
 use App\Http\Controllers\Admin\CreatePlanController;
+use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\ModulesController;
-use App\Http\Controllers\Admin\Stripe\StripeController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CoursesController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,22 +16,7 @@ use Inertia\Inertia;
 Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
     ->group(function () {
 
-        Route::get('/dashboard', function () {
-            return Inertia::render('Admin/Dashboard');
-        })->name('admin.dashboard');
-
-        Route::get('/checkout', function () {
-            return Inertia::render('Subscription/Show', [
-                'intent' => auth()->user()->createSetupIntent(),
-
-            ]);
-        })->name('checkout.index');
-
-
-            // Stripe Test
-            Route::get('/stripe', [StripeController::class, 'show'])->name('stripe.show');
-            Route::get('/stripe/create', [StripeController::class, 'create'])->name('stripe.create');
-
+            Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
 
             // ================ COMMENTS ================= //
@@ -86,6 +72,8 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
 
 
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+            ->name('logout');
     });
 
 

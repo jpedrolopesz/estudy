@@ -4,7 +4,6 @@
       <VideoPlayer
         class="w-full h-[calc(80vh-64px)] video-player vjs-big-play-centered"
         v-bind:src="'/storage/' + videoUrl"
-
         crossorigin="anonymous"
         playsinline
         controls

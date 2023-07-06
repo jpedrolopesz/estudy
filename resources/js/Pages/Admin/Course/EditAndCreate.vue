@@ -27,13 +27,6 @@
                       <span>Modules</span>
                     </div>
                   </Tab>
-
-                  <Tab v-slot="{ selected }" class="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
-                    <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
-                      <BanknotesIcon class="w-5 h-5 mr-1"/>
-                      <span>Billing</span>
-                    </div>
-                  </Tab>
                   </div>
 
                 </TabList>
@@ -191,12 +184,6 @@
                       </div>
                     </div>
                   </TabPanel>
-                  <!-- TAB 2 -->
-                  <TabPanel>
-                    <div class="flex items-center mx-6 mb-4 justify-between">
-                      <h2 class=" font-semibold text-gray-800">Billing</h2>
-                    </div>
-                  </TabPanel>
                 </TabPanels>
               </TabGroup>
             </div>
@@ -204,10 +191,7 @@
 
             <div v-else class="h-[calc(80vh-84px)] " >
               <div class="px-4 sm:py-10  bg-transparent max-w-7xl sm:px-6 lg:px-8">
-                <div class="grid items-center grid-cols-1 gap-y-8 sm:grid-cols-2 ">
-                  <div class="order-2 ml-20">
-                    <img class="w-3/4 sm:w-full  " src="/asset/podcasts.svg" alt="" />
-                  </div>
+                <div class="items-center">
 
                   <div class="order-1">
                     <FirstCreate

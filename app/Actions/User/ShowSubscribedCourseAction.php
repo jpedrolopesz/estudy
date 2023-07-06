@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ShowSubscribedCourseAction
 {
-    public function execute(int $id): array|Builder|Collection|Model
+    public function execute(int $id): array
     {
         $user = Auth::user();
 
-        if (!$user->subscribed('default')) {
+        if ($user && !$user->subscribed('default')) {
             $course = Course::with(['modules' => function ($query) use ($user) {
                 $query->orderBy('sort_order')->with(['lessons' => function ($query) use ($user) {
                     $query->orderBy('sort_order')

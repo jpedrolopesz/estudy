@@ -7,6 +7,7 @@
 
       <main class=" ml-16 mr-4 min-h-screen bg-dots-darker overflow-hidden">
 
+        <Toast/>
         <div class="py-1 w-full max-w-9xl mx-auto">
           <slot />
         </div>
@@ -19,6 +20,7 @@
 <script setup>
 import { ref } from 'vue';
 import Sidebar from "./Dashboard/Sidebar.vue";
+import Toast from "@/Components/Toast.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>

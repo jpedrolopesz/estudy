@@ -6,7 +6,6 @@
   >
     <div class="flex rounded-t-lg border-b h-16 bg-white justify-between">
       <h1 class="font-medium m-2 text-lg lg:text-2xl opacity-75">Courses</h1>
-      <FormSearchSideBar/>
 
     </div>
 
@@ -60,8 +59,6 @@
 
 <script setup>
 import { defineEmits, defineProps } from 'vue';
-import FormSearchSideBar from "@/Components/FormSearchSideBar.vue";
-
 
 const props = defineProps({
   courses: Object,

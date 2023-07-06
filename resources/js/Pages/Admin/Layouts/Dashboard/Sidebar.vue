@@ -87,6 +87,15 @@
           </NavLink>
           <span class="tooltip bg-white">Settings</span>
         </li>
+        <li>
+          <NavLink  method="POST" :href="route('logout.user')">
+            <div class="flex items-center p-1 ">
+              <ArrowLeftOnRectangleIcon class="w-6 h-6 mr-1" />
+              <span class="ml-3 links_name">Logout</span>
+            </div>
+          </NavLink>
+          <span class="tooltip bg-white">Logout</span>
+        </li>
       </ul>
 
       <div class="profile pl-6 pr-4 py-4 bg-gray-700 flex items-center justify-between">
@@ -110,7 +119,7 @@
 import {onMounted} from 'vue';
 import NavLink from '@/Components/NavLink.vue';
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import { Bars3CenterLeftIcon,ChatBubbleLeftRightIcon,UsersIcon,ChartPieIcon,VideoCameraIcon,TicketIcon,Cog6ToothIcon } from '@heroicons/vue/24/outline';
+import {ArrowLeftOnRectangleIcon,Bars3CenterLeftIcon,ChatBubbleLeftRightIcon,UsersIcon,ChartPieIcon,VideoCameraIcon,TicketIcon,Cog6ToothIcon } from '@heroicons/vue/24/outline';
 
 
 onMounted(() => {

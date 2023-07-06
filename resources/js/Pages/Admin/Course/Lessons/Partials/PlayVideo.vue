@@ -3,7 +3,6 @@
     <VideoPlayer
       class="w-full h-[calc(50vh-54px)] video-player vjs-big-play-centered"
       :src="'/storage/' + lesson.video_url"
-      poster="https://vjs.zencdn.net/v/oceans.png"
       crossorigin="anonymous"
       playsinline
       controls

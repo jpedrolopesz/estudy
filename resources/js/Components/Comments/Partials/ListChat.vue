@@ -75,7 +75,6 @@
 
 import moment from "moment/moment";
 import FormSearch from "@/Components/FormSearch.vue";
-import FormSearchSideBar from "@/Components/FormSearchSideBar.vue";
 import { BookmarkIcon, PhotoIcon } from '@heroicons/vue/24/outline';
 import {ref, watch} from "vue";
 import {Inertia} from "@inertiajs/inertia";
@@ -85,7 +84,7 @@ import {RadioGroup, RadioGroupLabel, RadioGroupOption} from "@headlessui/vue";
 
 export default {
   name: 'ListChat',
-  components: {RadioGroupOption, RadioGroupLabel, RadioGroup, FormSearchSideBar, BookmarkIcon,PhotoIcon, FormSearch},
+  components: {RadioGroupOption, RadioGroupLabel, RadioGroup, BookmarkIcon,PhotoIcon, FormSearch},
   props: {
     comments: Object,
     msgSidebarOpen:Boolean

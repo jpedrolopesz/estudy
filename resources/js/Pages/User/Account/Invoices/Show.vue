@@ -28,7 +28,6 @@
                 <!-- Right -->
                 <div class="text-sm text-gray-800 ml-4">
                   <span class="mr-3">{{ subscription.pm_type }} ending {{ subscription.pm_last_four }}</span>
-                  <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Edit</a>
                 </div>
               </li>
               <li class="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
@@ -37,7 +36,6 @@
                 <!-- Right -->
                 <div class="text-sm text-gray-800 ml-4">
                   <span class="mr-3">Plan Name</span>
-                  <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Edit</a>
                 </div>
               </li>
               <li class="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
@@ -46,7 +44,6 @@
                 <!-- Right -->
                 <div class="text-sm text-gray-800ml-4">
                   <span class="mr-3">{{ subscription.stripe_id }}</span>
-                  <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Edit</a>
                 </div>
               </li>
 
@@ -56,7 +53,6 @@
                 <!-- Right -->
                 <div class="text-sm text-gray-800 ml-4">
                   <span class="mr-3">{{ subscription.email }}</span>
-                  <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Edit</a>
                 </div>
               </li>
 

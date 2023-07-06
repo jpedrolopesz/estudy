@@ -40,8 +40,6 @@
                     <PlayVideo  :lesson="lesson"/>
 
 
-                    {{lesson.video_url}} // O BACKEND ESTA SALVANDO ERRADO
-
                     <div>
 
                       <div class="mb-2">
@@ -83,7 +81,7 @@
                 </div>
 
                 <div>
-                  <ButtonForm color="dark" type="submit">Submit</ButtonForm>
+                  <button class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"  type="submit">Update</button>
                 </div>
 
               </div>

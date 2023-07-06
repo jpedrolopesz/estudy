@@ -54,16 +54,16 @@
                     </button>
                   </div>
                   <div class="grid  gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0">
-                    <img :src="imagePreview" alt="" class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full " loading="lazy">
-
+                    <img :src="imagePreview" alt="" class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full " >
                   </div>
 
                 </div>
               </label>
-              <InputError class="mt-2" :message="form.errors.thumbnail" />
 
             </div>
-          </div>
+          <InputError class="mt-2" :message="form.errors.thumbnail" />
+
+        </div>
         <div class="pt-6 w-80 ml-14">
           <ButtonForm color="dark" :loading="form.processing">Create Project</ButtonForm>
         </div>
