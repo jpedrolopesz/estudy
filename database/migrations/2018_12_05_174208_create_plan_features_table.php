@@ -16,7 +16,7 @@ class CreatePlanFeaturesTable extends Migration
     {
         Schema::create('plan_features', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Plan::class)->constrained()->cascadeOnDelete();
+            $table->foreignId('plan_id')->constrained('plans')->cascadeOnDelete();
             $table->unsignedInteger('max_users')->nullable();
             $table->timestamps();
         });
