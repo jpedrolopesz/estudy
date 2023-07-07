@@ -24,7 +24,7 @@
                   <Tab  v-slot="{ selected }" class="pb-3 sm:ml-4 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                     <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
                       <FolderIcon class="w-5 h-4.5 mr-1"/>
-                      <span>Modules ROLA</span>
+                      <span>Modules pica</span>
                     </div>
                   </Tab>
                   </div>
