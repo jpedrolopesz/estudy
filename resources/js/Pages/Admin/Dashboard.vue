@@ -7,7 +7,7 @@
         <div class="min-w-0 flex-1">
 
           <div class="mb-2">
-            <h1 class="text-2xl md:text-3xl text-gray-800 font-bold">Welcome back, {{$page.props.auth.user.first_name}}</h1>
+            <h1 class="text-2xl md:text-3xl text-gray-800 font-bold">W back, {{$page.props.auth.user.first_name}}</h1>
           </div>
           <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
             <p class="text-md text-gray-600 ">Here's what's happening</p>

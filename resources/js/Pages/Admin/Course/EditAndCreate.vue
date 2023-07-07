@@ -24,7 +24,7 @@
                   <Tab  v-slot="{ selected }" class="pb-3 sm:ml-4 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                     <div :class="{ 'text-gray-900': selected }" class="text-gray-500 hover:text-gray-800 whitespace-nowrap flex items-center">
                       <FolderIcon class="w-5 h-4.5 mr-1"/>
-                      <span>Modules pica</span>
+                      <span>Modules</span>
                     </div>
                   </Tab>
                   </div>
@@ -127,7 +127,38 @@
                                   >
                                     <template #item="{ element: lesson }">
                                       <li class="bg-white hover:border-gray-500 rounded-md border mb-4 border-gray-300 p-0.5">
-                                     rola
+                                        <div class="w-full md:flex items-center justify space-y-1.5 md:space-y-0">
+                                          <div class="flex-1">
+
+
+                                            <div class="flex gap-3 sm:gap-2 justify-start items-center sm:items-center text-black cursor-pointer text-md">
+                                              <button class="cursor-grab handle mr-4 ">
+                                                <ChevronUpDownIcon class="w-5 h-5 hover:fill-gray-800 "/>
+                                              </button>
+
+                                              <div class="grow m-1">
+                                                <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
+
+                                              </div>
+                                              <div class="flex items-center justify-end ">
+                                                <ModalDelete >
+
+                                                  <div class="flex justify-between ">
+                                                    <Link :href="route('course.module.lesson.destroy', [this.course, module.id, lesson.id])" as="button" type="button" method="DELETE"
+                                                          class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
+                                                      Yes, delete
+                                                    </Link>
+                                                  </div>
+                                                </ModalDelete>
+
+                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-200">
+                                                  <PaintBrushIcon class="w-5 h-5 " />
+                                                </Link>
+
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
                                       </li>
                                     </template>
                                   </Draggable>
