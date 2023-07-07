@@ -71,21 +71,23 @@ class DatabaseSeeder extends Seeder
 
 
         Course::factory()->count(4)->create()->each(function ($curso) {
-            // Criar 5 módulos para cada curso
             $modulos = Module::factory()->count(5)->create(['course_id' => $curso->id]);
 
-            // Para cada módulo, criar 5 aulas
             $modulos->each(function ($modulo) {
                 $aulas = Lesson::factory()->count(3)->create(['module_id' => $modulo->id]);
 
-                // Para cada aula, criar 3 comentários
                 $aulas->each(function ($aula) {
-                    Comment::factory()->count(3)->create([
+                    $comments = Comment::factory()->count(3)->create([
                         'lesson_id' => $aula->id,
                     ]);
-                    Reply::factory()->count(3)->create();
 
+                    $comments->each(function ($comment) {
+                        Reply::factory()->count(3)->create([
+                            'comment_id' => $comment->id,
+                        ]);
+                    });
                 });
+
             });
         });
     }

@@ -108,21 +108,15 @@
           <div class="lg:w-5/12 space-y-8">
                         <span class="flex space-x-2">
                             <span class="block w-14 mb-2 border-b-2 border-gray-600"></span>
-                            <span class="font-medium text-gray-600 dark:text-gray-400">New this summer</span>
+                            <span class="font-medium text-gray-600 dark:text-gray-400">New this version</span>
                         </span>
-            <h1 class="text-4xl font-bold md:text-6xl dark:text-white">The New <br> Way To Discover</h1>
-            <p class="text-xl text-gray-700 dark:text-gray-300">Booking Company-Wide Savings, Invoicing and reporting
-              docs.</p>
+            <h1 class="text-4xl font-bold md:text-6xl dark:text-white">Have your <br> own online course platform</h1>
+            <p class="text-xl text-gray-700 dark:text-gray-300">Software created to perform with excellence, without having to worry about development</p>
 
             <div class="flex space-x-4">
-              <button type="button" class="w-full py-3 px-6 text-center rounded-md transition bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
+              <button type="button" class="w-full py-2 px-6 text-center rounded-md transition bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
                 <span class="block text-white font-semibold">
-                  Access Now
-                </span>
-              </button>
-              <button type="button" class="group w-full py-3 px-6 text-center transition dark:active:bg-yellow-800 dark:focus:bg-yellow-900 active:bg-yellow-200 focus:bg-yellow-100 sm:w-max">
-                <span class="block text-gray-700 dark:text-white font-semibold group-focus:text-yellow-700 dark:group-focus:text-yellow-100">
-                  Saiba Mais
+                  Access Now Demo
                 </span>
               </button>
             </div>
@@ -146,8 +140,8 @@
     <div class="xl:container m-auto px-6 text-gray-500 md:px-12">
       <div>
         <h2 class="mt-4 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
-          A technology-first approach to payments <br class="lg:block" hidden/>
-          and finance
+          A technology-first approach to having your  <br class="lg:block" hidden/>
+          own online course platform
         </h2>
       </div>
       <div
