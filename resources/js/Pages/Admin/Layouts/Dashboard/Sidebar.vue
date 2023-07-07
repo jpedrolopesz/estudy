@@ -88,13 +88,13 @@
           <span class="tooltip bg-white">Settings</span>
         </li>
         <li>
-          <NavLink  method="POST" :href="route('logout.user')">
+          <NavLink  method="POST" as="button" :href="route('logout.user')">
             <div class="flex items-center p-1 ">
               <ArrowLeftOnRectangleIcon class="w-6 h-6 mr-1" />
               <span class="ml-3 links_name">Logout</span>
             </div>
           </NavLink>
-          <span class="tooltip bg-white">Logout</span>
+          <span class="tooltip bg-white mt-1.5">Logout</span>
         </li>
       </ul>
 
