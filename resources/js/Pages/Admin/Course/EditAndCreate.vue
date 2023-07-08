@@ -118,35 +118,6 @@
                                     </button>
                                   </Link>
 
-                                  <Draggable
-                                    :list="module.lessons"
-                                    tag="ul"
-                                    group="lessons"
-                                    itemKey="id"
-                                    @change="onLessonDrag"
-                                  >
-                                    <template #item="{ element: lesson }">
-                                      <li class="bg-white hover:border-gray-500 rounded-md border mb-4 border-gray-300 p-0.5">
-                                        <div class="w-full md:flex items-center justify space-y-1.5 md:space-y-0">
-                                          <div class="flex-1">
-
-
-                                            <div class="flex gap-3 sm:gap-2 justify-start items-center sm:items-center text-black cursor-pointer text-md">
-                                              <button class="cursor-grab handle mr-4 ">
-                                                <ChevronUpDownIcon class="w-5 h-5 hover:fill-gray-800 "/>
-                                              </button>
-
-                                              <div class="grow m-1">
-                                                <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
-
-                                              </div>
-                                              rola
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </li>
-                                    </template>
-                                  </Draggable>
 
 
                                 </DisclosurePanel>
