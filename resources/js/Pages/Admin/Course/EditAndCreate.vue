@@ -112,8 +112,56 @@
                                   </div>
                                 </div>
                                 <DisclosurePanel class="py-2 m-4 text-sm text-gray-500">
+                                  <Link :href="route('course.module.lesson.create', [course.id, module.id])">
+                                    <button type="button" class="w-full mb-2 px-1.5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
+                                      Add lesson
+                                    </button>
+                                  </Link>
 
-                                  Rola
+                                  <Draggable
+                                    :list="module.lessons"
+                                    tag="ul"
+                                    group="lessons"
+                                    itemKey="id"
+                                    @change="onLessonDrag"
+                                  >
+                                    <template #item="{ element: lesson }">
+                                      <li class="bg-white hover:border-gray-500 rounded-md border mb-4 border-gray-300 p-0.5">
+                                        <div class="w-full md:flex items-center justify space-y-1.5 md:space-y-0">
+                                          <div class="flex-1">
+
+
+                                            <div class="flex gap-3 sm:gap-2 justify-start items-center sm:items-center text-black cursor-pointer text-md">
+                                              <button class="cursor-grab handle mr-4 ">
+                                                <ChevronUpDownIcon class="w-5 h-5 hover:fill-gray-800 "/>
+                                              </button>
+
+                                              <div class="grow m-1">
+                                                <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
+
+                                              </div>
+                                              <div class="flex items-center justify-end ">
+                                                <ModalDelete >
+
+                                                  <div class="flex justify-between ">
+                                                    <Link :href="route('course.module.lesson.destroy', [this.course, module.id, lesson.id])" as="button" type="button" method="DELETE"
+                                                          class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
+                                                      Yes, delete
+                                                    </Link>
+                                                  </div>
+                                                </ModalDelete>
+
+                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-200">
+                                                  <PaintBrushIcon class="w-5 h-5 " />
+                                                </Link>
+
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </template>
+                                  </Draggable>
 
 
                                 </DisclosurePanel>
