@@ -112,12 +112,8 @@
                                   </div>
                                 </div>
                                 <DisclosurePanel class="py-2 m-4 text-sm text-gray-500">
-                                  <Link :href="route('course.module.lesson.create', [this.course, module.id])">
-                                    <button type="button" class="w-full mb-2 px-1.5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
-                                      Add lesson
-                                    </button>
-                                  </Link>
 
+                                  Rola
 
 
                                 </DisclosurePanel>
