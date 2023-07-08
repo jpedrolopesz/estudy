@@ -144,7 +144,7 @@
                                                 <ModalDelete >
 
                                                   <div class="flex justify-between ">
-                                                    <Link :href="route('course.module.lesson.destroy', [this.course, module.id, lesson.id])" as="button" type="button" method="DELETE"
+                                                    <Link :href="route('course.module.lesson.destroy', [course.id, module.id, lesson.id])" as="button" type="button" method="DELETE"
                                                           class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
                                                       Yes, delete
                                                     </Link>
