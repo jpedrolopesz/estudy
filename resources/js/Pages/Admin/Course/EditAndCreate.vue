@@ -140,22 +140,7 @@
                                                 <span class="font-medium text-gray-600 ml-2">{{ lesson.title }}</span>
 
                                               </div>
-                                              <div class="flex items-center justify-end ">
-                                                <ModalDelete >
-
-                                                  <div class="flex justify-between ">
-                                                    <Link :href="route('course.module.lesson.destroy', [this.course, module.id, lesson.id])" as="button" type="button" method="DELETE"
-                                                          class="btn bg-red-600 text-sm text-white hover:bg-red-700 ">
-                                                      Yes, delete
-                                                    </Link>
-                                                  </div>
-                                                </ModalDelete>
-
-                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-200">
-                                                  <PaintBrushIcon class="w-5 h-5 " />
-                                                </Link>
-
-                                              </div>
+                                              rola
                                             </div>
                                           </div>
                                         </div>
