@@ -151,7 +151,7 @@
                                                   </div>
                                                 </ModalDelete>
 
-                                                <Link :href="route('course.module.lesson.edit',[this.course, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-200">
+                                                <Link :href="route('course.module.lesson.edit',[course.id, module.id, lesson.id])" class="text-gray-400 hover:text-gray-500 px-2 py-1.5  rounded-md hover:bg-gray-200">
                                                   <PaintBrushIcon class="w-5 h-5 " />
                                                 </Link>
 
