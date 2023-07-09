@@ -16,7 +16,7 @@ class LessonFactory extends Factory
             'module_id' => Module::factory(),
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'video_url' => 'https://www.youtube.com/embed/MlgbDr-9SJE',
+            'video_url' => '/videos/curso_introducao.mp4',
         ];
     }
 }

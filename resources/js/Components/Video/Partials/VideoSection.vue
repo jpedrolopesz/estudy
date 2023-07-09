@@ -3,7 +3,7 @@
     <div class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
       <VideoPlayer
         class="w-full h-[calc(80vh-64px)] video-player vjs-big-play-centered"
-        v-bind:src="'/storage/' + videoUrl"
+        v-bind:src="'/storage/' + selectedLesson.video_url"
         crossorigin="anonymous"
         playsinline
         controls
@@ -40,7 +40,7 @@ import {VideoJsPlayer} from "video.js";
 
 const props = defineProps({
   course:Object,
-  videoUrl: String,
+  selectedLesson:Object,
   label: { type: String, default: ""}
 
 

@@ -172,7 +172,7 @@
 
       <div class="px-0 md:px-6 md:mt-6 transition-all duration-200 mb-3 md:mb-0 flex-grow order-first w-full md:w-auto">
 
-      <VideoSection :video-url="videoUrl"/>
+      <VideoSection  :selected-lesson="selectedLesson"/>
 
       <div class="flex">
         <div class=" justify-start pb-2 sticky w-full">
@@ -241,6 +241,22 @@ export default {
 
     return {auth,form, selectComment, selectedComment};
   },
+  mounted() {
+    const savedLesson = localStorage.getItem('selectedLesson');
+
+    if (savedLesson) {
+      this.selectedLesson = JSON.parse(savedLesson);
+    }
+  },
+
+  watch: {
+    selectedLesson: {
+      deep: true,
+      handler(newLesson) {
+        localStorage.setItem('selectedLesson', JSON.stringify(newLesson));
+      },
+    },
+  },
 
 
   methods: {
@@ -269,6 +285,7 @@ export default {
     },
     handleLessonSelected(lesson) {
       this.selectedLesson = lesson;
+      localStorage.setItem('selectedLesson', JSON.stringify(lesson));
     },
     previousLesson() {
       const lessons = this.course.modules.flatMap(module => module.lessons);

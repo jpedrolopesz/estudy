@@ -16,7 +16,7 @@ class CreateUpdateCourseRequest extends FormRequest
     {
         return [
             'user_id' => 'nullable',
-            'title' => 'required|string|max:55|min:4',
+            'title' => 'required|string|max:60|min:4',
             'description' => 'nullable|string|max:255|min:10',
             'thumbnail' => 'required|nullable|sometimes|mimes:jpeg,png,jpg|max:2048',
         ];

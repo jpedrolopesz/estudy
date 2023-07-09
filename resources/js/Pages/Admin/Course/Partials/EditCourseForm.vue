@@ -33,6 +33,8 @@
                 placeholder="Module title"
                 id="module-id"
                 :autofocus="true"/>
+              <InputError class="mt-2" :message="form.errors.title" />
+
 
 
               <FormDescriptionEditor
@@ -42,6 +44,8 @@
                 placeholder="Module description"
                 id="module-id"
               />
+              <InputError class="mt-2" :message="form.errors.description" />
+
 
 
               <div  class="mb-4">
@@ -53,15 +57,15 @@
                       <input type="file" ref="imageInputRef" name="thumbnail" @change="updateImagePreview" class="sr-only"/>
 
                       <div  class="flex hover:opacity-80 flex-col items-center justify-center w-full max-w-4xl mx-auto grid grid-cols-1 ">
-                        <div class="relative  p-3 col-start-2 row-start-5 flex flex-col-reverse rounded-lg bg-gradient-to-t from-gray-500/95 via-gray-500/80  ">
+                        <div class="relative  p-3 col-start-2 row-start-5 flex flex-col-reverse rounded-lg  ">
                           <button type="button"  @click.prevent="selectNewImage" class="flex px-1.5 py-1.5 bg-gray-50 text-sm font-bold rounded-md text-gray-400 border border-gray-300 hover:bg-gray-200 hover:text-gray-500">
                             <ArrowPathRoundedSquareIcon class="w-5 h-5 mr-2"/>
                             Image Change
                           </button>
                         </div>
                         <div class="grid gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0">
-                          <img  v-if="imagePreview" :src="imagePreview"  class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full ">
-                          <img v-if="!imagePreview" :src="'/storage/' + form.thumbnail"  class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full ">
+                          <img  v-if="imagePreview" :src="imagePreview"  class="w-full h-60 mr-16 rounded-lg lg:col-span-full ">
+                          <img v-if="!imagePreview" :src="'/storage/' + form.thumbnail"  class="w-full h-60 mr-16 rounded-lg lg:col-span-full  ">
 
                         </div>
 

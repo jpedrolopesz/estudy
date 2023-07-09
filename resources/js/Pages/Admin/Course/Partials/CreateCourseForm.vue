@@ -54,7 +54,7 @@
                     </button>
                   </div>
                   <div class="grid  gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0">
-                    <img :src="imagePreview" alt="" class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full " >
+                    <img :src="imagePreview" alt="" class="w-full h-60 mr-16 rounded-lg lg:col-span-full  " >
                   </div>
 
                 </div>

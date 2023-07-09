@@ -33,7 +33,7 @@ class CoursesController extends Controller
            $image = $request->file('thumbnail');
            $filename = time() . '.' . $image->getClientOriginalExtension();
            $thumbnailPath = 'thumbnails/' . $filename;
-           $thumbnail = Image::make($image)->resize(800, 400);
+           $thumbnail = Image::make($image)->resize(800, 500);
 
            Storage::disk('public')->put($thumbnailPath, $thumbnail->stream());
        } else {
@@ -84,7 +84,7 @@ class CoursesController extends Controller
             $image = $request->file('thumbnail');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $thumbnailPath = 'thumbnails/' . $filename;
-            $thumbnail = Image::make($image)->resize(800, 400);
+            $thumbnail = Image::make($image)->resize(800, 500);
 
             Storage::disk('public')->put($thumbnailPath, $thumbnail->stream());
         } else {

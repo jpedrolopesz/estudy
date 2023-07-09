@@ -26,8 +26,8 @@
               @click="selectCourse(course)"
               @click.stop="$emit('close-msgsidebar')">
             <div class="flex m-2 gap-x-2">
-              <div class="w-1/4">
-                <img :src="'/storage/' + course.thumbnail" class="h-[90px] w-3/3 flex-shrink-0 flex-grow-0 rounded-xl object-cover" />
+              <div >
+                <img :src="'/storage/' + course.thumbnail" class="h-[90px] w-46  rounded-xl object-cover" />
               </div>
               <div class="flex-grow grid-rows-3 justify-between ">
                 <span class="flex-shrink-0 flex-grow-0 text-left text-base font-bold text-gray-600">{{ course.title }}</span>
