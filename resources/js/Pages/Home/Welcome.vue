@@ -122,11 +122,11 @@
             </div>
           </div>
 
-          <div class="-z-10 relative left-36 lg:w-7/12">
+          <div class="-z-10 relative left-36 lg:w-6/12">
             <div aria-hidden="true" class="absolute inset-0 m-auto w-[30rem] h-[30rem]  lg:w-[60rem] lg:h-[60rem] rounded-full bg-gray-200">
 
             </div>
-            <img src="images/shoes.png" class="relative ml-auto" alt="">
+            <img src="/asset/hero.jpeg" class="relative  ml-auto" alt="">
           </div>
         </div>
       </div>

@@ -56,112 +56,67 @@ class DatabaseSeeder extends Seeder
         Course::factory()->create([
             'title' => "Space Exploration and Planetary Colonization: Towards a Multiplanetary Species",
             'thumbnail' => '/thumbnails/imageFakeElon.jpg'
-            ])->each(function ($course) {
+        ])->each(function ($course) {
             // Module 1
-            Module::factory()->create([
+            $module1 = Module::factory()->create([
                 'title' => 'Introduction to Space Exploration',
                 'course_id' => $course->id
-            ])->each(function ($module) {
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'Overview of Space Exploration',
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'Historical Milestones in Space Exploration',
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'Challenges of Space Exploration'
-                ]);
-            });
+            ]);
+
+            $lessons = Lesson::factory()->create([
+                'module_id' => $module1->id,
+                'title' => 'Overview of Space Exploration',
+                'video_url' => '/videos/curso_introducao.mp4',
+
+            ]);
             // Module 2
-            Module::factory()->create([
+            $module2 = Module::factory()->create([
                 'title' => 'The Mission of SpaceX',
                 'course_id' => $course->id
-            ])->each(function ($module) {
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => "Elon Musk's Vision for a Multiplanetary Species"
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'The History and Achievements of SpaceX'
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'The Future Plans of SpaceX'
-                ]);
-            });
+            ]);
+            $lessons = Lesson::factory()->create([
+                'module_id' => $module2->id,
+                'title' => "Elon Musk's Vision for a Multiplanetary Species",
+                'video_url' => '/videos/palestra_elon.mp4',
+            ]);
+
             // Module 3
-            Module::factory()->create([
+            $module3 = Module::factory()->create([
                 'title' => 'Advanced Space Technologies',
                 'course_id' => $course->id
-            ])->each(function ($module) {
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => "Reusable Rockets: The Future of Space Transportation"
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'The Falcon Heavy Revolution'
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'Starship: The Next Generation of Spacecraft'
-                ]);
-            });
-            // Module 4
-            Module::factory()->create([
-                'title' => 'Mars Colonization',
-                'course_id' => $course->id
-            ])->each(function ($module) {
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => "Why Mars is a Candidate for Colonization"
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'Challenges of Mars Colonization'
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'Preparing to Live on Mars'
-                ]);
-            });
+            ]);
+             $lessons = Lesson::factory()->create([
+                'module_id' => $module3->id,
+                'title' => "Reusable Rockets: The Future of Space Transportation",
+                'video_url' => '/videos/palestra_elon1.mp4',
 
-            // Module 5
-            Module::factory()->create([
-                'title' => 'Life Beyond Earth',
-                'course_id' => $course->id
-            ])->each(function ($module) {
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => "The Search for Extraterrestrial Life"
+            ]);
+            $lessons->each(function ($lesson) {
+                $comments = Comment::factory()->count(2)->create([
+                    'lesson_id' => $lesson->id,
                 ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'Exoplanets: Other Potentially Habitable Worlds'
-                ]);
-                Lesson::factory()->create([
-                    'module_id' => $module->id,
-                    'title' => 'The Significance of Discovering Life Beyond Earth'
-                ]);
-            });
 
+                $comments->each(function ($comment) {
+                    Reply::factory()->count(2)->create([
+                        'comment_id' => $comment->id,
+                    ]);
+                });
+            });
 
 
         });
 
 
-        Course::factory()->count(4)->create()->each(function ($curso) {
+
+
+        Course::factory()->count(3)->create()->each(function ($curso) {
             $modulos = Module::factory()->count(5)->create(['course_id' => $curso->id]);
 
             $modulos->each(function ($modulo) {
-                $aulas = Lesson::factory()->count(3)->create(['module_id' => $modulo->id]);
+                $aulas = Lesson::factory()->count(2)->create(['module_id' => $modulo->id]);
 
                 $aulas->each(function ($aula) {
-                    $comments = Comment::factory()->count(3)->create([
+                    $comments = Comment::factory()->count(2)->create([
                         'lesson_id' => $aula->id,
                     ]);
 

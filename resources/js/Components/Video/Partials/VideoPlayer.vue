@@ -172,9 +172,21 @@
 
       <div class="px-0 md:px-6 md:mt-6 transition-all duration-200 mb-3 md:mb-0 flex-grow order-first w-full md:w-auto">
 
-      <VideoSection  :selected-lesson="selectedLesson"/>
+      <VideoSection v-if="videoUrl" :selected-lesson="selectedLesson"/>
+        <div v-if="!videoUrl" class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
+          <div class="w-full h-[calc(80vh-64px)] flex items-center justify-center mx-auto">
+            <div class="flex-col items-center text-center">
+              <h2 class="font-semibold text-md">
+                Choose your starting lesson and begin your learning journey!
+              </h2>
+            </div>
+          </div>
 
-      <div class="flex">
+
+        </div>
+
+
+      <div v-if="videoUrl"  class="flex">
         <div class=" justify-start pb-2 sticky w-full">
           <p class="text-left text-xl font-bold text-gray-800">{{ selectedLesson.title }}</p>
         </div>
@@ -241,24 +253,6 @@ export default {
 
     return {auth,form, selectComment, selectedComment};
   },
-  mounted() {
-    const savedLesson = localStorage.getItem('selectedLesson');
-
-    if (savedLesson) {
-      this.selectedLesson = JSON.parse(savedLesson);
-    }
-  },
-
-  watch: {
-    selectedLesson: {
-      deep: true,
-      handler(newLesson) {
-        localStorage.setItem('selectedLesson', JSON.stringify(newLesson));
-      },
-    },
-  },
-
-
   methods: {
 
     replyStore(){
@@ -285,8 +279,8 @@ export default {
     },
     handleLessonSelected(lesson) {
       this.selectedLesson = lesson;
-      localStorage.setItem('selectedLesson', JSON.stringify(lesson));
     },
+
     previousLesson() {
       const lessons = this.course.modules.flatMap(module => module.lessons);
       const currentIndex = lessons.findIndex(lesson => lesson.id === this.selectedLesson.id);

@@ -16,7 +16,12 @@ class LessonFactory extends Factory
             'module_id' => Module::factory(),
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'video_url' => '/videos/curso_introducao.mp4',
+            'video_url' => $this->faker->randomElement([
+                '/videos/curso_introducao.mp4',
+                '/videos/palestra_elon.mp4',
+                '/videos/palestra_elon1.mp4'
+            ]),
+
         ];
     }
 }
