@@ -17,7 +17,7 @@ class ShowSubscribedCourseAction
     {
         $user = Auth::user();
 
-        if ($user && !$user->subscribed('default')) {
+        if ($user) {
             $course = Course::with(['modules' => function ($query) use ($user) {
                 $query->orderBy('sort_order')->with(['lessons' => function ($query) use ($user) {
                     $query->orderBy('sort_order')

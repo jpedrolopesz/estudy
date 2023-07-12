@@ -27,7 +27,7 @@ class CourseUserController extends Controller
 
         foreach ($courses as $course) {
             $courseData = $showCourseAction->execute($course->id);
-            $course->progressPercentage = $courseData['progressPercentage'];
+            $course->progressPercentage = $courseData['progressPercentage'] ?? null;
         }
         return Inertia::render('User/Course/Index', [
             'courses' => $courses,

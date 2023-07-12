@@ -69,12 +69,21 @@
               </ul>
             </div>
 
+
+            <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 mx-2 ">
+              <Link v-if="$page.props.auth.user.owner" :href="route('admin.dashboard')"
+                    class="w-full py-2  px-6 text-center text-white rounded-sm  transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
+                Panel Admin
+              </Link>
+            </div>
+
             <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 flex ">
 
               <Link v-if="$page.props.auth.user" :href="route('course.user.index')"
-                    class="w-full py-2 rounded-sm px-6 text-center text-white transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
-                Access
+                    class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
+                Access Courses
               </Link>
+
 
               <template v-else>
                 <a href="/login" class="text-gray-700 font-semibold group-focus:text-yellow-700 underline">
@@ -114,7 +123,7 @@
             <p class="text-xl text-gray-700 dark:text-gray-300">Software created to perform with excellence, without having to worry about development</p>
 
             <div class="flex space-x-4">
-              <button type="button" class="w-full py-2 px-6 text-center rounded-md transition bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
+              <button type="button" class="w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
                 <span class="block text-white font-semibold">
                   Access Now Demo
                 </span>

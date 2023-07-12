@@ -37,7 +37,7 @@
                 <div class="text-gray-800 my-2 opacity-70 text-lg font-bold">Comments</div>
                 <CommentLesson  :selectedLesson="selectedLesson">
                   <template #button>
-                    <button   class="underline font-semibold text-gray-600">Add Comment</button>
+                    <button v-if="videoUrl"  class="underline font-semibold text-gray-600">Add Comment</button>
                   </template>
                 </CommentLesson>
               </div>

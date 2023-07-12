@@ -26,13 +26,14 @@ Route::post('register/no-redirect', [RegisteredUserSubscriptionController::class
 Route::post('login/no-redirect', [LoginTabController::class, 'store'])->name('login.noRedirect');
 Route::post('logout/no-redirect', [LoginTabController::class, 'logout'])->name('logout.noRedirect');
 
-Route::group([ 'middleware' => ['auth','verified']], function (){
+Route::group([ 'middleware' => ['auth']], function (){
 
     Route::get('/courses', [CourseUserController::class, 'index'])->name('course.user.index');
     Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');
     Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched'])->name('lessons.markAsWatched');
 
     Route::resource('support', CommentUserController::class);
+
 
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserController::class, 'update'])->name('profile.update');

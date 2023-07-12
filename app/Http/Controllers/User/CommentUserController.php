@@ -52,7 +52,7 @@ class CommentUserController extends Controller
 
     }
 
-    public function storeReply(Request $request, $support)
+    public function storeReply(Request $request, $comment)
     {
 
         $validatedData = $request->validate([

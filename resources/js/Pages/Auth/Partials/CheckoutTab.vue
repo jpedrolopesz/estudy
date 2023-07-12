@@ -155,7 +155,7 @@ export default {
                     countdown--;
                     if (countdown <= 0) {
                       clearInterval(countdownInterval);
-                      window.location.href = '/dashboard';
+                      window.location.href = '/courses';
                     }
                     document.getElementById('countdownElement').textContent = countdown;
                   }, 1000);
