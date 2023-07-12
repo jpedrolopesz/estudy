@@ -88,7 +88,7 @@
           <span class="tooltip bg-white">Settings</span>
         </li>
         <li>
-          <NavLink method="POST" as="button" class="-mr-1 hover:bg-transparent hover:border-transparent w-64" :href="route('logout.user')">
+          <NavLink method="POST" as="button" class="-mr-1 hover:bg-transparent hover:border-transparent focus:border-transparent focus:outline-none w-64" :href="route('logout.user')">
             <div class="flex items-center p-1 ">
               <ArrowLeftOnRectangleIcon class="w-6 h-6 mr-1" />
               <span class="ml-3 links_name">Logout</span>
