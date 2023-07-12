@@ -32,7 +32,7 @@ Route::group([ 'middleware' => ['auth']], function (){
     Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');
     Route::put('/lessons/{id}/watched', [CourseUserController::class, 'markAsWatched'])->name('lessons.markAsWatched');
 
-    Route::resource('support', CommentUserController::class);
+    Route::get('support', [CommentUserController::class, 'index'])->name('support.index');
 
 
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');

@@ -12,6 +12,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::post('/{comment}/reply',[CommentsController::class, 'storeReply'])->name('storeReply');
+Route::post('/comment',[CommentsController::class, 'storeComment'])->name('storeComment');
 
 Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
     ->group(function () {
@@ -23,7 +25,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
             Route::resource('/comments', CommentsController::class);
             Route::controller(CommentsController::class)->group(function () {
-                Route::post('comments/{comment}/reply','storeReply')->name('storeReply');
 
             });
 

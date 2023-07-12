@@ -52,7 +52,7 @@ const form = useForm({
 })
 
 const submit = () => {
-  form.post(route('comments.store',{
+  form.post(route('storeComment',{
     lesson_id: props.selectedLesson.id,
     user_id: auth.user.id
   },{

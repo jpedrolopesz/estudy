@@ -27,12 +27,17 @@ class GetAllCommentsAction
         return Pipeline::send($data)
             ->then(fn($data) => $data->builder)
             ->when(!$isAdmin, function ($query) {
-                $query->where('user_id', Auth::id());
+                $query->where(function ($subquery) {
+                    $subquery->where('user_id', Auth::id())
+                        ->whereDoesntHave('user', function ($userQuery) {
+                            $userQuery->where('owner', '1');
+                        });
+                });
             })
+
             ->filter(Request::only('search', 'reply'))
-            ->with(['lesson', 'user', 'replies' => function ($query) {
-                $query->with('user');
-            }])
+            ->with(['lesson', 'user', 'replies.user']) // Modificação aqui
+
             ->orderBy('created_at', 'desc')
             ->get();
     }

@@ -32,7 +32,7 @@ class CommentsController extends Controller
      *
      * @param Request $request
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function storeComment(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validatedData = $request->validate([
             'title' => 'nullable|string',
@@ -54,13 +54,11 @@ class CommentsController extends Controller
 
     public function storeReply(Request $request, $comment)
     {
-
         $validatedData = $request->validate([
             'reply' => 'required|string',
             'user_id' => 'required|exists:users,id',
-            'comment_id' => 'required|exists:users,id',
+            'comment_id' => 'required|exists:comments,id',
         ]);
-
 
         $reply = new Reply();
         $reply->comment_id = $validatedData['comment_id'];
@@ -70,5 +68,6 @@ class CommentsController extends Controller
 
         return redirect()->back()->with('success', 'Commented Success');
     }
+
 
 }

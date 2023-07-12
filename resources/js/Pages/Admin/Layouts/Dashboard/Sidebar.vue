@@ -94,7 +94,6 @@
               <span class="ml-3 links_name">Logout</span>
             </div>
           </NavLink>
-          <span class="tooltip bg-white mt-1.5">Logout</span>
         </li>
       </ul>
 

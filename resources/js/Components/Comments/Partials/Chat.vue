@@ -101,7 +101,6 @@ import ChatHeader from "@/Components/Comments/Partials/ChatHeader.vue";
 import FormComment from "@/Components/Form/FormComment.vue";
 import { UserCircleIcon, PhotoIcon, BookmarkIcon } from '@heroicons/vue/24/outline';
 import {useForm, usePage} from "@inertiajs/inertia-vue3";
-import {Inertia} from "@inertiajs/inertia";
 
 export default {
   name: 'Chat',
