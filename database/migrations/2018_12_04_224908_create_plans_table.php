@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('url');
-            $table->integer('price');
+            $table->decimal('price');
+            $table->string('price_currency')->nullable();
             $table->string('stripe_id')->unique();
             $table->string('description')->nullable();
             $table->boolean('active')->default(false);

@@ -377,8 +377,6 @@ const selectedTab = ref(localStorage.getItem('tabActive') || null);
 const selectedOption = ref(localStorage.getItem('selectedOption') || null);
 const { auth } = usePage().props.value;
 
-
-
 function completeStep(index) {
   if (selectedOption.value === 'login' || selectedOption.value === 'register') {
     if (auth.user) {
@@ -393,13 +391,13 @@ function completeStep(index) {
   }
 }
 
-
-
 function selectTab(tabIndex) {
   if (!auth.user && tabIndex === 2) {
     tabIndex = 1;
     localStorage.removeItem('tabActive');
     localStorage.removeItem('selectedOption');
+  } else if (tabIndex === 2) {
+    return; // Não salva a tab 2 no localStorage
   }
 
   localStorage.setItem('tabActive', tabIndex);
@@ -408,7 +406,6 @@ function selectTab(tabIndex) {
 }
 
 onBeforeMount(() => {
-
   const tabActive = localStorage.getItem('tabActive');
   const selectedOption = localStorage.getItem('selectedOption');
 
@@ -426,7 +423,6 @@ onBeforeMount(() => {
 onBeforeUnmount(() => {
   localStorage.removeItem('tabActive');
   localStorage.removeItem('selectedOption');
-
 });
 
 

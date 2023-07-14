@@ -17,6 +17,7 @@ class Plan extends Model
         'slug',
         'name',
         'price',
+        'price_currency',
         'plan_features',
         'stripe_id',
         'active',
@@ -35,6 +36,13 @@ class Plan extends Model
         return $this->hasOne(PlanFeature::class, 'plan_id');
     }
 
+
+    public function formattedPrice()
+    {
+        $currencySymbol = '';
+
+        return $currencySymbol . number_format($this->price);
+    }
 
 
 
