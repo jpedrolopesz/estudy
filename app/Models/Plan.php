@@ -37,12 +37,6 @@ class Plan extends Model
     }
 
 
-    public function formattedPrice()
-    {
-        $currencySymbol = '';
-
-        return $currencySymbol . number_format($this->price);
-    }
 
 
 

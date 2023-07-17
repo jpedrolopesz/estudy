@@ -45,10 +45,10 @@
                   </header>
                   <div class="text-sm mb-2">Ideal for individuals that need a custom solution with custom tools.</div>
                   <!-- Price -->
-                  <div class="text-slate-800 font-bold mb-4">
-                    <span class="text-3xl">
-                     ${{plan.price}}</span>
-                    <span class="text-slate-500 font-medium text-sm">
+                  <div class="flex items-center text-gray-800 font-bold mb-4">
+                    <div class="text-lg">
+                      {{plan.price_currency}} <span class="text-3xl ml-0.5">{{plan.price}}</span></div>
+                    <span class="text-gray-500 mt-2 font-medium text-sm">
                     /{{plan.slug}}</span>
                   </div>
 
@@ -129,10 +129,10 @@
               </header>
               <div class="text-sm mb-2">Ideal for individuals that need a custom solution with custom tools.</div>
               <!-- Price -->
-              <div class="text-slate-800 font-bold mb-4">
-                    <span class="text-3xl">
-                     ${{plan.price}}</span>
-                <span class="text-slate-500 font-medium text-sm">
+              <div class="flex items-center text-gray-800 font-bold mb-4">
+                <div class="text-lg">
+                  {{plan.price_currency}} <span class="text-3xl ml-0.5">{{plan.price}}</span></div>
+                <span class="text-gray-500 mt-2 font-medium text-sm">
                     /{{plan.slug}}</span>
               </div>
 

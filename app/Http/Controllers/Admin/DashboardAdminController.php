@@ -25,11 +25,12 @@ class DashboardAdminController extends Controller
 
 
         $balance = $this->balance = ($this->getBalance())->toArray();
+        $formattedBalance = number_format($balance['pending'][0]['amount'], 2, ',' , '.');
 
         return Inertia::render('Admin/Dashboard',[
             'totalUsers' => User::count(),
             'totalComments' => Comment::count(),
-            'balance' =>  $balance,
+            'balance' =>  $formattedBalance,
         ]);
 
 

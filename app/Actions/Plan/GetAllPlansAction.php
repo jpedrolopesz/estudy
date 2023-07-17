@@ -21,18 +21,7 @@ class GetAllPlansAction
             ->then(fn ($data) => $data->builder)
             ->filter(Request::only('search', 'trashed'))
             ->paginate(6)
-            ->withQueryString()
-            ->tap(function ($results) {
-                $results->getCollection()->transform(function ($plan) {
-                    $currencySymbol = ''; // Obtenha o símbolo da moeda com base em $plan->price_currency
+            ->withQueryString();
 
-                    $formatter = new NumberFormatter(config('app.locale'), NumberFormatter::CURRENCY);
-                    $formattedPrice = $formatter->formatCurrency($plan->price, $currencySymbol);
-
-                    $plan->formattedPrice = $formattedPrice;
-
-                    return $plan;
-                });
-            });
     }
 }

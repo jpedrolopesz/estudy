@@ -8,11 +8,11 @@
             <h5 class="text-xl font-semibold text-gray-700">{{selected.name}}</h5>
 
             <div class="relative flex justify-around">
-              <div class="flex">
-                <div class="text-gray-800 font-bold">
-                  <span class="text-4xl">${{selected.price}}</span>
-                  <span class="text-slate-500 font-medium text-sm">/{{selected.slug}}</span>
-                </div>
+              <div class="flex items-center text-gray-800 font-bold mb-4">
+                <div class="text-lg">
+                  {{selected.price_currency}} <span class="text-3xl ml-0.5">{{selected.price}}</span></div>
+                <span class="text-gray-500 mt-2 font-medium text-sm">
+                    /{{selected.slug}}</span>
               </div>
             </div>
           </div>

@@ -81,7 +81,8 @@
                 <div class="text-left">{{plan.slug}}</div>
               </td>
                <td class="px-2 first:pl-5 last:pr-5  whitespace-nowrap">
-                <div class="text-left">{{plan.price}}</div>
+                 <div class="text-left">{{plan.price_currency}} <span class="ml-0.5"> {{plan.price}}</span>
+                 </div>
               </td>
 
 

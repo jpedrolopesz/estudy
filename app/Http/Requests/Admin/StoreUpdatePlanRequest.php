@@ -23,12 +23,12 @@ class StoreUpdatePlanRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->segment(3);
 
         return [
             'name' => "required|min:3|max:255|",
             'description' => 'nullable|min:3|max:255',
-            'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
+            'price' => "required",
+            'price_currency' => "required",
             'max_users' => 'required|numeric',
         ];
     }

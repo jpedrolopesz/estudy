@@ -22,11 +22,7 @@ class ProfileUpdateRequest extends FormRequest
             'owner' => 'nullable',
             'password' => 'nullable',
             'password_' => 'nullable|required_if:email,null',
-            'email' => ['email', 'max:255',
-                Rule::unique('users')->ignore($userId)->where(function ($query) {
-                    $query->where('email', '!=', $this->user()->email);
-                }),
-            ],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user)],
             'photo' => 'sometimes|nullable',
 
         ];

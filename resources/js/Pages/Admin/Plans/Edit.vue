@@ -51,16 +51,19 @@
                   </div>
 
                   <div class="col-span-6 sm:col-span-2">
-                    <FormInput
-                      v-model="form.price"
-                      required
-                      type="number"
-                      label="Price"
-                      :autofocus="true"
-                    />
-                    <InputError class="mt-2" :message="form.errors.price" />
+                    <label for="price" class="form-label !pt-1 block mb-2 text-sm font-medium text-gray-900">Price</label>
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                      <select v-model="form.price_currency" name="currencySymbol" class="w-2/4 p-1.5 bg-white rounded-l-md border-r border-gray-300 text-gray-900 text-sm focus:ring-gray-500 focus:border-gray-500 block">
+                        <option v-for="option in currencyOptions" :value="option" :key="option">{{ option }}</option>
+                      </select>
 
+
+                      <input  v-model="form.price" type="text" class="w-full p-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-gray-500 focus:border-gray-500 block">
+
+                    </div>
                   </div>
+                  <InputError class="mt-2" :message="form.errors.price_currency" />
+                  <InputError class="mt-2" :message="form.errors.price" />
 
 
                   <div class="col-span-6 sm:col-span-2">
@@ -78,7 +81,7 @@
                     <FormInput
                       v-model="form.stripe_id"
                       required
-                      type="number"
+                      type="text"
                       label="Code Stripe"
                       :autofocus="true"
                     />
@@ -95,11 +98,11 @@
                     <div class="mt-1 flex rounded-md shadow-sm">
                       <span class=" rounded-l-md border border-r-0 border-gray-300  px-5 text-xs text-gray-500">Max Users</span>
 
-                      <input  v-model="form.plan_features" type="number" class="w-full p-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-gray-500 focus:border-gray-500 block">
+                      <input  v-model="form.max_users" type="number" class="w-full p-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-gray-500 focus:border-gray-500 block">
 
                     </div>
                   </div>
-                  <InputError class="mt-2" :message="form.errors.plan_features" />
+                  <InputError class="mt-2" :message="form.errors.max_users" />
 
 
 
@@ -163,16 +166,70 @@ const form = useForm({
   name: props.plan.name,
   slug: props.plan.slug,
   price: props.plan.price,
+  price_currency: props.plan.price_currency,
   stripe_id: props.plan.stripe_id,
   description: props.plan.description,
 
-  plan_features: props.plan.plan_features.max_users
+  max_users: props.plan.plan_features.max_users
 });
 
 const update = () => {
   form.put(route('plan.update', {
       plan: props.plan.id}),)
 };
+
+const currencyOptions = [
+  'USD',
+  'EUR',
+  'JPY',
+  'GBP',
+  'AUD',
+  'CAD',
+  'CHF',
+  'CNY',
+  'SEK',
+  'NZD',
+  'MXN',
+  'SGD',
+  'HKD',
+  'NOK',
+  'KRW',
+  'TRY',
+  'RUB',
+  'INR',
+  'BRL',
+  'ZAR',
+  'PHP',
+  'TWD',
+  'THB',
+  'IDR',
+  'BBD',
+  'COP',
+  'KWD',
+  'JOD',
+  'BND',
+  'TTD',
+  'FJD',
+  'KYD',
+  'ARS',
+  'SAR',
+  'RSD',
+  'PKR',
+  'ILS',
+  'CLP',
+  'LKR',
+  'BSD',
+  'DZD',
+  'DOP',
+  'PLN',
+  'BZD',
+  'BMD',
+  'BIF',
+  'SBD',
+  'ZMW',
+  'CKD',
+  'FKP'
+];
 
 
 function restore () {

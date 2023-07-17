@@ -36,7 +36,7 @@
           </svg>
         </div>
         <div>
-          <span class="block text-2xl font-bold">{{ balance.pending[0].amount }}</span>
+          <span class="block text-2xl font-bold">{{ balance }}</span>
           <span class="block text-gray-500">Pending </span>
         </div>
       </div>

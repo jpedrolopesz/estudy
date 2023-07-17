@@ -58,9 +58,6 @@ class CreatePlanController extends Controller
         $plan = Plan::where('id', $id)->first();
 
 
-        if (!$plan)
-            return redirect()->back();
-
         $plan->planFeatures()->update([
             'max_users' => $request->max_users,
         ]);

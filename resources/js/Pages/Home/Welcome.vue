@@ -70,42 +70,46 @@
             </div>
 
 
-            <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 mx-2 ">
-              <Link v-if="$page.props.auth.user.owner" :href="route('admin.dashboard')"
-                    class="w-full py-2  px-6 text-center text-white rounded-sm  transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
-                Panel Admin
-              </Link>
-            </div>
+            <div v-if="$page.props.auth.user" >
+              <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 mx-2 ">
+                <Link v-if="$page.props.auth.user.owner" :href="route('admin.dashboard')"
+                      class="w-full py-2  px-6 text-center text-white rounded-sm  transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
+                  Panel Admin
+                </Link>
+              </div>
 
+            </div>
             <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 flex ">
 
-              <Link v-if="$page.props.auth.user" :href="route('course.user.index')"
-                    class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
-                Access Courses
-              </Link>
+                <Link v-if="$page.props.auth.user" :href="route('course.user.index')"
+                      class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
+                  Access Courses
+                </Link>
 
 
-              <template v-else>
-                <a href="/login" class="text-gray-700 font-semibold group-focus:text-yellow-700 underline">
-                  Log in
-                </a>
+                <template v-else>
+                  <a href="/login" class="text-gray-700 font-semibold group-focus:text-yellow-700 underline">
+                    Log in
+                  </a>
 
-                <ModalPlans >
-                  <template #plans>
+                  <ModalPlans >
+                    <template #plans>
                    <span class="text-gray-700 font-semibold group-focus:text-yellow-700 underline">
                      Register
                    </span>
-                  </template>
-                  <Plans
-                    :plans="plans"
-                    :plansMonthly="plansMonthly"
-                    :plansYearly="plansYearly"
-                  />
+                    </template>
+                    <Plans
+                      :plans="plans"
+                      :plansMonthly="plansMonthly"
+                      :plansYearly="plansYearly"
+                    />
 
-                </ModalPlans>
-              </template>
+                  </ModalPlans>
+                </template>
 
-            </div>
+              </div>
+
+
 
           </div>
         </div>

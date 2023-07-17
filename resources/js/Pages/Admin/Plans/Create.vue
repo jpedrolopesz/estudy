@@ -51,17 +51,26 @@
 
                     </div>
 
-                    <div class="col-span-6 sm:col-span-2">
-                      <FormInput
-                        v-model="form.price"
-                        required
-                        type="number"
-                        label="Price"
-                        :autofocus="true"
-                      />
+
+
+                      <div class="col-span-6 sm:col-span-2">
+                        <label for="price" class="form-label !pt-1 block mb-2 text-sm font-medium text-gray-900">Price</label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                          <select v-model="form.price_currency" name="currencySymbol" class="w-2/4 p-1.5 bg-white rounded-l-md border-r border-gray-300 text-gray-900 text-sm focus:ring-gray-500 focus:border-gray-500 block">
+                            <option v-for="option in currencyOptions" :value="option" :key="option">{{ option }}</option>
+                          </select>
+
+
+                          <input  v-model="form.price" type="text" class="w-full p-1.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-gray-500 focus:border-gray-500 block">
+
+                        </div>
+                      </div>
+                      <InputError class="mt-2" :message="form.errors.price_currency" />
                       <InputError class="mt-2" :message="form.errors.price" />
 
-                    </div>
+
+
+
 
 
                     <div class="col-span-6 sm:col-span-2">
@@ -75,11 +84,12 @@
                     </div>
 
 
+
                     <div class="col-span-6 sm:col-span-2">
                       <FormInput
                         v-model="form.stripe_id"
                         required
-                        type="number"
+                        type="text"
                         label="Code Stripe"
                         :autofocus="true"
                       />
@@ -152,6 +162,7 @@ import AdminLayout from "../Layouts/AdminLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import FormInput from "@/Components/Form/FormInput.vue";
 import FormDescriptionEditor from "@/Components/Form/FormDescriptionEditor.vue";
+import {ref} from "vue";
 
 const props = defineProps({
   plan:Object
@@ -161,10 +172,67 @@ const form = useForm({
   name: '',
   slug: '',
   price: '',
+  price_currency: '',
   stripe_id: '',
   description: '',
   max_users: ''
 })
+
+
+
+const currencyOptions = [
+  'USD',
+  'EUR',
+  'JPY',
+  'GBP',
+  'AUD',
+  'CAD',
+  'CHF',
+  'CNY',
+  'SEK',
+  'NZD',
+  'MXN',
+  'SGD',
+  'HKD',
+  'NOK',
+  'KRW',
+  'TRY',
+  'RUB',
+  'INR',
+  'BRL',
+  'ZAR',
+  'PHP',
+  'TWD',
+  'THB',
+  'IDR',
+  'BBD',
+  'COP',
+  'KWD',
+  'JOD',
+  'BND',
+  'TTD',
+  'FJD',
+  'KYD',
+  'ARS',
+  'SAR',
+  'RSD',
+  'PKR',
+  'ILS',
+  'CLP',
+  'LKR',
+  'BSD',
+  'DZD',
+  'DOP',
+  'PLN',
+  'BZD',
+  'BMD',
+  'BIF',
+  'SBD',
+  'ZMW',
+  'CKD',
+  'FKP'
+];
+
 
 const create = () => {
   form.post(route('plan.store'))

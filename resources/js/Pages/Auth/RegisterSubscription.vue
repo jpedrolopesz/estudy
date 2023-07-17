@@ -120,7 +120,7 @@
                        <template #login>
                          <button @click="backTab" class="underline">Back</button>
 
-                         <PrimaryButton @click="completeStep(2)" v-if="auth.user" type="button"  :disabled="!selectedOption"  class="ml-4">
+                         <PrimaryButton  @click="completeStep(2)" v-if="auth.user" type="button"  :disabled="!selectedOption"  class="ml-4">
                            Next Step <ChevronRightIcon class="w-4 h-4"/>
                          </PrimaryButton>
                        </template>
@@ -280,11 +280,11 @@
             <div class="overflow-hidden bg-white rounded-md">
               <div class="px-4 my-12">
                 <h3 class="text-xs font-semibold tracking-widest text-black uppercase">{{plan.name}}</h3>
-                <div>
-                  <span class="align-top mt-4 text-3xl font-bold sm:text-3xl text-black">${{plan.price}}</span>
-                  <span class="align-top mt-4 text-3xl font-bold sm:text-3xl text-black">
-                    <span class="text-3xl font-bold sm:text-2xl text-black">/{{plan.slug}}</span>
-                    </span>
+                <div class="flex items-center text-gray-800 font-bold mb-4">
+                  <div class="text-lg">
+                    {{plan.price_currency}} <span class="text-3xl ml-0.5">{{plan.price}}</span></div>
+                  <span class="text-gray-500 mt-2 font-medium text-sm">
+                    /{{plan.slug}}</span>
                 </div>
                 <div class="text-xs mt-2 font-normal leading-tight text-gray-500">
                   Automatically renews after the cycle.
@@ -396,8 +396,8 @@ function selectTab(tabIndex) {
     tabIndex = 1;
     localStorage.removeItem('tabActive');
     localStorage.removeItem('selectedOption');
-  } else if (tabIndex === 2) {
-    return; // Não salva a tab 2 no localStorage
+  } else if (tabIndex === 3) {
+    return;
   }
 
   localStorage.setItem('tabActive', tabIndex);
