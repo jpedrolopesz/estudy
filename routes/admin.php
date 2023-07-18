@@ -9,16 +9,25 @@ use App\Http\Controllers\Admin\ModulesController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredAdminController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::post('/{comment}/reply',[CommentsController::class, 'storeReply'])->name('storeReply');
 Route::post('/comment',[CommentsController::class, 'storeComment'])->name('storeComment');
 
+
+// ================ Primary Access ================= //
+Route::get('admin/config', [RegisteredAdminController::class, 'create'])
+    ->middleware('admin.registered')
+    ->name('admin.config');
+Route::post('admin/config', [RegisteredAdminController::class, 'store'])->name('config.store');
+
 Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
     ->group(function () {
 
-            Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+
+        Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
 
             // ================ COMMENTS ================= //

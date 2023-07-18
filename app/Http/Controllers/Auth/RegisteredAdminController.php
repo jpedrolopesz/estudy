@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +12,7 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class RegisteredUserController extends Controller
+class RegisteredAdminController extends Controller
 {
     /**
      * Display the registration view.
@@ -23,7 +22,7 @@ class RegisteredUserController extends Controller
     public function create(): Response
     {
 
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Admin/Config/Index');
     }
 
     /**
@@ -49,12 +48,13 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
+            'owner' => $request->owner = true,
         ]);
 
-        event(new Registered($user));
 
-        Auth::login($user);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->back();
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }

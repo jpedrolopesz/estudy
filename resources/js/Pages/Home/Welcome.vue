@@ -74,7 +74,7 @@
               <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 mx-2 ">
                 <Link v-if="$page.props.auth.user.owner" :href="route('admin.dashboard')"
                       class="w-full py-2  px-6 text-center text-white rounded-sm  transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
-                  Panel Admin
+                  Panel
                 </Link>
               </div>
 

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Enums\Roles;
 use App\Models\Comment;
 use App\Models\Course;
 use App\Models\Lesson;
@@ -30,7 +29,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'jplopeszamonelo@hotmail.com',
             'password' => bcrypt('joao1998'),
             'owner' => true,
-            'role' => Roles::SUPER_ADMIN,
             'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
         ]);
 
