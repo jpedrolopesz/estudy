@@ -22,7 +22,7 @@
             <DropdownLink :href="route('profile.edit')" >
               Account
             </DropdownLink>
-            <DropdownLink :href="route('logout')" method="post" as="button">
+            <DropdownLink :href="route('logout.user')" method="post" as="button">
               Log Out
             </DropdownLink>
 

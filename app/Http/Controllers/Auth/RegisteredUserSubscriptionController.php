@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
@@ -87,10 +88,15 @@ class RegisteredUserSubscriptionController extends Controller
     {
         $plan = Plan::findOrFail($request->input('billing_plan_id'));
 
+        $feature = $plan->planFeatures->max_users;
+        $maxUsers = $feature;
 
         $request->user()->newSubscription('default', $plan->stripe_id)
             ->create($request->paymentMethod['id']);
 
+        DB::table('subscriptions')
+            ->where('user_id', $request->user()->id)
+            ->update(['max_users' => $maxUsers]);
 
         return redirect()->back()
             ->with('success', 'Your data has been successfully updated.');
@@ -102,15 +108,19 @@ class RegisteredUserSubscriptionController extends Controller
      */
     public function paySubscriptionUpdate(Request $request): RedirectResponse
     {
-
         $plan = Plan::findOrFail($request->input('billing_plan_id'));
+        $feature = $plan->planFeatures->max_users;
+        $maxUsers = $feature;
 
         $request->user()->subscription('default', $plan->stripe_id)->swapAndInvoice($request->plan);
 
+        DB::table('subscriptions')
+            ->where('user_id', $request->user()->id)
+            ->update(['max_users' => $maxUsers]);
 
-        return redirect()->back()
-            ->with('success', 'Your data has been successfully updated.');
+        return redirect()->route('course.user.index')->with('success', 'Your data has been successfully updated.');
     }
+
 
 
 }

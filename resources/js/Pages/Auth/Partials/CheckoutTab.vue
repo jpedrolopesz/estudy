@@ -42,9 +42,10 @@
 
         </div>
         <div v-else>
-          <Link  :href="route('paySubscription.update', {billing_plan_id: plan.id, plan: plan.stripe_id})" as="button" type="button" method="post"
+          <Link  :href="route('paySubscription.update',
+           {billing_plan_id: plan.id, plan: plan.stripe_id})" as="button" type="button" method="post"
                   class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">
-            Update ${{plan.price}}
+            Update
           </Link>
         </div>
 
@@ -168,6 +169,9 @@ export default {
         });
       });
     })
+
+
+
 
     return {showModal, buttonText, errorMessage, auth }
 

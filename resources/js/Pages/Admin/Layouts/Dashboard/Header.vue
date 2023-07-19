@@ -26,7 +26,7 @@
                 <DropdownLink  :href="route('user.edit', $page.props.auth.user.id)" >
                   Account
                 </DropdownLink>
-                <DropdownLink :href="route('logout')" method="post" as="button">
+                <DropdownLink :href="route('logout.user')" method="post" as="button">
                   Log Out
                 </DropdownLink>
 

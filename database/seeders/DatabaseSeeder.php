@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Lopes Zamonelo',
             'email' => 'jplopeszamonelo@hotmail.com',
             'password' => bcrypt('joao1998'),
-            'owner' => true,
+            'owner' => false,
             'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
         ]);
 
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
 
         foreach ($plans as $item) {
-            Plan::create($item)->planFeatures()->create(['max_users' => 2]);
+            Plan::create($item)->planFeatures()->create(['max_users' => 1]);
         }
 
 

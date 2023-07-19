@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
         'EnsureUserIsSubscribed' => EnsureUserIsSubscribed::class,
         'admin.registered' => \App\Http\Middleware\CheckAdminRegistered::class,
+        'logout.attempt' => \App\Http\Middleware\LogoutAttemptMiddleware::class,
 
     ];
 }

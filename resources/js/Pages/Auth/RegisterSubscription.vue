@@ -52,7 +52,7 @@
                           <div class="h-full text-center bg-white  rounded border border-gray-200 hover:border-gray-300 shadow-sm duration-150 ease-in-out">
 
                             <div class="flex items-center p-2">
-                              <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" :src="'/storage/' + auth.user.photo" />
+                              <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" :src="'/storage/user/' + auth.user.photo" />
                               <div class="ml-4">
                                 <p class="text-start font-semibold text-gray-600">{{auth.user.first_name}}</p>
                                 <p class="mt-px text-sm text-gray-400">{{ auth.user.email }}</p>
