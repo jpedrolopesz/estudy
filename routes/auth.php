@@ -57,5 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'logout'])
         ->name('logout.user');
 
+    Route::post('logout/logoutAllIPs', [AuthenticatedSessionController::class, 'logoutAllIPs'])
+        ->name('logout.logoutAllIPs');
+
 
 });

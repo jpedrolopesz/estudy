@@ -1,6 +1,8 @@
 <template>
   <Head title="Welcome"/>
 
+  <Toast/>
+
   <div class=" overflow-hidden relative w-full">
     <nav class="absolute w-full">
       <div class="container m-auto px-6 md:px-12 lg:px-7">
@@ -12,6 +14,7 @@
                    width="144" height="68">
               <span class="font-semibold text-lg">eStudy</span>
             </a>
+
 
             <div class="flex items-center md:hidden max-h-10">
               <label role="button" for="toggle_nav" aria-label="humburger" id="hamburger"
@@ -79,15 +82,18 @@
               </div>
 
             </div>
+            <Link v-if="$page.props.flash.alert" :href="route('logout.logoutAllIPs')" as="button" method="POST"
+                  class="w-3/6 py-1.5 mr-2  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
+              Log Out from All Devices
+            </Link>
             <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 flex ">
 
-                <Link v-if="$page.props.auth.user" :href="route('course.user.index')"
-                      class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
-                  Access Courses
-                </Link>
+              <Link v-if="$page.props.auth.user" :href="route('course.user.index')"
+                    class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
+                Access Courses
+              </Link>
 
-
-                <template v-else>
+                  <template v-else>
                   <a href="/login" class="text-gray-700 font-semibold group-focus:text-yellow-700 underline">
                     Log in
                   </a>
@@ -336,6 +342,7 @@ import {ref} from 'vue'
 import {Head, Link} from '@inertiajs/inertia-vue3';
 import Plans from "@/Pages/Home/Partials/Plans.vue";
 import ModalPlans from "@/Components/ModalPlans.vue";
+import Toast from "@/Components/Toast.vue";
 
 const props = defineProps({
   canLogin: Boolean,

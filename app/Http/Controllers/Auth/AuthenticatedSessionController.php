@@ -43,38 +43,27 @@ class AuthenticatedSessionController extends Controller
         if (Auth::user()->owner == '1') {
             return redirect('/admin/dashboard')->with('success', 'Your login was successful');
         } elseif (Auth::user()->owner == '0') {
-            // Verificar o limite de logins por IP
             $allowedIps = Auth::user()->allowed_ips;
             $userIpAddress = $request->ip();
 
             if (is_array($allowedIps) && !in_array($userIpAddress, $allowedIps)) {
-                // O IP do usuário não está permitido
-                return redirect('/')->withErrors(['login' => 'Seu IP não tem permissão para fazer login nesta conta.']);
+                return redirect('/')->with('alert', 'Your IP does not have permission to log into this account.');
             }
-
 
             $maxUsers = DB::table('subscriptions')
                 ->where('user_id', $request->user()->id)
                 ->value('max_users');
 
-            // Verificar o número de tentativas de login por IP
-            $maxAttemptsPerIP = $maxUsers; // Defina o limite máximo de logins por IP aqui
+            $maxAttemptsPerIP = $maxUsers;
 
             $ipAttempts = LoginAttempt::where('user_id', Auth::id())
                 ->where('ip_address', $userIpAddress)
-                ->where('created_at', '>=', now()->subDay()) // Limitar a um período de 24 horas
+                ->where('created_at', '>=', now()->subDay())
                 ->count();
 
             if ($ipAttempts >= $maxAttemptsPerIP) {
-                // Excedeu o limite de logins por IP
-                return redirect('/')->withErrors(['login' => 'Limite de logins excedido para este IP.']);
+                return redirect('/')->with('alert', 'Login limit exceeded for this IP');
             }
-
-            // Registrar a tentativa de login
-            LoginAttempt::create([
-                'user_id' => Auth::id(),
-                'ip_address' => $userIpAddress,
-            ]);
 
             return redirect(RouteServiceProvider::HOME)->with('success', 'Your login was successful');
         } else {
@@ -107,6 +96,16 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return back();
+    }
+
+    public function logoutAllIPs(Request $request)
+    {
+        $user = Auth::user();
+
+        LoginAttempt::where('user_id', $user->id)
+            ->delete();
+
+        return redirect()->route('website.index')->with('success', 'Successfully logged out of all sessions on other IPs.');
     }
 
 
