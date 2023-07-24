@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
+Route::get('/presentation', [WebsiteController::class, 'presentation'])->name('presentation');
 
 
 //TABS

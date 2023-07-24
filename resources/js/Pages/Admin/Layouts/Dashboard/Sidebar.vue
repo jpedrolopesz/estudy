@@ -25,7 +25,6 @@
             <span class="ml-3 links_name">Dashboard</span>
           </div>
         </NavLink>
-        <span class="tooltip bg-white">Dashboard</span>
       </li>
       <li>
         <NavLink :href="route('user.index')" :active="route().current('user.index')">
@@ -36,7 +35,6 @@
             <span class="ml-3 links_name">Users</span>
           </div>
         </NavLink>
-        <span class="tooltip bg-white">Users</span>
       </li>
       <li>
         <NavLink :href="route('comments.index')" :active="route().current('comments.index')">
@@ -47,7 +45,6 @@
             <span class="ml-3 links_name">Comments</span>
           </div>
         </NavLink>
-        <span class="tooltip bg-white">Comments</span>
       </li>
       <li>
         <NavLink :href="route('course.index')" :active="route().current('course.index')">
@@ -58,7 +55,6 @@
             <span class="ml-3 links_name">Courses</span>
           </div>
         </NavLink>
-        <span class="tooltip bg-white">Courses</span>
       </li>
       <li>
         <NavLink :href="route('plan.index')" :active="route().current('plan.index')">
@@ -69,7 +65,6 @@
             <span class="ml-3 links_name">Plans</span>
           </div>
         </NavLink>
-        <span class="tooltip bg-white">Plans</span>
       </li>
     </ul>
 
@@ -85,7 +80,6 @@
               <span class="ml-3 links_name">Settings</span>
             </div>
           </NavLink>
-          <span class="tooltip bg-white">Settings</span>
         </li>
         <li>
           <NavLink method="POST" as="button" class="-mr-1 hover:bg-transparent hover:border-transparent focus:border-transparent focus:outline-none w-64" :href="route('logout.user')">

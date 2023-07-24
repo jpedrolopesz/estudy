@@ -25,7 +25,6 @@
                 <span class="ml-3 links_name">Courses</span>
               </div>
             </NavLink>
-            <span class="tooltip bg-white">Courses</span>
           </li>
           <li>
             <NavLink :href="route('support.index')" :active="route().current('support.index')">
@@ -36,7 +35,6 @@
                 <span class="ml-3 links_name">Comments</span>
               </div>
             </NavLink>
-            <span class="tooltip bg-white">Comments</span>
           </li>
         </ul>
 
@@ -52,7 +50,6 @@
                   <span class="ml-3 links_name">Settings</span>
                 </div>
               </NavLink>
-              <span class="tooltip bg-white">Settings</span>
             </li
             >
             <li >

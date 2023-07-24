@@ -27,4 +27,11 @@ class WebsiteController extends Controller
                     ->get(),
         ]);
     }
+
+
+
+    public function presentation(): \Inertia\Response
+    {
+        return Inertia::render('Presentation');
+    }
 }
