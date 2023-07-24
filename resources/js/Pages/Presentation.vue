@@ -18,9 +18,9 @@
                 <label role="button" for="toggle_nav" aria-label="humburger" id="hamburger"
                        class="relative z-40 px-2 py-3 sm:-mr-6">
                   <div id="line"
-                       class="m-auto h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-300 transition duration-300"></div>
+                       class="m-auto h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
                   <div id="line2"
-                       class="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-300 transition duration-300">
+                       class="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 transition duration-300">
                   </div>
                 </label>
               </div>
@@ -29,38 +29,39 @@
             <label role="button" class="fixed w-full z-10 h-full top-0 left-0 bg-gray-700 bg-opacity-40 hidden peer-checked:block md:peer-checked:hidden"></label>
 
             <div class="flex z-20 flex-col md:flex-row justify-between
-                    items-center gap-y-4 p-6 bg-white dark:bg-gray-800 md:w-8/12
+                    items-center gap-y-4 p-6 bg-white md:w-8/12
                     md:gap-y-4 md:p-0
                     md:bg-transparent lg:w-7/12 fixed top-0 -left-full transition-all duration-500 peer-checked:left-0 max-w-sm h-full
                     md:left-0 md:h-auto w-4/5 md:max-w-none md:relative lg:first-letter:top-0">
               <div class="flex md:hidden w-full pb-5">
-                <a href="#" aria-label="logo">
-                  <img src="images/logo.svg" class="w-36 grayscale contrast-200" alt="purosaas.com" width="144" height="68">
+                <a class="flex items-center" aria-label="logo">
+                  <img src="/asset/logoe-estudiar.svg" class="w-8 grayscale contrast-200" alt="eStudy SAAS" width="144" height="68">
+                  <span class="font-semibold text-lg">eStudy</span>
                 </a>
               </div>
               <div class="block w-full h-full md:h-auto">
                 <ul class="space-y-8 tracking-wide font-medium md:flex md:space-y-0">
                   <li>
-                    <a href="#" class="block md:px-3">
-                      <div class="relative text-yellow-800 dark:text-yellow-300 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left dark:before:bg-yelloe-500 before:mx-auto before:mt-auto before:rounded-full before:bg-yellow-800">
+                    <a href="" class="block md:px-3">
+                      <div class="relative text-gray-800 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left before:mx-auto before:mt-auto before:rounded-full before:bg-gray-800">
                         <span>Home</span>
                       </div>
                     </a>
                   </li>
                   <li>
-                    <a href="#features" class="block md:px-3 group">
-                      <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left dark:before:bg-yelloe-500 before:mx-auto before:mt-auto before:rounded-full before:bg-yellow-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
-                      <span class="transition group-hover:text-yellow-700 dark:text-gray-300 dark:group-hover:text-yellow-300">
-                        Features
+                    <a href="mailto:purosaas@hotmail.com" class="block md:px-3 group">
+                      <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left before:mx-auto before:mt-auto before:rounded-full before:bg-gray-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
+                      <span class="transition group-hover:text-gray-700">
+                        Contact
                       </span>
                       </div>
                     </a>
                   </li>
                   <li>
-                    <a href="#price" class="block md:px-3 group">
-                      <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left dark:before:bg-yelloe-500 before:mx-auto before:mt-auto before:rounded-full before:bg-yellow-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
-                      <span class="transition group-hover:text-yellow-700 dark:text-gray-300 dark:group-hover:text-yellow-300">
-                        Price
+                    <a href="/login" class="block md:px-3 group">
+                      <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left before:mx-auto before:mt-auto before:rounded-full before:bg-gray-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
+                      <span class="transition group-hover:text-gray-700">
+                        Demo
                       </span>
                       </div>
                     </a>
@@ -70,7 +71,7 @@
 
               <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 flex ">
 
-                <Link  :href="route('website.index')"
+                <Link  :href="route('login')"
                        class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
                   Access Now Demo
                 </Link>
@@ -91,19 +92,23 @@
           <div class="flex items-center flex-wrap gap-12 lg:gap-0">
             <div class="lg:w-5/12 space-y-8">
             <span class="flex space-x-2 mt-12">
-              <span class="block w-16 ml-2 mb-2 border-b-2 border-gray-600"></span>
-              <span class="font-medium text-gray-600 dark:text-gray-400">launch produced by purosaas</span>
+              <span class="block w-20 ml-2 mb-2 border-b-2 border-gray-600"></span>
+              <span class="font-medium text-gray-600">produced by
+                <span class="underline">purosaas.com</span></span>
             </span>
-              <h1 class="text-4xl font-bold md:text-5xl dark:text-white">Have your <br> own online course platform</h1>
-              <p class="text-xl text-gray-700 dark:text-gray-300">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
+              <h1 class="text-4xl font-bold md:text-5xl">Have your <br> own online course platform</h1>
+              <p class="text-xl text-gray-700">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
 
-              <div class="flex space-x-4">
-                <button type="button" class="w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
+              <div class="flex items-center space-x-4">
+                <Link :href="route('login')" class="w-96 sm:w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
                 <span class="block text-white font-semibold">
                   Access Now Demo
                 </span>
-                </button>
+
+                </Link>
+                <a href="#" class="text-sm flex items-center font-semibold leading-6 text-gray-600">Buy Now <span aria-hidden="true">→</span></a>
               </div>
+
 
               <div class="flex-col hidden mt-12 sm:flex lg:mt-14">
                 <p class=" text-sm font-medium tracking-widest text-gray-500 capitalize">Developed by:</p>
@@ -118,11 +123,11 @@
 
 
                 </div>
-                <a href="" class="hidden space-x-4 md:flex md:items-center">
-                  <img class="w-14 h-14 rounded-full object-cover" src="/images/default.png" alt="">
+                <a href="mailto:purosaas.com" class="hidden space-x-4 md:flex md:items-center">
+                  <img class="w-14 h-14 rounded-full object-cover" src="/asset/eu.jpg" alt="">
                   <div class="text-gray-600">
                     <span class="text-sm">Question ?</span>
-                    <p class="font-semibold text-gray-700">Talk to our developer.</p>
+                    <p class="font-semibold text-gray-700">Talk to the developer.</p>
                   </div>
                 </a>
               </div>
@@ -133,10 +138,11 @@
             </div>
 
             <div class="-z-10 relative md:left-28 w-6/8 lg:w-6/12">
-              <div aria-hidden="true" class="absolute inset-0 m-auto w-[30rem] h-[30rem]  lg:w-[60rem] lg:h-[60rem] rounded-full bg-gray-200">
+              <div aria-hidden="true" class="absolute -z-20 inset-10 m-auto w-[30rem] h-[30rem]  lg:w-[60rem] lg:h-[60rem] rounded-full bg-gray-200">
 
               </div>
-              <img src="/asset/hero.jpeg" class="relative border   rounded-md ml-auto" alt="">
+              <img class="ml-auto border left-0 w-[57rem] w-full sm:max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/hero.jpeg" alt="" width="1824" height="1080">
+
             </div>
           </div>
         </div>
@@ -152,7 +158,7 @@
             <h2 class="text-2xl font-bold text-gray-900 md:text-4xl">
               Elevate your teaching experience today!
             </h2>
-            <p class="my-8 text-gray-600 dark:text-gray-300">
+            <p class="my-8 text-gray-600">
               Our platform offers robust support for each video, ensuring an immersive and engaging learning environment
 
             </p>
@@ -166,8 +172,8 @@
                 </div>
 
                 <div class="w-5/6">
-                  <h3 class="font-semibold text-lg text-gray-700 dark:text-teal-300">Control Video Speed</h3>
-                  <p class="text-gray-500 text-xs dark:text-gray-400">Freedom to manipulate the speed of the videos they watch. Designed to enhance the viewing experience, this application allows you to speed up slow moments.</p>
+                  <h3 class="font-semibold text-lg text-gray-700">Control Video Speed</h3>
+                  <p class="text-gray-500 text-xs">Freedom to manipulate the speed of the videos they watch. Designed to enhance the viewing experience, this application allows you to speed up slow moments.</p>
                 </div>
               </div>
 
@@ -179,8 +185,8 @@
 
                 </div>
                 <div class="w-5/6">
-                  <h3 class="font-semibold text-lg text-gray-700 dark:text-teal-300">Recurring payments</h3>
-                  <p class="text-gray-500 text-xs dark:text-gray-400">Incorporated feature that allows users to log all watched content. Making it easier to revisit or continue watching specific content.</p>
+                  <h3 class="font-semibold text-lg text-gray-700">Recurring payments</h3>
+                  <p class="text-gray-500 text-xs">Incorporated feature that allows users to log all watched content. Making it easier to revisit or continue watching specific content.</p>
                 </div>
               </div>
 
@@ -192,19 +198,19 @@
                   </svg>
                 </div>
                 <div class="w-5/6">
-                  <h3 class="font-semibold text-lg text-gray-700 dark:text-teal-300">Viewing history</h3>
-                  <p class="text-gray-500 text-xs dark:text-gray-400">Incorporated feature that allows users to log all watched content. Making it easier to revisit or continue watching specific content.</p>
+                  <h3 class="font-semibold text-lg text-gray-700">Viewing history</h3>
+                  <p class="text-gray-500 text-xs">Incorporated feature that allows users to log all watched content. Making it easier to revisit or continue watching specific content.</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="relative w-6/8 lg:w-6/12">
-            <img class="z-10 border rounded-md" src="/asset/sectionOne.jpeg"/>
+            <img class="z-10 border rounded-md shadow-md" src="/asset/sectionOne.jpeg"/>
             <div class="flex items-center">
-              <img class=" mt-4 w-3/5 z-10 border rounded-md" src="/asset/sectionTwo.jpeg"/>
+              <img class=" mt-4 w-3/5 z-10 border shadow-md rounded-md" src="/asset/sectionTwo.jpeg"/>
               <div>
-                <img class="mx-2 mt-4 w-4/4 -z-50 border rounded-md" src="/asset/sectionpay.jpeg" alt="image"/>
+                <img class="mx-2 mt-4 w-4/4 -z-50 border shadow-md rounded-md" src="/asset/sectionpay.jpeg" alt="image"/>
               </div>
             </div>
           </div>
@@ -213,15 +219,15 @@
     </div>
 
     <!-- Section Two -->
-     <div class="py-16">
+    <div class="py-16 ">
       <div class="container m-auto px-6 text-gray-600 md:px-12 lg:py-0 lg:px-7">
         <div class="lg:py-4  space-y-6 md:flex flex-row-reverse md:gap-6 justify-center md:space-y-0 lg:items-center">
           <div class="relative w-6/8 lg:w-6/12">
-            <img class="z-10 border rounded-md" src="/asset/adSectionChat.jpeg"/>
+            <img class="z-10 border rounded-md shadow-md" src="/asset/adSectionChat.jpeg"/>
             <div class="flex items-center">
-              <img class=" mt-4 w-3/5 z-10 border rounded-md" src="/asset/adSectionPlan.jpeg"/>
+              <img class=" mt-4 w-3/5 z-10 border rounded-md shadow-md" src="/asset/adSectionPlan.jpeg"/>
               <div>
-                <img class="mx-2 mt-4 w-4/4 -z-50 border rounded-md" src="/asset/adSectionInfo.jpeg" alt="image"/>
+                <img class="mx-2 mt-4 w-4/4 -z-50 border rounded-md shadow-md" src="/asset/adSectionInfo.jpeg" alt="image"/>
               </div>
             </div>
           </div>
@@ -229,7 +235,7 @@
             <h2 class="text-2xl font-bold text-gray-900 md:text-4xl">
               Power is in Your Hands!
             </h2>
-            <p class="my-8 text-gray-600 dark:text-gray-300">
+            <p class="my-8 text-gray-600">
               In addition to an intuitive and user-friendly interface, the app owner will have access to a robust control panel. The app owner will have the freedom to stress and shape their teaching experiences
 
             </p>
@@ -237,13 +243,13 @@
 
               <div class="pt-1 flex gap-4 md:items-center">
                 <div class="w-12 h-12 flex gap-4 rounded-full bg-indigo-100">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 m-auto text-indigo-500 dark:text-indigo-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 m-auto text-indigo-500">
                     <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
                   </svg>
                 </div>
                 <div class="w-5/6">
                   <h3 class="font-semibold text-lg text-gray-700">Support Anytime</h3>
-                  <p class="text-gray-500 text-xs dark:text-gray-400">Dynamic communication that makes connection easier with the ability to communicate and share experiences with each video, enabling support for users.</p>
+                  <p class="text-gray-500 text-xs">Dynamic communication that makes connection easier with the ability to communicate and share experiences with each video, enabling support for users.</p>
                 </div>
               </div>
 
@@ -255,8 +261,8 @@
                 </div>
 
                 <div class="w-5/6">
-                  <h3 class="font-semibold text-lg text-gray-700 dark:text-teal-300">Creation of plans</h3>
-                  <p class="text-gray-500 text-xs dark:text-gray-400">Freedom to manipulate the speed of the videos they watch. Designed to enhance the viewing experience, this application allows you to speed up slow moments.</p>
+                  <h3 class="font-semibold text-lg text-gray-700 ">Creation of plans</h3>
+                  <p class="text-gray-500 text-xs ">Control and create customized plans for your future customers, allowing you to adapt to their needs and preferences. Make the most of it to attract and retain customers, paving new ways for your business.</p>
                 </div>
               </div>
 
@@ -268,8 +274,8 @@
 
                 </div>
                 <div class="w-5/6">
-                  <h3 class="font-semibold text-lg text-gray-700 dark:text-teal-300">Control payments</h3>
-                  <p class="text-gray-500 text-xs dark:text-gray-400">Incorporated feature that allows users to log all watched content. Making it easier to revisit or continue watching specific content.</p>
+                  <h3 class="font-semibold text-lg text-gray-700 ">Control payments</h3>
+                  <p class="text-gray-500 text-xs ">Gain access and maintain transparent control over your billing process. With an intuitive and easy-to-use interface, you can manage all your transactions transparently.</p>
                 </div>
               </div>
 
@@ -281,161 +287,48 @@
       </div>
     </div>
 
-    <!-- Features -->
-    <div id="features" class="py-16">
-      <div class="xl:container m-auto px-6 text-gray-500 md:px-12">
-        <div>
-          <h2 class="mt-4 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
-            A technology-first approach to having your  <br class="lg:block" hidden/>
+    <!-- CTA -->
+  <div class="bg-white">
+    <div class="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+        <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0" aria-hidden="true">
+          <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
+          <defs>
+            <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
+              <stop stop-color="#FFF" />
+              <stop offset="1" stop-color="#FFF" />
+            </radialGradient>
+          </defs>
+        </svg>
+        <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Have your
             own online course platform
           </h2>
+          <p class="text-sm mt-3 text-gray-300">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
+          <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+            <a href="" class="w-full py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-700 focus:bg-gray-300 sm:w-max">
+                <span class="block text-black font-semibold">
+                  Access Now Demo
+                </span>
+            </a>
+            <a href="#" class="text-sm font-semibold leading-6 text-white">Buy Now <span aria-hidden="true">→</span></a>
+          </div>
         </div>
-        <div
-          class="mt-16 grid divide-x divide-y divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4"
-        >
-          <div
-            class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-            <div class="relative space-y-8 py-12 p-8">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png"
-                class="w-12"
-                width="512"
-                height="512"
-                alt="burger illustration"
-              />
-
-              <div class="space-y-2">
-                <h5
-                  class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
-                >
-                  First feature
-                </h5>
-                <p class="text-sm text-gray-600 dark:text-gray-300">
-                  Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-                </p>
-              </div>
-              <a href="#" class="flex items-center justify-between group-hover:text-primary">
-                <span class="text-sm">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                     class="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                  <path fill-rule="evenodd"
-                        d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                        clip-rule="evenodd"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div
-            class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-            <div class="relative space-y-8 py-12 p-8">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/4341/4341134.png"
-                class="w-12"
-                width="512"
-                height="512"
-                alt="burger illustration"
-              />
-
-              <div class="space-y-2">
-                <h5
-                  class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
-                >
-                  Second feature
-                </h5>
-                <p class="text-sm text-gray-600 dark:text-gray-300">
-                  Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-                </p>
-              </div>
-              <a href="#" class="flex items-center justify-between group-hover:text-primary">
-                <span class="text-sm">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                     class="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                  <path fill-rule="evenodd"
-                        d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                        clip-rule="evenodd"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div
-            class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-            <div class="relative space-y-8 py-12 p-8">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/4341/4341160.png"
-                class="w-12"
-                width="512"
-                height="512"
-                alt="burger illustration"
-              />
-
-              <div class="space-y-2">
-                <h5
-                  class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
-                >
-                  Third feature
-                </h5>
-                <p class="text-sm text-gray-600 dark:text-gray-300">
-                  Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-                </p>
-              </div>
-              <a href="#" class="flex items-center justify-between group-hover:text-primary">
-                <span class="text-sm">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                     class="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                  <path fill-rule="evenodd"
-                        d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                        clip-rule="evenodd"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div
-            class="group relative bg-gray-50 dark:bg-gray-900 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10"
-          >
-            <div
-              class="relative space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white dark:group-hover:bg-gray-800"
-            >
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/4341/4341025.png"
-                class="w-12"
-                width="512"
-                height="512"
-                alt="burger illustration"
-              />
-
-              <div class="space-y-2">
-                <h5
-                  class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
-                >
-                  More features
-                </h5>
-                <p class="text-sm text-gray-600 dark:text-gray-300">
-                  Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
-                </p>
-              </div>
-              <a href="#" class="flex items-center justify-between group-hover:text-primary">
-                <span class="text-sm">Read more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                     class="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                  <path fill-rule="evenodd"
-                        d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                        clip-rule="evenodd"/>
-                </svg>
-              </a>
-            </div>
-          </div>
+        <div class="relative mt-16 h-80 lg:mt-8">
+          <img class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/hero.jpeg" alt="" width="1824" height="1080">
         </div>
       </div>
     </div>
+  </div>
 
 
 
 
   <!-- Footer -->
-  <footer class="w-full bg-gray-100 dark:bg-gray-900 py-16">
+  <footer class="w-full bg-gray-100 py-16">
     <div class="md:px-12 lg:px-28">
-      <div class="container m-auto space-y-6 text-gray-600 dark:text-gray-300">
-        <img src="images/logo.svg" alt="purosaas.com" class="m-auto w-40"/>
+      <div class="container m-auto space-y-6 text-gray-600">
+        <img src="/asset/purosaas.png" alt="purosaas.com" class="m-auto  w-40"/>
         <div class="m-auto flex w-max items-center justify-between space-x-4">
           <div class="text-center">
             <span class="text-sm tracking-wide">Copyright © purosaas <span id="year"></span> | All right reserved</span>

@@ -20,9 +20,9 @@
               <label role="button" for="toggle_nav" aria-label="humburger" id="hamburger"
                      class="relative z-40 px-2 py-3 sm:-mr-6">
                 <div id="line"
-                     class="m-auto h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-300 transition duration-300"></div>
+                     class="m-auto h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
                 <div id="line2"
-                     class="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 dark:bg-gray-300 transition duration-300">
+                     class="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900  transition duration-300">
                 </div>
               </label>
             </div>
@@ -32,7 +32,7 @@
                  class="fixed w-full z-10 h-full top-0 left-0 bg-gray-700 bg-opacity-40 hidden peer-checked:block md:peer-checked:hidden"></label>
 
           <div class="flex z-20 flex-col md:flex-row justify-between
-                    items-center gap-y-4 p-6 bg-white dark:bg-gray-800 md:w-8/12
+                    items-center gap-y-4 p-6 bg-white md:w-8/12
                     md:gap-y-4 md:p-0
                     md:bg-transparent lg:w-7/12 fixed top-0 -left-full transition-all duration-500 peer-checked:left-0 max-w-sm h-full
                     md:left-0 md:h-auto w-4/5 md:max-w-none md:relative lg:first-letter:top-0">
@@ -46,15 +46,15 @@
               <ul class="space-y-8 tracking-wide font-medium md:flex md:space-y-0">
                 <li>
                   <a href="#" class="block md:px-3">
-                    <div class="relative text-yellow-800 dark:text-yellow-300 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left dark:before:bg-yelloe-500 before:mx-auto before:mt-auto before:rounded-full before:bg-yellow-800">
+                    <div class="relative text-gray-800 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left before:mx-auto before:mt-auto before:rounded-full before:bg-gray-800">
                       <span>Home</span>
                     </div>
                   </a>
                 </li>
                 <li>
                   <a href="#features" class="block md:px-3 group">
-                    <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left dark:before:bg-yelloe-500 before:mx-auto before:mt-auto before:rounded-full before:bg-yellow-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
-                      <span class="transition group-hover:text-yellow-700 dark:text-gray-300 dark:group-hover:text-yellow-300">
+                    <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left  before:mx-auto before:mt-auto before:rounded-full before:bg-gray-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
+                      <span class="transition group-hover:text-gray-700">
                         Features
                       </span>
                     </div>
@@ -62,8 +62,8 @@
                 </li>
                 <li>
                   <a href="#price" class="block md:px-3 group">
-                    <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left dark:before:bg-yelloe-500 before:mx-auto before:mt-auto before:rounded-full before:bg-yellow-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
-                      <span class="transition group-hover:text-yellow-700 dark:text-gray-300 dark:group-hover:text-yellow-300">
+                    <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left  before:mx-auto before:mt-auto before:rounded-full before:bg-gray-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
+                      <span class="transition group-hover:text-gray-700">
                         Price
                       </span>
                     </div>
@@ -94,13 +94,13 @@
               </Link>
 
                   <template v-else>
-                  <a href="/login" class="text-gray-700 font-semibold group-focus:text-yellow-700 underline">
+                  <a href="/login" class="text-gray-700 font-semibold group-focus:text-gray-700 underline">
                     Log in
                   </a>
 
                   <ModalPlans >
                     <template #plans>
-                   <span class="text-gray-700 font-semibold group-focus:text-yellow-700 underline">
+                   <span class="text-gray-700 font-semibold group-focus:text-gray-700 underline">
                      Register
                    </span>
                     </template>
@@ -121,31 +121,29 @@
         </div>
       </div>
     </nav>
-    <div class="min-h-screen flex">
+    <div class="min-h-screen flex ">
       <div class="container m-auto px-6 py-40 md:px-12 lg:py-0 lg:px-7">
         <div class="flex items-center flex-wrap gap-12 lg:gap-0">
           <div class="lg:w-5/12 space-y-8">
-                        <span class="flex space-x-2">
-                            <span class="block w-14 mb-2 border-b-2 border-gray-600"></span>
-                            <span class="font-medium text-gray-600 dark:text-gray-400">New this version</span>
-                        </span>
-            <h1 class="text-4xl font-bold md:text-6xl dark:text-white">Have your <br> own online course platform</h1>
-            <p class="text-xl text-gray-700 dark:text-gray-300">Software created to perform with excellence, without having to worry about development</p>
 
-            <div class="flex space-x-4">
-              <button type="button" class="w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
+            <h1 class="text-4xl font-bold md:text-5xl "> Start your educational<br> journey with our courses today.</h1>
+            <p class="text-xl text-gray-700">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
+
+            <div class="flex items-center space-x-4">
+              <Link :href="route('login')" class="w-96 sm:w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
                 <span class="block text-white font-semibold">
-                  Access Now Demo
+                  Access Now
                 </span>
-              </button>
+              </Link>
+
             </div>
           </div>
-
-          <div class="-z-10 relative left-36 lg:w-6/12">
-            <div aria-hidden="true" class="absolute inset-0 m-auto w-[30rem] h-[30rem]  lg:w-[60rem] lg:h-[60rem] rounded-full bg-gray-200">
-
+          <div class="-z-10 relative md:left-28 w-6/8 lg:w-6/12">
+            <div aria-hidden="true" class="absolute inset-10 m-auto w-[30rem] h-[30rem]  lg:w-[60rem] lg:h-[60rem] rounded-full bg-gray-200">
             </div>
-            <img src="/asset/hero.jpeg" class="relative  ml-auto" alt="">
+            <div class="relative h-80 ">
+              <img class="absolute border left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/sectionOne.jpeg" alt="" width="1824" height="1080">
+            </div>
           </div>
         </div>
       </div>
@@ -158,16 +156,16 @@
   <div id="features" class="py-16">
     <div class="xl:container m-auto px-6 text-gray-500 md:px-12">
       <div>
-        <h2 class="mt-4 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
-          A technology-first approach to having your  <br class="lg:block" hidden/>
-          own online course platform
+        <h2 class="mt-4 text-2xl font-bold text-gray-700 md:text-4xl">
+          A technological approach to maximizing<br class="lg:block" hidden/>
+          your learning experience.
         </h2>
       </div>
       <div
-        class="mt-16 grid divide-x divide-y divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4"
+        class="mt-16 grid divide-x divide-y divide-gray-100 overflow-hidden rounded-3xl border border-gray-100 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4"
       >
         <div
-          class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+          class="group relative bg-white transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
           <div class="relative space-y-8 py-12 p-8">
             <img
               src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png"
@@ -179,11 +177,11 @@
 
             <div class="space-y-2">
               <h5
-                class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
+                class="text-xl font-medium text-gray-700  transition group-hover:text-primary"
               >
                 First feature
               </h5>
-              <p class="text-sm text-gray-600 dark:text-gray-300">
+              <p class="text-sm text-gray-600">
                 Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
               </p>
             </div>
@@ -199,7 +197,7 @@
           </div>
         </div>
         <div
-          class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+          class="group relative bg-white transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
           <div class="relative space-y-8 py-12 p-8">
             <img
               src="https://cdn-icons-png.flaticon.com/512/4341/4341134.png"
@@ -211,11 +209,11 @@
 
             <div class="space-y-2">
               <h5
-                class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
+                class="text-xl font-medium text-gray-700 transition group-hover:text-primary"
               >
                 Second feature
               </h5>
-              <p class="text-sm text-gray-600 dark:text-gray-300">
+              <p class="text-sm text-gray-600 ">
                 Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
               </p>
             </div>
@@ -231,7 +229,7 @@
           </div>
         </div>
         <div
-          class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+          class="group relative bg-white transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
           <div class="relative space-y-8 py-12 p-8">
             <img
               src="https://cdn-icons-png.flaticon.com/512/4341/4341160.png"
@@ -243,11 +241,11 @@
 
             <div class="space-y-2">
               <h5
-                class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
+                class="text-xl font-medium text-gray-700 transition group-hover:text-primary"
               >
                 Third feature
               </h5>
-              <p class="text-sm text-gray-600 dark:text-gray-300">
+              <p class="text-sm text-gray-600">
                 Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
               </p>
             </div>
@@ -263,10 +261,10 @@
           </div>
         </div>
         <div
-          class="group relative bg-gray-50 dark:bg-gray-900 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10"
+          class="group relative bg-gray-50 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10"
         >
           <div
-            class="relative space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white dark:group-hover:bg-gray-800"
+            class="relative space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white"
           >
             <img
               src="https://cdn-icons-png.flaticon.com/512/4341/4341025.png"
@@ -278,11 +276,11 @@
 
             <div class="space-y-2">
               <h5
-                class="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
+                class="text-xl font-medium text-gray-700 transition group-hover:text-primary"
               >
                 More features
               </h5>
-              <p class="text-sm text-gray-600 dark:text-gray-300">
+              <p class="text-sm text-gray-600">
                 Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
               </p>
             </div>
@@ -306,7 +304,7 @@
   <div  class="xl:container m-auto px-6 py-20 md:px-12 lg:px-20">
     <div class="m-auto text-center mb-10 lg:w-8/12 xl:w-7/12">
       <h2 class="text-2xl font-bold text-gray-800 md:text-4xl">
-        A eStudy subscription gives you access to our components and more.
+        A subscription to eStudy gives you access to our courses and much more.
       </h2>
     </div>
     <Plans
@@ -320,10 +318,12 @@
 
 
   <!-- Footer -->
-  <footer class="w-full bg-gray-100 dark:bg-gray-900 py-16">
+  <footer class="w-full bg-gray-100 py-16">
     <div class="md:px-12 lg:px-28">
-      <div class="container m-auto space-y-6 text-gray-600 dark:text-gray-300">
-        <img src="images/logo.svg" alt="purosaas.com" class="m-auto w-40"/>
+      <div class="container m-auto space-y-6 text-gray-600">
+        <a href=""  class=" flex items-center">
+          <img src="asset/logoe-estudiar.svg" class="w-12 m-auto grayscale contrast-200" alt="eStudy SAAS" width="144" height="68">
+        </a>
         <div class="m-auto flex w-max items-center justify-between space-x-4">
           <div class="text-center">
             <span class="text-sm tracking-wide">Copyright © purosaas <span id="year"></span> | All right reserved</span>

@@ -3,18 +3,23 @@
   <div class="grid grid-cols-1 min-h-screen lg:grid-cols-2">
 
     <div>
-      <div class="flex items-center justify-between ">
-
-        <Link href="/">
-          <ApplicationLogo class="w-10 h-10 fill-current text-gray-500" />
-        </Link>
-      </div>
       <div class="max-w-sm mx-auto w-full px-4 py-20">
-          <div >
+
+        <div class="flex items-center justify-between h-16 -mb-px">
+
+          <a class="block rounded-full p-1 bg-gray-100 text-gray-500 hover:text-gray-600"
+             href="/">
+            <span class="sr-only">Back</span>
+
+            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+
+          </a>
+        </div>
             <div class="h-16">
               <h1 class="text-3xl text-gray-800 font-bold ">Login</h1>
             </div>
-          </div>
                 <form @submit.prevent="submit">
                   <div>
                     <InputLabel for="email" value="Email" />
