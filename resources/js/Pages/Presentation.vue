@@ -306,74 +306,59 @@
 
             <div class="md:7/12 lg:w-1/2">
               <div class="flex items-center">
-                <span class="block h-8 border-l-8  border-gray-600"></span>
+                <span class="block h-8 border-l-8  border-green-300"></span>
 
-                <h2 class="text-3xl ml-2 font-bold text-white md:text-4xl ">
-                  Solution
+                <h2 class="text-3xl ml-2 font-bold text-green-500 md:text-4xl ">
+                  Positive Points
                 </h2>
               </div>
 
-              <p class="my-8 text-gray-400 dark:text-gray-300">
-                Nobis minus voluptatibus pariatur dignissimos libero quaerat iure expedita at?
-                Asperiores nemo possimus nesciunt dicta veniam aspernatur quam mollitia.
-              </p>
-              <div class="divide-y space-y-4 divide-gray-100 dark:divide-gray-800">
-                <div class="mt-8 flex gap-4 md:items-center">
-                  <div class="w-12 h-12 flex gap-4 rounded-full bg-indigo-100 dark:bg-indigo-900/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 m-auto text-indigo-500 dark:text-indigo-400">
-                      <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
+              <ul>
+                <li v-for="item in positive" :key="item.name" class="mt-8 flex gap-4 md:items-center">
+                  <svg class="h-6 w-6 flex-none fill-green-100 stroke-green-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+                  </svg>
                   <div class="w-5/6">
-                    <h3 class="font-semibold text-lg text-gray-700 dark:text-indigo-300">Chat Anytime</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Asperiores nemo possimus nesciunt quam mollitia.</p>
+                    <h3 class="font-semibold text-lg text-gray-200">
+                      {{ item.name }}
+                    </h3>
+                    <p class="text-gray-500 dark:text-gray-400">
+                      {{item.description}}
+                    </p>
                   </div>
-                </div>
-                <div class="pt-4 flex gap-4 md:items-center">
-                  <div class="w-12 h-12 flex gap-4 rounded-full bg-teal-100 dark:bg-teal-900/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 m-auto text-teal-600 dark:text-teal-400">
-                      <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <div class="w-5/6">
-                    <h3 class="font-semibold text-lg text-gray-700 dark:text-teal-300">Real Time Location</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Asperiores nemo possimus nesciunt quam mollitia.</p>
-                  </div>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
-
-
-
             <img class="relative  max-h-0 md:max-h-screen " src="/asset/raio.svg"/>
 
 
             <div class="md:7/12 lg:w-1/2">
               <div class="flex items-center">
-                <span class="block h-8  border-l-8  border-gray-600"></span>
+                <span class="block h-8  border-l-8  border-red-300"></span>
 
-                <h2 class="text-3xl ml-2 font-bold text-white md:text-4xl ">
+                <h2 class="text-3xl ml-2 font-bold text-red-500 md:text-4xl ">
                   Pain Points
                 </h2>
               </div>
-              <p class="my-8 text-gray-400 dark:text-gray-300">
-                Nobis minus voluptatibus pariatur dignissimos libero quaerat iure expedita at?
-                Asperiores nemo possimus nesciunt dicta veniam aspernatur quam mollitia.
-              </p>
-              <div class="divide-y space-y-4 divide-gray-100 dark:divide-gray-800">
 
-                <li class="flex items-center">
+              <ul>
+                <li v-for="item in negative" :key="item.name" class="mt-8 flex gap-4 md:items-center">
                   <svg  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6  fill-red-100 stroke-red-500 stroke-2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
 
-
-                  <p class="ml-4">
-                    Customizing your
-                    <code class="text-sm font-bold text-gray-900">tailwind.config.js</code> file
-                  </p>
+                  <div class="w-5/6">
+                    <h3 class="font-semibold text-lg text-gray-200">
+                      {{ item.name }}
+                    </h3>
+                    <p class="text-gray-500 dark:text-gray-400">
+                      {{item.description}}
+                    </p>
+                  </div>
                 </li>
-              </div>
+
+              </ul>
             </div>
 
           </div>
@@ -441,10 +426,23 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {reactive, ref} from 'vue'
 import {Head, Link} from '@inertiajs/inertia-vue3';
 
 
+const negative = reactive([
+  { name: 'Exorbitant Commissions', description: 'Third-party platforms often extort high commissions from course sales. Say goodbye to your profits!' },
+  { name: 'Limited Control', description: 'On a third-party platform, your ability to shape the user experience is practically nil. You\'re at the mercy of the platform\'s decisions.' },
+  { name: 'Personalization Limitations', description: 'Third-party platforms limit your creativity and course personalization. How can you offer a unique experience under these restrictions?' },
+  { name: 'Dependence', description: 'Relying on a third-party platform risks your business if they fail or change policies.' }
+]);
+
+const positive = reactive([
+  { name: 'Take Control', description: ' Your platform, your rules! Master every aspect of user experience, from the look and feel to the customer support.' },
+  { name: 'Profit Your Way', description: 'Unleash your entrepreneurial spirit! Your platform, your rules. Shape your financial success as freely as an artist paints a canvas!' },
+  { name: 'Stand Out', description: ' Harness the power of a distinct brand. Your own platform can foster loyalty and spark word-of-mouth promotion.' },
+  { name: 'Adapt Swiftly', description: 'Seize opportunities with speed. With your own platform, you can implement fresh ideas instantly, no approvals needed.' }
+]);
 
 const mobileMenuOpen = ref(false)
 </script>
