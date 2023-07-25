@@ -1,6 +1,9 @@
 <template>
   <Head title="Purosaas Presentation"/>
 
+  <div class="relative flex min-h-screen flex-col justify-center overflow-hidden ">
+    <div class="absolute inset-0 bg-[url(/asset/patterns.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+
     <!-- Header -->
     <div class="overflow-hidden relative w-full">
       <nav class="absolute w-full">
@@ -9,7 +12,7 @@
             <input type="checkbox" name="toggle_nav" id="toggle_nav" class="peer hidden">
             <div class="w-full flex justify-between md:w-max md:px-0">
               <a href="#" aria-label="logo" class="flex items-center">
-                <img src="asset/logoe-estudiar.svg" class="w-8 grayscale contrast-200" alt="eStudy SAAS" width="144" height="68">
+                <img src="/asset/logoe-estudiar.svg" class="w-8 grayscale contrast-200" alt="eStudy SAAS" width="144" height="68">
                 <span class="font-semibold text-lg">eStudy</span>
               </a>
 
@@ -100,7 +103,7 @@
               <p class="text-xl text-gray-700">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
 
               <div class="flex items-center space-x-4">
-                <Link :href="route('login')" class="w-96 sm:w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
+                <Link :href="route('login')" class="w-80 sm:w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
                 <span class="block text-white font-semibold">
                   Access Now Demo
                 </span>
@@ -137,11 +140,9 @@
 
             </div>
 
-            <div class="-z-10 relative md:left-28 w-6/8 lg:w-6/12">
-              <div aria-hidden="true" class="absolute -z-20 inset-10 m-auto w-[30rem] h-[30rem]  lg:w-[60rem] lg:h-[60rem] rounded-full bg-gray-200">
+            <div class=" relative md:left-28 w-6/8 lg:w-6/12">
 
-              </div>
-              <img class="ml-auto border left-0 w-[57rem] w-full sm:max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/hero.jpeg" alt="" width="1824" height="1080">
+              <img class="ml-auto border shadow-lg z-20 left-0 w-[57rem] w-full sm:max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/hero.jpeg" alt="" width="1824" height="1080">
 
             </div>
           </div>
@@ -149,6 +150,7 @@
 
       </div>
     </div>
+
 
     <!-- Section One -->
     <div class="py-16">
@@ -287,57 +289,153 @@
       </div>
     </div>
 
-    <!-- CTA -->
-  <div class="bg-white">
-    <div class="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-        <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0" aria-hidden="true">
+
+    <!-- Section Zero -->
+      <div class="relative isolate overflow-hidden bg-gray-900 pt-16 shadow-2xl   md:pt-24 lg:flex  lg:pt-0">
+        <svg viewBox="1024 1024" class="absolute left-56 -top-44 h-[64rem] w-[64rem]  [mask-image:radial-gradient(closest-side,white,transparent)]  -translate-x-1/1 translate-y-1/2 " aria-hidden="true">
           <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
           <defs>
             <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
               <stop stop-color="#FFF" />
-              <stop offset="1" stop-color="#FFF" />
+              <stop offset="1" stop-color="#transparent" />
             </radialGradient>
           </defs>
         </svg>
-        <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Have your
-            own online course platform
-          </h2>
-          <p class="text-sm mt-3 text-gray-300">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
-          <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-            <a href="" class="w-full py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-700 focus:bg-gray-300 sm:w-max">
+        <div class="container m-auto px-6 text-gray-600 ">
+          <div class="  rounded-[4rem] space-y-6 md:flex flex-row-reverse md:gap-6 justify-center md:space-y-0 lg:items-center">
+
+            <div class="md:7/12 lg:w-1/2">
+              <div class="flex items-center">
+                <span class="block h-8 border-l-8  border-gray-600"></span>
+
+                <h2 class="text-3xl ml-2 font-bold text-white md:text-4xl ">
+                  Solution
+                </h2>
+              </div>
+
+              <p class="my-8 text-gray-400 dark:text-gray-300">
+                Nobis minus voluptatibus pariatur dignissimos libero quaerat iure expedita at?
+                Asperiores nemo possimus nesciunt dicta veniam aspernatur quam mollitia.
+              </p>
+              <div class="divide-y space-y-4 divide-gray-100 dark:divide-gray-800">
+                <div class="mt-8 flex gap-4 md:items-center">
+                  <div class="w-12 h-12 flex gap-4 rounded-full bg-indigo-100 dark:bg-indigo-900/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 m-auto text-indigo-500 dark:text-indigo-400">
+                      <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="w-5/6">
+                    <h3 class="font-semibold text-lg text-gray-700 dark:text-indigo-300">Chat Anytime</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Asperiores nemo possimus nesciunt quam mollitia.</p>
+                  </div>
+                </div>
+                <div class="pt-4 flex gap-4 md:items-center">
+                  <div class="w-12 h-12 flex gap-4 rounded-full bg-teal-100 dark:bg-teal-900/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 m-auto text-teal-600 dark:text-teal-400">
+                      <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="w-5/6">
+                    <h3 class="font-semibold text-lg text-gray-700 dark:text-teal-300">Real Time Location</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Asperiores nemo possimus nesciunt quam mollitia.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <img class="relative  max-h-0 md:max-h-screen " src="/asset/raio.svg"/>
+
+
+            <div class="md:7/12 lg:w-1/2">
+              <div class="flex items-center">
+                <span class="block h-8  border-l-8  border-gray-600"></span>
+
+                <h2 class="text-3xl ml-2 font-bold text-white md:text-4xl ">
+                  Pain Points
+                </h2>
+              </div>
+              <p class="my-8 text-gray-400 dark:text-gray-300">
+                Nobis minus voluptatibus pariatur dignissimos libero quaerat iure expedita at?
+                Asperiores nemo possimus nesciunt dicta veniam aspernatur quam mollitia.
+              </p>
+              <div class="divide-y space-y-4 divide-gray-100 dark:divide-gray-800">
+
+                <li class="flex items-center">
+                  <svg  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6  fill-red-100 stroke-red-500 stroke-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+
+
+                  <p class="ml-4">
+                    Customizing your
+                    <code class="text-sm font-bold text-gray-900">tailwind.config.js</code> file
+                  </p>
+                </li>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    <!-- CTA -->
+      <div>
+        <div class="relative isolate overflow-hidden bg-gray-900  px-6  shadow-2xl  sm:px-16  lg:flex lg:gap-x-20 lg:px-24 ">
+
+          <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Have your
+              own online course platform
+            </h2>
+            <p class="text-sm mt-3 text-gray-300">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
+            <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+              <a href="" class="w-full py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-700 focus:bg-gray-300 sm:w-max">
                 <span class="block text-black font-semibold">
                   Access Now Demo
                 </span>
-            </a>
-            <a href="#" class="text-sm font-semibold leading-6 text-white">Buy Now <span aria-hidden="true">→</span></a>
+              </a>
+              <a href="#" class="text-sm font-semibold leading-6 text-white">Buy Now <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="relative">
+            <img class="absolute left-0 top-0 w-[60rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/hero.jpeg" alt="" width="1824" height="1080">
+            <svg viewBox="1024 1024" class="absolute  bg-button left-[30rem] top-[11rem]  -z-10 h-[64rem] w-[64rem]  [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full -ml-96  -translate-x-1/1 -translate-y-1/2 " aria-hidden="true">
+              <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
+              <defs>
+                <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
+                  <stop stop-color="#transparent" />
+                  <stop offset="1" stop-color="#transparent" />
+                </radialGradient>
+              </defs>
+            </svg>
           </div>
         </div>
-        <div class="relative mt-16 h-80 lg:mt-8">
-          <img class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/hero.jpeg" alt="" width="1824" height="1080">
+      </div>
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="w-full bg-gray-100 py-16">
+      <div class="md:px-12 lg:px-28">
+        <div class="container m-auto space-y-6 text-gray-600">
+          <img src="/asset/purosaas.png" alt="purosaas.com" class="m-auto  w-40"/>
+          <div class="m-auto flex w-max items-center justify-between space-x-4">
+            <div class="text-center">
+              <span class="text-sm tracking-wide">Copyright © purosaas <span id="year"></span> | All right reserved</span>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+    </footer>
+
   </div>
-
-
-
-
-  <!-- Footer -->
-  <footer class="w-full bg-gray-100 py-16">
-    <div class="md:px-12 lg:px-28">
-      <div class="container m-auto space-y-6 text-gray-600">
-        <img src="/asset/purosaas.png" alt="purosaas.com" class="m-auto  w-40"/>
-        <div class="m-auto flex w-max items-center justify-between space-x-4">
-          <div class="text-center">
-            <span class="text-sm tracking-wide">Copyright © purosaas <span id="year"></span> | All right reserved</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </footer>
 
 
 </template>
