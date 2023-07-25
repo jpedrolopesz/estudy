@@ -52,8 +52,12 @@
                 </form>
 
 
-              </div>
+        <Demo/>
+
+
+      </div>
     </div>
+
 
     <section class="py-20 bg-gray-900 ">
             <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -123,6 +127,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import Demo from "@/Components/Demo.vue";
 
 defineProps({
   canResetPassword: Boolean,

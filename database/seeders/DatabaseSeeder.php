@@ -24,10 +24,19 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'id' => 1,
-            'first_name' => 'Joao Pedro',
-            'last_name' => 'Lopes Zamonelo',
-            'email' => 'jplopeszamonelo@hotmail.com',
-            'password' => bcrypt('joao1998'),
+            'first_name' => 'John',
+            'last_name' => 'Zamo',
+            'email' => 'owner@demo.com',
+            'password' => bcrypt('password'),
+            'owner' => true,
+            'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
+        ]);
+        User::factory()->create([
+            'id' => 2,
+            'first_name' => 'Peter',
+            'last_name' => 'Lopexy',
+            'email' => 'user@demo.com',
+            'password' => bcrypt('password'),
             'owner' => false,
             'trial_ends_at' => now()->addDays(config('cashier.trial_days')),
         ]);

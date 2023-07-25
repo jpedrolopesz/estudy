@@ -15,7 +15,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'thumbnail' => '/thumbnails/default-thumbnail.jpg',
+            'thumbnail' => '/thumbnails/default.jpg',
             'user_id' => 1
         ];
     }
