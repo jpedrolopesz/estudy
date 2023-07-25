@@ -409,10 +409,10 @@
     <footer class="w-full bg-gray-100 py-16">
       <div class="md:px-12 lg:px-28">
         <div class="container m-auto space-y-6 text-gray-600">
-          <img src="/asset/purosaas.png" alt="purosaas.com" class="m-auto  w-40"/>
           <div class="m-auto flex w-max items-center justify-between space-x-4">
             <div class="text-center">
-              <span class="text-sm tracking-wide">Copyright © purosaas <span id="year"></span> | All right reserved</span>
+              <span class="text-sm w-3/4 tracking-wide">Copyright © 2023 by <span class="underline">Purosaas</span>  | All rights reserved. No part of this document may be reproduced, <br> without prior written permission of the copyright holder.</span>
+
             </div>
           </div>
 
