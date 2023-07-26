@@ -114,7 +114,7 @@
 
 
               <div class="flex-col hidden mt-12 sm:flex lg:mt-14">
-                <p class=" text-sm font-medium tracking-widest text-gray-500 capitalize">Developed by:</p>
+                <p class=" text-sm font-medium tracking-widest text-gray-500 capitalize">Technologies used:</p>
                 <div class="flex">
                   <svg class="text-xl text-gray-500 tracking-widest font-medium capitalize italic " xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 600 100">
                     <text  y="35" class="duration-150 cursor-pointer fill-current transition-color hover:text-gray-600" >laravel</text>
@@ -291,7 +291,7 @@
 
 
     <!-- Section Zero -->
-      <div class="relative isolate overflow-hidden bg-gray-900 pt-16 shadow-2xl   md:pt-24 lg:flex  lg:pt-0">
+      <div class="relative isolate overflow-hidden bg-gray-900 pt-16   md:pt-24 lg:flex  lg:pt-0">
         <svg viewBox="1024 1024" class="absolute left-56 -top-44 h-[64rem] w-[64rem]  [mask-image:radial-gradient(closest-side,white,transparent)]  -translate-x-1/1 translate-y-1/2 " aria-hidden="true">
           <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
           <defs>
@@ -370,23 +370,18 @@
       <div>
         <div class="relative isolate overflow-hidden bg-gray-900  px-6  shadow-2xl  sm:px-16  lg:flex lg:gap-x-20 lg:px-24 ">
 
-          <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+          <div class="mx-auto max-w-md my-44 text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
 
-            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Have your
+            <h2 class="text-3xl font-bold  tracking-tight text-white sm:text-6xl">Have your
               own online course platform
             </h2>
-            <p class="text-sm mt-3 text-gray-300">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
+
             <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-              <a href="" class="w-full py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-700 focus:bg-gray-300 sm:w-max">
-                <span class="block text-black font-semibold">
-                  Access Now Demo
-                </span>
-              </a>
-              <a href="#" class="text-sm font-semibold leading-6 text-white">Buy Now <span aria-hidden="true">→</span></a>
+              <p class=" mb-20 text-lg font-medium tracking-widest text-gray-500 capitalize">Technologies used:</p>
             </div>
           </div>
-          <div class="relative">
-            <img class="absolute left-0 top-0 w-[60rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/hero.jpeg" alt="" width="1824" height="1080">
+          <div class="relative my-44">
+            <img class="absolute left-0 top-0 w-[60rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/sectionOne.jpeg" alt="" width="1824" height="1080">
             <svg viewBox="1024 1024" class="absolute  bg-button left-[30rem] top-[11rem]  -z-10 h-[64rem] w-[64rem]  [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full -ml-96  -translate-x-1/1 -translate-y-1/2 " aria-hidden="true">
               <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
               <defs>
