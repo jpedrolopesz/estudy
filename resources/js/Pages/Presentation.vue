@@ -405,7 +405,7 @@
     <footer class="w-full bg-gray-100 py-16">
       <div class="md:px-12 lg:px-28">
         <div class="container m-auto space-y-6 text-gray-600">
-          <div class="m-auto flex  items-center justify-between space-x-4">
+          <div class="m-auto flex sm:w-max items-center justify-between space-x-4">
             <div class="text-center">
               <span class="text-sm w-3/4 tracking-wide">Copyright © 2023 by <span class="underline">Purosaas</span>  | All rights reserved. No part of this document may be reproduced, <br> without prior written permission of the copyright holder.</span>
 
