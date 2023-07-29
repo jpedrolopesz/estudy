@@ -372,17 +372,18 @@
 
           <div class="mx-auto max-w-md my-44 text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
 
-            <h2 class="text-3xl font-bold  tracking-tight text-white sm:text-6xl">Have your
+            <h2 class="text-3xl font-bold  tracking-tight mb-10 text-white sm:text-6xl">Have your
               own online course platform
             </h2>
 
-            <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-              <p class=" mb-20 text-lg font-medium tracking-widest text-gray-500 capitalize">Technologies used:</p>
-            </div>
+            <Link :href="route('login')" class="w-full mt-20 text-gray-900 font-semibold  py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-300 focus:bg-gray-300 ">
+              Buy Now
+
+            </Link>
           </div>
           <div class="relative my-44">
             <img class="absolute left-0 top-0 w-[60rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/sectionOne.jpeg" alt="" width="1824" height="1080">
-            <svg viewBox="1024 1024" class="absolute  bg-button left-[30rem] top-[11rem]  -z-10 h-[64rem] w-[64rem]  [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full -ml-96  -translate-x-1/1 -translate-y-1/2 " aria-hidden="true">
+            <svg viewBox="1024 1024" class="absolute  bg-button left-[30rem] top-[11rem]  -z-10 h-[64rem] w-[64rem]  [mask-image:radial-gradient(closest-side,white,transparent)] left-full -ml-96  -translate-x-1/1 -translate-y-1/2 " aria-hidden="true">
               <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
               <defs>
                 <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
@@ -404,7 +405,7 @@
     <footer class="w-full bg-gray-100 py-16">
       <div class="md:px-12 lg:px-28">
         <div class="container m-auto space-y-6 text-gray-600">
-          <div class="m-auto flex w-max items-center justify-between space-x-4">
+          <div class="m-auto flex  items-center justify-between space-x-4">
             <div class="text-center">
               <span class="text-sm w-3/4 tracking-wide">Copyright © 2023 by <span class="underline">Purosaas</span>  | All rights reserved. No part of this document may be reproduced, <br> without prior written permission of the copyright holder.</span>
 
