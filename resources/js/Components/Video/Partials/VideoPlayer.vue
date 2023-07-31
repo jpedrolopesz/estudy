@@ -174,7 +174,7 @@
 
       <VideoSection v-if="videoUrl" :selected-lesson="selectedLesson"/>
         <div v-if="!videoUrl" class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
-          <div class="w-full h-[calc(80vh-64px)] flex items-center justify-center mx-auto">
+          <div class="w-full h-[calc(60vh-64px)] sm:h-[calc(80vh-64px)] flex items-center justify-center mx-auto">
             <div class="flex-col items-center text-center">
               <h2 class="font-semibold text-md">
                 Choose your starting lesson and begin your learning journey!

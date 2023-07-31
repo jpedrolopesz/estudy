@@ -3,7 +3,7 @@
   <div class="grid grid-cols-1 min-h-screen lg:grid-cols-2">
 
     <div>
-      <div class="max-w-sm mx-auto w-full px-4 py-20">
+      <div class="max-w-sm mx-auto w-full py-20">
 
         <div class="flex items-center justify-between h-16 -mb-px">
 
@@ -120,13 +120,11 @@
 
 <script setup>
 import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Demo from "@/Components/Demo.vue";
 
 defineProps({

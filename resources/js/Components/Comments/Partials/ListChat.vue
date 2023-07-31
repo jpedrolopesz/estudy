@@ -2,7 +2,7 @@
 
 
   <div id="messages-sidebar"
-       class="flex bg-white shadow-md rounded-md mx-2 border border-gray-200 flex-col absolute right-20 w-5/6 md:w-auto md:static  md:bottom-auto md:translate-x-0 transform transition-transform duration-200 ease-in-out"
+       class="flex bg-white shadow-md  rounded-md sm:mx-2 border border-gray-200 flex-col absolute right-20 w-full sm:w-auto  sm:static sm:bottom-auto sm:translate-x-0 transform transition-transform duration-200 ease-in-out"
        :class="msgSidebarOpen ? 'translate-y-1 translate-x-20 ' : '-translate-x-full '"
   >
     <div class="flex rounded-t-lg border-b h-16 bg-white justify-between">

@@ -1,4 +1,5 @@
 <template>
+
   <div class="sidebar z-50 bg-white justify-items-center fixed top-0 left-0 h-full w-14 border-r border-gray-300 duration-500 ">
         <div class="logo_class ">
           <div class="logo ml-6">

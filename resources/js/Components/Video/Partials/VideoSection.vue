@@ -2,7 +2,7 @@
   <div>
     <div class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
       <VideoPlayer
-        class="w-full h-[calc(80vh-64px)] video-player vjs-big-play-centered"
+        class="w-full h-[calc(60vh-64px)] sm:h-[calc(80vh-64px)] video-player vjs-big-play-centered"
         v-bind:src="'/storage/' + selectedLesson.video_url"
         crossorigin="anonymous"
         playsinline
