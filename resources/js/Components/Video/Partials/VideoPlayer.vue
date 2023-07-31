@@ -1,9 +1,8 @@
 <template>
-  <div class="overflow-y-auto">
-    <div class="my-8"></div>
+  <div class="sm:overflow-y-auto">
     <div class="h-auto bg-transparent flex items-stretch flex-wrap md:flex-nowrap order-1 w-6/6">
 
-      <div class="shadow-md border bg-white border-gray-200  p-2 overflow-x-hidden rounded-sm h-[calc(80vh-64px)] transition-all duration-200  md:mt-6 mt-12  overflow-y-scroll mb-3 md:mb-0 w-full md:w-[220px] lg:w-[290px] xl:w-[390px] !block md:order-1 md:mr-[20px] lg:mr-[20px]">
+      <div class="shadow-md border bg-white border-gray-200  p-2 overflow-x-hidden rounded-sm h-[calc(80vh-64px)] transition-all duration-200  md:mt-6   sm:overflow-y-scroll  w-full md:w-[220px] lg:w-[290px] xl:w-[390px] !block md:order-1 md:mr-[20px] lg:mr-[20px]">
         <div>
           <TabGroup>
             <TabList class="border-b border-gray-200 ">
@@ -174,7 +173,7 @@
 
       <VideoSection v-if="videoUrl" :selected-lesson="selectedLesson"/>
         <div v-if="!videoUrl" class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
-          <div class="w-full h-[calc(60vh-64px)] sm:h-[calc(80vh-64px)] flex items-center justify-center mx-auto">
+          <div class="w-full h-[calc(30vh-60px)] sm:h-[calc(80vh-64px)] flex items-center justify-center mx-auto">
             <div class="flex-col items-center text-center">
               <h2 class="font-semibold text-md">
                 Choose your starting lesson and begin your learning journey!
@@ -186,12 +185,12 @@
         </div>
 
 
-      <div v-if="videoUrl"  class="flex">
-        <div class=" justify-start pb-2 sticky w-full">
+      <div v-if="videoUrl"  class="flex flex-col">
+        <div class=" justify-start pb-2  sticky w-full">
           <p class="text-left text-xl font-bold text-gray-800">{{ selectedLesson.title }}</p>
         </div>
-        <div class="flex mx-2 ">
-          <button class="p-2 mr-4 rounded-md bg-gray-200 hover:bg-gray-300" @click="previousLesson">
+        <div class="flex justify-end mx-2 ">
+          <button class="p-2 mr-4  rounded-md bg-gray-200 hover:bg-gray-300" @click="previousLesson">
             <ChevronLeftIcon class="w-5 h-5 text-gray-600 "/>
           </button>
 
