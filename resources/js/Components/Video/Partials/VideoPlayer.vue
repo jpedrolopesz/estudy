@@ -172,7 +172,7 @@
       <div class="px-0 md:px-6 md:mt-6 transition-all duration-200 mb-3 md:mb-0 flex-grow order-first w-full md:w-auto">
 
       <VideoSection v-if="videoUrl" :selected-lesson="selectedLesson"/>
-        <div v-if="!videoUrl" class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
+        <div v-if="!videoUrl" class="bg-gray-200  mx-auto rounded-md transition-all duration-200 w-full">
           <div class="w-full h-[calc(30vh-60px)] sm:h-[calc(80vh-64px)] flex items-center justify-center mx-auto">
             <div class="flex-col items-center text-center">
               <h2 class="font-semibold text-md">

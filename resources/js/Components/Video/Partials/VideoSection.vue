@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
+    <div class=" mx-auto aspect-video rounded-md transition-all duration-200 w-full">
       <VideoPlayer
         class="w-full max-h-full lg:h-[calc(80vh-64px)] video-player vjs-big-play-centered"
         :src="videoUrl"
@@ -24,10 +24,7 @@
       />
     </div>
     <div>
-
-
-
-    </div>.
+    </div>
   </div>
 </template>
 

@@ -6,10 +6,10 @@
       <Sidebar class="hidden sm:block"/>
       <NavBar class="sm:hidden"/>
 
-      <main class="sm:ml-16 mr-4 min-h-screen bg-dots-darker overflow-hidden">
+      <main class="sm:ml-16 sm:mr-4 min-h-screen bg-dots-darker overflow-hidden">
 
         <Toast/>
-        <div class="py-1 w-full max-w-9xl mx-auto">
+        <div class="sm:py-1 w-full max-w-9xl mx-auto">
           <slot />
         </div>
       </main>
