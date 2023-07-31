@@ -3,7 +3,7 @@
     <div class="bg-gray-200 mx-auto rounded-md transition-all duration-200 w-full">
       <VideoPlayer
         class="w-full h-[calc(60vh-64px)] sm:h-[calc(80vh-64px)] video-player vjs-big-play-centered"
-        v-bind:src="'/storage/' + selectedLesson.video_url"
+        :src="videoUrl"
         crossorigin="anonymous"
         playsinline
         controls
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 
-import { shallowRef } from 'vue'
+import { shallowRef, computed } from 'vue'
 import { VideoPlayer } from '@videojs-player/vue'
 import 'video.js/dist/video-js.css'
 import {VideoJsPlayer} from "video.js";
@@ -45,6 +45,9 @@ const props = defineProps({
 
 
 })
+
+
+const videoUrl = computed(() => '/storage/' + props.selectedLesson.video_url);
 
 
 const player = shallowRef<VideoJsPlayer>()
