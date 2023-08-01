@@ -51,10 +51,6 @@
                   </div>
                 </form>
 
-
-        <Demo/>
-
-
       </div>
     </div>
 
@@ -125,7 +121,6 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import Demo from "@/Components/Demo.vue";
 
 defineProps({
   canResetPassword: Boolean,
