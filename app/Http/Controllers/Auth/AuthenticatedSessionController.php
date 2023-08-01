@@ -40,8 +40,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
+        $userOwner = Auth::user()->owner;
 
-        return redirect(RouteServiceProvider::HOME)->with('success', 'Your login was successful');
+        return $userOwner == '1' ? redirect('/admin/dashboard')->with('success', 'Your login was successful')
+            : ($userOwner == '0' ? redirect(RouteServiceProvider::HOME)
+                : redirect('/'));
 
     }
 
