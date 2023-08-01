@@ -39,7 +39,6 @@ class LogoutAttemptMiddleware
                 $sessionId = Str::uuid();
                 LoginAttempt::create(['user_id' => Auth::id(), 'session_id' => $sessionId, 'ip_address' => $ip]);
 
-
                 $minutes = 1440;
                 $cookie = cookie('session_id', $sessionId, $minutes);
 
