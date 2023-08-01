@@ -3,11 +3,12 @@
 
     <div class=" bg-gray-50 overflow-y-auto overflow-hidden">
 
-      <Sidebar/>
+      <Sidebar class="hidden sm:block"/>
+      <NavBar class="sm:hidden"/>
 
       <Toast/>
 
-      <main class=" ml-16 mr-4 min-h-screen bg-dots-darker overflow-hidden">
+      <main class=" sm:ml-16 sm:mr-4 min-h-screen bg-dots-darker overflow-hidden">
         <Header />
 
         <div class="py-1 w-full max-w-9xl mx-auto">
@@ -23,6 +24,7 @@ import { ref } from 'vue';
 import Sidebar from "./Dashboard/Sidebar.vue";
 import Header from "./Dashboard/Header.vue";
 import Toast from "@/Components/Toast.vue";
+import NavBar from "@/Pages/Admin/Layouts/Dashboard/NavBar.vue";
 
 
 const showingNavigationDropdown = ref(false);
