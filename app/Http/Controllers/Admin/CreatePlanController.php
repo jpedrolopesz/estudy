@@ -76,7 +76,7 @@ class CreatePlanController extends Controller
             return redirect()->back();
 
 
-        $plan-> delete();
+        $plan->delete();
 
         return Redirect()->back()
             ->with('success', 'Plan successfully deleted');

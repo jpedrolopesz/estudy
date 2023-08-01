@@ -30,6 +30,8 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
         Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
 
+        Route::middleware('demo')->group(function () {
+
             // ================ COMMENTS ================= //
 
             Route::resource('/comments', CommentsController::class);
@@ -38,24 +40,23 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
             });
 
             // ================ USERS ================= //
-             Route::resource('user', UsersController::class);
-             Route::controller(UsersController::class)->group(function () {
+            Route::resource('user', UsersController::class);
+            Route::controller(UsersController::class)->group(function () {
 
-                 Route::put('user/{user}/restore', 'restore')->name('user.restore');
-                 Route::put('user/{user}/password', 'updatePassword')->name('user.password');
+                Route::put('user/{user}/restore', 'restore')->name('user.restore');
+                Route::put('user/{user}/password', 'updatePassword')->name('user.password');
 
-             });
+            });
 
-             // ================ PLANS ================= //
-             Route::resource('plan', CreatePlanController::class);
-             Route::controller(CreatePlanController::class)->group(function () {
+            // ================ PLANS ================= //
+            Route::resource('plan', CreatePlanController::class);
+            Route::controller(CreatePlanController::class)->group(function () {
 
-                 Route::put('plan/{plan}/restore',  'restore')->name('plan.restore');
+                Route::put('plan/{plan}/restore',  'restore')->name('plan.restore');
 
 
-             });
-
-             // ================ COURSES ================= //
+            });
+            // ================ COURSES ================= //
             Route::resource('course', CoursesController::class);
             Route::controller(CoursesController::class)->group(function () {
 
@@ -63,13 +64,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
 
             });
 
-             // ================ MODULES ================= //
-            Route::resource('course.module', ModulesController::class);
-            Route::controller(ModulesController::class)->group(function () {
-
-                Route::put('draggable', 'updateDraggable')->name('module.draggable');
-
-            });
 
             // ================ LESSONS ================= //
             Route::resource('course.module.lesson', LessonsController::class);
@@ -79,7 +73,18 @@ Route::prefix('admin')->middleware(['auth','isAdmin', 'verified'])
             });
 
 
+        });
 
+
+
+
+             // ================ MODULES ================= //
+            Route::resource('course.module', ModulesController::class);
+            Route::controller(ModulesController::class)->group(function () {
+
+                Route::put('draggable', 'updateDraggable')->name('module.draggable');
+
+            });
 
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
