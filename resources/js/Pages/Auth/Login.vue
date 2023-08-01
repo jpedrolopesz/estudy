@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="flex items-center mt-8">
-                      <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="/storage/user/default.png" />
+                      <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="/images/default.png" />
                       <div class="ml-4">
                         <p class="text-base font-semibold text-white">João Zamopeteer</p>
                         <p class="mt-px text-sm text-gray-400">Digital Marketer</p>
