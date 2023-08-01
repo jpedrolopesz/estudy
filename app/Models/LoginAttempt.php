@@ -11,6 +11,7 @@ class LoginAttempt extends Model
     protected $fillable = [
         'user_id',
         'ip_address',
+        'session_id',
     ];
 
     public function user()

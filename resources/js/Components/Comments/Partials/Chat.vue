@@ -50,13 +50,13 @@
             </div>
 
             <ul>
-              <li v-for="reply in selectedComment.replies" :key="reply.id" class="mb-6">
+              <li v-for="reply in selectedComment.replies" :key="reply.id" class="mb-2">
 
                 <div class="flex flex-row space-y-8 "
                      :class="$page.props.auth.user.id === reply.user.id ? 'flex flex-row space-x-2 flex-row-reverse space-x-reverse ml-14 mr-2 ' : ''">
                   <div class="flex flex-col">
                     <div class="text-sm font-normal text-gray-500 ">
-                                       <span class="flex items-center  mb-1 text-sm font-medium text-gray-500"
+                                       <span class="flex items-center text-sm font-medium text-gray-500"
                                              :class="$page.props.auth.user.id === reply.user.id ? 'justify-end ' : ''">
                                         <img :src="'/storage/user/' + reply.user.photo"  class=" rounded-full w-5 h-5 mr-2 "/>
                                         {{ reply.user.first_name }}
@@ -78,7 +78,7 @@
       <div :class="msgSidebarOpen ? 'hidden' : ''">
         <form @submit.prevent="replySubmit">
           <label for="chat" class="sr-only">Your message</label>
-          <div class="flex items-center px-3 pb-12 pt-2 sm:py-2 rounded-lg bg-gray-50">
+          <div class="flex items-center px-3 pb-10 pt-2 sm:py-2 rounded-lg bg-gray-50">
             <textarea id="chat" v-model="form.reply" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500" placeholder="Your message..."></textarea>
             <button type="submit" class="inline-flex justify-center p-2 text-gray-600 rounded-full cursor-pointer hover:bg-gray-100 ">
               <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>

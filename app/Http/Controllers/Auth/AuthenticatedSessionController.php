@@ -40,35 +40,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        if (Auth::user()->owner == '1') {
-            return redirect('/admin/dashboard')->with('success', 'Your login was successful');
-        } elseif (Auth::user()->owner == '0') {
-            $allowedIps = Auth::user()->allowed_ips;
-            $userIpAddress = $request->ip();
 
-            if (is_array($allowedIps) && !in_array($userIpAddress, $allowedIps)) {
-                return redirect('/')->with('alert', 'Your IP does not have permission to log into this account.');
-            }
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Your login was successful');
 
-            $maxUsers = DB::table('subscriptions')
-                ->where('user_id', $request->user()->id)
-                ->value('max_users');
-
-            $maxAttemptsPerIP = $maxUsers;
-
-            $ipAttempts = LoginAttempt::where('user_id', Auth::id())
-                ->where('ip_address', $userIpAddress)
-                ->where('created_at', '>=', now()->subDay())
-                ->count();
-
-            if ($ipAttempts >= $maxAttemptsPerIP) {
-                return redirect('/')->with('alert', 'Login limit exceeded for this IP');
-            }
-
-            return redirect(RouteServiceProvider::HOME)->with('success', 'Your login was successful');
-        } else {
-            return redirect('/');
-        }
     }
 
 

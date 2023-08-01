@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
 
 
         foreach ($plans as $item) {
-            Plan::create($item)->planFeatures()->create(['max_users' => 5]);
+            Plan::create($item)->planFeatures()->create(['max_users' => 1]);
         }
 
 

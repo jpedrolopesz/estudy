@@ -11,6 +11,8 @@ class CreateLoginAttemptsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('ip_address');
+            $table->string('session_id');
+
             $table->timestamps();
         });
     }
