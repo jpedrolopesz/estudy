@@ -11,7 +11,6 @@ use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredAdminController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::post('/{comment}/reply',[CommentsController::class, 'storeReply'])->name('storeReply');
 Route::post('/comment',[CommentsController::class, 'storeComment'])->name('storeComment');

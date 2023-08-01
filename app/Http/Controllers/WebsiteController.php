@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Models\Plan;
 use App\Models\PlanFeature;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 use Inertia\Inertia;
 
 class WebsiteController extends Controller
 {
     public function index(): \Inertia\Response
     {
-
 
         return Inertia::render('Home/Welcome',[
             'plans' => Plan::all(),
@@ -28,10 +24,4 @@ class WebsiteController extends Controller
         ]);
     }
 
-
-
-    public function presentation(): \Inertia\Response
-    {
-        return Inertia::render('Presentation');
-    }
 }
