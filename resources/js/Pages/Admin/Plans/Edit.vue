@@ -118,7 +118,7 @@
                 </div>
 
               </div>
-              <div class="flex justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
+              <div class="flex justify-between bg-gray-50 pb-16 sm:pb-2 px-4 py-3 text-right sm:px-6">
 
                 <div>
                   <Link :href="route('plan.index')" type="button" class="btn bg-gray-600 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
