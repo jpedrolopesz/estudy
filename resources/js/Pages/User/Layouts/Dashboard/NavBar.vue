@@ -32,7 +32,6 @@
 
 <script setup>
 import NavLink from '@/Components/NavLink.vue';
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import {
 Bars3CenterLeftIcon,
 VideoCameraIcon,

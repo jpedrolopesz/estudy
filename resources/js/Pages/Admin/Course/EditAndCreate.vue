@@ -6,7 +6,7 @@
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
           <div class="w-full ">
-            <div class="sm:flex sm:items-center mx-8 sm:justify-between">
+            <div class="sm:flex sm:items-center mx-2 sm:mx-8 sm:justify-between">
               <div class="min-w-0 flex-1">
                 <EditCourseForm :course="course"/>
               </div>

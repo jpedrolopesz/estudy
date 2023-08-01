@@ -2,7 +2,7 @@
   <Head  title="Plans" />
 
   <AdminLayout>
-    <div class="bg-white ml-2 shadow-lg rounded-md border border-slate-200 relative">
+    <div class="bg-white sm:ml-2 shadow-lg rounded-md border border-slate-200 relative">
       <header class="px-4 py-2 flex items-center justify-between">
         <h2 class="text-xs font-semibold uppercase text-gray-500 hidden sm:block">All Plans <span class="text-gray-400 font-medium">  </span></h2>
 

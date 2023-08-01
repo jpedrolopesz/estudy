@@ -3,7 +3,7 @@
 
 
     <div class="w-full ">
-      <div class="sm:flex sm:items-center mx-8 sm:justify-between">
+      <div class="sm:flex sm:items-center mx-2 sm:mx-8 sm:justify-between">
         <div class="min-w-0 flex-1">
 
           <div class="mb-2">
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <section class="grid mx-8 my-8 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <section class="grid mx-2 sm:mx-8 my-8 md:grid-cols-2 xl:grid-cols-3 gap-6">
       <div class="flex items-center p-8 bg-white shadow rounded-lg">
         <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
           <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
