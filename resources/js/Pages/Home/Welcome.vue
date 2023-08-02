@@ -61,20 +61,20 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/login" class="block md:px-3 group">
+                    <Link :href="route('demo')" class="block md:px-3 group">
                       <div class="relative text-gray-600 before:absolute before:-inset-2 before:w-full before:h-0.5 before:origin-left before:mx-auto before:mt-auto before:rounded-full before:bg-gray-800 before:transition before:scale-x-0 group-hover:before:scale-x-100">
                       <span class="transition group-hover:text-gray-700">
                         Demo
                       </span>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
 
               <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 flex ">
 
-                <Link  :href="route('login')"
+                <Link  :href="route('demo')"
                        class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
                   Access Now Demo
                 </Link>
@@ -103,7 +103,7 @@
               <p class="text-xl text-gray-700">Discover the freedom and potential of running your own online course platform, offering unique and valuable content to learners globally.</p>
 
               <div class="flex items-center space-x-4">
-                <Link :href="route('login')" class="w-80 sm:w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
+                <Link :href="route('demo')" class="w-80 sm:w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
                 <span class="block text-white font-semibold">
                   Access Now Demo
                 </span>
