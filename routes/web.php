@@ -27,7 +27,7 @@ Route::post('register/no-redirect', [RegisteredUserSubscriptionController::class
 Route::post('login/no-redirect', [LoginTabController::class, 'store'])->name('login.noRedirect');
 Route::post('logout/no-redirect', [LoginTabController::class, 'logout'])->name('logout.noRedirect');
 
-Route::group([ 'middleware' => ['auth', 'logout.attempt']], function (){
+Route::group([ 'middleware' => ['auth']], function (){
 
     Route::get('/courses', [CourseUserController::class, 'index'])->name('course.user.index');
     Route::get('/v/course/{course}', [CourseUserController::class, 'showCourse'])->name('showCourse');

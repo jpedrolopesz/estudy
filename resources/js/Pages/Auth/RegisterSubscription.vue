@@ -9,7 +9,7 @@
         <div class="flex items-center justify-between h-16 -mb-px">
 
           <a class="block rounded-full p-1 bg-gray-100 text-gray-500 hover:text-gray-600"
-             href="/">
+             href="/demo">
             <span class="sr-only">Back</span>
 
             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
@@ -88,6 +88,18 @@
                             </div>
                             <div class="absolute inset-0 border-2 border-transparent peer-checked:border-gray-400 rounded pointer-events-none" aria-hidden="true"></div>
                           </label>
+                        </div>
+
+                        <div >
+                          <h3 class="font-semibold mt-4">User</h3>
+                          <div class="hover:border-gray-500 hover:border-solid hover:bg-white hover:text-gray-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3">
+                            <div class="flex">
+                              <span>E-mail: </span><span class="underline ml-2">user@demo.com</span>
+                            </div>
+                            <div class="flex">
+                              <span>Password: </span><span class="underline ml-2">password</span>
+                            </div>
+                          </div>
                         </div>
 
 
