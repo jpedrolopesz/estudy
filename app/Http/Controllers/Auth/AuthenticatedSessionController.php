@@ -84,7 +84,7 @@ class AuthenticatedSessionController extends Controller
         LoginAttempt::where('user_id', $user->id)
             ->delete();
 
-        return redirect()->route('website.index')->with('success', 'Successfully logged out of all sessions on other IPs.');
+        return redirect()->route('demo')->with('success', 'Successfully logged out of all sessions on other IPs.');
     }
 
 
