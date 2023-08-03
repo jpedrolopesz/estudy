@@ -8,7 +8,7 @@
         <div class="flex items-center justify-between h-16 -mb-px">
 
           <a class="block rounded-full p-1 bg-gray-100 text-gray-500 hover:text-gray-600"
-             href="/">
+             href="/demo">
             <span class="sr-only">Back</span>
 
             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
