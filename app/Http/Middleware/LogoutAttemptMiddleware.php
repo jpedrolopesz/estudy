@@ -33,7 +33,7 @@ class LogoutAttemptMiddleware
                 $sessionCount = LoginAttempt::where('user_id', $user->id)->distinct('session_id')->count();
 
                 if ($sessionCount >= $maxIPs) {
-                    return redirect()->route('website.index')->with('alert','You exceeded max users. Logout or upgrade.');
+                    return redirect()->route('demo')->with('alert','You exceeded max users. Logout or upgrade.');
                 }
 
                 $sessionId = Str::uuid();
