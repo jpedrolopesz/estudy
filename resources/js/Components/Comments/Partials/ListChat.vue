@@ -76,8 +76,10 @@
 import moment from "moment/moment";
 import FormSearch from "@/Components/FormSearch.vue";
 import { BookmarkIcon, PhotoIcon } from '@heroicons/vue/24/outline';
-import {ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import {Inertia} from "@inertiajs/inertia";
+import { usePage} from "@inertiajs/inertia-vue3";
+
 import {RadioGroup, RadioGroupLabel, RadioGroupOption} from "@headlessui/vue";
 
 
@@ -97,24 +99,39 @@ export default {
   },
   setup(){
 
+    const {auth} = usePage().props.value;
     let search = ref('');
-    watch(search, (value) => {Inertia.get("/admin/comments", {
-        search: value }, { preserveState: true }
-    );
-    });
     let reply = ref('');
-    watch(reply, (value) => {
-      Inertia.get("/admin/comments", {
-          reply: value }, { preserveState: true }
-      );
+
+    let isAdmin = ref(auth.user.owner);
+
+    let commentsUrl = computed(() => {
+      return isAdmin.value ? "/admin/comments" : "/support";
     });
+
+    watch(search, (value) => {
+      Inertia.get(commentsUrl.value, {
+        search: value
+      }, {
+        preserveState: true
+      });
+    });
+
+    watch(reply, (value) => {
+      Inertia.get(commentsUrl.value, {
+        reply: value
+      }, {
+        preserveState: true
+      });
+    });
+
 
     function reset() {
       search.value = ''
       reply.value = ''
     }
 
-    return {search, reset, reply}
+    return {search, reset, reply, auth}
   },
   emits: ["comment-selected", 'close-msgsidebar'],
   methods: {
