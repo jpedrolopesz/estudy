@@ -30,14 +30,7 @@
                   <span class="mr-3">{{ subscription.pm_type }} ending {{ subscription.pm_last_four }}</span>
                 </div>
               </li>
-              <li class="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
-                <!-- Left -->
-                <div class="text-sm text-gray-800 ">Current Plan</div>
-                <!-- Right -->
-                <div class="text-sm text-gray-800 ml-4">
-                  <span class="mr-3">Plan Name</span>
-                </div>
-              </li>
+
               <li class="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
                 <!-- Left -->
                 <div class="text-sm text-gray-800">Number</div>
@@ -66,9 +59,7 @@
 
                 <form v-if="!onGracePeriod" @submit.prevent="cancel">
                   <div class="flex">
-                    <p class="text-sm mr-3 text-gray-800">
-                      Nome Plano
-                    </p>
+
                     <button type="submit" class="font-medium text-red-500 hover:text-red-600">Cancel </button>
                   </div>
                 </form>
