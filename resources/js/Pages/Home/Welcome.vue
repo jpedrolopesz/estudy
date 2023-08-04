@@ -80,7 +80,7 @@
                     Access Demo
                   </Link>
 
-                  <a href="https://purosaas.gumroad.com/l/eStudy"
+                  <a href="https://app.gumroad.com/checkout?product=mkqban&quantity=1"
                          class="w-full py-1.5  px-2 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800">
                     Buy Now
                   </a>
@@ -119,7 +119,7 @@
                 </span>
 
                 </Link>
-                <a href="https://purosaas.gumroad.com/l/eStudy" class="text-sm flex items-center font-semibold leading-6 text-gray-600">Buy Now <span aria-hidden="true">→</span></a>
+                <a href="https://app.gumroad.com/checkout?product=mkqban&quantity=1" class="text-sm flex items-center font-semibold leading-6 text-gray-600">Buy Now <span aria-hidden="true">→</span></a>
               </div>
 
 
@@ -386,7 +386,7 @@
             own online course platform
           </h2>
 
-          <a href="https://purosaas.gumroad.com/l/eStudy" class="w-full px-20 mt-20 text-gray-900 font-semibold  py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-300 focus:bg-gray-300 ">
+          <a href="https://app.gumroad.com/checkout?product=mkqban&quantity=1" class="w-full px-20 mt-20 text-gray-900 font-semibold  py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-300 focus:bg-gray-300 ">
             Buy Now
 
           </a>
