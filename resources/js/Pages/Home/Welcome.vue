@@ -11,7 +11,7 @@
           <div class="flex flex-wrap items-center justify-between py-6 gap-6 md:py-4 md:gap-0 relative">
             <input type="checkbox" name="toggle_nav" id="toggle_nav" class="peer hidden">
             <div class="w-full flex justify-between md:w-max md:px-0">
-              <a href="#" aria-label="logo" class="flex items-center">
+              <a href="/" aria-label="logo" class="flex items-center">
                 <img src="/asset/logoe-estudiar.svg" class="w-8 grayscale contrast-200" alt="eStudy SAAS" width="144" height="68">
                 <span class="font-semibold text-lg">eStudy</span>
               </a>
@@ -72,12 +72,22 @@
                 </ul>
               </div>
 
-              <div class="w-full space-x-4 gap-y-4 md:max-w-max md:gap-y-0 md:gap-x-4 flex ">
+              <div class="w-full  ">
 
-                <Link  :href="route('demo')"
-                       class="w-full py-1.5  px-6 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 md:w-maxunderline">
-                  Access Now Demo
-                </Link>
+                <div class="flex  items-center space-x-2">
+                  <Link  :href="route('demo')"
+                         class="w-full py-1.5  px-2 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800">
+                    Access Demo
+                  </Link>
+
+                  <a href="https://purosaas.gumroad.com/l/eStudy"
+                         class="w-full py-1.5  px-2 text-center text-white rounded-sm transition font-bold bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800">
+                    Buy Now
+                  </a>
+
+
+              </div>
+
 
               </div>
 
@@ -105,11 +115,11 @@
               <div class="flex items-center space-x-4">
                 <Link :href="route('demo')" class="w-80 sm:w-full py-2 px-6 text-center rounded-sm transition bg-gray-900 hover:bg-gray-800 active:bg-gray-700 focus:bg-gray-800 sm:w-max">
                 <span class="block text-white font-semibold">
-                  Access Now Demo
+                  Access Demo
                 </span>
 
                 </Link>
-                <a href="#" class="text-sm flex items-center font-semibold leading-6 text-gray-600">Buy Now <span aria-hidden="true">→</span></a>
+                <a href="https://purosaas.gumroad.com/l/eStudy" class="text-sm flex items-center font-semibold leading-6 text-gray-600">Buy Now <span aria-hidden="true">→</span></a>
               </div>
 
 
@@ -376,10 +386,10 @@
             own online course platform
           </h2>
 
-          <Link :href="route('login')" class="w-full px-20 mt-20 text-gray-900 font-semibold  py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-300 focus:bg-gray-300 ">
+          <a href="https://purosaas.gumroad.com/l/eStudy" class="w-full px-20 mt-20 text-gray-900 font-semibold  py-2 px-6 text-center rounded-sm transition bg-white hover:bg-gray-200 active:bg-gray-300 focus:bg-gray-300 ">
             Buy Now
 
-          </Link>
+          </a>
         </div>
         <div class="relative my-44">
           <img class="absolute left-0 top-0 w-[60rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="/asset/sectionOne.jpeg" alt="" width="1824" height="1080">
